@@ -1,8 +1,0 @@
-/target/
-/.settings
-/.mvn
-/logs/
-.classpath
-.project
-.springBeans
-.idea
