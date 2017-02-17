@@ -2,9 +2,13 @@ package entidades;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,15 +29,25 @@ public class Persona implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(length=12)
 	private String cedula;
-	@Column(name = "nombre" , nullable = false)
+	@Column(nullable = false,length=30)
 	private String nombre;
-	@Column(name = "nombre" , nullable = false)
+	@Column(nullable = false,length=30)
+	//@NotNull
 	private String apellido;
 	
+	//Fecha
+	//Email (length=100,unique=true)
+	
+	@Enumerated(EnumType.STRING)
+	@Column(length=13)
 	private GeneroEnum genero;
 	
-	private List<String> telefonos;	
+	@ElementCollection
+	private Map<String,String> telefonos;
+	
+	
 	
 	public Persona() {
 		super();
@@ -66,10 +80,12 @@ public class Persona implements Serializable {
 	public void setGenero(GeneroEnum genero) {
 		this.genero = genero;
 	}
-	public List<String> getTelefonos() {
+
+	
+	public Map<String, String> getTelefonos() {
 		return telefonos;
 	}
-	public void setTelefonos(List<String> telefonos) {
+	public void setTelefonos(Map<String, String> telefonos) {
 		this.telefonos = telefonos;
 	}
 	@Override
