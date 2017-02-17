@@ -1,4 +1,4 @@
-package entidades;
+package co.edu.uniquindio.ingesis.suturno.entidades;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -11,8 +11,10 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import co.edu.uniquindio.ingesis.suturno.entidades.Persona;
+
 @RunWith(Arquillian.class)
-public class PersonaTest {
+public class EntidadesTest {
 
 	@PersistenceContext
 	private EntityManager entityManager;

@@ -1,4 +1,4 @@
-package entidades;
+package co.edu.uniquindio.ingesis.suturno.entidades;
 
 import java.io.Serializable;
 import java.util.List;
@@ -27,8 +27,7 @@ public class Persona implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Id	
 	@Column(length=12)
 	private String cedula;
 	@Column(nullable = false,length=30)
