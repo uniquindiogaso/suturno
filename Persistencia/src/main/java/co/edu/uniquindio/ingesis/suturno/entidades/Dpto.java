@@ -12,8 +12,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="suturno_ubicacion")
-public class Ubicacion implements Serializable {
+@Table(name="suturno_dpto")
+public class Dpto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -27,7 +27,7 @@ public class Ubicacion implements Serializable {
 	@Column(nullable = false,length=50)
 	private String nombre;
 	
-	public Ubicacion() {
+	public Dpto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

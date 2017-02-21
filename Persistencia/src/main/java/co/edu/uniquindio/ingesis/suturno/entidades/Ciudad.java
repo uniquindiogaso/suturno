@@ -7,13 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="suturno_ubicacion")
-public class Ubicacion implements Serializable {
+@Table(name="suturno_cuidad")
+public class Ciudad implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -26,8 +27,10 @@ public class Ubicacion implements Serializable {
 	private String codigo;
 	@Column(nullable = false,length=50)
 	private String nombre;
+	@ManyToOne(optional = false, targetEntity = Dpto.class)
+	private Dpto dpto;
 	
-	public Ubicacion() {
+	public Ciudad() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -55,7 +58,15 @@ public class Ubicacion implements Serializable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+	public Dpto getDpto() {
+		return dpto;
+	}
+
+	public void setDpto(Dpto dpto) {
+		this.dpto = dpto;
+	}
 	
-	
+		
 	
 }

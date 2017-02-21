@@ -12,22 +12,26 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="suturno_ubicacion")
-public class Ubicacion implements Serializable {
+@Table(name="suturno_servicio")
+public class Servicio implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	@NotNull(message="El Codigo de la ubicacion debe ser obligatorio")
+	@NotNull(message="El Codigo del Servicio debe de ser obligatorio")
 	@Size(max=5,message="El Codigo debe de tener un maximo de 5 Caracteres")
 	@Column(nullable = false,length=5)
 	private String codigo;
 	@Column(nullable = false,length=50)
 	private String nombre;
+	@Column(nullable = false)
+	private String descripcion;
+	@Column()
+	private boolean activo;
 	
-	public Ubicacion() {
+	public Servicio() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -55,6 +59,23 @@ public class Ubicacion implements Serializable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
+	
 	
 	
 	
