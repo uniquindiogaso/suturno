@@ -20,10 +20,13 @@ public class Empleado implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	@NotNull(message="El tercero debe de ser obligatorio")
 	@ManyToOne(optional = false, targetEntity = Tercero.class)
 	private Tercero tercero;
+	@NotNull(message="El usuario debe de ser obligatorio")
 	@Column(nullable = false,length=50)
 	private String usuario;
+	@NotNull(message="La clave debe de ser obligatoria")
 	@Column(nullable = false,length=50)
 	private String clave;
 	@Column()

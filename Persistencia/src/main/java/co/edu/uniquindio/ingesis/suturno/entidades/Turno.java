@@ -26,15 +26,20 @@ public class Turno implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	@Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@NotNull(message="La fecha debe de ser obligatoria")
+	@Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP", nullable=false)
 	private Timestamp fecha;
-	@ManyToOne(optional = false, targetEntity = Empleado.class)
+	@NotNull(message="El empleado debe de ser obligatorio")
+	@ManyToOne(optional = false, targetEntity = Empleado.class, nullable=false)
 	private Empleado empleado;
-	@ManyToOne(optional = false, targetEntity = Tercero.class)
+	@NotNull(message="El cliente debe de ser obligatorio")
+	@ManyToOne(optional = false, targetEntity = Tercero.class, nullable=false)
 	private Tercero cliente;
-	@ManyToOne(optional = false, targetEntity = Servicio.class)
+	@NotNull(message="El servicio debe de ser obligatorio")
+	@ManyToOne(optional = false, targetEntity = Servicio.class, nullable=false)
 	private Servicio servicio;
 	private String nota;
+	@NotNull(message="El estado debe de ser obligatorio")
 	@Column(nullable = false)
 	@Enumerated(EnumType.ORDINAL)
 	private EstadoTurno estado;

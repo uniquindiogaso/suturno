@@ -25,6 +25,7 @@ public class Ciudad implements Serializable {
 	@Size(max=5,message="El Codigo debe de tener un maximo de 5 Caracteres")
 	@Column(nullable = false,length=5)
 	private String codigo;
+	@NotNull(message="El nombre de la ciudad debe de ser obligatorio")
 	@Column(nullable = false,length=50)
 	private String nombre;
 	@ManyToOne(optional = false, targetEntity = Dpto.class)

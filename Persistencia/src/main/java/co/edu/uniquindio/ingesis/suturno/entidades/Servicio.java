@@ -25,6 +25,7 @@ public class Servicio implements Serializable {
 	@Column(nullable = false,length=5)
 	private String codigo;
 	@Column(nullable = false,length=50)
+	@NotNull(message="El nombre del Servicio debe de ser obligatorio")
 	private String nombre;
 	@Column(nullable = false)
 	private String descripcion;

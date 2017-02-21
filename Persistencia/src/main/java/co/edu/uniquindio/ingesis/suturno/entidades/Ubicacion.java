@@ -25,6 +25,7 @@ public class Ubicacion implements Serializable {
 	@Column(nullable = false,length=5)
 	private String codigo;
 	@Column(nullable = false,length=50)
+	@NotNull(message="El nombre de la ubicacion debe de ser obligatorio")
 	private String nombre;
 	
 	public Ubicacion() {

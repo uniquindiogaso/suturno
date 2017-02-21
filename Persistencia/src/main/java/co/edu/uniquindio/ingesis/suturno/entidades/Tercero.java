@@ -25,23 +25,28 @@ public class Tercero implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	@NotNull(message="La identificacion debe de ser obligatoria")
 	@Column(nullable = false,length=11)
 	private String identificacion;
+	@NotNull(message="El tipo de documento debe de ser obligatorio")
+	@Column(nullable=false)
 	@Enumerated(EnumType.ORDINAL)
 	private TipoDocumento tDoc;
 	@Enumerated(EnumType.ORDINAL)
 	@Column(length=9)
 	private Genero genero;
+	@NotNull(message="El nombre1 debe de ser obligatorio")
 	@Column(nullable = false,length=50)
 	private String nombre1;
 	@Column(length=50)
 	private String nombre2;
+	@NotNull(message="El apellido1 debe de ser obligatorio")
 	@Column(nullable = false,length=50)
 	private String apellido1;
 	@Column(length=50)
 	private String apellido2;
 	@Column(length=50)
-	@Email(message="Correo Electronico Invalido")
+	@Email(message="Correo Electronico Invalido", nullable=false)
 	private String email;
 	@Column(length=15)
 	private String tel1;
