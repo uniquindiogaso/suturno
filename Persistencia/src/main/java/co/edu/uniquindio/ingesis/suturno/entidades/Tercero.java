@@ -30,6 +30,7 @@ public class Tercero implements Serializable {
 	@Enumerated(EnumType.ORDINAL)
 	private TipoDocumento tDoc;
 	@Enumerated(EnumType.ORDINAL)
+	@Column(length=9)
 	private Genero genero;
 	@Column(nullable = false,length=50)
 	private String nombre1;

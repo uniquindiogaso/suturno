@@ -35,6 +35,7 @@ public class Turno implements Serializable {
 	@ManyToOne(optional = false, targetEntity = Servicio.class)
 	private Servicio servicio;
 	private String nota;
+	@Column(nullable = false)
 	@Enumerated(EnumType.ORDINAL)
 	private EstadoTurno estado;
 
