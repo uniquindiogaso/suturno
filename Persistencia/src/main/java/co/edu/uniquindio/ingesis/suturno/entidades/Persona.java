@@ -1,6 +1,7 @@
 package co.edu.uniquindio.ingesis.suturno.entidades;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,16 +10,20 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import co.edu.uniquindio.ingesis.suturno.validators.Email;
 import utils.Genero;
 import utils.TipoDocumento;
 
 @Entity
-@Table(name="suturno_tercero")
-public class Tercero implements Serializable {
+@Table(name="suturno_persona")
+public class Persona implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -46,7 +51,7 @@ public class Tercero implements Serializable {
 	@Column(length=50)
 	private String apellido2;
 	@Column(length=50)
-	@Email(message="Correo Electronico Invalido", nullable=false)
+	@Email(message="Correo Electronico Invalido")
 	private String email;
 	@Column(length=15)
 	private String tel1;
@@ -54,13 +59,22 @@ public class Tercero implements Serializable {
 	private String tel2;
 	@Column(length=100)
 	private String dir;
-	@ManyToOne(optional = false, targetEntity = Ciudad.class)
+	
+	@ManyToOne(optional = false)	
 	private Ciudad ciudad;
+	
 	@Column()
 	private boolean activo;	
+	@ManyToMany()
+	private List<TipoCliente> tiposCliente;
 	
+	@OneToMany(mappedBy="cliente")
+	private List<Turno> turnos;
 	
-	public Tercero() {
+	@OneToOne()
+	private Empleado empleado;
+	
+	public Persona() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -175,6 +189,16 @@ public class Tercero implements Serializable {
 
 	public void setActivo(boolean activo) {
 		this.activo = activo;
+	}
+
+	public List<TipoCliente> getTiposCliente() {
+		return tiposCliente;
+	}
+
+	public void setTiposCliente(List<TipoCliente> tiposCliente) {
+		this.tiposCliente = tiposCliente;
 	}	
+	
+	
 	
 }

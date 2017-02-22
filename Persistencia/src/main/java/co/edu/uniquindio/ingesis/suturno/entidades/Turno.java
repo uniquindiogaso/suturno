@@ -29,14 +29,18 @@ public class Turno implements Serializable {
 	@NotNull(message="La fecha debe de ser obligatoria")
 	@Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP", nullable=false)
 	private Timestamp fecha;
+	
 	@NotNull(message="El empleado debe de ser obligatorio")
-	@ManyToOne(optional = false, targetEntity = Empleado.class, nullable=false)
+	@ManyToOne(optional = false)
 	private Empleado empleado;
-	@NotNull(message="El cliente debe de ser obligatorio")
-	@ManyToOne(optional = false, targetEntity = Tercero.class, nullable=false)
-	private Tercero cliente;
+	
+	@NotNull(message="El cliente debe de ser obligatorio")	
+	@ManyToOne(optional = false)
+	private Persona cliente;
+	
 	@NotNull(message="El servicio debe de ser obligatorio")
-	@ManyToOne(optional = false, targetEntity = Servicio.class, nullable=false)
+	
+	@ManyToOne(optional = false)
 	private Servicio servicio;
 	private String nota;
 	@NotNull(message="El estado debe de ser obligatorio")
@@ -72,11 +76,11 @@ public class Turno implements Serializable {
 		this.empleado = empleado;
 	}
 
-	public Tercero getCliente() {
+	public Persona getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(Tercero cliente) {
+	public void setCliente(Persona cliente) {
 		this.cliente = cliente;
 	}
 
