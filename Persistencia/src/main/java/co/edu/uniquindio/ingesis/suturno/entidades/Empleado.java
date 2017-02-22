@@ -8,8 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="suturno_empleado")
@@ -20,18 +24,27 @@ public class Empleado implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	@ManyToOne(optional = false, targetEntity = Tercero.class)
-	private Tercero tercero;
+	
+	@NotNull(message="El tercero debe de ser obligatorio")
+	@OneToOne(mappedBy="empleado")
+	private Persona tercero;
+	
+	@NotNull(message="El usuario debe de ser obligatorio")
 	@Column(nullable = false,length=50)
 	private String usuario;
+	@NotNull(message="La clave debe de ser obligatoria")
 	@Column(nullable = false,length=50)
 	private String clave;
 	@Column()
 	private boolean admin;
-	
+	@OneToOne()
+	private PuestoTrabajo puesto;
+	@ManyToMany
 	private List<Servicio> servicios;
-	@ManyToOne(optional = false, targetEntity = Ubicacion.class)
-	private Ubicacion ubicacion;
+	@ManyToOne(optional = false, targetEntity = PuestoTrabajo.class)
+	private PuestoTrabajo ubicacion;
+	@OneToMany(mappedBy="empleado")
+	private List<Turno> turnos;
 	
 	
 	public Empleado() {
@@ -47,11 +60,11 @@ public class Empleado implements Serializable {
 		this.id = id;
 	}
 
-	public Tercero getTercero() {
+	public Persona getTercero() {
 		return tercero;
 	}
 
-	public void setTercero(Tercero tercero) {
+	public void setTercero(Persona tercero) {
 		this.tercero = tercero;
 	}
 
@@ -87,12 +100,20 @@ public class Empleado implements Serializable {
 		this.servicios = servicios;
 	}
 
-	public Ubicacion getUbicacion() {
+	public PuestoTrabajo getUbicacion() {
 		return ubicacion;
 	}
 
-	public void setUbicacion(Ubicacion ubicacion) {
+	public void setUbicacion(PuestoTrabajo ubicacion) {
 		this.ubicacion = ubicacion;
+	}
+
+	public PuestoTrabajo getPuesto() {
+		return puesto;
+	}
+
+	public void setPuesto(PuestoTrabajo puesto) {
+		this.puesto = puesto;
 	}
 	
 	

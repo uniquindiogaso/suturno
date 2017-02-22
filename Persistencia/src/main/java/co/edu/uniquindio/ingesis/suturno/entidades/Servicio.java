@@ -1,12 +1,15 @@
 package co.edu.uniquindio.ingesis.suturno.entidades;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -25,11 +28,16 @@ public class Servicio implements Serializable {
 	@Column(nullable = false,length=5)
 	private String codigo;
 	@Column(nullable = false,length=50)
+	@NotNull(message="El nombre del Servicio debe de ser obligatorio")
 	private String nombre;
 	@Column(nullable = false)
 	private String descripcion;
 	@Column()
 	private boolean activo;
+	@ManyToMany(mappedBy="servicios")
+	private List<Empleado> empleados;
+	@OneToMany(mappedBy="servicio")
+	private List<Turno> turnos;
 	
 	public Servicio() {
 		super();
@@ -74,6 +82,14 @@ public class Servicio implements Serializable {
 
 	public void setActivo(boolean activo) {
 		this.activo = activo;
+	}
+
+	public List<Empleado> getEmpleados() {
+		return empleados;
+	}
+
+	public void setEmpleados(List<Empleado> empleados) {
+		this.empleados = empleados;
 	}
 	
 	

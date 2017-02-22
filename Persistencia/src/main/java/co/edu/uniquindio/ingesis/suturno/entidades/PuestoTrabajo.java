@@ -1,19 +1,21 @@
 package co.edu.uniquindio.ingesis.suturno.entidades;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="suturno_ubicacion")
-public class Ubicacion implements Serializable {
+@Table(name="suturno_puestotrabajo")
+public class PuestoTrabajo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -25,9 +27,12 @@ public class Ubicacion implements Serializable {
 	@Column(nullable = false,length=5)
 	private String codigo;
 	@Column(nullable = false,length=50)
+	@NotNull(message="El nombre de la ubicacion debe de ser obligatorio")
 	private String nombre;
+	@OneToOne(mappedBy="puesto")
+	private Empleado empleados;
 	
-	public Ubicacion() {
+	public PuestoTrabajo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

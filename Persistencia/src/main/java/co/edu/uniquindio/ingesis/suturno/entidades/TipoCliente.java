@@ -8,31 +8,33 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "suturno_dpto")
-public class Dpto implements Serializable {
+@Table(name="suturno_tipocliente")
+public class TipoCliente implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	@NotNull(message = "El Codigo de la ubicacion debe ser obligatorio")
-	@Size(max = 5, message = "El Codigo debe de tener un maximo de 5 Caracteres")
-	@Column(nullable = false, length = 5)
+	@NotNull(message="El Codigo de la ubicacion debe ser obligatorio")
+	@Size(max=5,message="El Codigo debe de tener un maximo de 5 Caracteres")
+	@Column(nullable = false,length=5)
 	private String codigo;
-	@NotNull(message = "El nombre del departamento debe de ser obligatorio")
-	@Column(nullable = false, length = 50)
+	@NotNull(message="El nombre de la ciudad debe de ser obligatorio")
+	@Column(nullable = false,length=50)
 	private String nombre;
-	@OneToMany(mappedBy = "dpto")
-	private List<Ciudad> ciudades;
-
-	public Dpto() {
+	@Column()
+	private boolean prioridad;
+	@ManyToMany(mappedBy="tiposCliente")
+	private List<Persona> personas;
+	
+	public TipoCliente() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -61,15 +63,17 @@ public class Dpto implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public List<Ciudad> getCiudades() {
-		return ciudades;
+	public boolean isPrioridad() {
+		return prioridad;
 	}
 
-	public void setCiudades(List<Ciudad> ciudades) {
-		this.ciudades = ciudades;
+	public void setPrioridad(boolean prioridad) {
+		this.prioridad = prioridad;
 	}
 
+
+
 	
-	
+		
 	
 }
