@@ -60,6 +60,14 @@ public class PuestoTrabajo implements Serializable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+	public Empleado getEmpleados() {
+		return empleados;
+	}
+
+	public void setEmpleados(Empleado empleados) {
+		this.empleados = empleados;
+	}
 	
 	
 	

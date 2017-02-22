@@ -71,6 +71,14 @@ public class TipoCliente implements Serializable {
 		this.prioridad = prioridad;
 	}
 
+	public List<Persona> getPersonas() {
+		return personas;
+	}
+
+	public void setPersonas(List<Persona> personas) {
+		this.personas = personas;
+	}
+
 
 
 	

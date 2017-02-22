@@ -71,6 +71,15 @@ public class Ciudad implements Serializable {
 	public void setDpto(Dpto dpto) {
 		this.dpto = dpto;
 	}
+
+	public List<Persona> getPersonas() {
+		return personas;
+	}
+
+	public void setPersonas(List<Persona> personas) {
+		this.personas = personas;
+	}
+	
 	
 		
 	

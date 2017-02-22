@@ -115,6 +115,14 @@ public class Empleado implements Serializable {
 	public void setPuesto(PuestoTrabajo puesto) {
 		this.puesto = puesto;
 	}
+
+	public List<Turno> getTurnos() {
+		return turnos;
+	}
+
+	public void setTurnos(List<Turno> turnos) {
+		this.turnos = turnos;
+	}
 	
 	
 	

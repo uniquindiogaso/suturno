@@ -197,6 +197,22 @@ public class Persona implements Serializable {
 
 	public void setTiposCliente(List<TipoCliente> tiposCliente) {
 		this.tiposCliente = tiposCliente;
+	}
+
+	public List<Turno> getTurnos() {
+		return turnos;
+	}
+
+	public void setTurnos(List<Turno> turnos) {
+		this.turnos = turnos;
+	}
+
+	public Empleado getEmpleado() {
+		return empleado;
+	}
+
+	public void setEmpleado(Empleado empleado) {
+		this.empleado = empleado;
 	}	
 	
 	
