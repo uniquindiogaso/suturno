@@ -32,17 +32,20 @@ public class Empleado implements Serializable {
 	@NotNull(message="El usuario debe de ser obligatorio")
 	@Column(nullable = false,length=50)
 	private String usuario;
+	
 	@NotNull(message="La clave debe de ser obligatoria")
 	@Column(nullable = false,length=50)
 	private String clave;
-	@Column()
+	
+	@Column
 	private boolean admin;
-	@OneToOne()
+	
+	@OneToOne
 	private PuestoTrabajo puesto;
+	
 	@ManyToMany
 	private List<Servicio> servicios;
-	@ManyToOne(optional = false, targetEntity = PuestoTrabajo.class)
-	private PuestoTrabajo ubicacion;
+	
 	@OneToMany(mappedBy="empleado")
 	private List<Turno> turnos;
 	
@@ -98,14 +101,6 @@ public class Empleado implements Serializable {
 
 	public void setServicios(List<Servicio> servicios) {
 		this.servicios = servicios;
-	}
-
-	public PuestoTrabajo getUbicacion() {
-		return ubicacion;
-	}
-
-	public void setUbicacion(PuestoTrabajo ubicacion) {
-		this.ubicacion = ubicacion;
 	}
 
 	public PuestoTrabajo getPuesto() {
