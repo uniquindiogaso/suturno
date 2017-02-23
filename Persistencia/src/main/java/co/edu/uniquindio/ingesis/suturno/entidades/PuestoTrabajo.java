@@ -22,13 +22,16 @@ public class PuestoTrabajo implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	
 	@NotNull(message="El Codigo de la ubicacion debe ser obligatorio")
 	@Size(max=5,message="El Codigo debe de tener un maximo de 5 Caracteres")
 	@Column(nullable = false,length=5)
 	private String codigo;
+	
 	@Column(nullable = false,length=50)
 	@NotNull(message="El nombre de la ubicacion debe de ser obligatorio")
 	private String nombre;
+	
 	@OneToOne(mappedBy="puesto")
 	private Empleado empleados;
 	
