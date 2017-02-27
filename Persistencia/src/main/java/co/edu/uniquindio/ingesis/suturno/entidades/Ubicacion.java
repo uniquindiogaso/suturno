@@ -8,7 +8,7 @@ import javax.persistence.*;
  * Entity implementation class for Entity: Ubicacion
  *
  */
-@Entity
+@Entity(name="ubicacion")
 @IdClass(Llave.class)
 
 public class Ubicacion implements Serializable {
