@@ -1,0 +1,14 @@
+{
+	"PUESTOTRABAJO": [
+	{
+	"ID": 1,
+	"CODIGO":"A101",
+	"NOMBRE":"Puesto1"
+	},
+	{
+	"ID": 2,
+	"CODIGO":"A102",
+	"NOMBRE":"Puesto1"
+	}
+	]
+}

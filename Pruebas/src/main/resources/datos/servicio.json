@@ -1,0 +1,32 @@
+{
+	"SERVICIO": [
+	{
+	"ID": 1,
+	"ACTIVO":1,
+	"CODIGO":"pago",
+	"DESCRIPCION":"Pagar la factura",
+	"NOMBRE":"Pago Factura"
+	},
+	{
+	"ID": 2,
+	"ACTIVO":0,
+	"CODIGO":"queja",
+	"DESCRIPCION":"Queja debido a malfuncionamiento del servicio",
+	"NOMBRE":"Queja y/o Reclamo"
+	}
+	{
+	"ID": 3,
+	"ACTIVO":0,
+	"CODIGO":"nuevo",
+	"DESCRIPCION":"Solicitud de nuevo servicio",
+	"NOMBRE":"Nuevo servicio"
+	},
+	{
+	"ID": 4,
+	"ACTIVO":0,
+	"CODIGO":"cancelacion",
+	"DESCRIPCION":"Cancelación del servicio",
+	"NOMBRE":"Cancelación del servicio"
+	}
+	]
+}

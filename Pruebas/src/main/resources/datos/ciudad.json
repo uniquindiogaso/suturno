@@ -1,0 +1,16 @@
+{
+	"CIUDAD":[ 
+	{
+		"ID":1,
+		"CODIGO":"arm",
+		"NOMBRE":"Armenia",
+		"DEPTO_ID":1
+	},
+	{
+	"ID":2,
+	"CODIGO":"man",
+	"NOMBRE":"Manizales",
+	"DEPTO_ID":2
+	}
+	]
+}

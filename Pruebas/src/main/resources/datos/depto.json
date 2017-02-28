@@ -1,0 +1,14 @@
+{
+	"DPTO": [
+	{
+	"ID": 1,
+	"CODIGO": "qui",
+	"NOMBRE": "Quindio"
+	},
+	{
+	"ID": 2,
+	"CODIGO": "cal",
+	"NOMBRE": "Caldas"
+	}
+	]
+}
