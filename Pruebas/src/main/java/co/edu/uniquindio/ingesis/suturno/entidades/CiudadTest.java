@@ -18,7 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
-public class DeptoTest {
+public class CiudadTest {
 
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -32,54 +32,57 @@ public class DeptoTest {
 
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/depto.json" })
-	@Ignore
+	@UsingDataSet({ "datos/depto.json","datos/ciudad.json" })
 	public void findTest() {
-		Dpto dpto = entityManager.find(Dpto.class, 1);
-		Assert.assertEquals("Quindio", dpto.getNombre());
+		Ciudad ciudad = entityManager.find(Ciudad.class, 1);
+		Assert.assertEquals("Armenia", ciudad.getNombre());
 	}
 
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/depto.json" })
+	@UsingDataSet({ "datos/depto.json","datos/ciudad.json" })
 	public void persistTest() {
 
-		Dpto dpto = new Dpto();
-		dpto.setId(3);
-		dpto.setCodigo("AR");
-		dpto.setNombre("Arauca");
+		Ciudad ciudad = new Ciudad();
+		ciudad.setId(3);
+		ciudad.setCodigo("per");
+		ciudad.setNombre("Pereira");
 
-		entityManager.persist(dpto);
+		entityManager.persist(ciudad);
 
-		Dpto registrado = entityManager.find(Dpto.class, dpto.getId());
-		Assert.assertEquals(dpto, registrado);
+		Ciudad registrado = entityManager.find(Ciudad.class, ciudad.getId());
+		Assert.assertEquals(ciudad, registrado);
 	}
 
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/depto.json" })
+	@UsingDataSet({ "datos/depto.json","datos/ciudad.json" })
 	public void updateTest() {
 
-		Dpto quindio = entityManager.find(Dpto.class, 1);
+		Ciudad manizales = entityManager.find(Ciudad.class, 1);
 
-		quindio.setCodigo("Ayer");
+		manizales.setCodigo("Abierto");
 
-//		entityManager.persist(quindio);
+//		entityManager.persist(manizales);
 
-		Dpto registrado = entityManager.find(Dpto.class, quindio.getId());
-		Assert.assertEquals("Ayer", registrado.getCodigo());
+		Ciudad registrado = entityManager.find(Ciudad.class, manizales.getId());
+		Assert.assertEquals(manizales.getCodigo(), registrado.getCodigo());
+		
+		Ciudad rusia=new Ciudad();
+		
+		
 	}
 
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/depto.json" })
+	@UsingDataSet({ "datos/depto.json","datos/ciudad.json" })
 	public void deleteTest(){
 		
-		Dpto quindio = entityManager.find(Dpto.class, 1);
+		Ciudad manizales = entityManager.find(Ciudad.class, 1);
 		
-		entityManager.remove(quindio);
+		entityManager.remove(manizales);
 		
-		Dpto registrado = entityManager.find(Dpto.class, quindio.getId());
+		Ciudad registrado = entityManager.find(Ciudad.class, manizales.getId());
 		Assert.assertNull(registrado);
 	}
 }
