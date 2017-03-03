@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="suturno_cuidad")
+@Table(name="suturno_ciudad")
 public class Ciudad implements Serializable {
 
 	private static final long serialVersionUID = 1L;

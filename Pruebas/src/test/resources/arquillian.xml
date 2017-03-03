@@ -8,4 +8,8 @@
 			<property name="sunResourcesXml">src/test/resources/sun-resources.xml</property>
 		</configuration>
 	</container>
+	<extension qualifier="persistence-script">
+		<property name="scriptsToExecuteBeforeTest">SET foreign_key_checks = 0;</property>
+		<property name="scriptsToExecuteAfterTest">SET foreign_key_checks = 1;</property>
+	</extension>
 </arquillian>

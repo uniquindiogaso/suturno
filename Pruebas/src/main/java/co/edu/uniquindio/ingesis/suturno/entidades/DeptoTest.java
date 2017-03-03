@@ -1,5 +1,8 @@
 package co.edu.uniquindio.ingesis.suturno.entidades;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -13,7 +16,6 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -33,7 +35,7 @@ public class DeptoTest {
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "datos/depto.json" })
-	@Ignore
+	//@Ignore
 	public void findTest() {
 		Dpto dpto = entityManager.find(Dpto.class, 1);
 		Assert.assertEquals("Quindio", dpto.getNombre());
@@ -43,11 +45,19 @@ public class DeptoTest {
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "datos/depto.json" })
 	public void persistTest() {
+		
+		Ciudad c1 = entityManager.find(Ciudad.class, 1);
+		Ciudad c2 = entityManager.find(Ciudad.class, 2);
+		
+		List<Ciudad> ciudades = new ArrayList<>();
+		ciudades.add(c1);
+		ciudades.add(c2);
 
 		Dpto dpto = new Dpto();
 		dpto.setId(3);
 		dpto.setCodigo("AR");
 		dpto.setNombre("Arauca");
+		dpto.setCiudades(ciudades);
 
 		entityManager.persist(dpto);
 

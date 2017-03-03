@@ -38,15 +38,19 @@ public class CiudadTest {
 		Assert.assertEquals("Armenia", ciudad.getNombre());
 	}
 
+	
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "datos/depto.json","datos/ciudad.json" })
 	public void persistTest() {
 
+		Dpto dpto = entityManager.find(Dpto.class, 2);
+		
 		Ciudad ciudad = new Ciudad();
 		ciudad.setId(3);
 		ciudad.setCodigo("per");
 		ciudad.setNombre("Pereira");
+		ciudad.setDpto(dpto);
 
 		entityManager.persist(ciudad);
 
@@ -54,6 +58,7 @@ public class CiudadTest {
 		Assert.assertEquals(ciudad, registrado);
 	}
 
+	
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "datos/depto.json","datos/ciudad.json" })
@@ -73,6 +78,7 @@ public class CiudadTest {
 		
 	}
 
+	
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "datos/depto.json","datos/ciudad.json" })
