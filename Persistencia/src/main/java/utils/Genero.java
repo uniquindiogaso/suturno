@@ -1,5 +1,5 @@
 package utils;
 
-public enum GeneroEnum {
+public enum Genero {
 	MASCULINO,FEMENINO
 }
