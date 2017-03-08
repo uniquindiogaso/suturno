@@ -1,0 +1,16 @@
+{
+	"suturno_tipocliente": [
+	{
+	"ID": 1,
+	"CODIGO":"cliente_general",
+	"NOMBRE":"Cliente_General",
+	"PRIORIDAD":0
+	},
+	{
+	"ID": 2,
+	"CODIGO":"mayor",
+	"NOMBRE":"Cliente_terceraEdad",
+	"PRIORIDAD":1
+	}
+	]
+}

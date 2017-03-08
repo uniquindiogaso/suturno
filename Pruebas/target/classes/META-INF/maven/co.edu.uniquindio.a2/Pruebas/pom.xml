@@ -98,11 +98,11 @@
 			<artifactId>arquillian-protocol-servlet</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.jboss.arquillian.extension/arquillian-persistence-dbunit -->
 		<dependency>
 			<groupId>org.jboss.arquillian.extension</groupId>
-			<artifactId>arquillian-persistence-impl</artifactId>
-			<version>1.0.0.Alpha6</version>
-			<scope>provided</scope>
+			<artifactId>arquillian-persistence-dbunit</artifactId>
+			<version>1.0.0.Alpha7</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.arquillian.extension</groupId>

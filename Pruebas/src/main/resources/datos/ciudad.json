@@ -1,0 +1,16 @@
+{
+	"suturno_ciudad":[ 
+	{
+		"ID":1,
+		"CODIGO":"arm",
+		"NOMBRE":"Armenia",
+		"DPTO_ID":1
+	},
+	{
+	"ID":2,
+	"CODIGO":"man",
+	"NOMBRE":"Manizales",
+	"DPTO_ID":2
+	}
+	]
+}

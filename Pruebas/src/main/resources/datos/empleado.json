@@ -1,0 +1,18 @@
+{
+	"suturno_empleado": [
+	{
+	"ID":1,
+	"ADMIN":1,
+	"CLAVE":"12345",
+	"USUARIO":"1765839900",
+	"PUESTO_ID":2
+	},
+	{
+	"ID":2,
+	"ADMIN":0,
+	"CLAVE":"6789",
+	"USUARIO":"109887773",
+	"PUESTO_ID":1
+	}
+	]
+}

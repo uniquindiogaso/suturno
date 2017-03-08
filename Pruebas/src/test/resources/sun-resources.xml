@@ -11,8 +11,8 @@ Definitions //EN" "http://www.sun.com/software/appserver/dtds/sun-resources_1_3.
 		res-type="javax.sql.DataSource">
 		<property name="user" value="root" />
 		<property name="password" value="12345" />
-		<property name="url" value="jdbc:mysql://127.0.0.1:3306/prueba" />
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/suturno" />
 	</jdbc-connection-pool>
-	<jdbc-resource enabled="true" jndi-name="jdbc/test"
+	<jdbc-resource enabled="true" jndi-name="jdbc/suturno"
 		object-type="user" pool-name="mysql-proyecto-pool" />
 </resources>

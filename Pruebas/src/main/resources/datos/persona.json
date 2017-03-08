@@ -1,0 +1,38 @@
+{
+	"suturno_persona": [
+	{
+	"ID":1,
+	"ACTIVO":1,
+	"APELLIDO1":"Vasquéz",
+	"APELLIDO2":"Rodriguez",
+	"DIR":"Arcoiris",
+	"EMAIL":"mar@gmail.com",
+	"GENERO":2,
+	"IDENTIFICACION":"987784947",
+	"NOMBRE1":"Mariana",
+	"NOMBRE2":"",
+	"TDOC":2,
+	"TEL1":"758649P",
+	"TEL2":"3127869942",
+	"CIUDAD_ID":"1",
+	"EMPLEADO_ID":""
+	},
+	{
+	"ID":2,
+	"ACTIVO":1,
+	"APELLIDO1":"Parra",
+	"APELLIDO2":"Ruiz",
+	"DIR":"Nisa Bulevar",
+	"EMAIL":"thomas@gmail.com",
+	"GENERO":1,
+	"IDENTIFICACION":"1039758739933",
+	"NOMBRE1":"Thomas",
+	"NOMBRE2":"Alexander",
+	"TDOC":1,
+	"TEL1":"7659076",
+	"TEL2":"320877463",
+	"CIUDAD_ID":2,
+	"EMPLEADO_ID":""
+	}
+	]
+}
