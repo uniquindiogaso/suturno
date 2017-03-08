@@ -17,7 +17,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
-public class EmpleadoTest {
+public class TurnoTest {
 
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -31,57 +31,58 @@ public class EmpleadoTest {
 
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/puestoTrabajo.json", "datos/empleado.json" })
+	@UsingDataSet({ "datos/cliente,json", "datos/empleado.json", "datos/Turno.json", "datos/Turno.json" })
 	public void findTest() {
-		Empleado empleado = entityManager.find(Empleado.class, 1);
-		Assert.assertEquals("12345", empleado.getClave());
+		Turno turno = entityManager.find(Turno.class, 1);
+		Assert.assertEquals("1", turno.getId());
 	}
 
 	
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/puestoTrabajo.json", "datos/empleado.json"})
+	@UsingDataSet({  "datos/cliente,json", "datos/empleado.json", "datos/Turno.json", "datos/Turno.json" })
 	public void persistTest() {
 		
-		Empleado p1 = entityManager.find(Empleado.class, 1);
-		Empleado p2 = entityManager.find(Empleado.class, 2);
+		Turno t1 = entityManager.find(Turno.class, 1);
+		Turno t2 = entityManager.find(Turno.class, 2);
 		
-		Empleado empleado = new Empleado();
-		empleado.setId(4);
-		empleado.setCodigo("A104");
-		empleado.setNombre("empleado4");
+		Turno Turno = new Turno();
+		Turno.setId(4);
+		Turno.setEstado(1);
+		Turno.setFecha(12/03/2017);
+		Turno.setNota("Nuevo Turno");
 
-		entityManager.persist(empleado);
+		entityManager.persist(Turno);
 
-		Empleado registrado = entityManager.find(Empleado.class, empleado.getId());
-		Assert.assertEquals(empleado, registrado);
+		Turno registrado = entityManager.find(Turno.class, Turno.getId());
+		Assert.assertEquals(Turno, registrado);
 	}
 
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/puestoTrabajo.json", "datos/empleado.json"})
+	@UsingDataSet({  "datos/cliente,json", "datos/empleado.json", "datos/Turno.json", "datos/Turno.json" })
 	public void updateTest() {
 
-		Empleado empleado = entityManager.find(Empleado.class, 2);
+		Turno Turno = entityManager.find(Turno.class, 4);
 
-		empleado.setCodigo("A111");
+		Turno.setCodigo("1");
 
 //		entityManager.persist(quindio);
 
-		Empleado registrado = entityManager.find(Empleado.class, empleado.getId());
-		Assert.assertEquals("A111", registrado.getCodigo());
+		Turno registrado = entityManager.find(Turno.class, Turno.getId());
+		Assert.assertEquals("11", registrado.getCodigo());
 	}
 
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/puestoTrabajo.json", "datos/empleado.json" })
+	@UsingDataSet({  "datos/cliente,json", "datos/empleado.json", "datos/Turno.json", "datos/Turno.json"  })
 	public void deleteTest(){
 		
-		Empleado empleado = entityManager.find(Empleado.class, 2);
+		Turno turno = entityManager.find(Turno.class, 2);
 		
-		entityManager.remove(empleado);
+		entityManager.remove(turno);
 		
-		Empleado registrado = entityManager.find(Empleado.class, empleado.getId());
+		Turno registrado = entityManager.find(Turno.class, Turno.getId());
 		Assert.assertNull(registrado);
 	}
 }

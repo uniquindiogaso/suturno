@@ -1,0 +1,31 @@
+{
+	"suturno_turno": [
+	{
+	"ID": 1,
+	"ESTADO":1,
+	"FECHA":12/01/2017,
+	"NOTA":"Terminar",
+	"CLIENTE_ID":"12345",
+	"EMPLEADO_ID":"12345",
+	"SERVICIO_ID":1
+	},
+	{
+	"ID": 2,
+	"ESTADO":0,
+	"FECHA":24/02/2017,
+	"NOTA":"Queja",
+	"CLIENTE_ID":"12345",
+	"EMPLEADO_ID":"12345",
+	"SERVICIO_ID":2
+	},
+	{
+	"ID": 3,
+	"ESTADO":0,
+	"FECHA":24/02/2017,
+	"NOTA":"Solicitud",
+	"CLIENTE_ID":"12345",
+	"EMPLEADO_ID":"12345",
+	"SERVICIO_ID":2
+	}
+	]
+}

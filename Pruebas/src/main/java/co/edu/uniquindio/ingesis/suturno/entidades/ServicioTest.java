@@ -17,7 +17,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
-public class EmpleadoTest {
+public class ServicioTest {
 
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -31,57 +31,59 @@ public class EmpleadoTest {
 
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/puestoTrabajo.json", "datos/empleado.json" })
+	@UsingDataSet({ "datos/servicio.json" })
 	public void findTest() {
-		Empleado empleado = entityManager.find(Empleado.class, 1);
-		Assert.assertEquals("12345", empleado.getClave());
+		Servicio servicio = entityManager.find(Servicio.class, 1);
+		Assert.assertEquals("1", servicio.getClave());
 	}
 
 	
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/puestoTrabajo.json", "datos/empleado.json"})
+	@UsingDataSet({ "datos/servicio.json" })
 	public void persistTest() {
 		
-		Empleado p1 = entityManager.find(Empleado.class, 1);
-		Empleado p2 = entityManager.find(Empleado.class, 2);
+		Servicio s1 = entityManager.find(Servicio.class, 1);
+		Servicio s2 = entityManager.find(Servicio.class, 2);
 		
-		Empleado empleado = new Empleado();
-		empleado.setId(4);
-		empleado.setCodigo("A104");
-		empleado.setNombre("empleado4");
+		Servicio servicio = new Servicio();
+		Servicio.setId(5);
+		Servicio.setActivo(1);
+		Servicio.setCodigo("ser4");
+		Servicio.setNombre("Servicio4");
+		Servicio.setDescripcion("Nuevo servicio 4");
 
-		entityManager.persist(empleado);
+		entityManager.persist(servicio);
 
-		Empleado registrado = entityManager.find(Empleado.class, empleado.getId());
-		Assert.assertEquals(empleado, registrado);
+		Servicio registrado = entityManager.find(Servicio.class, Servicio.getId());
+		Assert.assertEquals(Servicio, registrado);
 	}
 
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/puestoTrabajo.json", "datos/empleado.json"})
+	@UsingDataSet({ "datos/servicio.json" })
 	public void updateTest() {
 
-		Empleado empleado = entityManager.find(Empleado.class, 2);
+		Servicio servicio = entityManager.find(Servicio.class, 4);
 
-		empleado.setCodigo("A111");
+		Servicio.setCodigo("11");
 
 //		entityManager.persist(quindio);
 
-		Empleado registrado = entityManager.find(Empleado.class, empleado.getId());
-		Assert.assertEquals("A111", registrado.getCodigo());
+		Servicio registrado = entityManager.find(Servicio.class, Servicio.getId());
+		Assert.assertEquals("11", registrado.getCodigo());
 	}
 
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/puestoTrabajo.json", "datos/empleado.json" })
+	@UsingDataSet({ "datos/servicio.json"  })
 	public void deleteTest(){
 		
-		Empleado empleado = entityManager.find(Empleado.class, 2);
+		Servicio servicio = entityManager.find(Servicio.class, 2);
 		
-		entityManager.remove(empleado);
+		entityManager.remove(servicio);
 		
-		Empleado registrado = entityManager.find(Empleado.class, empleado.getId());
+		Servicio registrado = entityManager.find(Servicio.class, Servicio.getId());
 		Assert.assertNull(registrado);
 	}
 }
