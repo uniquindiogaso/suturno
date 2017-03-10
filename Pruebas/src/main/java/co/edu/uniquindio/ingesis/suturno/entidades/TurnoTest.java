@@ -23,6 +23,7 @@ import utils.EstadoTurno;
 import utils.Genero;
 import utils.TipoDocumento;
 
+
 @RunWith(Arquillian.class)
 public class TurnoTest {
 

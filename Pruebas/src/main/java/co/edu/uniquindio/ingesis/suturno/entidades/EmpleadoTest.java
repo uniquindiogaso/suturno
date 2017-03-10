@@ -40,6 +40,7 @@ public class EmpleadoTest {
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "datos/puestoTrabajo.json", "datos/empleado.json" , "datos/persona.json" })
+
 	public void persistTest() {
 
 		Empleado e1 = entityManager.find(Empleado.class, 1);
@@ -67,8 +68,6 @@ public class EmpleadoTest {
 
 		empleado.setUsuario("29803742");
 
-		// entityManager.persist(quindio);
-
 		Empleado registrado = entityManager.find(Empleado.class, empleado.getId());
 		Assert.assertEquals("29803742", registrado.getUsuario());
 	}
@@ -77,7 +76,6 @@ public class EmpleadoTest {
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "datos/puestoTrabajo.json", "datos/empleado.json" })
 	public void deleteTest() {
-
 		Empleado empleado = entityManager.find(Empleado.class, 2);
 
 		entityManager.remove(empleado);
