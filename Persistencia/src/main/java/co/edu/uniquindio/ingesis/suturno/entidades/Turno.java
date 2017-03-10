@@ -30,8 +30,7 @@ public class Turno implements Serializable {
 	@Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP", nullable=false)
 	private Timestamp fecha;
 	
-	@NotNull(message="El empleado debe de ser obligatorio")
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	private Empleado empleado;
 	
 	@NotNull(message="El cliente debe de ser obligatorio")	
@@ -39,7 +38,6 @@ public class Turno implements Serializable {
 	private Persona cliente;
 	
 	@NotNull(message="El servicio debe de ser obligatorio")
-	
 	@ManyToOne(optional = false)
 	private Servicio servicio;
 	private String nota;

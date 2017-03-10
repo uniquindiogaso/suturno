@@ -24,8 +24,8 @@ public class Servicio implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	@NotNull(message="El Codigo del Servicio debe de ser obligatorio")
-	@Size(max=5,message="El Codigo debe de tener un maximo de 5 Caracteres")
-	@Column(nullable = false,length=5)
+	@Size(max=10,message="El Codigo debe de tener un maximo de 5 Caracteres")
+	@Column(nullable = false,length=10)
 	private String codigo;
 	@Column(nullable = false,length=50)
 	@NotNull(message="El nombre del Servicio debe de ser obligatorio")
@@ -43,6 +43,18 @@ public class Servicio implements Serializable {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+
+	public Servicio(String codigo, String nombre, String descripcion, boolean activo) {
+		super();
+		this.codigo = codigo;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.activo = activo;
+	}
+
+
 
 	public int getId() {
 		return id;

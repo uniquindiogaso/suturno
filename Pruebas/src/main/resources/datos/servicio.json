@@ -1,10 +1,10 @@
 {
-	"Ssuturno_servicio": [
+	"suturno_servicio": [
 	{
 	"ID": 1,
 	"ACTIVO":1,
 	"CODIGO":"pago",
-	"DESCRIPCION":"Pagar la factura",
+	"DESCRIPCION":"Pagar la factura w",
 	"NOMBRE":"Pago Factura"
 	},
 	{
@@ -24,9 +24,9 @@
 	{
 	"ID": 4,
 	"ACTIVO":0,
-	"CODIGO":"cancelacion",
-	"DESCRIPCION":"Cancelación del servicio",
-	"NOMBRE":"Cancelación del servicio"
+	"CODIGO":"cancel",
+	"DESCRIPCION":"Cancelacion del servicio",
+	"NOMBRE":"Cancelacion del servicio"
 	}
 	]
 }
