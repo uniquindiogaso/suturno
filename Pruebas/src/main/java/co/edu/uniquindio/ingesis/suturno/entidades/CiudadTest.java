@@ -17,6 +17,19 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+/*
+ * Prueba CiudadTest
+ * 
+ * @author Gustavo Salgado y Laura Julieth Rúa
+ * 
+ * @author Ingeniería de Sistemas y Computación
+ * 
+ * @author Universidad del Quindío
+ * 
+ * @version 1.0
+ * 
+ * @since 1/03/2017
+ */
 @RunWith(Arquillian.class)
 public class CiudadTest {
 
@@ -30,27 +43,32 @@ public class CiudadTest {
 				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
 
+	/**
+	 * Metodo de prueba que verifica la busqueda de datos
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/depto.json","datos/ciudad.json" })
+	@UsingDataSet({ "datos/depto.json", "datos/ciudad.json" })
 	public void findTest() {
 		Ciudad ciudad = entityManager.find(Ciudad.class, 1);
 		Assert.assertEquals("Armenia", ciudad.getNombre());
 	}
 
-	
+	/**
+	 * Metodo de prueba que verifica la insercion de datos
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/depto.json","datos/ciudad.json" })
+	@UsingDataSet({ "datos/depto.json", "datos/ciudad.json" })
 	public void persistTest() {
 
-		Dpto dpto = entityManager.find(Dpto.class, 2);
-		
+		Depto depto = entityManager.find(Depto.class, 2);
+
 		Ciudad ciudad = new Ciudad();
 		ciudad.setId(3);
 		ciudad.setCodigo("per");
 		ciudad.setNombre("Pereira");
-		ciudad.setDpto(dpto);
+		ciudad.setDpto(depto);
 
 		entityManager.persist(ciudad);
 
@@ -58,36 +76,39 @@ public class CiudadTest {
 		Assert.assertEquals(ciudad, registrado);
 	}
 
-	
+	/**
+	 * Metodo de prueba que verifica la actualizacion de datos
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/depto.json","datos/ciudad.json" })
+	@UsingDataSet({ "datos/depto.json", "datos/ciudad.json" })
 	public void updateTest() {
 
 		Ciudad manizales = entityManager.find(Ciudad.class, 1);
 
 		manizales.setCodigo("Abierto");
 
-//		entityManager.persist(manizales);
+		// entityManager.persist(manizales);
 
 		Ciudad registrado = entityManager.find(Ciudad.class, manizales.getId());
 		Assert.assertEquals(manizales.getCodigo(), registrado.getCodigo());
-		
-		Ciudad rusia=new Ciudad();
-		
-		
+
+		Ciudad rusia = new Ciudad();
+
 	}
 
-	
+	/**
+	 * Metodo de prueba que verifica la eliminacion de datos
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/depto.json","datos/ciudad.json" })
-	public void deleteTest(){
-		
+	@UsingDataSet({ "datos/depto.json", "datos/ciudad.json" })
+	public void deleteTest() {
+
 		Ciudad manizales = entityManager.find(Ciudad.class, 1);
-		
+
 		entityManager.remove(manizales);
-		
+
 		Ciudad registrado = entityManager.find(Ciudad.class, manizales.getId());
 		Assert.assertNull(registrado);
 	}

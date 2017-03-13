@@ -19,6 +19,19 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+/*
+ * Prueba DeptoTest
+ * 
+ * @author Gustavo Salgado y Laura Julieth Rúa
+ * 
+ * @author Ingeniería de Sistemas y Computación
+ * 
+ * @author Universidad del Quindío
+ * 
+ * @version 1.0
+ * 
+ * @since 1/03/2017
+ */
 @RunWith(Arquillian.class)
 public class DeptoTest {
 
@@ -32,64 +45,73 @@ public class DeptoTest {
 				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
 
+	/**
+	 * Metodo de prueba que verifica la busqueda de datos
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "datos/depto.json" })
-	//@Ignore
 	public void findTest() {
-		Dpto dpto = entityManager.find(Dpto.class, 1);
-		Assert.assertEquals("Quindio", dpto.getNombre());
+		Depto depto = entityManager.find(Depto.class, 1);
+		Assert.assertEquals("Quindio", depto.getNombre());
 	}
 
+	/**
+	 * Metodo de prueba que verifica la insercion de datos
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "datos/depto.json" })
 	public void persistTest() {
-		
+
 		Ciudad c1 = entityManager.find(Ciudad.class, 1);
 		Ciudad c2 = entityManager.find(Ciudad.class, 2);
-		
+
 		List<Ciudad> ciudades = new ArrayList<>();
 		ciudades.add(c1);
 		ciudades.add(c2);
 
-		Dpto dpto = new Dpto();
-		dpto.setId(3);
-		dpto.setCodigo("AR");
-		dpto.setNombre("Arauca");
-		dpto.setCiudades(ciudades);
+		Depto depto = new Depto();
+		depto.setId(3);
+		depto.setCodigo("AR");
+		depto.setNombre("Arauca");
+		depto.setCiudades(ciudades);
 
-		entityManager.persist(dpto);
+		entityManager.persist(depto);
 
-		Dpto registrado = entityManager.find(Dpto.class, dpto.getId());
-		Assert.assertEquals(dpto, registrado);
+		Depto registrado = entityManager.find(Depto.class, depto.getId());
+		Assert.assertEquals(depto, registrado);
 	}
 
+	/**
+	 * Metodo de prueba que verifica la actualizacion de datos
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "datos/depto.json" })
 	public void updateTest() {
 
-		Dpto quindio = entityManager.find(Dpto.class, 1);
+		Depto quindio = entityManager.find(Depto.class, 1);
 
-		quindio.setCodigo("Ayer");
+		quindio.setCodigo("man");
 
-//		entityManager.persist(quindio);
-
-		Dpto registrado = entityManager.find(Dpto.class, quindio.getId());
-		Assert.assertEquals("Ayer", registrado.getCodigo());
+		Depto registrado = entityManager.find(Depto.class, quindio.getId());
+		Assert.assertEquals("man", registrado.getCodigo());
 	}
 
+	/**
+	 * Metodo de prueba que verifica la eliminacion de datos
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "datos/depto.json" })
-	public void deleteTest(){
-		
-		Dpto quindio = entityManager.find(Dpto.class, 1);
-		
+	public void deleteTest() {
+
+		Depto quindio = entityManager.find(Depto.class, 1);
+
 		entityManager.remove(quindio);
-		
-		Dpto registrado = entityManager.find(Dpto.class, quindio.getId());
+
+		Depto registrado = entityManager.find(Depto.class, quindio.getId());
 		Assert.assertNull(registrado);
 	}
 }

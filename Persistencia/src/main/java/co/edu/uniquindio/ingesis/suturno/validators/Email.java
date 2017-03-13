@@ -10,6 +10,19 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 import javax.validation.constraints.Pattern;
 
+/*
+ * Validator Email
+ * 
+ * @author Gustavo Salgado y Laura Julieth Rúa
+ * 
+ * @author Ingeniería de Sistemas y Computación
+ * 
+ * @author Universidad del Quindío
+ * 
+ * @version 1.0
+ * 
+ * @since 1/03/2017
+ */
 @Pattern.List({ @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\." + "[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*"
 		+ "@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?") })
 @Constraint(validatedBy = {})

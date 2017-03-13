@@ -16,6 +16,19 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+/*
+ * Prueba EmpleadoTest
+ * 
+ * @author Gustavo Salgado y Laura Julieth Rúa
+ * 
+ * @author Ingeniería de Sistemas y Computación
+ * 
+ * @author Universidad del Quindío
+ * 
+ * @version 1.0
+ * 
+ * @since 1/03/2017
+ */
 @RunWith(Arquillian.class)
 public class EmpleadoTest {
 
@@ -29,6 +42,9 @@ public class EmpleadoTest {
 				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
 
+	/**
+	 * Metodo de prueba que verifica la busqueda de datos
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "datos/puestoTrabajo.json", "datos/empleado.json" })
@@ -37,15 +53,16 @@ public class EmpleadoTest {
 		Assert.assertEquals("12345", empleado.getClave());
 	}
 
+	/**
+	 * Metodo de prueba que verifica la insercion de datos
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/puestoTrabajo.json", "datos/empleado.json" , "datos/persona.json" })
-
+	@UsingDataSet({ "datos/puestoTrabajo.json", "datos/empleado.json", "datos/persona.json" })
 	public void persistTest() {
 
 		Empleado e1 = entityManager.find(Empleado.class, 1);
 		Persona p2 = new Persona();
-		
 
 		Empleado empleado = new Empleado();
 		empleado.setId(4);
@@ -59,6 +76,9 @@ public class EmpleadoTest {
 		Assert.assertEquals(empleado, registrado);
 	}
 
+	/**
+	 * Metodo de prueba que verifica la actualizacion de datos
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "datos/puestoTrabajo.json", "datos/empleado.json" })
@@ -72,6 +92,9 @@ public class EmpleadoTest {
 		Assert.assertEquals("29803742", registrado.getUsuario());
 	}
 
+	/**
+	 * Metodo de prueba que verifica la eliminacion de datos
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "datos/puestoTrabajo.json", "datos/empleado.json" })

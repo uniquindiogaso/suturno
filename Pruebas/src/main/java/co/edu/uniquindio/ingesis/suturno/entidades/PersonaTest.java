@@ -17,8 +17,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import utils.Genero;
-import utils.TipoDocumento;
+import co.edu.uniquindio.ingesis.suturno.utils.Genero;
+import co.edu.uniquindio.ingesis.suturno.utils.TipoDocumento;
 
 @RunWith(Arquillian.class)
 public class PersonaTest {

@@ -16,6 +16,19 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+/*
+ * Prueba ServicioTest
+ * 
+ * @author Gustavo Salgado y Laura Julieth Rúa
+ * 
+ * @author Ingeniería de Sistemas y Computación
+ * 
+ * @author Universidad del Quindío
+ * 
+ * @version 1.0
+ * 
+ * @since 1/03/2017
+ */
 @RunWith(Arquillian.class)
 public class ServicioTest {
 
@@ -29,6 +42,9 @@ public class ServicioTest {
 				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
 
+	/**
+	 * Metodo de prueba que verifica la busqueda de datos
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "datos/servicio.json" })
@@ -37,17 +53,19 @@ public class ServicioTest {
 		Assert.assertEquals("pago", servicio.getCodigo());
 	}
 
-	
+	/**
+	 * Metodo de prueba que verifica la insercion de datos
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "datos/servicio.json" })
 	public void persistTest() {
-		
+
 		Servicio s1 = entityManager.find(Servicio.class, 1);
 		Servicio s2 = entityManager.find(Servicio.class, 2);
-		
+
 		Servicio servicio = new Servicio();
-		
+
 		servicio.setActivo(true);
 		servicio.setCodigo("ser5");
 		servicio.setNombre("Servicio5");
@@ -59,6 +77,9 @@ public class ServicioTest {
 		Assert.assertEquals(servicio, registrado);
 	}
 
+	/**
+	 * Metodo de prueba que verifica la actualizacion de datos
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "datos/servicio.json" })
@@ -72,15 +93,18 @@ public class ServicioTest {
 		Assert.assertEquals("nuevo1", registrado.getCodigo());
 	}
 
+	/**
+	 * Metodo de prueba que verifica la eliminacion de datos
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/servicio.json"  })
-	public void deleteTest(){
-		
+	@UsingDataSet({ "datos/servicio.json" })
+	public void deleteTest() {
+
 		Servicio servicio = entityManager.find(Servicio.class, 2);
-		
+
 		entityManager.remove(servicio);
-		
+
 		Servicio registrado = entityManager.find(Servicio.class, servicio.getId());
 		Assert.assertNull(registrado);
 	}
