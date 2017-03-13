@@ -43,16 +43,7 @@ public class CiudadTest {
 				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
 
-	/**
-	 * Metodo de prueba que verifica la busqueda de datos
-	 */
-	@Test
-	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/depto.json", "datos/ciudad.json" })
-	public void findTest() {
-		Ciudad ciudad = entityManager.find(Ciudad.class, 1);
-		Assert.assertEquals("Armenia", ciudad.getNombre());
-	}
+
 
 	/**
 	 * Metodo de prueba que verifica la insercion de datos
@@ -76,6 +67,18 @@ public class CiudadTest {
 		Assert.assertEquals(ciudad, registrado);
 	}
 
+	/**
+	 * Metodo de prueba que verifica la busqueda de datos
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "datos/depto.json", "datos/ciudad.json" })
+	public void findTest() {
+		Ciudad ciudad = entityManager.find(Ciudad.class, 1);
+		Assert.assertEquals("Armenia", ciudad.getNombre());
+	}
+	
+	
 	/**
 	 * Metodo de prueba que verifica la actualizacion de datos
 	 */
