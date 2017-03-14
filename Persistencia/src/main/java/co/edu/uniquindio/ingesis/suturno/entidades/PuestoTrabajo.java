@@ -131,7 +131,7 @@ public class PuestoTrabajo implements Serializable {
 	 * 
 	 * @return empleado el empleado que tiene el puesto de trabajo
 	 */
-	public Empleado getEmpleados() {
+	public Empleado getEmpleado() {
 		return empleado;
 	}
 
@@ -141,8 +141,8 @@ public class PuestoTrabajo implements Serializable {
 	 * @param empleado
 	 *            el empleado que tiene el puesto de trabajo
 	 */
-	public void setEmpleados(Empleado empleados) {
-		this.empleado = empleados;
+	public void setEmpleado(Empleado empleado) {
+		this.empleado = empleado;
 	}
 
 }

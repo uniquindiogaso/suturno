@@ -1,5 +1,8 @@
 package co.edu.uniquindio.ingesis.suturno.entidades;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -17,7 +20,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /*
- * Prueba PuestoTrabajoTest
+ * Prueba CiudadTest
  * 
  * @author Gustavo Salgado y Laura Julieth Rúa
  * 
@@ -30,14 +33,14 @@ import org.junit.runner.RunWith;
  * @since 1/03/2017
  */
 @RunWith(Arquillian.class)
-public class PuestoTrabajoTest {
+public class TipoClienteTest {
 
 	/*
 	 * Variable que representa el atributo entityManager, que es al administrador de conexiones
 	 */
 	@PersistenceContext
 	private EntityManager entityManager;
-	
+
 	/*
 	 * Metodo estatico que permite identificar en que paquete se corre la prueba
 	 */
@@ -49,56 +52,62 @@ public class PuestoTrabajoTest {
 	}
 
 	/**
-	 * Metodo de prueba que verifica la busqueda de datos
-	 */
-	@Test
-	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/puestotrabajo.json" })
-	public void findTest() {
-		PuestoTrabajo puesto = entityManager.find(PuestoTrabajo.class, 3);
-		Assert.assertEquals("Puesto3", puesto.getNombre());
-	}
-
-	/**
 	 * Metodo de prueba que verifica la insercion de datos
 	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/puestotrabajo.json" })
+	@UsingDataSet({ "datos/persona.json" })
 	public void persistTest() {
-
-		PuestoTrabajo p1 = entityManager.find(PuestoTrabajo.class, 1);
-
-		Empleado marianita = entityManager.find(Empleado.class, 1);
-
-		PuestoTrabajo puesto = new PuestoTrabajo();
-		puesto.setId(4);
-		puesto.setCodigo("A104");
-		puesto.setNombre("Puesto4");
-		puesto.setEmpleado(marianita);
-
-		entityManager.persist(puesto);
-
-		PuestoTrabajo registrado = entityManager.find(PuestoTrabajo.class, puesto.getId());
-		Assert.assertEquals(puesto, registrado);
 		
-		Assert.assertEquals(registrado.getEmpleado(), marianita);
+		Persona client1 = entityManager.find(Persona.class, 3);
+		Persona client2 = entityManager.find(Persona.class, 4);
+		
+		List<Persona> clientes = new ArrayList<Persona>();
+		clientes.add(client1);
+		clientes.add(client2);
+
+		TipoCliente tCliente = new TipoCliente();
+		
+		tCliente.setId(3);
+		tCliente.setCodigo("gold");
+		tCliente.setNombre("Cliente Premium");
+		tCliente.setPrioridad(true);
+		tCliente.setPersonas(clientes);
+
+		entityManager.persist(tCliente);
+
+		TipoCliente registrado = entityManager.find(TipoCliente.class, tCliente.getId());
+		Assert.assertEquals(tCliente, registrado);
 	}
 
+	/**
+	 * Metodo de prueba que verifica la busqueda de datos
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "datos/tipocliente.json" })
+	public void findTest() {
+		TipoCliente tCliente = entityManager.find(TipoCliente.class, 1);
+		Assert.assertEquals("gen", tCliente.getCodigo());
+	}
+	
+	
 	/**
 	 * Metodo de prueba que verifica la actualizacion de datos
 	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/puestotrabajo.json" })
+	@UsingDataSet({ "datos/tipocliente.json" })
 	public void updateTest() {
 
-		PuestoTrabajo puesto = entityManager.find(PuestoTrabajo.class, 2);
+		TipoCliente mayor = entityManager.find(TipoCliente.class, 2);
 
-		puesto.setCodigo("A111");
+		mayor.setNombre("Preferente");
 
-		PuestoTrabajo registrado = entityManager.find(PuestoTrabajo.class, puesto.getId());
-		Assert.assertEquals("A111", registrado.getCodigo());
+
+		TipoCliente registrado = entityManager.find(TipoCliente.class, mayor.getId());
+		Assert.assertEquals(mayor.getNombre(), registrado.getNombre());
+
 	}
 
 	/**
@@ -106,14 +115,14 @@ public class PuestoTrabajoTest {
 	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/puestotrabajo.json" })
+	@UsingDataSet({ "datos/persona.json", "datos/ciudad.json" })
 	public void deleteTest() {
 
-		PuestoTrabajo puesto = entityManager.find(PuestoTrabajo.class, 2);
+		TipoCliente pref = entityManager.find(TipoCliente.class, 1);
 
-		entityManager.remove(puesto);
+		entityManager.remove(pref);
 
-		PuestoTrabajo registrado = entityManager.find(PuestoTrabajo.class, puesto.getId());
+		TipoCliente registrado = entityManager.find(TipoCliente.class, pref.getId());
 		Assert.assertNull(registrado);
 	}
 }
