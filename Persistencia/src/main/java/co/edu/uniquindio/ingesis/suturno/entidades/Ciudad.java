@@ -73,6 +73,17 @@ public class Ciudad implements Serializable {
 	public Ciudad() {
 		super();
 	}
+	
+	
+
+	public Ciudad(String codigo, String nombre, Depto depto) {
+		super();
+		this.codigo = codigo;
+		this.nombre = nombre;
+		this.depto = depto;
+	}
+
+
 
 	/**
 	 * Metodo que permite obtener el valor del atributo id

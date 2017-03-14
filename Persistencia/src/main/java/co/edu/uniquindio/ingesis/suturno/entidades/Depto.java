@@ -67,6 +67,16 @@ public class Depto implements Serializable {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+
+	public Depto(String codigo, String nombre) {
+		super();
+		this.codigo = codigo;
+		this.nombre = nombre;
+	}
+
+
 
 	/**
 	 * Metodo que permite obtener el valor del atributo id

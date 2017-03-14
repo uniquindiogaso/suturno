@@ -1,6 +1,9 @@
 package co.edu.uniquindio.ingesis.suturno.entidades;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -54,33 +57,51 @@ public class PersonaTest {
 	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({  "datos/ciudad.json", "datos/empleado.json", "datos/persona.json" })
+	@UsingDataSet({  "datos/ciudad.json", "datos/empleado.json", "datos/persona.json" , "datos/tipocliente.json"})
 	public void persistTest() {
 		
 		Persona p1 = entityManager.find(Persona.class, 1);
 		Persona p2 = entityManager.find(Persona.class, 2);
 		
+		Ciudad armenia = entityManager.find(Ciudad.class, 1);
+		
+		Assert.assertNotNull("La ciudad para el cliente no debe ser nula",armenia);
+		
+		
+		TipoCliente clienteGeneral = entityManager.find(TipoCliente.class, 1);
+		TipoCliente clienteMayor= entityManager.find(TipoCliente.class, 2);	
+		
+		List<TipoCliente> tipoClient = new ArrayList<TipoCliente>();
+		
+		tipoClient.add(clienteGeneral);
+		tipoClient.add(clienteMayor); 
+		
 		Persona persona = new Persona();
 		persona.setId(3);
 		persona.setActivo(true);
-		persona.setApellido1("Marín");
+		persona.setApellido1("Marin");
 		persona.setApellido2("Perez");
 		persona.setDir("Granada");
 		persona.setEmail("saramarin@gmail.com");
 		persona.setGenero(Genero.FEMENINO);
 		persona.setIdentificacion("9574136672");
 		persona.setNombre1("Sara");
-		//persona.setNombre2();
 		persona.settDoc(TipoDocumento.TARJETA_IDENTIDAD);
 		persona.setTel1("3206842320");
 		persona.setTel2("7452310");
-		persona.setCiudad(null);
+		persona.setCiudad(armenia);
+		//Esta Persona no es un Empleado por eso se deja null
 		persona.setEmpleado(null);
+		persona.setTiposCliente(tipoClient);
+		
+		
 		
 		entityManager.persist(persona);
 
 		Persona registrado = entityManager.find(Persona.class, persona.getId());
 		Assert.assertEquals(persona, registrado);
+		
+		Assert.assertTrue("Tipo Cliente no registrado", registrado.getTiposCliente().contains(clienteMayor));
 	}
 
 	/**
@@ -112,6 +133,6 @@ public class PersonaTest {
 		entityManager.remove(persona);
 		
 		Persona registrado = entityManager.find(Persona.class, persona.getId());
-		Assert.assertNull(registrado);
+		Assert.assertNull("No se encontro la Persona, no es posible eliminarla",registrado);
 	}
 }

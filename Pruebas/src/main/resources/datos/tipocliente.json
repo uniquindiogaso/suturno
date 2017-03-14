@@ -2,7 +2,7 @@
 	"suturno_tipocliente": [
 	{
 	"ID": 1,
-	"CODIGO":"cliente_general",
+	"CODIGO":"gen",
 	"NOMBRE":"Cliente_General",
 	"PRIORIDAD":0
 	},
