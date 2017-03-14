@@ -71,40 +71,33 @@ public class TurnoTest {
 	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/persona.json", "datos/empleado.json", "datos/turno.json" })
+	@UsingDataSet({ "datos/persona.json", "datos/empleado.json", "datos/turno.json" , "datos/servicio.json" })
 	public void persistTest() {
-
-		Turno t1 = entityManager.find(Turno.class, 1);
-		Turno t2 = entityManager.find(Turno.class, 2);
+	
+		Servicio nuevoServi = entityManager.find(Servicio.class, 3);
+		Persona cliente = entityManager.find(Persona.class, 2);
+		Empleado thomas =  entityManager.find(Empleado.class, 2);
+		
 
 		Turno turno = new Turno();
 		turno.setId(4);
 		turno.setEstado(EstadoTurno.EN_ESPERA);
 		turno.setFecha(new Timestamp(new Date().getTime()));
 		turno.setNota("Nuevo Turno");
-		turno.setServicio(new Servicio("12345", "Pagar", "Ultimatum de pago", true));
-
-		Persona persona = new Persona();
-		persona.setId(3);
-		persona.setActivo(true);
-		persona.setApellido1("Marin");
-		persona.setApellido2("Perez");
-		persona.setDir("Granada");
-		persona.setEmail("saramarin@gmail.com");
-		persona.setGenero(Genero.FEMENINO);
-		persona.setIdentificacion("9574136672");
-		persona.setNombre1("Sara");
-		persona.settDoc(TipoDocumento.TARJETA_IDENTIDAD);
-		persona.setTel1("3206842320");
-		persona.setTel2("7452310");
-		persona.setCiudad(null);
-		persona.setEmpleado(null);
-		turno.setCliente(persona);
+		turno.setServicio(nuevoServi);
+		turno.setEmpleado(thomas);	
+		turno.setCliente(cliente);
 
 		entityManager.persist(turno);
 
 		Turno registrado = entityManager.find(Turno.class, turno.getId());
 		Assert.assertEquals(turno, registrado);
+		
+		Assert.assertTrue("Servicio no corresponde con el registrado",registrado.getServicio().getNombre().equals(nuevoServi.getNombre()));
+		
+		Assert.assertNotNull("Debe seleccionar un Cliente", registrado.getCliente());
+		
+		Assert.assertNotNull("Debe seleccionar un Empleado que va a atender solicitud", registrado.getEmpleado());
 	}
 
 	/**
