@@ -33,17 +33,21 @@ import org.junit.runner.RunWith;
 @RunWith(Arquillian.class)
 public class CiudadTest {
 
+	/*
+	 * Variable que representa el atributo entityManager, que es al administrador de conexiones
+	 */
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	/*
+	 * Metodo estatico que permite identificar en que paquete se corre la prueba
+	 */
 	@Deployment
 	public static Archive<?> createTestArchive() {
 		return ShrinkWrap.create(WebArchive.class, "test.war").addPackage(Persona.class.getPackage())
 				.addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
 				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
-
-
 
 	/**
 	 * Metodo de prueba que verifica la insercion de datos

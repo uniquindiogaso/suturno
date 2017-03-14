@@ -32,9 +32,15 @@ import org.junit.runner.RunWith;
 @RunWith(Arquillian.class)
 public class EmpleadoTest {
 
+	/*
+	 * Variable que representa el atributo entityManager, que es al administrador de conexiones
+	 */
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	/*
+	 * Metodo estatico que permite identificar en que paquete se corre la prueba
+	 */
 	@Deployment
 	public static Archive<?> createTestArchive() {
 		return ShrinkWrap.create(WebArchive.class, "test.war").addPackage(Persona.class.getPackage())

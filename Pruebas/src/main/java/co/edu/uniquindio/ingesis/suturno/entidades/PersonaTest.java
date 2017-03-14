@@ -23,9 +23,14 @@ import co.edu.uniquindio.ingesis.suturno.utils.TipoDocumento;
 @RunWith(Arquillian.class)
 public class PersonaTest {
 
+	/*
+	 * Variable que representa el atributo entityManager, que es al administrador de conexiones
+	 */
 	@PersistenceContext
 	private EntityManager entityManager;
-
+	/*
+	 * Metodo estatico que permite identificar en que paquete se corre la prueba
+	 */
 	@Deployment
 	public static Archive<?> createTestArchive() {
 		return ShrinkWrap.create(WebArchive.class, "test.war").addPackage(Persona.class.getPackage())
@@ -33,6 +38,9 @@ public class PersonaTest {
 				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
 
+	/**
+	 * Metodo de prueba que verifica la busqueda de datos
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "datos/ciudad.json", "datos/empleado.json", "datos/persona.json"})
@@ -41,7 +49,9 @@ public class PersonaTest {
 		Assert.assertEquals(1, persona.getId());
 	}
 
-	
+	/**
+	 * Metodo de prueba que verifica la insercion de datos
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({  "datos/ciudad.json", "datos/empleado.json", "datos/persona.json" })
@@ -73,6 +83,9 @@ public class PersonaTest {
 		Assert.assertEquals(persona, registrado);
 	}
 
+	/**
+	 * Metodo de prueba que verifica la actualizacion de datos
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({  "datos/ciudad.json", "datos/empleado.json", "datos/persona.json" })
@@ -86,6 +99,9 @@ public class PersonaTest {
 		Assert.assertEquals("Perez", registrado.getApellido1());
 	}
 
+	/**
+	 * Metodo de prueba que verifica la eliminacion de datos
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({  "datos/ciudad.json", "datos/empleado.json", "datos/persona.json"  })

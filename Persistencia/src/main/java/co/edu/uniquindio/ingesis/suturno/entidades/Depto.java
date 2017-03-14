@@ -144,9 +144,8 @@ public class Depto implements Serializable {
 		this.ciudades = ciudades;
 	}
 
-	/*
-	 * 
-	 * 
+	/**
+	 * Metodo sobreescrito de hashCode
 	 */
 	@Override
 	public int hashCode() {
@@ -156,9 +155,8 @@ public class Depto implements Serializable {
 		return result;
 	}
 
-	/*
-	 * 
-	 * 
+	/**
+	 * Metodo sobreescrito de equals
 	 */
 	@Override
 	public boolean equals(Object obj) {

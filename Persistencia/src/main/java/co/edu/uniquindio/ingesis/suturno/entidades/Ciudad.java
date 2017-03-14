@@ -169,8 +169,8 @@ public class Ciudad implements Serializable {
 		this.personas = personas;
 	}
 
-	/*
-	 *
+	/**
+	 * Metodo sobreescrito de hashCode
 	 */
 	@Override
 	public int hashCode() {
@@ -180,8 +180,8 @@ public class Ciudad implements Serializable {
 		return result;
 	}
 
-	/*
-	 * 
+	/**
+	 * Metodo sobreescrito de equals
 	 */
 	@Override
 	public boolean equals(Object obj) {
