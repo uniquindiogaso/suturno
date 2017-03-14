@@ -20,7 +20,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /*
- * Prueba CiudadTest
+ * Prueba TipoClienteTest
  * 
  * @author Gustavo Salgado y Laura Julieth Rúa
  * 
