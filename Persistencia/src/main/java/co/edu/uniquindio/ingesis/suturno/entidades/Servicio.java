@@ -243,6 +243,9 @@ public class Servicio implements Serializable {
 		this.turnos = turnos;
 	}
 
+	/**
+	 * Metodo sobreescrito de hashCode
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -251,6 +254,9 @@ public class Servicio implements Serializable {
 		return result;
 	}
 
+	/**
+	 * Metodo sobreescrito de equals
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -264,8 +270,5 @@ public class Servicio implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
 
 }

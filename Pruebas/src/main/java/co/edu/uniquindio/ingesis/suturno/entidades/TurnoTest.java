@@ -40,7 +40,8 @@ import co.edu.uniquindio.ingesis.suturno.utils.TipoDocumento;
 public class TurnoTest {
 
 	/*
-	 * Variable que representa el atributo entityManager, que es al administrador de conexiones
+	 * Variable que representa el atributo entityManager, que es el
+	 * administrador de conexiones
 	 */
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -71,13 +72,12 @@ public class TurnoTest {
 	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/persona.json", "datos/empleado.json", "datos/turno.json" , "datos/servicio.json" })
+	@UsingDataSet({ "datos/persona.json", "datos/empleado.json", "datos/turno.json", "datos/servicio.json" })
 	public void persistTest() {
-	
+
 		Servicio nuevoServi = entityManager.find(Servicio.class, 3);
-		Persona cliente = entityManager.find(Persona.class, 2);
-		Empleado thomas =  entityManager.find(Empleado.class, 2);
-		
+		Persona cliente = entityManager.find(Persona.class, 3);
+		Empleado thomas = entityManager.find(Empleado.class, 2);
 
 		Turno turno = new Turno();
 		turno.setId(4);
@@ -85,18 +85,19 @@ public class TurnoTest {
 		turno.setFecha(new Timestamp(new Date().getTime()));
 		turno.setNota("Nuevo Turno");
 		turno.setServicio(nuevoServi);
-		turno.setEmpleado(thomas);	
+		turno.setEmpleado(thomas);
 		turno.setCliente(cliente);
 
 		entityManager.persist(turno);
 
 		Turno registrado = entityManager.find(Turno.class, turno.getId());
 		Assert.assertEquals(turno, registrado);
-		
-		Assert.assertTrue("Servicio no corresponde con el registrado",registrado.getServicio().getNombre().equals(nuevoServi.getNombre()));
-		
+
+		Assert.assertTrue("Servicio no corresponde con el registrado",
+				registrado.getServicio().getNombre().equals(nuevoServi.getNombre()));
+
 		Assert.assertNotNull("Debe seleccionar un Cliente", registrado.getCliente());
-		
+
 		Assert.assertNotNull("Debe seleccionar un Empleado que va a atender solicitud", registrado.getEmpleado());
 	}
 

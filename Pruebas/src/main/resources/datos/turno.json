@@ -5,8 +5,8 @@
 	"ESTADO":1,
 	"FECHA":"2017-01-12",
 	"NOTA":"Terminar",
-	"CLIENTE_ID":"12345",
-	"EMPLEADO_ID":"12345",
+	"CLIENTE_ID":3,
+	"EMPLEADO_ID":1,
 	"SERVICIO_ID":1
 	},
 	{
@@ -14,8 +14,8 @@
 	"ESTADO":0,
 	"FECHA":"2017-01-24",
 	"NOTA":"Queja",
-	"CLIENTE_ID":"12345",
-	"EMPLEADO_ID":"12345",
+	"CLIENTE_ID":4,
+	"EMPLEADO_ID":2,
 	"SERVICIO_ID":2
 	},
 	{
@@ -23,8 +23,8 @@
 	"ESTADO":0,
 	"FECHA":"2017-01-24",
 	"NOTA":"Solicitud",
-	"CLIENTE_ID":"12345",
-	"EMPLEADO_ID":"12345",
+	"CLIENTE_ID":3,
+	"EMPLEADO_ID":2,
 	"SERVICIO_ID":2
 	}
 	]

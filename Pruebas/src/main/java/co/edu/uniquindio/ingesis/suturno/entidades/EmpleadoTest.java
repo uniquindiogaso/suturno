@@ -36,7 +36,8 @@ import org.junit.runner.RunWith;
 public class EmpleadoTest {
 
 	/*
-	 * Variable que representa el atributo entityManager, que es al administrador de conexiones
+	 * Variable que representa el atributo entityManager, que es el
+	 * administrador de conexiones
 	 */
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -67,31 +68,32 @@ public class EmpleadoTest {
 	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/puestoTrabajo.json", "datos/empleado.json", "datos/persona.json", "datos/servicio.json" , "datos/turno.json"})
+	@UsingDataSet({ "datos/puestoTrabajo.json", "datos/empleado.json", "datos/persona.json", "datos/servicio.json",
+			"datos/turno.json" })
 	public void persistTest() {
 
 		Empleado e1 = entityManager.find(Empleado.class, 1);
 		Persona p = entityManager.find(Persona.class, 1);
-		
+
 		Servicio pagarFactura = entityManager.find(Servicio.class, 1);
-		Servicio nuevoServicio = entityManager.find(Servicio.class, 3);	
-		
+		Servicio nuevoServicio = entityManager.find(Servicio.class, 3);
+
 		List<Servicio> servicios = new ArrayList<Servicio>();
-		
+
 		servicios.add(pagarFactura);
 		servicios.add(nuevoServicio);
-		
+
 		Turno t1 = entityManager.find(Turno.class, 1);
 		Turno t2 = entityManager.find(Turno.class, 2);
 		Turno t3 = entityManager.find(Turno.class, 3);
 		Turno t4 = entityManager.find(Turno.class, 4);
-		
+
 		List<Turno> turnos = new ArrayList<Turno>();
-		
+
 		turnos.add(t1);
 		turnos.add(t2);
-		turnos.add(t3);		
-		
+		turnos.add(t3);
+
 		PuestoTrabajo puesto1 = entityManager.find(PuestoTrabajo.class, 1);
 
 		Empleado empleado = new Empleado();
@@ -102,18 +104,18 @@ public class EmpleadoTest {
 		empleado.setTercero(p);
 		empleado.setServicios(servicios);
 		empleado.setPuesto(puesto1);
-		
+
 		empleado.setTurnos(turnos);
 
 		entityManager.persist(empleado);
 
 		Empleado registrado = entityManager.find(Empleado.class, empleado.getId());
 		Assert.assertEquals(empleado, registrado);
-		
+
 		Assert.assertTrue("Servicio no asociado a Empleado", registrado.getServicios().contains(nuevoServicio));
-		
+
 		Assert.assertNotNull("Debe tener asociado un puesto de Trabajo", registrado.getPuesto());
-		
+
 		Assert.assertTrue("El Turno no puede existir", !registrado.getTurnos().contains(t4));
 	}
 

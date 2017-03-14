@@ -34,7 +34,7 @@ import org.junit.runner.RunWith;
 public class CiudadTest {
 
 	/*
-	 * Variable que representa el atributo entityManager, que es al administrador de conexiones
+	 * Variable que representa el atributo entityManager, que es el administrador de conexiones
 	 */
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -93,9 +93,7 @@ public class CiudadTest {
 
 		Ciudad manizales = entityManager.find(Ciudad.class, 1);
 
-		manizales.setCodigo("Abierto");
-
-		// entityManager.persist(manizales);
+		manizales.setCodigo("mani");
 
 		Ciudad registrado = entityManager.find(Ciudad.class, manizales.getId());
 		Assert.assertEquals(manizales.getCodigo(), registrado.getCodigo());

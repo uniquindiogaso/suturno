@@ -33,11 +33,12 @@ import org.junit.runner.RunWith;
 public class PuestoTrabajoTest {
 
 	/*
-	 * Variable que representa el atributo entityManager, que es al administrador de conexiones
+	 * Variable que representa el atributo entityManager, que es el
+	 * administrador de conexiones
 	 */
 	@PersistenceContext
 	private EntityManager entityManager;
-	
+
 	/*
 	 * Metodo estatico que permite identificar en que paquete se corre la prueba
 	 */
@@ -81,7 +82,7 @@ public class PuestoTrabajoTest {
 
 		PuestoTrabajo registrado = entityManager.find(PuestoTrabajo.class, puesto.getId());
 		Assert.assertEquals(puesto, registrado);
-		
+
 		Assert.assertEquals(registrado.getEmpleado(), marianita);
 	}
 

@@ -73,17 +73,23 @@ public class Ciudad implements Serializable {
 	public Ciudad() {
 		super();
 	}
-	
-	
 
+	/**
+	 * Metodo constructor de la entidad Ciudad
+	 * 
+	 * @param codigo
+	 *            el codigo de la ciudad
+	 * @param nombre
+	 *            el nombre de la ciudad
+	 * @param depto
+	 *            el departamento al que pertenece la ciudad
+	 */
 	public Ciudad(String codigo, String nombre, Depto depto) {
 		super();
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.depto = depto;
 	}
-
-
 
 	/**
 	 * Metodo que permite obtener el valor del atributo id

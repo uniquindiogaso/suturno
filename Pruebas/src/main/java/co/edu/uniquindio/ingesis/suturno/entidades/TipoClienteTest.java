@@ -36,7 +36,8 @@ import org.junit.runner.RunWith;
 public class TipoClienteTest {
 
 	/*
-	 * Variable que representa el atributo entityManager, que es al administrador de conexiones
+	 * Variable que representa el atributo entityManager, que es el
+	 * administrador de conexiones
 	 */
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -58,16 +59,16 @@ public class TipoClienteTest {
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "datos/persona.json" })
 	public void persistTest() {
-		
+
 		Persona client1 = entityManager.find(Persona.class, 3);
 		Persona client2 = entityManager.find(Persona.class, 4);
-		
+
 		List<Persona> clientes = new ArrayList<Persona>();
 		clientes.add(client1);
 		clientes.add(client2);
 
 		TipoCliente tCliente = new TipoCliente();
-		
+
 		tCliente.setId(3);
 		tCliente.setCodigo("gold");
 		tCliente.setNombre("Cliente Premium");
@@ -90,8 +91,7 @@ public class TipoClienteTest {
 		TipoCliente tCliente = entityManager.find(TipoCliente.class, 1);
 		Assert.assertEquals("gen", tCliente.getCodigo());
 	}
-	
-	
+
 	/**
 	 * Metodo de prueba que verifica la actualizacion de datos
 	 */
@@ -103,7 +103,6 @@ public class TipoClienteTest {
 		TipoCliente mayor = entityManager.find(TipoCliente.class, 2);
 
 		mayor.setNombre("Preferente");
-
 
 		TipoCliente registrado = entityManager.find(TipoCliente.class, mayor.getId());
 		Assert.assertEquals(mayor.getNombre(), registrado.getNombre());

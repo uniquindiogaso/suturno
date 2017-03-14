@@ -36,7 +36,8 @@ import org.junit.runner.RunWith;
 public class ServicioTest {
 
 	/*
-	 * Variable que representa el atributo entityManager, que es al administrador de conexiones
+	 * Variable que representa el atributo entityManager, que es el
+	 * administrador de conexiones
 	 */
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -67,26 +68,25 @@ public class ServicioTest {
 	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/servicio.json" , "datos/empleado.json" , "datos/turno.json"})
+	@UsingDataSet({ "datos/servicio.json", "datos/empleado.json", "datos/turno.json" })
 	public void persistTest() {
-		
+
 		Empleado emp1 = entityManager.find(Empleado.class, 1);
-		Empleado emp2 = entityManager.find(Empleado.class, 2);		
-		
+		Empleado emp2 = entityManager.find(Empleado.class, 2);
+
 		List<Empleado> empleados = new ArrayList<Empleado>();
 		empleados.add(emp1);
 		empleados.add(emp2);
-		
+
 		Turno t1 = entityManager.find(Turno.class, 1);
 		Turno t2 = entityManager.find(Turno.class, 2);
 		Turno t3 = entityManager.find(Turno.class, 3);
-		
-		
+
 		List<Turno> turnos = new ArrayList<Turno>();
 		turnos.add(t1);
 		turnos.add(t2);
 		turnos.add(t3);
-		
+
 		Servicio servicio = new Servicio();
 
 		servicio.setActivo(true);
@@ -100,11 +100,11 @@ public class ServicioTest {
 
 		Servicio registrado = entityManager.find(Servicio.class, servicio.getId());
 		Assert.assertEquals(servicio, registrado);
-		
-		Assert.assertTrue("Empleano no esta asociado a Servicio", registrado.getEmpleados().contains(emp2));		
-		
+
+		Assert.assertTrue("Empleano no esta asociado a Servicio", registrado.getEmpleados().contains(emp2));
+
 		Assert.assertTrue("Turno no asociado a Servicio", registrado.getTurnos().contains(t2));
-		
+
 	}
 
 	/**

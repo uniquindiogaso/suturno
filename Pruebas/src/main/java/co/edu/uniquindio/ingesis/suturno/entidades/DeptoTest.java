@@ -36,7 +36,7 @@ import org.junit.runner.RunWith;
 public class DeptoTest {
 
 	/*
-	 * Variable que representa el atributo entityManager, que es al administrador de conexiones
+	 * Variable que representa el atributo entityManager, que es el administrador de conexiones
 	 */
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -99,10 +99,10 @@ public class DeptoTest {
 
 		Depto quindio = entityManager.find(Depto.class, 1);
 
-		quindio.setCodigo("man");
+		quindio.setCodigo("quind");
 
 		Depto registrado = entityManager.find(Depto.class, quindio.getId());
-		Assert.assertEquals("man", registrado.getCodigo());
+		Assert.assertEquals("quind", registrado.getCodigo());
 	}
 
 	/**

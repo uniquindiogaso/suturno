@@ -1,6 +1,5 @@
 package co.edu.uniquindio.ingesis.suturno.entidades;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,10 +26,12 @@ import co.edu.uniquindio.ingesis.suturno.utils.TipoDocumento;
 public class PersonaTest {
 
 	/*
-	 * Variable que representa el atributo entityManager, que es al administrador de conexiones
+	 * Variable que representa el atributo entityManager, que es el
+	 * administrador de conexiones
 	 */
 	@PersistenceContext
 	private EntityManager entityManager;
+
 	/*
 	 * Metodo estatico que permite identificar en que paquete se corre la prueba
 	 */
@@ -46,7 +47,7 @@ public class PersonaTest {
 	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/ciudad.json", "datos/empleado.json", "datos/persona.json"})
+	@UsingDataSet({ "datos/ciudad.json", "datos/empleado.json", "datos/persona.json" })
 	public void findTest() {
 		Persona persona = entityManager.find(Persona.class, 1);
 		Assert.assertEquals(1, persona.getId());
@@ -57,25 +58,24 @@ public class PersonaTest {
 	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({  "datos/ciudad.json", "datos/empleado.json", "datos/persona.json" , "datos/tipocliente.json"})
+	@UsingDataSet({ "datos/ciudad.json", "datos/empleado.json", "datos/persona.json", "datos/tipocliente.json" })
 	public void persistTest() {
-		
+
 		Persona p1 = entityManager.find(Persona.class, 1);
 		Persona p2 = entityManager.find(Persona.class, 2);
-		
+
 		Ciudad armenia = entityManager.find(Ciudad.class, 1);
-		
-		Assert.assertNotNull("La ciudad para el cliente no debe ser nula",armenia);
-		
-		
+
+		Assert.assertNotNull("La ciudad para el cliente no debe ser nula", armenia);
+
 		TipoCliente clienteGeneral = entityManager.find(TipoCliente.class, 1);
-		TipoCliente clienteMayor= entityManager.find(TipoCliente.class, 2);	
-		
+		TipoCliente clienteMayor = entityManager.find(TipoCliente.class, 2);
+
 		List<TipoCliente> tipoClient = new ArrayList<TipoCliente>();
-		
+
 		tipoClient.add(clienteGeneral);
-		tipoClient.add(clienteMayor); 
-		
+		tipoClient.add(clienteMayor);
+
 		Persona persona = new Persona();
 		persona.setId(3);
 		persona.setActivo(true);
@@ -90,17 +90,15 @@ public class PersonaTest {
 		persona.setTel1("3206842320");
 		persona.setTel2("7452310");
 		persona.setCiudad(armenia);
-		//Esta Persona no es un Empleado por eso se deja null
+		// Esta Persona no es un Empleado por eso se deja null
 		persona.setEmpleado(null);
 		persona.setTiposCliente(tipoClient);
-		
-		
-		
+
 		entityManager.persist(persona);
 
 		Persona registrado = entityManager.find(Persona.class, persona.getId());
 		Assert.assertEquals(persona, registrado);
-		
+
 		Assert.assertTrue("Tipo Cliente no registrado", registrado.getTiposCliente().contains(clienteMayor));
 	}
 
@@ -109,7 +107,7 @@ public class PersonaTest {
 	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({  "datos/ciudad.json", "datos/empleado.json", "datos/persona.json" })
+	@UsingDataSet({ "datos/ciudad.json", "datos/empleado.json", "datos/persona.json" })
 	public void updateTest() {
 
 		Persona persona = entityManager.find(Persona.class, 2);
@@ -125,14 +123,14 @@ public class PersonaTest {
 	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({  "datos/ciudad.json", "datos/empleado.json", "datos/persona.json"  })
-	public void deleteTest(){
-		
+	@UsingDataSet({ "datos/ciudad.json", "datos/empleado.json", "datos/persona.json" })
+	public void deleteTest() {
+
 		Persona persona = entityManager.find(Persona.class, 2);
-		
+
 		entityManager.remove(persona);
-		
+
 		Persona registrado = entityManager.find(Persona.class, persona.getId());
-		Assert.assertNull("No se encontro la Persona, no es posible eliminarla",registrado);
+		Assert.assertNull("No se encontro la Persona, no es posible eliminarla", registrado);
 	}
 }
