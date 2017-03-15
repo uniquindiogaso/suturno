@@ -14,14 +14,14 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-/*
+/**
  * Entidad Ciudad
  * 
- * @author Gustavo Salgado y Laura Julieth Rúa
+ * @author Gustavo Salgado y Laura Julieth Rua
  * 
- * @author Ingeniería de Sistemas y Computación
+ * @author Ingeniería de Sistemas y Computacion
  * 
- * @author Universidad del Quindío
+ * @author Universidad del Quindio
  * 
  * @version 1.0
  * 
@@ -33,14 +33,14 @@ public class Ciudad implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	/*
+	/**
 	 * Variable que representa el atributo id de la entidad
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	/*
+	/**
 	 * Variable que representa el atributo codigo de la entidad ciudad
 	 */
 	@NotNull(message = "El Codigo de la ubicacion debe ser obligatorio")
@@ -48,20 +48,20 @@ public class Ciudad implements Serializable {
 	@Column(nullable = false, length = 5)
 	private String codigo;
 
-	/*
+	/**
 	 * Variable que representa el atributo nombre de la entidad ciudad
 	 */
 	@NotNull(message = "El nombre de la ciudad debe de ser obligatorio")
 	@Column(nullable = false, length = 50)
 	private String nombre;
 
-	/*
+	/**
 	 * Variable que representa el atributo departamento de la entidad ciudad
 	 */
 	@ManyToOne(optional = false, targetEntity = Depto.class)
 	private Depto depto;
 
-	/*
+	/**
 	 * Lista que representa el atributo persona de la entidad ciudad
 	 */
 	@OneToMany(mappedBy = "ciudad")
@@ -186,7 +186,7 @@ public class Ciudad implements Serializable {
 		this.personas = personas;
 	}
 
-	/**
+	/*
 	 * Metodo sobreescrito de hashCode
 	 */
 	@Override
@@ -197,7 +197,7 @@ public class Ciudad implements Serializable {
 		return result;
 	}
 
-	/**
+	/*
 	 * Metodo sobreescrito de equals
 	 */
 	@Override

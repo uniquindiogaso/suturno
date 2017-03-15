@@ -21,14 +21,14 @@ import co.edu.uniquindio.ingesis.suturno.utils.Genero;
 import co.edu.uniquindio.ingesis.suturno.utils.TipoDocumento;
 import co.edu.uniquindio.ingesis.suturno.validators.Email;
 
-/*
+/**
  * Entidad Persona
  * 
- * @author Gustavo Salgado y Laura Julieth Rúa
+ * @author Gustavo Salgado y Laura Julieth Rua
  * 
- * @author Ingeniería de Sistemas y Computación
+ * @author Ingeniería de Sistemas y Computacion
  * 
- * @author Universidad del Quindío
+ * @author Universidad del Quindio
  * 
  * @version 1.0
  * 
@@ -40,21 +40,21 @@ public class Persona implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	/*
+	/**
 	 * Variable que representa el atributo id de la entidad
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	/*
+	/**
 	 * Variable que representa el atributo identificacion de la Persona
 	 */
 	@NotNull(message = "La identificacion debe de ser obligatoria")
 	@Column(nullable = false, length = 11)
 	private String identificacion;
 
-	/*
+	/**
 	 * Variable que representa el atributo tipo de documento de la Persona
 	 */
 	@NotNull(message = "El tipo de documento debe de ser obligatorio")
@@ -62,90 +62,90 @@ public class Persona implements Serializable {
 	@Enumerated(EnumType.ORDINAL)
 	private TipoDocumento tDoc;
 
-	/*
+	/**
 	 * Variable que representa el atributo genero de la Persona
 	 */
 	@Enumerated(EnumType.ORDINAL)
 	@Column(length = 9)
 	private Genero genero;
 
-	/*
+	/**
 	 * Variable que representa el atributo nombre 1 de la Persona
 	 */
 	@NotNull(message = "El nombre1 debe de ser obligatorio")
 	@Column(nullable = false, length = 50)
 	private String nombre1;
 
-	/*
+	/**
 	 * Variable que representa el atributo nombre 2 de la Persona
 	 */
 	@Column(length = 50)
 	private String nombre2;
 
-	/*
+	/**
 	 * Variable que representa el atributo apellido 1 de la Persona
 	 */
 	@NotNull(message = "El apellido1 debe de ser obligatorio")
 	@Column(nullable = false, length = 50)
 	private String apellido1;
 
-	/*
+	/**
 	 * Variable que representa el atributo apellido 2 de la Persona
 	 */
 	@Column(length = 50)
 	private String apellido2;
 
-	/*
+	/**
 	 * Variable que representa el atributo email de la Persona
 	 */
 	@Column(length = 50)
 	@Email(message = "Correo Electronico Invalido")
 	private String email;
 
-	/*
+	/**
 	 * Variable que representa el atributo telefono 1 de la Persona
 	 */
 	@Column(length = 15)
 	private String tel1;
 
-	/*
+	/**
 	 * Variable que representa el atributo telefono 2 de la Persona
 	 */
 	@Column(length = 15)
 	private String tel2;
 
-	/*
+	/**
 	 * Variable que representa el atributo dirección de la Persona
 	 */
 	@Column(length = 100)
 	private String dir;
 
-	/*
+	/**
 	 * Variable que representa el atributo ciudad al que pertenece la Persona
 	 */
 	@ManyToOne(optional = false)
 	private Ciudad ciudad;
 
-	/*
+	/**
 	 * Variable que representa el atributo activo de la Persona
 	 */
 	@Column()
 	private boolean activo;
 
-	/*
+	/**
 	 * Variable que representa el atributo lista de tipos de cliente de la
 	 * Persona
 	 */
 	@ManyToMany()
 	private List<TipoCliente> tiposCliente;
 
-	/*
+	/**
 	 * Variable que representa el atributo lsita de turnos de la Persona
 	 */
 	@OneToMany(mappedBy = "cliente")
 	private List<Turno> turnos;
 
-	/*
+	/**
 	 * Variable que representa el atributo empleado de la Persona
 	 */
 	@OneToOne()

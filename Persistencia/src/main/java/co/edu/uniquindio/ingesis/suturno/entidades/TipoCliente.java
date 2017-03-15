@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-/*
+/**
  * Entidad TipoCliente
  * 
  * @author Gustavo Salgado y Laura Julieth Rúa
@@ -32,14 +32,14 @@ public class TipoCliente implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	/*
+	/**
 	 * Variable que representa el atributo id de la entidad
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	/*
+	/**
 	 * Variable que representa el atributo codigo del tipo de cliente
 	 */
 	@NotNull(message = "El Codigo de la ubicacion debe ser obligatorio")
@@ -47,20 +47,20 @@ public class TipoCliente implements Serializable {
 	@Column(nullable = false, length = 5)
 	private String codigo;
 
-	/*
+	/**
 	 * Variable que representa el atributo nombre del tipo de cliente
 	 */
 	@NotNull(message = "El nombre de la ciudad debe de ser obligatorio")
 	@Column(nullable = false, length = 50)
 	private String nombre;
 
-	/*
+	/**
 	 * Variable que representa el atributo prioridad del tipo de cliente
 	 */
 	@Column()
 	private boolean prioridad;
 
-	/*
+	/**
 	 * Variable que representa el atributo personas lista de personas que
 	 * pertenecen al tipo de cliente
 	 */
@@ -171,8 +171,8 @@ public class TipoCliente implements Serializable {
 	public void setPersonas(List<Persona> personas) {
 		this.personas = personas;
 	}
-	
-	/**
+
+	/*
 	 * Metodo sobreescrito de hashCode
 	 */
 	@Override
@@ -183,7 +183,7 @@ public class TipoCliente implements Serializable {
 		return result;
 	}
 
-	/**
+	/*
 	 * Metodo sobreescrito de equals
 	 */
 	@Override
@@ -199,8 +199,5 @@ public class TipoCliente implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
 
 }

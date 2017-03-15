@@ -13,14 +13,14 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-/*
+/**
  * Entidad Depto
  * 
- * @author Gustavo Salgado y Laura Julieth Rúa
+ * @author Gustavo Salgado y Laura Julieth Rua
  * 
- * @author Ingeniería de Sistemas y Computación
+ * @author Ingeniería de Sistemas y Computacion
  * 
- * @author Universidad del Quindío
+ * @author Universidad del Quindio
  * 
  * @version 1.0
  * 
@@ -32,14 +32,14 @@ public class Depto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	/*
+	/**
 	 * Variable que representa el atributo id de la entidad
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	/*
+	/**
 	 * Variable que representa el atributo codigo de la entidad Depto
 	 */
 	@NotNull(message = "El Codigo de la ubicacion debe ser obligatorio")
@@ -47,14 +47,14 @@ public class Depto implements Serializable {
 	@Column(nullable = false, length = 5)
 	private String codigo;
 
-	/*
+	/**
 	 * Variable que representa el atributo nombre de la entidad Depto
 	 */
 	@NotNull(message = "El nombre del departamento debe de ser obligatorio")
 	@Column(nullable = false, length = 50)
 	private String nombre;
 
-	/*
+	/**
 	 * Variable que representa el atributo ciudades de la entidad Depto
 	 */
 	@OneToMany(mappedBy = "depto")
@@ -158,7 +158,7 @@ public class Depto implements Serializable {
 		this.ciudades = ciudades;
 	}
 
-	/**
+	/*
 	 * Metodo sobreescrito de hashCode
 	 */
 	@Override
@@ -169,7 +169,7 @@ public class Depto implements Serializable {
 		return result;
 	}
 
-	/**
+	/*
 	 * Metodo sobreescrito de equals
 	 */
 	@Override

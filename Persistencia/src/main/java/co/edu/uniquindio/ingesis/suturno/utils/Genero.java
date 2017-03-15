@@ -1,18 +1,18 @@
 package co.edu.uniquindio.ingesis.suturno.utils;
 
-/*
+/**
  * Enumeracion Genero
  * 
- * @author Gustavo Salgado y Laura Julieth Rúa
+ * @author Gustavo Salgado y Laura Julieth Rua
  * 
- * @author Ingeniería de Sistemas y Computación
+ * @author Ingeniería de Sistemas y Computacion
  * 
- * @author Universidad del Quindío
+ * @author Universidad del Quindio
  * 
  * @version 1.0
  * 
  * @since 1/03/2017
  */
 public enum Genero {
-	MASCULINO,FEMENINO
+	MASCULINO, FEMENINO
 }

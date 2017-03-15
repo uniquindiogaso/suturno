@@ -13,14 +13,14 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-/*
+/**
  * Entidad PuestoTrabajo
  * 
- * @author Gustavo Salgado y Laura Julieth Rúa
+ * @author Gustavo Salgado y Laura Julieth Rua
  * 
- * @author Ingeniería de Sistemas y Computación
+ * @author Ingeniería de Sistemas y Computacion
  * 
- * @author Universidad del Quindío
+ * @author Universidad del Quindio
  * 
  * @version 1.0
  * 
@@ -32,14 +32,14 @@ public class PuestoTrabajo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	/*
+	/**
 	 * Variable que representa el atributo id de la entidad
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	/*
+	/**
 	 * Variable que representa el atributo codigo del puesto de trabajo
 	 */
 	@NotNull(message = "El Codigo de la ubicacion debe ser obligatorio")
@@ -47,14 +47,14 @@ public class PuestoTrabajo implements Serializable {
 	@Column(nullable = false, length = 5)
 	private String codigo;
 
-	/*
+	/**
 	 * Variable que representa el atributo nombre del puesto de trabajo
 	 */
 	@Column(nullable = false, length = 50)
 	@NotNull(message = "El nombre de la ubicacion debe de ser obligatorio")
 	private String nombre;
 
-	/*
+	/**
 	 * Variable que representa el atributo empleado que tiene el puesto de
 	 * trabajo
 	 */

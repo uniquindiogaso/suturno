@@ -14,14 +14,14 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-/*
+/**
  * Entidad Servicio
  * 
- * @author Gustavo Salgado y Laura Julieth Rúa
+ * @author Gustavo Salgado y Laura Julieth Rua
  * 
- * @author Ingeniería de Sistemas y Computación
+ * @author Ingeniería de Sistemas y Computacion
  * 
- * @author Universidad del Quindío
+ * @author Universidad del Quindio
  * 
  * @version 1.0
  * 
@@ -33,14 +33,14 @@ public class Servicio implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	/*
+	/**
 	 * Variable que representa el atributo id de la entidad
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	/*
+	/**
 	 * Variable que representa el atributo codigo del servicio
 	 */
 	@NotNull(message = "El Codigo del Servicio debe de ser obligatorio")
@@ -48,32 +48,32 @@ public class Servicio implements Serializable {
 	@Column(nullable = false, length = 10)
 	private String codigo;
 
-	/*
+	/**
 	 * Variable que representa el atributo nombre del servicio
 	 */
 	@Column(nullable = false, length = 50)
 	@NotNull(message = "El nombre del Servicio debe de ser obligatorio")
 	private String nombre;
 
-	/*
+	/**
 	 * Variable que representa el atributo descripcion del servicio
 	 */
 	@Column(nullable = false)
 	private String descripcion;
 
-	/*
+	/**
 	 * Variable que representa el atributo activo del servicio
 	 */
 	@Column()
 	private boolean activo;
 
-	/*
+	/**
 	 * Variable que representa el atributo empleados que pertenecen al servicio
 	 */
 	@ManyToMany(mappedBy = "servicios")
 	private List<Empleado> empleados;
 
-	/*
+	/**
 	 * Variable que representa el atributo turnos que pertenecen al servicio
 	 */
 	@OneToMany(mappedBy = "servicio")
@@ -243,7 +243,7 @@ public class Servicio implements Serializable {
 		this.turnos = turnos;
 	}
 
-	/**
+	/*
 	 * Metodo sobreescrito de hashCode
 	 */
 	@Override
@@ -254,7 +254,7 @@ public class Servicio implements Serializable {
 		return result;
 	}
 
-	/**
+	/*
 	 * Metodo sobreescrito de equals
 	 */
 	@Override

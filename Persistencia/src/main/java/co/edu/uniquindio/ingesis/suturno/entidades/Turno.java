@@ -17,14 +17,14 @@ import javax.validation.constraints.Size;
 
 import co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno;
 
-/*
+/**
  * Entidad Turno
  * 
- * @author Gustavo Salgado y Laura Julieth Rúa
+ * @author Gustavo Salgado y Laura Julieth Rua
  * 
- * @author Ingeniería de Sistemas y Computación
+ * @author Ingeniería de Sistemas y Computacion
  * 
- * @author Universidad del Quindío
+ * @author Universidad del Quindio
  * 
  * @version 1.0
  * 
@@ -36,46 +36,46 @@ public class Turno implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	/*
+	/**
 	 * Variable que representa el atributo id de la entidad
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	/*
+	/**
 	 * Variable que representa el atributo id de la entidad
 	 */
 	@NotNull(message = "La fecha debe de ser obligatoria")
 	@Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", nullable = false)
 	private Timestamp fecha;
 
-	/*
+	/**
 	 * Variable que representa el atributo empleado del turno
 	 */
 	@ManyToOne(optional = true)
 	private Empleado empleado;
 
-	/*
+	/**
 	 * Variable que representa el atributo cliente del turno
 	 */
 	@NotNull(message = "El cliente debe de ser obligatorio")
 	@ManyToOne(optional = false)
 	private Persona cliente;
 
-	/*
+	/**
 	 * Variable que representa el atributo servicio del turno
 	 */
 	@NotNull(message = "El servicio debe de ser obligatorio")
 	@ManyToOne(optional = false)
 	private Servicio servicio;
 
-	/*
+	/**
 	 * Variable que representa el atributo nota del turno
 	 */
 	private String nota;
 
-	/*
+	/**
 	 * Variable que representa el atributo estado del turno
 	 */
 	@NotNull(message = "El estado debe de ser obligatorio")
@@ -223,7 +223,7 @@ public class Turno implements Serializable {
 		this.estado = estado;
 	}
 
-	/**
+	/*
 	 * Metodo sobreescrito de hashCode
 	 */
 	@Override
@@ -234,7 +234,7 @@ public class Turno implements Serializable {
 		return result;
 	}
 
-	/**
+	/*
 	 * Metodo sobreescrito de equals
 	 */
 	@Override

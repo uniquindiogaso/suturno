@@ -15,14 +15,14 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-/*
+/**
  * Entidad Empleado
  * 
- * @author Gustavo Salgado y Laura Julieth Rúa
+ * @author Gustavo Salgado y Laura Julieth Rua
  * 
- * @author Ingeniería de Sistemas y Computación
+ * @author Ingeniería de Sistemas y Computacion
  * 
- * @author Universidad del Quindío
+ * @author Universidad del Quindio
  * 
  * @version 1.0
  * 
@@ -34,55 +34,55 @@ public class Empleado implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	/*
+	/**
 	 * Variable que representa el atributo id de la entidad
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	/*
+	/**
 	 * Variable que representa el atributo persona de la entidad Empleado
 	 */
 	@NotNull(message = "El tercero debe de ser obligatorio")
 	@OneToOne(mappedBy = "empleado")
 	private Persona tercero;
 
-	/*
+	/**
 	 * Variable que representa el atributo usuario de la entidad Empleado
 	 */
 	@NotNull(message = "El usuario debe de ser obligatorio")
 	@Column(nullable = false, length = 50)
 	private String usuario;
 
-	/*
+	/**
 	 * Variable que representa el atributo clave de la entidad Empleado
 	 */
 	@NotNull(message = "La clave debe de ser obligatoria")
 	@Column(nullable = false, length = 50)
 	private String clave;
 
-	/*
+	/**
 	 * Variable que representa el atributo administrador de la entidad Empleado
 	 */
 	@Column
 	private boolean admin;
 
-	/*
+	/**
 	 * Variable que representa el atributo puesto de trabajo de la entidad
 	 * Empleado
 	 */
 	@OneToOne
 	private PuestoTrabajo puesto;
 
-	/*
+	/**
 	 * Variable que representa el atributo lista de servicios de la entidad
 	 * Empleado
 	 */
 	@ManyToMany
 	private List<Servicio> servicios;
 
-	/*
+	/**
 	 * Variable que representa el atributo lista de turnos de la entidad
 	 * Empleado
 	 */
@@ -251,7 +251,7 @@ public class Empleado implements Serializable {
 		this.turnos = turnos;
 	}
 
-	/**
+	/*
 	 * Metodo sobreescrito de hashCode
 	 */
 	@Override
@@ -262,7 +262,7 @@ public class Empleado implements Serializable {
 		return result;
 	}
 
-	/**
+	/*
 	 * Metodo sobreescrito de equals
 	 */
 	@Override
