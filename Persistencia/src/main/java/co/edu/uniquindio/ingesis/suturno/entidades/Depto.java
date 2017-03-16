@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -27,10 +29,16 @@ import javax.validation.constraints.Size;
  * @since 1/03/2017
  */
 @Entity
+@NamedQueries({ @NamedQuery(name = Depto.GET_ALL, query = "SELECT entidad FROM Depto entidad") })
 @Table(name = "suturno_depto")
 public class Depto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	/**
+	 * Constante que identifica la consulta que obtener todos los registros de
+	 * {@link Depto} <br />
+	 */
+	public static final String GET_ALL = "Depto_findAll";
 
 	/**
 	 * Variable que representa el atributo id de la entidad

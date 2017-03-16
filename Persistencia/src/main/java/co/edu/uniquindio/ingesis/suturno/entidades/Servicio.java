@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -29,9 +31,16 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "suturno_servicio")
+@NamedQueries({ @NamedQuery(name = Servicio.GET_ALL, query = "SELECT entidad FROM Servicio entidad") })
 public class Servicio implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constante que identifica la consulta que obtener todos los registros de
+	 * {@link Servicio} <br />
+	 */
+	public static final String GET_ALL = "Servicio_findAll";
 
 	/**
 	 * Variable que representa el atributo id de la entidad

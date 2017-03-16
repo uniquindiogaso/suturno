@@ -14,6 +14,66 @@
 		"ID": 3,
 		"CODIGO":"A103",
 		"NOMBRE":"Puesto3"
+	},
+		{
+		"ID": 4,
+		"CODIGO":"A104",
+		"NOMBRE":"Puesto4"
+	},
+	{
+		"ID": 5,
+		"CODIGO":"A105",
+		"NOMBRE":"Puesto5"
+	},
+	{
+		"ID": 6,
+		"CODIGO":"A106",
+		"NOMBRE":"Puesto6"
+	},
+		{
+		"ID": 7,
+		"CODIGO":"A107",
+		"NOMBRE":"Puesto7"
+	},
+	{
+		"ID": 8,
+		"CODIGO":"A108",
+		"NOMBRE":"Puesto8"
+	},
+	{
+		"ID": 9,
+		"CODIGO":"A109",
+		"NOMBRE":"Puesto9"
+	},
+		{
+		"ID": 10,
+		"CODIGO":"A110",
+		"NOMBRE":"Puesto10"
+	},
+	{
+		"ID": 11,
+		"CODIGO":"A111",
+		"NOMBRE":"Puesto11"
+	},
+	{
+		"ID": 12,
+		"CODIGO":"A112",
+		"NOMBRE":"Puesto12"
+	},
+	{
+		"ID": 13,
+		"CODIGO":"A113",
+		"NOMBRE":"Puesto13"
+	},
+	{
+		"ID": 14,
+		"CODIGO":"A114",
+		"NOMBRE":"Puesto14"
+	},
+	{
+		"ID": 15,
+		"CODIGO":"A115",
+		"NOMBRE":"Puesto15"
 	}
 	]
 }

@@ -1,7 +1,10 @@
 package co.edu.uniquindio.ingesis.suturno.entidades;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -13,7 +16,6 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -70,6 +72,25 @@ public class CiudadTest {
 		Ciudad registrado = entityManager.find(Ciudad.class, ciudad.getId());
 		Assert.assertEquals(ciudad, registrado);
 	}
+	
+	
+	
+	/**
+	 * Prueba de Limite de Registros por Query
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "datos/depto.json", "datos/ciudad.json" })
+	public void limitarRegistros() {
+
+		TypedQuery<Ciudad> queryCiudades = entityManager.createNamedQuery(Ciudad.GET_ALL,Ciudad.class);
+		//Limitar cantidad de registros a 10
+		queryCiudades = queryCiudades.setMaxResults(10);
+		List<Ciudad> cuiudades = queryCiudades.getResultList();
+	
+		Assert.assertEquals("Se espera limitar a 10 el resultado de la Query",cuiudades.size(), 10);
+	}
+	
 
 	/**
 	 * Metodo de prueba que verifica la busqueda de datos

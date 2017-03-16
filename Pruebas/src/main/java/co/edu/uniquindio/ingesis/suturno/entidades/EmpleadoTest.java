@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -61,6 +63,54 @@ public class EmpleadoTest {
 	public void findTest() {
 		Empleado empleado = entityManager.find(Empleado.class, 1);
 		Assert.assertEquals("12345", empleado.getClave());
+	}
+	
+	
+	/**
+	 * Comprobra Autenticacion por medio de Query
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "datos/puestoTrabajo.json", "datos/empleado.json", "datos/persona.json" })
+	public void comprobrarAutenticacionQuery() {
+		
+		Empleado empleado = entityManager.find(Empleado.class, 1);
+		
+		Query query = entityManager.createQuery("SELECT e FROM Empleado e WHERE	e.usuario=:usuario AND e.clave=:clave" );
+		query.setParameter("usuario", empleado.getUsuario());
+		query.setParameter("clave", empleado.getClave());
+
+		List<Empleado> empleadoBD = query.getResultList();
+		
+		Assert.assertNotNull("Usuario debio de ser encontrado",empleadoBD);
+		
+		Assert.assertTrue("Solo debe existir un usuario con datos de autenticacion",empleadoBD.size() == 1);
+
+		Assert.assertEquals(empleado.getUsuario(),empleadoBD.get(0).getUsuario());
+	}
+	
+	
+	/**
+	 * Comprobra Autenticacion por medio de NameQuery
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "datos/puestoTrabajo.json", "datos/empleado.json", "datos/persona.json" })
+	public void comprobrarAutenticacionNameQuery() {
+		
+		Empleado empleado = entityManager.find(Empleado.class, 1);
+		
+		TypedQuery<Empleado> query = entityManager.createNamedQuery(Empleado.AUTENTICAR,Empleado.class);
+		query.setParameter("usuario", empleado.getUsuario());
+		query.setParameter("clave", empleado.getClave());
+
+		List<Empleado> empleadoBD = query.getResultList();
+		
+		Assert.assertNotNull("Usuario debio de ser encontrado",empleadoBD);
+		
+		Assert.assertTrue("Solo debe existir un usuario con datos de autenticacion",empleadoBD.size() == 1);
+
+		Assert.assertEquals(empleado.getUsuario(),empleadoBD.get(0).getUsuario());
 	}
 
 	/**

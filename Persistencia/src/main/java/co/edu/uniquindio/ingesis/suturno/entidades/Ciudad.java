@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -28,10 +30,17 @@ import javax.validation.constraints.Size;
  * @since 1/03/2017
  */
 @Entity
+@NamedQueries({ @NamedQuery(name = Ciudad.GET_ALL, query = "SELECT entidad FROM Ciudad entidad") })
 @Table(name = "suturno_ciudad")
 public class Ciudad implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constante que identifica la consulta que obtener todos los registros de
+	 * {@link Ciudad} <br />
+	 */
+	public static final String GET_ALL = "Ciudad_findAll";	
 
 	/**
 	 * Variable que representa el atributo id de la entidad

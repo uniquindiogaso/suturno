@@ -1,7 +1,10 @@
 package co.edu.uniquindio.ingesis.suturno.entidades;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -116,5 +119,23 @@ public class PuestoTrabajoTest {
 
 		PuestoTrabajo registrado = entityManager.find(PuestoTrabajo.class, puesto.getId());
 		Assert.assertNull(registrado);
+	}
+	
+	
+	/**
+	 * Metodo de prueba que verifica para obtener los ultimos 5 registros
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "datos/puestotrabajo.json" })
+	public void obtenerUltimosRegistros() {
+
+		TypedQuery<PuestoTrabajo> query = entityManager.createNamedQuery(PuestoTrabajo.GET_ALL,PuestoTrabajo.class);
+		//Obtener informacion desde el puesto numero 10
+		query = query.setFirstResult(10);
+		List<PuestoTrabajo> puestos = query.getResultList();
+
+
+		Assert.assertEquals("Se esperan obtener los ultimos 5 puestos de trabajo",puestos.size(), 5);
 	}
 }

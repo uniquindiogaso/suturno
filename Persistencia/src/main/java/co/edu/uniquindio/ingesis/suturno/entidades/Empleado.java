@@ -9,7 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -29,10 +30,26 @@ import javax.validation.constraints.NotNull;
  * @since 1/03/2017
  */
 @Entity
+@NamedQueries({
+		@NamedQuery(name = Empleado.GET_ALL, query = "SELECT entidad FROM Empleado entidad"),
+		@NamedQuery(name = Empleado.AUTENTICAR, query = "SELECT e FROM Empleado e WHERE	e.usuario=:usuario AND e.clave=:clave") })
+
 @Table(name = "suturno_empleado")
 public class Empleado implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Constante que identifica la consulta que permite comprobrar credenciales
+	 * de acceso de {@link Empleado} <br />
+	 */
+	public static final String AUTENTICAR = "Empleado_findbyUsuarioAndClave";
+	
+	/**
+	 * Constante que identifica la consulta que obtener todos los registros de
+	 * {@link Depto} <br />
+	 */
+	public static final String GET_ALL = "Empleado_findAll";
 
 	/**
 	 * Variable que representa el atributo id de la entidad

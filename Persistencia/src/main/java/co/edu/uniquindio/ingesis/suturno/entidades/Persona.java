@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -35,10 +37,17 @@ import co.edu.uniquindio.ingesis.suturno.validators.Email;
  * @since 1/03/2017
  */
 @Entity
+@NamedQueries({ @NamedQuery(name = Persona.GET_ALL, query = "SELECT entidad FROM Persona entidad") })
 @Table(name = "suturno_persona")
 public class Persona implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	/**
+	 * Constante que identifica la consulta que obtener todos los registros de
+	 * {@link Persona} <br />
+	 */
+	public static final String GET_ALL = "Persona_findAll";
+	
 
 	/**
 	 * Variable que representa el atributo id de la entidad

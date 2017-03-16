@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -123,5 +124,21 @@ public class TipoClienteTest {
 
 		TipoCliente registrado = entityManager.find(TipoCliente.class, pref.getId());
 		Assert.assertNull(registrado);
+	}
+	
+	
+	/**
+	 * Metodo de prueba que verifica el condicionamiento de las query con WHERE
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "datos/tipocliente.json" })
+	public void obtenerPrioritariosWhere() {
+		
+		TypedQuery<TipoCliente> query = entityManager.createNamedQuery(TipoCliente.GET_PRIORIDAD,TipoCliente.class);		
+		List<TipoCliente> tipoClientes = query.getResultList();
+
+		Assert.assertTrue("Debe existir minimo un Tipo de Cliente Prioritario",tipoClientes.size() > 0);
+
 	}
 }
