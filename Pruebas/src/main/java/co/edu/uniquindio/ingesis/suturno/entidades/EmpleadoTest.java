@@ -21,14 +21,14 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-/*
+/**
  * Prueba EmpleadoTest
  * 
- * @author Gustavo Salgado y Laura Julieth Rúa
+ * @author Gustavo Salgado y Laura Julieth Rua
  * 
- * @author Ingeniería de Sistemas y Computación
+ * @author Ingeniería de Sistemas y Computacion
  * 
- * @author Universidad del Quindío
+ * @author Universidad del Quindio
  * 
  * @version 1.0
  * 
@@ -37,14 +37,14 @@ import org.junit.runner.RunWith;
 @RunWith(Arquillian.class)
 public class EmpleadoTest {
 
-	/*
+	/**
 	 * Variable que representa el atributo entityManager, que es el
 	 * administrador de conexiones
 	 */
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	/*
+	/**
 	 * Metodo estatico que permite identificar en que paquete se corre la prueba
 	 */
 	@Deployment
@@ -63,54 +63,6 @@ public class EmpleadoTest {
 	public void findTest() {
 		Empleado empleado = entityManager.find(Empleado.class, 1);
 		Assert.assertEquals("12345", empleado.getClave());
-	}
-	
-	
-	/**
-	 * Comprobra Autenticacion por medio de Query
-	 */
-	@Test
-	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/puestoTrabajo.json", "datos/empleado.json", "datos/persona.json" })
-	public void comprobrarAutenticacionQuery() {
-		
-		Empleado empleado = entityManager.find(Empleado.class, 1);
-		
-		Query query = entityManager.createQuery("SELECT e FROM Empleado e WHERE	e.usuario=:usuario AND e.clave=:clave" );
-		query.setParameter("usuario", empleado.getUsuario());
-		query.setParameter("clave", empleado.getClave());
-
-		List<Empleado> empleadoBD = query.getResultList();
-		
-		Assert.assertNotNull("Usuario debio de ser encontrado",empleadoBD);
-		
-		Assert.assertTrue("Solo debe existir un usuario con datos de autenticacion",empleadoBD.size() == 1);
-
-		Assert.assertEquals(empleado.getUsuario(),empleadoBD.get(0).getUsuario());
-	}
-	
-	
-	/**
-	 * Comprobra Autenticacion por medio de NameQuery
-	 */
-	@Test
-	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/puestoTrabajo.json", "datos/empleado.json", "datos/persona.json" })
-	public void comprobrarAutenticacionNameQuery() {
-		
-		Empleado empleado = entityManager.find(Empleado.class, 1);
-		
-		TypedQuery<Empleado> query = entityManager.createNamedQuery(Empleado.AUTENTICAR,Empleado.class);
-		query.setParameter("usuario", empleado.getUsuario());
-		query.setParameter("clave", empleado.getClave());
-
-		List<Empleado> empleadoBD = query.getResultList();
-		
-		Assert.assertNotNull("Usuario debio de ser encontrado",empleadoBD);
-		
-		Assert.assertTrue("Solo debe existir un usuario con datos de autenticacion",empleadoBD.size() == 1);
-
-		Assert.assertEquals(empleado.getUsuario(),empleadoBD.get(0).getUsuario());
 	}
 
 	/**
@@ -198,5 +150,72 @@ public class EmpleadoTest {
 
 		Empleado registrado = entityManager.find(Empleado.class, empleado.getId());
 		Assert.assertNull(registrado);
+	}
+
+	/**
+	 * Comprobar Autenticacion por medio de Query
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "datos/puestoTrabajo.json", "datos/empleado.json", "datos/persona.json" })
+	public void comprobrarAutenticacionQuery() {
+
+		Empleado empleado = entityManager.find(Empleado.class, 1);
+
+		Query query = entityManager.createQuery("SELECT e FROM Empleado e WHERE	e.usuario=:usuario AND e.clave=:clave");
+		query.setParameter("usuario", empleado.getUsuario());
+		query.setParameter("clave", empleado.getClave());
+
+		List<Empleado> empleadoBD = query.getResultList();
+
+		Assert.assertNotNull("Usuario debio de ser encontrado", empleadoBD);
+
+		Assert.assertTrue("Solo debe existir un usuario con datos de autenticacion", empleadoBD.size() == 1);
+
+		Assert.assertEquals(empleado.getUsuario(), empleadoBD.get(0).getUsuario());
+	}
+
+	/**
+	 * Comprobar Autenticacion por medio de NameQuery
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "datos/puestoTrabajo.json", "datos/empleado.json", "datos/persona.json" })
+	public void comprobrarAutenticacionNameQuery() {
+
+		Empleado empleado = entityManager.find(Empleado.class, 1);
+
+		TypedQuery<Empleado> query = entityManager.createNamedQuery(Empleado.AUTENTICAR, Empleado.class);
+		query.setParameter("usuario", empleado.getUsuario());
+		query.setParameter("clave", empleado.getClave());
+
+		List<Empleado> empleadoBD = query.getResultList();
+
+		Assert.assertNotNull("Usuario debio de ser encontrado", empleadoBD);
+
+		Assert.assertTrue("Solo debe existir un usuario con datos de autenticacion", empleadoBD.size() == 1);
+
+		Assert.assertEquals(empleado.getUsuario(), empleadoBD.get(0).getUsuario());
+	}
+
+	/**
+	 * Metodo de prueba que verifica cual es el puesto de trabajo al que
+	 * pertenece el empleado
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "datos/puestoTrabajo.json", "datos/empleado.json" })
+	public void saberPuestoEmpleado() {
+
+		PuestoTrabajo puesto = entityManager.find(PuestoTrabajo.class, 3);
+
+		TypedQuery<Empleado> query = entityManager.createNamedQuery(Empleado.GET_EMPLEADO_PUESTO, Empleado.class);
+		query.setParameter("puestoId", puesto.getId());
+
+		// Devolver el nombre del puesto
+		// int cantTurnos = query.get;
+
+		// Assert.assertEquals("Se esperan obtener el nombre del puesto de
+		// trabajo del empleado", cantTurnos, 2);
 	}
 }

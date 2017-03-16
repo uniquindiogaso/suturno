@@ -19,14 +19,14 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-/*
+/**
  * Prueba CiudadTest
  * 
- * @author Gustavo Salgado y Laura Julieth Rúa
+ * @author Gustavo Salgado y Laura Julieth Rua
  * 
- * @author Ingeniería de Sistemas y Computación
+ * @author Ingeniería de Sistemas y Computacion
  * 
- * @author Universidad del Quindío
+ * @author Universidad del Quindio
  * 
  * @version 1.0
  * 
@@ -35,13 +35,14 @@ import org.junit.runner.RunWith;
 @RunWith(Arquillian.class)
 public class CiudadTest {
 
-	/*
-	 * Variable que representa el atributo entityManager, que es el administrador de conexiones
+	/**
+	 * Variable que representa el atributo entityManager, que es el
+	 * administrador de conexiones
 	 */
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	/*
+	/**
 	 * Metodo estatico que permite identificar en que paquete se corre la prueba
 	 */
 	@Deployment
@@ -72,9 +73,7 @@ public class CiudadTest {
 		Ciudad registrado = entityManager.find(Ciudad.class, ciudad.getId());
 		Assert.assertEquals(ciudad, registrado);
 	}
-	
-	
-	
+
 	/**
 	 * Prueba de Limite de Registros por Query
 	 */
@@ -83,14 +82,13 @@ public class CiudadTest {
 	@UsingDataSet({ "datos/depto.json", "datos/ciudad.json" })
 	public void limitarRegistros() {
 
-		TypedQuery<Ciudad> queryCiudades = entityManager.createNamedQuery(Ciudad.GET_ALL,Ciudad.class);
-		//Limitar cantidad de registros a 10
+		TypedQuery<Ciudad> queryCiudades = entityManager.createNamedQuery(Ciudad.GET_ALL, Ciudad.class);
+		// Limitar cantidad de registros a 10
 		queryCiudades = queryCiudades.setMaxResults(10);
-		List<Ciudad> cuiudades = queryCiudades.getResultList();
-	
-		Assert.assertEquals("Se espera limitar a 10 el resultado de la Query",cuiudades.size(), 10);
+		List<Ciudad> ciudades = queryCiudades.getResultList();
+
+		Assert.assertEquals("Se espera limitar a 10 el resultado de la Query", ciudades.size(), 10);
 	}
-	
 
 	/**
 	 * Metodo de prueba que verifica la busqueda de datos
@@ -102,8 +100,7 @@ public class CiudadTest {
 		Ciudad ciudad = entityManager.find(Ciudad.class, 1);
 		Assert.assertEquals("Armenia", ciudad.getNombre());
 	}
-	
-	
+
 	/**
 	 * Metodo de prueba que verifica la actualizacion de datos
 	 */
@@ -118,8 +115,6 @@ public class CiudadTest {
 
 		Ciudad registrado = entityManager.find(Ciudad.class, manizales.getId());
 		Assert.assertEquals(manizales.getCodigo(), registrado.getCodigo());
-
-		Ciudad rusia = new Ciudad();
 
 	}
 

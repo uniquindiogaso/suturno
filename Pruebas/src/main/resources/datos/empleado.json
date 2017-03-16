@@ -4,7 +4,7 @@
 	"ID":1,
 	"ADMIN":1,
 	"CLAVE":"12345",
-	"USUARIO":"1765839900",
+	"USUARIO":"mafer",
 	"PUESTO_ID":2
 	},
 	{
@@ -13,6 +13,20 @@
 	"CLAVE":"6789",
 	"USUARIO":"109887773",
 	"PUESTO_ID":1
+	},
+	{
+	"ID":3,
+	"ADMIN":0,
+	"CLAVE":"123456",
+	"USUARIO":"1765839900",
+	"PUESTO_ID":3
+	},
+	{
+	"ID":4,
+	"ADMIN":0,
+	"CLAVE":"678911",
+	"USUARIO":"109887773",
+	"PUESTO_ID":3
 	}
 	]
 }

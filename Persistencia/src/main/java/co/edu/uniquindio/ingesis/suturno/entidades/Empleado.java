@@ -30,9 +30,9 @@ import javax.validation.constraints.NotNull;
  * @since 1/03/2017
  */
 @Entity
-@NamedQueries({
-		@NamedQuery(name = Empleado.GET_ALL, query = "SELECT entidad FROM Empleado entidad"),
-		@NamedQuery(name = Empleado.AUTENTICAR, query = "SELECT e FROM Empleado e WHERE	e.usuario=:usuario AND e.clave=:clave") })
+@NamedQueries({ @NamedQuery(name = Empleado.GET_ALL, query = "SELECT e FROM Empleado e"),
+		@NamedQuery(name = Empleado.AUTENTICAR, query = "SELECT e FROM Empleado e WHERE	e.usuario=:usuario AND e.clave=:clave"),
+		@NamedQuery(name = Empleado.GET_EMPLEADO_PUESTO, query = "SELECT e FROM Empleado e WHERE e.puesto.Id=:puestoId") })
 
 @Table(name = "suturno_empleado")
 public class Empleado implements Serializable {
@@ -44,12 +44,18 @@ public class Empleado implements Serializable {
 	 * de acceso de {@link Empleado} <br />
 	 */
 	public static final String AUTENTICAR = "Empleado_findbyUsuarioAndClave";
-	
+
 	/**
-	 * Constante que identifica la consulta que obtener todos los registros de
-	 * {@link Depto} <br />
+	 * Constante que identifica la consulta que obtener todos los registros del
+	 * empleado {@link Empleado} <br />
 	 */
 	public static final String GET_ALL = "Empleado_findAll";
+
+	/**
+	 * Constante que identifica la consulta que obtiene el puesto al que
+	 * pertenece el empleado {@link Empleado} <br />
+	 */
+	public static final String GET_EMPLEADO_PUESTO = "Empleado_findByPuesto";
 
 	/**
 	 * Variable que representa el atributo id de la entidad

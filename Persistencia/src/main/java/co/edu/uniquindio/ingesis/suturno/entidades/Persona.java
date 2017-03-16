@@ -37,7 +37,7 @@ import co.edu.uniquindio.ingesis.suturno.validators.Email;
  * @since 1/03/2017
  */
 @Entity
-@NamedQueries({ @NamedQuery(name = Persona.GET_ALL, query = "SELECT entidad FROM Persona entidad") })
+@NamedQueries({ @NamedQuery(name = Persona.GET_ALL, query = "SELECT p FROM Persona p") })
 @Table(name = "suturno_persona")
 public class Persona implements Serializable {
 

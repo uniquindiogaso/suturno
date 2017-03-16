@@ -2,9 +2,11 @@ package co.edu.uniquindio.ingesis.suturno.entidades;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -23,14 +25,14 @@ import co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno;
 import co.edu.uniquindio.ingesis.suturno.utils.Genero;
 import co.edu.uniquindio.ingesis.suturno.utils.TipoDocumento;
 
-/*
+/**
  * Prueba TurnoTest
  * 
- * @author Gustavo Salgado y Laura Julieth Rúa
+ * @author Gustavo Salgado y Laura Julieth Rua
  * 
- * @author Ingeniería de Sistemas y Computación
+ * @author Ingeniería de Sistemas y Computacion
  * 
- * @author Universidad del Quindío
+ * @author Universidad del Quindio
  * 
  * @version 1.0
  * 
@@ -39,14 +41,14 @@ import co.edu.uniquindio.ingesis.suturno.utils.TipoDocumento;
 @RunWith(Arquillian.class)
 public class TurnoTest {
 
-	/*
+	/**
 	 * Variable que representa el atributo entityManager, que es el
 	 * administrador de conexiones
 	 */
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	/*
+	/**
 	 * Metodo estatico que permite identificar en que paquete se corre la prueba
 	 */
 	@Deployment
@@ -131,5 +133,43 @@ public class TurnoTest {
 
 		Turno registrado = entityManager.find(Turno.class, turno.getId());
 		Assert.assertNull(registrado);
+	}
+
+	/**
+	 * Metodo de prueba que verifica cuantos turnos tiene un cliente
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "datos/ciudad.json", "datos/empleado.json", "datos/persona.json", "datos/tipocliente.json",
+			"datos/turno.json" })
+	public void saberCantidadTurnosCliente() {
+
+		Persona cliente = entityManager.find(Persona.class, 3);
+
+		TypedQuery<Turno> query = entityManager.createNamedQuery(Turno.GET_TURNOS_CLIENTE, Turno.class);
+		query.setParameter("clienteId", cliente.getId());
+
+		int cantTurnos = query.getResultList().size();
+
+		Assert.assertEquals("Se espera obtener la cantidad de turnos que tiene el cliente", cantTurnos, 2);
+	}
+	
+	/**
+	 * Metodo de prueba que verifica cuantos turnos tiene un empleado
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "datos/ciudad.json", "datos/empleado.json", "datos/persona.json", "datos/tipocliente.json",
+			"datos/turno.json" })
+	public void saberCantidadTurnosEmpleado() {
+
+		Empleado empleado = entityManager.find(Empleado.class, 2);
+
+		TypedQuery<Turno> query = entityManager.createNamedQuery(Turno.GET_TURNOS_EMPLEADO, Turno.class);
+		query.setParameter("empleadoId", empleado.getId());
+
+		int cantTurnos = query.getResultList().size();
+
+		Assert.assertEquals("Se espera obtener la cantidad de turnos que tiene el empleado", cantTurnos, 2);
 	}
 }

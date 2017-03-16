@@ -20,14 +20,14 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-/*
+/**
  * Prueba TipoClienteTest
  * 
- * @author Gustavo Salgado y Laura Julieth Rúa
+ * @author Gustavo Salgado y Laura Julieth Rua
  * 
- * @author Ingeniería de Sistemas y Computación
+ * @author Ingeniería de Sistemas y Computacion
  * 
- * @author Universidad del Quindío
+ * @author Universidad del Quindio
  * 
  * @version 1.0
  * 
@@ -36,14 +36,14 @@ import org.junit.runner.RunWith;
 @RunWith(Arquillian.class)
 public class TipoClienteTest {
 
-	/*
+	/**
 	 * Variable que representa el atributo entityManager, que es el
 	 * administrador de conexiones
 	 */
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	/*
+	/**
 	 * Metodo estatico que permite identificar en que paquete se corre la prueba
 	 */
 	@Deployment
@@ -125,8 +125,7 @@ public class TipoClienteTest {
 		TipoCliente registrado = entityManager.find(TipoCliente.class, pref.getId());
 		Assert.assertNull(registrado);
 	}
-	
-	
+
 	/**
 	 * Metodo de prueba que verifica el condicionamiento de las query con WHERE
 	 */
@@ -134,11 +133,27 @@ public class TipoClienteTest {
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "datos/tipocliente.json" })
 	public void obtenerPrioritariosWhere() {
-		
-		TypedQuery<TipoCliente> query = entityManager.createNamedQuery(TipoCliente.GET_PRIORIDAD,TipoCliente.class);		
+
+		TypedQuery<TipoCliente> query = entityManager.createNamedQuery(TipoCliente.GET_PRIORIDAD, TipoCliente.class);
 		List<TipoCliente> tipoClientes = query.getResultList();
 
-		Assert.assertTrue("Debe existir minimo un Tipo de Cliente Prioritario",tipoClientes.size() > 0);
+		Assert.assertTrue("Debe existir minimo un Tipo de Cliente Prioritario", tipoClientes.size() > 0);
+	}
+
+	/**
+	 * Metodo de prueba que identifica que tipo de cliente tiene un cliente
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "datos/tipocliente.json" })
+	public void saberTipoClienteDeCliente() {
+		
+		Persona cliente=entityManager.find(Persona.class, arg1)
+
+		TypedQuery<TipoCliente> query = entityManager.createNamedQuery(TipoCliente.GET_PRIORIDAD, TipoCliente.class);
+		List<TipoCliente> tipoClientes = query.getResultList();
+
+		Assert.assertTrue("Debe existir minimo un Tipo de Cliente Prioritario", tipoClientes.size() > 0);
 
 	}
 }

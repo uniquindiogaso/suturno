@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -19,14 +20,14 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-/*
+/**
  * Prueba ServicioTest
  * 
- * @author Gustavo Salgado y Laura Julieth Rúa
+ * @author Gustavo Salgado y Laura Julieth Rua
  * 
- * @author Ingeniería de Sistemas y Computación
+ * @author Ingeniería de Sistemas y Computacion
  * 
- * @author Universidad del Quindío
+ * @author Universidad del Quindio
  * 
  * @version 1.0
  * 
@@ -35,14 +36,14 @@ import org.junit.runner.RunWith;
 @RunWith(Arquillian.class)
 public class ServicioTest {
 
-	/*
+	/**
 	 * Variable que representa el atributo entityManager, que es el
 	 * administrador de conexiones
 	 */
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	/*
+	/**
 	 * Metodo estatico que permite identificar en que paquete se corre la prueba
 	 */
 	@Deployment
@@ -137,5 +138,24 @@ public class ServicioTest {
 
 		Servicio registrado = entityManager.find(Servicio.class, servicio.getId());
 		Assert.assertNull(registrado);
+	}
+
+	/**
+	 * Metodo de prueba que verifica cuales son los servicios disponibles
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "datos/servicio.json" })
+	public void saberServiciosDisponibles() {
+
+		// Se necesita obtener toda la entidad para saber el listado de los
+		// servicios disponibles
+		// Servicio servicio = entityManager.find(arg0, arg1);
+
+		TypedQuery<Servicio> query = entityManager.createNamedQuery(Servicio.GET_ALL, Servicio.class);
+
+		List<Servicio> servicios = query.getResultList();
+
+		Assert.assertEquals("Se espera obtener listado de servicios", servicios, 4);
 	}
 }

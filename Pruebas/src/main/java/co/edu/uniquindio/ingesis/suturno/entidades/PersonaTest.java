@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -22,17 +23,30 @@ import org.junit.runner.RunWith;
 import co.edu.uniquindio.ingesis.suturno.utils.Genero;
 import co.edu.uniquindio.ingesis.suturno.utils.TipoDocumento;
 
+/**
+ * Prueba PersonaTest
+ * 
+ * @author Gustavo Salgado y Laura Julieth Rua
+ * 
+ * @author Ingeniería de Sistemas y Computacion
+ * 
+ * @author Universidad del Quindio
+ * 
+ * @version 1.0
+ * 
+ * @since 1/03/2017
+ */
 @RunWith(Arquillian.class)
 public class PersonaTest {
 
-	/*
+	/**
 	 * Variable que representa el atributo entityManager, que es el
 	 * administrador de conexiones
 	 */
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	/*
+	/**
 	 * Metodo estatico que permite identificar en que paquete se corre la prueba
 	 */
 	@Deployment
@@ -132,5 +146,23 @@ public class PersonaTest {
 
 		Persona registrado = entityManager.find(Persona.class, persona.getId());
 		Assert.assertNull("No se encontro la Persona, no es posible eliminarla", registrado);
+	}
+
+	/**
+	 * Metodo de prueba que obtiene todos los datos del cliente
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "datos/ciudad.json", "datos/empleado.json", "datos/persona.json", "datos/tipocliente.json",
+			"datos/turno.json" })
+	public void obtenerDatosCliente() {
+
+		Persona cliente = entityManager.find(Persona.class, 20);
+
+		TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.GET_ALL, Persona.class);
+
+		List<Persona> datosCliente = query.getResultList();
+
+		Assert.assertNull("No se encontró el cliente", datosCliente);
 	}
 }

@@ -33,19 +33,32 @@ import co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno;
  * @since 1/03/2017
  */
 @Entity
-@NamedQueries({ @NamedQuery(name = Turno.GET_ALL, query = "SELECT entidad FROM Turno entidad") })
+@NamedQueries({ @NamedQuery(name = Turno.GET_ALL, query = "SELECT t FROM Turno t"),
+		@NamedQuery(name = Turno.GET_TURNOS_CLIENTE, query = "SELECT t FROM Turno t WHERE t.cliente.id=:clienteId"),
+		@NamedQuery(name = Turno.GET_TURNOS_EMPLEADO, query = "SELECT t FROM Turno t WHERE t.empleado.id=:empleadoId") })
 @Table(name = "suturno_turno")
 public class Turno implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Constante que identifica la consulta que obtener todos los registros de
-	 * {@link Depto} <br />
+	 * Turno {@link Turno} <br />
 	 */
 	public static final String GET_ALL = "Turno_findAll";
-	
-	
+
+	/**
+	 * Constante que identifica la consulta que obtiene la cantidad de turnos
+	 * que tiene el cliente {@link Turno} <br />
+	 */
+	public static final String GET_TURNOS_CLIENTE = "Turno_findByCliente";
+
+	/**
+	 * Constante que identifica la consulta que obtiene la cantidad de turnos
+	 * que tiene el empleado {@link Turno} <br />
+	 */
+	public static final String GET_TURNOS_EMPLEADO = "Turno_findByEmpleado";
+
 	/**
 	 * Variable que representa el atributo id de la entidad
 	 */
