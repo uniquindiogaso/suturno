@@ -18,6 +18,7 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -204,18 +205,18 @@ public class EmpleadoTest {
 	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/puestoTrabajo.json", "datos/empleado.json" })
+	@UsingDataSet({ "datos/puestoTrabajo.json", "datos/empleado.json", "datos/persona.json" })
 	public void saberPuestoEmpleado() {
 
 		PuestoTrabajo puesto = entityManager.find(PuestoTrabajo.class, 3);
+		Empleado e1 = entityManager.find(Empleado.class, 4);
 
-		TypedQuery<Empleado> query = entityManager.createNamedQuery(Empleado.GET_EMPLEADO_PUESTO, Empleado.class);
-		query.setParameter("puestoId", puesto.getId());
+		TypedQuery<PuestoTrabajo> query = entityManager.createNamedQuery(Empleado.GET_EMPLEADO_PUESTO,
+				PuestoTrabajo.class);
+		query.setParameter("empleadoId", e1.getId());
 
-		// Devolver el nombre del puesto
-		// int cantTurnos = query.get;
+		PuestoTrabajo puestoEmpleado = query.getSingleResult();
 
-		// Assert.assertEquals("Se esperan obtener el nombre del puesto de
-		// trabajo del empleado", cantTurnos, 2);
+		Assert.assertEquals("El puesto asignado no corresponde con lo esperado...", puestoEmpleado, puesto);
 	}
 }

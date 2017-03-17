@@ -31,16 +31,23 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "suturno_servicio")
-@NamedQueries({ @NamedQuery(name = Servicio.GET_ALL, query = "SELECT s FROM Servicio s") })
+@NamedQueries({ @NamedQuery(name = Servicio.GET_ALL, query = "SELECT s FROM Servicio s"),
+		@NamedQuery(name = Servicio.GET_SERVICIO_ACTIVOS, query = "SELECT s FROM Servicio s WHERE s.activo=true") })
 public class Servicio implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Constante que identifica la consulta que obtener todos los registros de
-	 * {@link Servicio} <br />
+	 * Constante que identifica la consulta que obtener todos los registros del
+	 * servicio {@link Servicio} <br />
 	 */
 	public static final String GET_ALL = "Servicio_findAll";
+
+	/**
+	 * Constante que identifica la consulta que obtener todos los servicios
+	 * activos {@link Servicio} <br />
+	 */
+	public static final String GET_SERVICIO_ACTIVOS = "Servicio_findByActivo";
 
 	/**
 	 * Variable que representa el atributo id de la entidad

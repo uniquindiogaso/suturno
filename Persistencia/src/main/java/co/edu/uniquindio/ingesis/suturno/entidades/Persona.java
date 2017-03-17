@@ -37,7 +37,8 @@ import co.edu.uniquindio.ingesis.suturno.validators.Email;
  * @since 1/03/2017
  */
 @Entity
-@NamedQueries({ @NamedQuery(name = Persona.GET_ALL, query = "SELECT p FROM Persona p") })
+@NamedQueries({ @NamedQuery(name = Persona.GET_ALL, query = "SELECT p FROM Persona p"),
+		@NamedQuery(name = Persona.GET_TIPOCLIENTE_CLIENTE, query = "SELECT t FROM Persona p LEFT JOIN (p.tiposCliente) t WHERE p.id= :personaId ") })
 @Table(name = "suturno_persona")
 public class Persona implements Serializable {
 
@@ -47,7 +48,12 @@ public class Persona implements Serializable {
 	 * {@link Persona} <br />
 	 */
 	public static final String GET_ALL = "Persona_findAll";
-	
+
+	/**
+	 * Constante que identifica la consulta que obtiene a que tipo de cliente
+	 * pertenece el cliente {@link Persona} <br />
+	 */
+	public static final String GET_TIPOCLIENTE_CLIENTE = "TipoCliente_findByCliente";
 
 	/**
 	 * Variable que representa el atributo id de la entidad

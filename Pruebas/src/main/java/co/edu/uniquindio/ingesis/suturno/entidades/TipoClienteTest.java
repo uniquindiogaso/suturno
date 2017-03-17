@@ -139,21 +139,4 @@ public class TipoClienteTest {
 
 		Assert.assertTrue("Debe existir minimo un Tipo de Cliente Prioritario", tipoClientes.size() > 0);
 	}
-
-	/**
-	 * Metodo de prueba que identifica que tipo de cliente tiene un cliente
-	 */
-	@Test
-	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/tipocliente.json" })
-	public void saberTipoClienteDeCliente() {
-		
-		Persona cliente=entityManager.find(Persona.class, arg1)
-
-		TypedQuery<TipoCliente> query = entityManager.createNamedQuery(TipoCliente.GET_PRIORIDAD, TipoCliente.class);
-		List<TipoCliente> tipoClientes = query.getResultList();
-
-		Assert.assertTrue("Debe existir minimo un Tipo de Cliente Prioritario", tipoClientes.size() > 0);
-
-	}
 }

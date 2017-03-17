@@ -30,8 +30,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @NamedQueries({ @NamedQuery(name = TipoCliente.GET_ALL, query = "SELECT tCli FROM TipoCliente tCli"),
-		@NamedQuery(name = TipoCliente.GET_PRIORIDAD, query = "SELECT tCli FROM TipoCliente tCli WHERE tCli.prioridad = True"),
-		@NamedQuery(name = TipoCliente.GET_TIPOCLIENTE_CLIENTE, query = "SELECT tCli FROM TipoCliente tCli WHERE tCli.personas.id = personasId") })
+		@NamedQuery(name = TipoCliente.GET_PRIORIDAD, query = "SELECT tCli FROM TipoCliente tCli WHERE tCli.prioridad = True") })
 @Table(name = "suturno_tipocliente")
 public class TipoCliente implements Serializable {
 
@@ -43,11 +42,6 @@ public class TipoCliente implements Serializable {
 	 */
 	public static final String GET_ALL = "TipoCliente_findAll";
 
-	/**
-	 * Constante que identifica la consulta que obtiene a que tipo de cliente
-	 * pertenece el cliente {@link TipoCliente} <br />
-	 */
-	public static final String GET_TIPOCLIENTE_CLIENTE = "TipoCliente_findByCliente";
 
 	/**
 	 * Constante que identifica la consulta que obtener todos los registros que

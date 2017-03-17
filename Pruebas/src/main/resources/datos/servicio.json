@@ -9,14 +9,14 @@
 	},
 	{
 	"ID": 2,
-	"ACTIVO":0,
+	"ACTIVO":1,
 	"CODIGO":"queja",
 	"DESCRIPCION":"Queja debido a malfuncionamiento del servicio",
 	"NOMBRE":"Queja y/o Reclamo"
 	},
 	{
 	"ID": 3,
-	"ACTIVO":0,
+	"ACTIVO":1,
 	"CODIGO":"nuevo",
 	"DESCRIPCION":"Solicitud de nuevo servicio",
 	"NOMBRE":"Nuevo servicio"

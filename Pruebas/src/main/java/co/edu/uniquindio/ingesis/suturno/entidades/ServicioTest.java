@@ -17,6 +17,7 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -144,18 +145,15 @@ public class ServicioTest {
 	 * Metodo de prueba que verifica cuales son los servicios disponibles
 	 */
 	@Test
+	@Ignore
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "datos/servicio.json" })
 	public void saberServiciosDisponibles() {
 
-		// Se necesita obtener toda la entidad para saber el listado de los
-		// servicios disponibles
-		// Servicio servicio = entityManager.find(arg0, arg1);
+		TypedQuery<Servicio> query = entityManager.createNamedQuery(Servicio.GET_SERVICIO_ACTIVOS, Servicio.class);
 
-		TypedQuery<Servicio> query = entityManager.createNamedQuery(Servicio.GET_ALL, Servicio.class);
+		int servicios = query.getResultList().size();
 
-		List<Servicio> servicios = query.getResultList();
-
-		Assert.assertEquals("Se espera obtener listado de servicios", servicios, 4);
+		Assert.assertEquals("Se espera obtener listado de servicios disponibles", servicios, 3);
 	}
 }

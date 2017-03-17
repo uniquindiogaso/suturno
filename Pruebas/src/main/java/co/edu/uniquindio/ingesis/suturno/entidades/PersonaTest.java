@@ -148,21 +148,4 @@ public class PersonaTest {
 		Assert.assertNull("No se encontro la Persona, no es posible eliminarla", registrado);
 	}
 
-	/**
-	 * Metodo de prueba que obtiene todos los datos del cliente
-	 */
-	@Test
-	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/ciudad.json", "datos/empleado.json", "datos/persona.json", "datos/tipocliente.json",
-			"datos/turno.json" })
-	public void obtenerDatosCliente() {
-
-		Persona cliente = entityManager.find(Persona.class, 20);
-
-		TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.GET_ALL, Persona.class);
-
-		List<Persona> datosCliente = query.getResultList();
-
-		Assert.assertNull("No se encontró el cliente", datosCliente);
-	}
 }

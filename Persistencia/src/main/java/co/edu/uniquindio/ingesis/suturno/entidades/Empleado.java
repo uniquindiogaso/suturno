@@ -32,7 +32,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @NamedQueries({ @NamedQuery(name = Empleado.GET_ALL, query = "SELECT e FROM Empleado e"),
 		@NamedQuery(name = Empleado.AUTENTICAR, query = "SELECT e FROM Empleado e WHERE	e.usuario=:usuario AND e.clave=:clave"),
-		@NamedQuery(name = Empleado.GET_EMPLEADO_PUESTO, query = "SELECT e FROM Empleado e WHERE e.puesto.Id=:puestoId") })
+		@NamedQuery(name = Empleado.GET_EMPLEADO_PUESTO, query = "SELECT e.puesto FROM Empleado e WHERE e.id=:empleadoId") })
 
 @Table(name = "suturno_empleado")
 public class Empleado implements Serializable {
@@ -58,7 +58,7 @@ public class Empleado implements Serializable {
 	public static final String GET_EMPLEADO_PUESTO = "Empleado_findByPuesto";
 
 	/**
-	 * Variable que representa el atributo id de la entidad
+	 * /** Variable que representa el atributo id de la entidad
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -75,7 +75,7 @@ public class Empleado implements Serializable {
 	 * Variable que representa el atributo usuario de la entidad Empleado
 	 */
 	@NotNull(message = "El usuario debe de ser obligatorio")
-	@Column(nullable = false, length = 50)
+	@Column(nullable = false, length = 50, unique = true)
 	private String usuario;
 
 	/**
@@ -117,7 +117,6 @@ public class Empleado implements Serializable {
 	 */
 	public Empleado() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
