@@ -161,7 +161,6 @@ public class ServicioTest {
 	 * servicio usando IN
 	 */
 	@Test
-	78
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "datos/servicio.json" })
 	public void saberEmpleadosAtenderServicioIN() {
@@ -169,12 +168,12 @@ public class ServicioTest {
 		Servicio servicio = entityManager.find(Servicio.class, 3);
 		Empleado empleado = entityManager.find(Empleado.class, 3);
 
-		TypedQuery<Servicio> query = entityManager.createNamedQuery(Servicio.GET_EMPLEADOS_SERVICIO, Servicio.class);
+		TypedQuery<Empleado> query = entityManager.createNamedQuery(Servicio.GET_EMPLEADOS_SERVICIO, Empleado.class);
 		query.setParameter("servicioId", servicio.getId());
 
-		List<Servicio> servicios = query.getResultList();
+		List<Empleado> empleadosServicio = query.getResultList();
 
-		//Assert.assertEquals("Se espera obtener listado de empleados que atienden un servicio", servicios, 3);
+		Assert.assertTrue("El Empleado no atiende el Servicio indicado", empleadosServicio.contains(empleado));
 	}
 
 }

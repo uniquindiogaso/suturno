@@ -152,21 +152,20 @@ public class PersonaTest {
 	 * Metodo de prueba que verifica que tipos de cliente es un cliente
 	 */
 	@Test
-	75
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "datos/ciudad.json", "datos/empleado.json", "datos/persona.json" })
 	public void saberTipoClienteDeCliente() {
 
-		TipoCliente tCliente = entityManager.find(TipoCliente.class, 2);
+		TipoCliente tMayor = entityManager.find(TipoCliente.class, 2);
 		Persona cliente = entityManager.find(Persona.class, 7);
 
 		TypedQuery<TipoCliente> query = entityManager.createNamedQuery(Persona.GET_TIPOCLIENTE_CLIENTE,
 				TipoCliente.class);
 		query.setParameter("personaId", cliente.getId());
+		
+		List<TipoCliente> tipoClientesCliente = query.getResultList();
 
-		List<TipoCliente> tipo = query.getResultList();
-
-		Assert.assertEquals("El tipo de cliente no corresponde", tipo, tCliente);
+		Assert.assertTrue("El tipo de Cliente no esta presente en el Listodo de Clientes del Usuario", tipoClientesCliente.contains(tMayor));
 	}
 
 }
