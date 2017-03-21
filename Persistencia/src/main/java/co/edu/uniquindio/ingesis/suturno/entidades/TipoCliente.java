@@ -89,7 +89,6 @@ public class TipoCliente implements Serializable {
 	 */
 	public TipoCliente() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

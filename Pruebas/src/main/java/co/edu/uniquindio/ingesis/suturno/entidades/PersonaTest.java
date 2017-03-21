@@ -148,4 +148,25 @@ public class PersonaTest {
 		Assert.assertNull("No se encontro la Persona, no es posible eliminarla", registrado);
 	}
 
+	/**
+	 * Metodo de prueba que verifica que tipos de cliente es un cliente
+	 */
+	@Test
+	75
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "datos/ciudad.json", "datos/empleado.json", "datos/persona.json" })
+	public void saberTipoClienteDeCliente() {
+
+		TipoCliente tCliente = entityManager.find(TipoCliente.class, 2);
+		Persona cliente = entityManager.find(Persona.class, 7);
+
+		TypedQuery<TipoCliente> query = entityManager.createNamedQuery(Persona.GET_TIPOCLIENTE_CLIENTE,
+				TipoCliente.class);
+		query.setParameter("personaId", cliente.getId());
+
+		List<TipoCliente> tipo = query.getResultList();
+
+		Assert.assertEquals("El tipo de cliente no corresponde", tipo, tCliente);
+	}
+
 }

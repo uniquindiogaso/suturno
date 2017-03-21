@@ -1,33 +1,55 @@
-/**
- * 
- */
+
 package co.edu.uniquindio.ingesis.suturno.dto;
 
 /**
- * @author gusta
- *
+ * DTO InformaciónTurnoPorFecha
+ * 
+ * @author Gustavo Salgado y Laura Julieth Rua
+ * 
+ * @author Ingeniería de Sistemas y Computacion
+ * 
+ * @author Universidad del Quindio
+ * 
+ * @version 1.0
+ * 
+ * @since 20/03/2017
  */
 public class InformacionTurnoPorFechaDTO {
-	
-	private int turnoId;
-	private String servicioNombre;
-	private String clienteIdentificacion;
-	private String clienteNombre;
-	private String clienteEmail;
-	
-	/**
-	 * 
-	 */
-	public InformacionTurnoPorFechaDTO() {
-		// TODO Auto-generated constructor stub
-	}
 
 	/**
+	 * Variable que representa el atributo id del Turno
+	 */
+	private int turnoId;
+	/**
+	 * Variable que representa el atributo nombre del Servicio
+	 */
+	private String servicioNombre;
+	/**
+	 * Variable que representa el atributo identificacion del cliente
+	 */
+	private String clienteIdentificacion;
+	/**
+	 * Variable que representa el atributo nombre del cliente
+	 */
+	private String clienteNombre;
+	/**
+	 * Variable que representa el atributo email del cliente
+	 */
+	private String clienteEmail;
+
+	/**
+	 * Metodo constructor del DTO InformacionTurnoPorFecha
+	 * 
 	 * @param turnoId
+	 *            el id del turno
 	 * @param servicioNombre
+	 *            el nombre del servicio
 	 * @param clienteIdentificacion
+	 *            la cedula o identificacion del cliente
 	 * @param clienteNombre
+	 *            el nombre del cliente
 	 * @param clienteEmail
+	 *            el email del cliente
 	 */
 	public InformacionTurnoPorFechaDTO(int turnoId, String servicioNombre, String clienteIdentificacion,
 			String clienteNombre, String clienteEmail) {
@@ -40,75 +62,98 @@ public class InformacionTurnoPorFechaDTO {
 	}
 
 	/**
-	 * @return the turnoId
+	 * Metodo que permite obtener el valor del atributo id
+	 * 
+	 * @return turnoId el identificador de la entidad Turno
 	 */
 	public int getTurnoId() {
 		return turnoId;
 	}
 
 	/**
-	 * @param turnoId the turnoId to set
+	 * Metodo que permite asignar un valor al atributo id
+	 * 
+	 * @param turnoId
+	 *            el identificador de la entidad Turno
 	 */
 	public void setTurnoId(int turnoId) {
 		this.turnoId = turnoId;
 	}
 
 	/**
-	 * @return the servicioNombre
+	 * Metodo que permite obtener el valor del atributo nombre del servicio
+	 * 
+	 * @return servicioNombre el nombre del servicio
 	 */
 	public String getServicioNombre() {
 		return servicioNombre;
 	}
 
 	/**
-	 * @param servicioNombre the servicioNombre to set
+	 * Metodo que permite asignar un valor al atributo nombre del servicio
+	 * 
+	 * @param servicioNombre
+	 *            el nombre del servicio
 	 */
 	public void setServicioNombre(String servicioNombre) {
 		this.servicioNombre = servicioNombre;
 	}
 
 	/**
-	 * @return the clienteIdentificacion
+	 * Metodo que permite obtener el valor del atributo identificacion del cliente
+	 * 
+	 * @return clienteIdentificacion el numero de identificacion del cliente
 	 */
 	public String getClienteIdentificacion() {
 		return clienteIdentificacion;
 	}
 
 	/**
-	 * @param clienteIdentificacion the clienteIdentificacion to set
+	 * Metodo que permite asignar un valor al atributo identificacion del cliente
+	 * 
+	 * @param clienteIdentificacion
+	 *            el numero de identificacion del cliente
 	 */
 	public void setClienteIdentificacion(String clienteIdentificacion) {
 		this.clienteIdentificacion = clienteIdentificacion;
 	}
 
 	/**
-	 * @return the clienteNombre
+	 * Metodo que permite obtener el valor del atributo nombre del cliente
+	 * 
+	 * @return clienteNombre el nombre del cliente
 	 */
 	public String getClienteNombre() {
 		return clienteNombre;
 	}
 
 	/**
-	 * @param clienteNombre the clienteNombre to set
+	 * Metodo que permite asignar un valor al atributo nombre del cliente
+	 * 
+	 * @param clienteNombre
+	 *            el nombre del cliente
 	 */
 	public void setClienteNombre(String clienteNombre) {
 		this.clienteNombre = clienteNombre;
 	}
 
 	/**
-	 * @return the clienteEmail
+	 * Metodo que permite obtener el valor del atributo email del cliente
+	 * 
+	 * @return clienteEmail el correo electrónico del cliente
 	 */
 	public String getClienteEmail() {
 		return clienteEmail;
 	}
 
 	/**
-	 * @param clienteEmail the clienteEmail to set
+	 * Metodo que permite asignar un valor al atributo email del cliente
+	 * 
+	 * @param clienteEmail
+	 *            el correo electrónico del cliente
 	 */
 	public void setClienteEmail(String clienteEmail) {
 		this.clienteEmail = clienteEmail;
 	}
-	
-	
 
 }

@@ -145,7 +145,6 @@ public class ServicioTest {
 	 * Metodo de prueba que verifica cuales son los servicios disponibles
 	 */
 	@Test
-	@Ignore
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "datos/servicio.json" })
 	public void saberServiciosDisponibles() {
@@ -156,4 +155,26 @@ public class ServicioTest {
 
 		Assert.assertEquals("Se espera obtener listado de servicios disponibles", servicios, 3);
 	}
+
+	/**
+	 * Metodo de prueba que verifica cuales son los empleados que atienden un
+	 * servicio usando IN
+	 */
+	@Test
+	78
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "datos/servicio.json" })
+	public void saberEmpleadosAtenderServicioIN() {
+
+		Servicio servicio = entityManager.find(Servicio.class, 3);
+		Empleado empleado = entityManager.find(Empleado.class, 3);
+
+		TypedQuery<Servicio> query = entityManager.createNamedQuery(Servicio.GET_EMPLEADOS_SERVICIO, Servicio.class);
+		query.setParameter("servicioId", servicio.getId());
+
+		List<Servicio> servicios = query.getResultList();
+
+		//Assert.assertEquals("Se espera obtener listado de empleados que atienden un servicio", servicios, 3);
+	}
+
 }

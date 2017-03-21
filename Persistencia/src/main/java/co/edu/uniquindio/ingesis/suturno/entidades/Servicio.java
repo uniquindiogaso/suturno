@@ -34,7 +34,7 @@ import javax.validation.constraints.Size;
 @NamedQueries({ @NamedQuery(name = Servicio.GET_ALL, query = "SELECT s FROM Servicio s"),
 		@NamedQuery(name = Servicio.GET_SERVICIO_ACTIVOS, query = "SELECT s FROM Servicio s WHERE s.activo=true"),
 		@NamedQuery(name = Servicio.GET_EMPLEADOS_SERVICIO, query = "SELECT e FROM Servicio s, IN(s.empleados) e WHERE s.id= :servicioId"),
-		@NamedQuery(name = Servicio.GET_EMPLEADOS_X_SERVICIOS, query = "SELECT s.nombre , e FROM Servicio s LEFT JOIN(s.empleados) e"),})
+		@NamedQuery(name = Servicio.GET_EMPLEADOS_X_SERVICIOS, query = "SELECT s.nombre , e FROM Servicio s LEFT JOIN(s.empleados) e"), })
 public class Servicio implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -50,17 +50,16 @@ public class Servicio implements Serializable {
 	 * activos {@link Servicio} <br />
 	 */
 	public static final String GET_SERVICIO_ACTIVOS = "Servicio_findByActivo";
-	
+
 	/**
-	 * Constante que identifica la consulta que obtener todos los empleados que pueden atender un servicio
-	 * activos {@link Servicio} <br />
+	 * Constante que identifica la consulta que obtener todos los empleados que
+	 * pueden atender un servicio {@link Servicio} <br />
 	 */
 	public static final String GET_EMPLEADOS_SERVICIO = "Servicio_findByEmpleado";
-	
-	
+
 	/**
-	 * Constante que identifica la consulta que obtener todos los empleados que pueden atender un servicio
-	 * activos {@link Servicio} <br />
+	 * Constante que identifica la consulta que obtener todos los empleados que
+	 * pueden atender un servicio{@link Servicio} <br />
 	 */
 	public static final String GET_EMPLEADOS_X_SERVICIOS = "Servicio_findEmpleadosByServicios";
 
@@ -115,7 +114,6 @@ public class Servicio implements Serializable {
 	 */
 	public Servicio() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

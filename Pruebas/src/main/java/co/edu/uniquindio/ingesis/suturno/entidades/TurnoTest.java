@@ -170,6 +170,6 @@ public class TurnoTest {
 
 		int cantTurnos = query.getResultList().size();
 
-		Assert.assertEquals("Se espera obtener la cantidad de turnos que tiene el empleado", cantTurnos, 2);
+		Assert.assertEquals("Se espera obtener la cantidad de turnos que tiene el empleado.", cantTurnos, 2);
 	}
 }

@@ -196,7 +196,7 @@ public class Persona implements Serializable {
 	/**
 	 * Metodo que permite obtener el valor del atributo identificacion
 	 * 
-	 * @return identicacion el número de identficación de la persona
+	 * @return identificacion el numero de identificacion de la persona
 	 */
 	public String getIdentificacion() {
 		return identificacion;
@@ -205,8 +205,8 @@ public class Persona implements Serializable {
 	/**
 	 * Metodo que permite asignar un valor al atributo identificacion
 	 * 
-	 * @param identicacion
-	 *            el número de identficación de la persona
+	 * @param identificacion
+	 *            el numero de identificacion de la persona
 	 */
 	public void setIdentificacion(String identificacion) {
 		this.identificacion = identificacion;
@@ -329,7 +329,7 @@ public class Persona implements Serializable {
 	/**
 	 * Metodo que permite obtener el valor del atributo email
 	 * 
-	 * @return emaile el correo electrónico de la persona
+	 * @return email el correo electrónico de la persona
 	 */
 	public String getEmail() {
 		return email;
@@ -338,7 +338,7 @@ public class Persona implements Serializable {
 	/**
 	 * Metodo que permite asignar un valor al atributo email
 	 * 
-	 * @param emaile
+	 * @param email
 	 *            el correo electrónico de la persona
 	 */
 	public void setEmail(String email) {
