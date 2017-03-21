@@ -32,7 +32,8 @@ import javax.validation.constraints.NotNull;
 @Entity
 @NamedQueries({ @NamedQuery(name = Empleado.GET_ALL, query = "SELECT e FROM Empleado e"),
 		@NamedQuery(name = Empleado.AUTENTICAR, query = "SELECT e FROM Empleado e WHERE	e.usuario=:usuario AND e.clave=:clave"),
-		@NamedQuery(name = Empleado.GET_EMPLEADO_PUESTO, query = "SELECT e.puesto FROM Empleado e WHERE e.id=:empleadoId") })
+		@NamedQuery(name = Empleado.GET_EMPLEADO_PUESTO, query = "SELECT e.puesto FROM Empleado e WHERE e.id=:empleadoId"),
+		@NamedQuery(name = Empleado.GET_EMPLEADO_SERVICIOS, query = "SELECT s FROM Empleado e INNER JOIN e.servicios s WHERE e.tercero.identificacion= :empledoIdentificacion")})
 
 @Table(name = "suturno_empleado")
 public class Empleado implements Serializable {
@@ -57,6 +58,12 @@ public class Empleado implements Serializable {
 	 */
 	public static final String GET_EMPLEADO_PUESTO = "Empleado_findByPuesto";
 
+	/**
+	 * Constante que identifica la consulta que obtiene el puesto al que
+	 * pertenece el empleado {@link Empleado} <br />
+	 */
+	public static final String GET_EMPLEADO_SERVICIOS = "Empleado_findByServicios";
+	
 	/**
 	 * /** Variable que representa el atributo id de la entidad
 	 */
