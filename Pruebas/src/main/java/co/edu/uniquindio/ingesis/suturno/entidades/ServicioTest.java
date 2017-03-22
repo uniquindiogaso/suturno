@@ -162,7 +162,7 @@ public class ServicioTest {
 	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/servicio.json" })
+	@UsingDataSet({  "datos/servicio.json","datos/empleado.json", "datos/empleadoxservicio.json" })
 	public void saberEmpleadosAtenderServicioIN() {
 
 		Servicio servicio = entityManager.find(Servicio.class, 3);
@@ -170,6 +170,25 @@ public class ServicioTest {
 
 		TypedQuery<Empleado> query = entityManager.createNamedQuery(Servicio.GET_EMPLEADOS_SERVICIO, Empleado.class);
 		query.setParameter("servicioId", servicio.getId());
+
+		List<Empleado> empleadosServicio = query.getResultList();
+
+		Assert.assertTrue("El Empleado no atiende el Servicio indicado", empleadosServicio.contains(empleado));
+	}
+
+	/**
+	 * Metodo de prueba que verifica cuales son los empleados que atienden un
+	 * servicio usando LEFT JOIN
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "datos/servicio.json","datos/empleado.json", "datos/empleadoxservicio.json" })
+	public void saberEmpleadosAtenderServicioLEFTJOIN() {
+
+		Servicio servicio = entityManager.find(Servicio.class, 3);
+		Empleado empleado = entityManager.find(Empleado.class, 3);
+
+		TypedQuery<Empleado> query = entityManager.createNamedQuery(Servicio.GET_EMPLEADOS_X_SERVICIOS, Empleado.class);
 
 		List<Empleado> empleadosServicio = query.getResultList();
 

@@ -3,7 +3,7 @@
 	{
 	"ID": 1,
 	"ESTADO":1,
-	"FECHA":"2017-01-12",
+	"FECHA":"2017-03-21 13:00:00",
 	"NOTA":"Terminar",
 	"CLIENTE_ID":3,
 	"EMPLEADO_ID":1,
@@ -12,7 +12,7 @@
 	{
 	"ID": 2,
 	"ESTADO":0,
-	"FECHA":"2017-01-24",
+	"FECHA":"2017-03-21 15:00:00",
 	"NOTA":"Queja",
 	"CLIENTE_ID":4,
 	"EMPLEADO_ID":2,
@@ -21,7 +21,7 @@
 	{
 	"ID": 3,
 	"ESTADO":0,
-	"FECHA":"2017-01-24",
+	"FECHA":"2017-03-02 13:00:00",
 	"NOTA":"Solicitud",
 	"CLIENTE_ID":3,
 	"EMPLEADO_ID":2,

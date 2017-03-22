@@ -1,8 +1,9 @@
 package co.edu.uniquindio.ingesis.suturno.entidades;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -21,9 +22,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import co.edu.uniquindio.ingesis.suturno.dto.InformacionTurnoPorFechaDTO;
 import co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno;
-import co.edu.uniquindio.ingesis.suturno.utils.Genero;
-import co.edu.uniquindio.ingesis.suturno.utils.TipoDocumento;
 
 /**
  * Prueba TurnoTest
@@ -172,4 +172,57 @@ public class TurnoTest {
 
 		Assert.assertEquals("Se espera obtener la cantidad de turnos que tiene el empleado.", cantTurnos, 2);
 	}
+	
+	
+	/**
+	 * Metodo de prueba que verifica los Clientes Atendidos en una Fecha Determinada
+	 * @throws ParseException 
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "datos/ciudad.json", "datos/empleado.json", "datos/persona.json", "datos/tipocliente.json",
+			"datos/turno.json" })
+	public void clientesAntendidosXFecha() throws ParseException {
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String fechaString = "2017-03-21";
+		Date fecha = formatter.parse(fechaString);
+		
+		TypedQuery<Turno> query = entityManager.createNamedQuery(Turno.GET_CLIENTES_X_FECHA, Turno.class);
+		query.setParameter("fecha", fecha);
+				
+		int cantturnosFecha = query.getResultList().size();
+
+		Assert.assertTrue(cantturnosFecha == 2);
+		
+	}
+	
+	
+	/**
+	 * Metodo de prueba que verifica los Clientes Atendidos en una Fecha Determinada
+	 * @throws ParseException 
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "datos/ciudad.json", "datos/empleado.json", "datos/persona.json", "datos/tipocliente.json",
+			"datos/turno.json" })
+	public void infoTurnoDTO() throws ParseException {
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String fechaString = "2017-03-21";
+		Date fecha = formatter.parse(fechaString);
+		
+		TypedQuery<InformacionTurnoPorFechaDTO> query = entityManager.createNamedQuery(Turno.GET_TURNO_FECHA, InformacionTurnoPorFechaDTO.class);
+		query.setParameter("fecha", fecha);
+				
+		int cantturnosFecha = query.getResultList().size();
+		
+		System.out.println("DTO" + cantturnosFecha);
+
+		Assert.assertTrue(cantturnosFecha == 1);
+		
+	}
+	
+	
+	
 }

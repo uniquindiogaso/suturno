@@ -1,0 +1,16 @@
+{
+	"suturno_empleado_suturno_servicio": [
+	{
+	 "EMPLEADOS_ID":1,
+	 "SERVICIOS_ID":2
+	},
+	{
+	 "EMPLEADOS_ID":2,
+	 "SERVICIOS_ID":2
+	},
+	{
+	 "EMPLEADOS_ID":2,
+	 "SERVICIOS_ID":4
+	}
+	]
+}

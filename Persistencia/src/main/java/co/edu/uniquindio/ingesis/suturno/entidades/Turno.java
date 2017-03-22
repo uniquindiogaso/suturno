@@ -36,8 +36,8 @@ import co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno;
 @NamedQueries({ @NamedQuery(name = Turno.GET_ALL, query = "SELECT t FROM Turno t"),
 		@NamedQuery(name = Turno.GET_TURNOS_CLIENTE, query = "SELECT t FROM Turno t WHERE t.cliente.id=:clienteId"),
 		@NamedQuery(name = Turno.GET_TURNOS_EMPLEADO, query = "SELECT t FROM Turno t WHERE t.empleado.id=:empleadoId"),
-		@NamedQuery(name = Turno.GET_TURNO_FECHA, query = "SELECT new co.edu.uniquindio.ingesis.suturno.dto.InformacionTurnoPorFechaDTO(t.id, t.servicio.nombre , t.cliente.identificacion ,  t.cliente.nombre1 , t.cliente.email) FROM Turno t WHERE t.fecha= :fecha"),
-		@NamedQuery(name = Turno.GET_CLIENTES_X_FECHA, query = "SELECT DISTINCT t.cliente FROM Turno t WHERE t.fecha= :fecha"),})
+		@NamedQuery(name = Turno.GET_TURNO_FECHA, query = "SELECT new co.edu.uniquindio.ingesis.suturno.dto.InformacionTurnoPorFechaDTO(t.id, t.servicio.nombre , t.cliente.identificacion ,  t.cliente.nombre1 , t.cliente.email) FROM Turno t WHERE CAST(t.fecha DATE )= :fecha"),
+		@NamedQuery(name = Turno.GET_CLIENTES_X_FECHA, query = "SELECT DISTINCT t.cliente FROM Turno t WHERE CAST(t.fecha DATE ) = :fecha"),})
 @Table(name = "suturno_turno")
 public class Turno implements Serializable {
 
