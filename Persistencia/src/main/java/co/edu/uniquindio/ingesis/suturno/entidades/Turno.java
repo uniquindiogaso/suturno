@@ -37,7 +37,11 @@ import co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno;
 		@NamedQuery(name = Turno.GET_TURNOS_CLIENTE, query = "SELECT t FROM Turno t WHERE t.cliente.id=:clienteId"),
 		@NamedQuery(name = Turno.GET_TURNOS_EMPLEADO, query = "SELECT t FROM Turno t WHERE t.empleado.id=:empleadoId"),
 		@NamedQuery(name = Turno.GET_TURNO_FECHA, query = "SELECT new co.edu.uniquindio.ingesis.suturno.dto.InformacionTurnoPorFechaDTO(t.id, t.servicio.nombre , t.cliente.identificacion ,  t.cliente.nombre1 , t.cliente.email) FROM Turno t WHERE CAST(t.fecha DATE )= :fecha"),
-		@NamedQuery(name = Turno.GET_CLIENTES_X_FECHA, query = "SELECT DISTINCT t.cliente FROM Turno t WHERE CAST(t.fecha DATE ) = :fecha"),})
+		@NamedQuery(name = Turno.GET_CLIENTES_X_FECHA, query = "SELECT DISTINCT t.cliente FROM Turno t WHERE CAST(t.fecha DATE ) = :fecha"),
+		@NamedQuery(name = Turno.GET_COUNT_CLIENTES_X_SERVICIO, query = "SELECT COUNT( DISTINCT t.cliente.id) FROM Turno t WHERE t.servicio= :servicio"),
+		@NamedQuery(name = Turno.GET_COUNT_CLIENTES_X_TURNO, query = "SELECT COUNT( DISTINCT t.cliente.id) FROM Turno t WHERE CAST(t.fecha DATE )= :fecha"),
+		@NamedQuery(name = Turno.GET_CLIENTES_SERVICIO_AGRUPADOS, query = "SELECT new co.edu.uniquindio.ingesis.suturno.dto.ConteoClientesXServicioDTO(COUNT( t.cliente.id) , t.servicio ) FROM Turno t GROUP BY t.servicio"),
+		@NamedQuery(name = Turno.GET_CANT_TURNO_CLIENTE_SIN_ATENDER, query = "SELECT new co.edu.uniquindio.ingesis.suturno.dto.CantTurnosXClienteDTO(COUNT(1) , t.cliente ) FROM Turno t WHERE t.estado = co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno.EN_ESPERA GROUP BY t.cliente"),})
 @Table(name = "suturno_turno")
 public class Turno implements Serializable {
 
@@ -60,19 +64,42 @@ public class Turno implements Serializable {
 	 * que tiene el empleado {@link Turno} <br />
 	 */
 	public static final String GET_TURNOS_EMPLEADO = "Turno_findByEmpleado";
-	
-	
+
 	/**
-	 * Constante que identifica la consulta que obtiene datos de turno de acuerdo a la fecha
-	 * que tiene el turno {@link Turno} <br />
+	 * Constante que identifica la consulta que obtiene datos de turno de
+	 * acuerdo a la fecha que tiene el turno {@link Turno} <br />
 	 */
 	public static final String GET_TURNO_FECHA = "Turno_findByFecha";
-	
+
 	/**
-	 * Constante que identifica la consulta que obtiene datos de los clientes que solicitan turno en fecha especifica
-	 *  {@link Turno} <br />
+	 * Constante que identifica la consulta que obtiene datos de los clientes
+	 * que solicitan turno en fecha especifica {@link Turno} <br />
 	 */
 	public static final String GET_CLIENTES_X_FECHA = "Turno_findByClientesAndFecha";
+
+	/**
+	 * Constante que identifica la consulta que permite obtener el número de
+	 * clientes que tienen turno para una fecha dada. . {@link Turno} <br />
+	 */
+	public static final String GET_COUNT_CLIENTES_X_SERVICIO = "Turno_CountByClienteAndServicio";
+
+	/**
+	 * Constante que identifica la consulta que permite obtener el número de
+	 * clientes que han solicitado un determinado servicio. {@link Turno} <br />
+	 */
+	public static final String GET_COUNT_CLIENTES_X_TURNO = "Turno_CountByClienteByFecha";
+
+	/**
+	 * Constante que identifica la consulta que permite determinar el número de
+	 * clientes que han solicitado cada servicio {@link Turno} <br />
+	 */
+	public static final String GET_CLIENTES_SERVICIO_AGRUPADOS = "Turno_CountClientesGroupByServicio";
+
+	/**
+	 * Constante que identifica la consulta que permite determinar que clientes
+	 * tienen turnos que aún no han sido atendidos {@link Turno} <br />
+	 */
+	public static final String GET_CANT_TURNO_CLIENTE_SIN_ATENDER = "Turno_CountTurnoSinAtender";
 
 	/**
 	 * Variable que representa el atributo id de la entidad

@@ -62,7 +62,8 @@ public class Servicio implements Serializable {
 	 * pueden atender un servicio{@link Servicio} <br />
 	 */
 	public static final String GET_EMPLEADOS_X_SERVICIOS = "Servicio_findEmpleadosByServicios";
-
+	
+	
 	/**
 	 * Variable que representa el atributo id de la entidad
 	 */

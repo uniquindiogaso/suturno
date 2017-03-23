@@ -4,9 +4,11 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -22,6 +24,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import co.edu.uniquindio.ingesis.suturno.dto.CantTurnosXClienteDTO;
+import co.edu.uniquindio.ingesis.suturno.dto.ConteoClientesXServicioDTO;
 import co.edu.uniquindio.ingesis.suturno.dto.InformacionTurnoPorFechaDTO;
 import co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno;
 
@@ -153,7 +157,7 @@ public class TurnoTest {
 
 		Assert.assertEquals("Se espera obtener la cantidad de turnos que tiene el cliente", cantTurnos, 2);
 	}
-	
+
 	/**
 	 * Metodo de prueba que verifica cuantos turnos tiene un empleado
 	 */
@@ -172,57 +176,157 @@ public class TurnoTest {
 
 		Assert.assertEquals("Se espera obtener la cantidad de turnos que tiene el empleado.", cantTurnos, 2);
 	}
-	
-	
+
 	/**
-	 * Metodo de prueba que verifica los Clientes Atendidos en una Fecha Determinada
-	 * @throws ParseException 
+	 * Metodo de prueba que verifica los Clientes Atendidos en una Fecha
+	 * Determinada
+	 * 
+	 * @throws ParseException
 	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "datos/ciudad.json", "datos/empleado.json", "datos/persona.json", "datos/tipocliente.json",
 			"datos/turno.json" })
 	public void clientesAntendidosXFecha() throws ParseException {
-		
+
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String fechaString = "2017-03-21";
 		Date fecha = formatter.parse(fechaString);
-		
+
 		TypedQuery<Turno> query = entityManager.createNamedQuery(Turno.GET_CLIENTES_X_FECHA, Turno.class);
 		query.setParameter("fecha", fecha);
-				
+
 		int cantturnosFecha = query.getResultList().size();
 
 		Assert.assertTrue(cantturnosFecha == 2);
-		
+
 	}
-	
-	
+
 	/**
-	 * Metodo de prueba que verifica los Clientes Atendidos en una Fecha Determinada
-	 * @throws ParseException 
+	 * Metodo de prueba que verifica los Clientes Atendidos en una Fecha
+	 * Determinada
+	 * 
+	 * @throws ParseException
 	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "datos/ciudad.json", "datos/empleado.json", "datos/persona.json", "datos/tipocliente.json",
 			"datos/turno.json" })
 	public void infoTurnoDTO() throws ParseException {
-		
+
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String fechaString = "2017-03-21";
 		Date fecha = formatter.parse(fechaString);
-		
-		TypedQuery<InformacionTurnoPorFechaDTO> query = entityManager.createNamedQuery(Turno.GET_TURNO_FECHA, InformacionTurnoPorFechaDTO.class);
+
+		TypedQuery<InformacionTurnoPorFechaDTO> query = entityManager.createNamedQuery(Turno.GET_TURNO_FECHA,
+				InformacionTurnoPorFechaDTO.class);
 		query.setParameter("fecha", fecha);
-				
+
 		int cantturnosFecha = query.getResultList().size();
-		
+
 		System.out.println("DTO" + cantturnosFecha);
 
 		Assert.assertTrue(cantturnosFecha == 1);
-		
+
 	}
-	
-	
-	
+
+	/**
+	 * Metodo de prueba que verifica los Clientes Atendidos en una Fecha
+	 * Determinada
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "datos/servicio.json", "datos/ciudad.json", "datos/empleado.json", "datos/persona.json",
+			"datos/tipocliente.json", "datos/turno.json" })
+	public void countClientesXServicio() {
+
+		Servicio servicio = entityManager.find(Servicio.class, 2);
+
+		Query query = entityManager.createNamedQuery(Turno.GET_COUNT_CLIENTES_X_SERVICIO);
+		query.setParameter("servicio", servicio);
+
+		Long cantClientesXServicio = (Long) query.getSingleResult();
+
+		System.out.println("COUNT Clientes x Servicio : " + cantClientesXServicio);
+
+		Assert.assertTrue(cantClientesXServicio == 2);
+
+	}
+
+	/**
+	 * Metodo de prueba que permite determinar el número de clientes que tienen
+	 * turno para una fecha dada
+	 * 
+	 * @throws ParseException
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "datos/servicio.json", "datos/ciudad.json", "datos/empleado.json", "datos/persona.json",
+			"datos/tipocliente.json", "datos/turno.json" })
+	public void countClientesXFecha() throws ParseException {
+
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String fechaString = "2017-03-21";
+		Date fecha = formatter.parse(fechaString);
+
+		Query query = entityManager.createNamedQuery(Turno.GET_COUNT_CLIENTES_X_TURNO);
+		query.setParameter("fecha", fecha);
+
+		Long cantClientesFecha = (Long) query.getSingleResult();
+
+		System.out.println("COUNT Clientes x Fecha : " + cantClientesFecha);
+
+		Assert.assertTrue(cantClientesFecha == 2);
+
+	}
+
+	/**
+	 * Metodo de prueba que permite probar el número de clientes que han
+	 * solicitado cada servicio
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "datos/servicio.json", "datos/ciudad.json", "datos/empleado.json", "datos/persona.json",
+			"datos/tipocliente.json", "datos/turno.json" })
+	public void numClientesXServicioDTO() {
+
+		Servicio servicio1 = entityManager.find(Servicio.class, 1);
+
+		TypedQuery<ConteoClientesXServicioDTO> query = entityManager
+				.createNamedQuery(Turno.GET_CLIENTES_SERVICIO_AGRUPADOS, ConteoClientesXServicioDTO.class);
+
+		List<ConteoClientesXServicioDTO> clientesXServicio = query.getResultList();
+
+		for (ConteoClientesXServicioDTO dto : clientesXServicio) {
+			System.out.println(dto.getCantClientes() + ": " + dto.getServicio().getNombre());
+		}
+
+		Assert.assertTrue(clientesXServicio.size() == 3);
+
+	}
+
+	/**
+	 * Metodo de prueba que permite probar que clientes tienen turnos que aún no
+	 * han sido atendidos
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "datos/servicio.json", "datos/ciudad.json", "datos/empleado.json", "datos/persona.json",
+			"datos/tipocliente.json", "datos/turno.json" })
+	public void numTurnosSinAtenderXCliente() {
+
+		Servicio servicio1 = entityManager.find(Servicio.class, 1);
+
+		TypedQuery<CantTurnosXClienteDTO> query = entityManager
+				.createNamedQuery(Turno.GET_CANT_TURNO_CLIENTE_SIN_ATENDER, CantTurnosXClienteDTO.class);
+
+		List<CantTurnosXClienteDTO> turnosXCliente = query.getResultList();
+
+		for (CantTurnosXClienteDTO dto : turnosXCliente) {
+			System.out.println(dto.getCantTurnos() + ": " + dto.getPersona().getIdentificacion());
+		}
+
+		//Assert.assertTrue(turnosXCliente.size() == 3);
+
+	}
 }
