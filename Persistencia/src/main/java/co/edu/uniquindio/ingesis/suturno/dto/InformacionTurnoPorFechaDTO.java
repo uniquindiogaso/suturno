@@ -38,6 +38,13 @@ public class InformacionTurnoPorFechaDTO {
 	private String clienteEmail;
 
 	/**
+	 * Metodo constructor vacio del DTO InformacionTurnoPorFecha
+	 */
+	public InformacionTurnoPorFechaDTO() {
+
+	}
+
+	/**
 	 * Metodo constructor del DTO InformacionTurnoPorFecha
 	 * 
 	 * @param turnoId
@@ -100,7 +107,8 @@ public class InformacionTurnoPorFechaDTO {
 	}
 
 	/**
-	 * Metodo que permite obtener el valor del atributo identificacion del cliente
+	 * Metodo que permite obtener el valor del atributo identificacion del
+	 * cliente
 	 * 
 	 * @return clienteIdentificacion el numero de identificacion del cliente
 	 */
@@ -109,7 +117,8 @@ public class InformacionTurnoPorFechaDTO {
 	}
 
 	/**
-	 * Metodo que permite asignar un valor al atributo identificacion del cliente
+	 * Metodo que permite asignar un valor al atributo identificacion del
+	 * cliente
 	 * 
 	 * @param clienteIdentificacion
 	 *            el numero de identificacion del cliente
