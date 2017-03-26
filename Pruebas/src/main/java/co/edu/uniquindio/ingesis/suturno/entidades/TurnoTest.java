@@ -26,6 +26,7 @@ import org.junit.runner.RunWith;
 
 import co.edu.uniquindio.ingesis.suturno.dto.CantTurnosXClienteDTO;
 import co.edu.uniquindio.ingesis.suturno.dto.ConteoClientesXServicioDTO;
+import co.edu.uniquindio.ingesis.suturno.dto.EmpleadoMaxTurnoDTO;
 import co.edu.uniquindio.ingesis.suturno.dto.InformacionTurnoPorFechaDTO;
 import co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno;
 
@@ -326,7 +327,32 @@ public class TurnoTest {
 			System.out.println(dto.getCantTurnos() + ": " + dto.getPersona().getIdentificacion());
 		}
 
-		//Assert.assertTrue(turnosXCliente.size() == 3);
+		// Assert.assertTrue(turnosXCliente.size() == 3);
+
+	}
+
+	/**
+	 * Metodo de prueba que permite probar cual es el empleado que más clientes
+	 * ha atendido
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "datos/servicio.json", "datos/ciudad.json", "datos/empleado.json", "datos/persona.json",
+			"datos/tipocliente.json", "datos/turno.json" })
+	public void empleadoMasProactivo() {
+
+		Servicio servicio1 = entityManager.find(Servicio.class, 1);
+
+		TypedQuery<EmpleadoMaxTurnoDTO> query = entityManager
+				.createNamedQuery(Turno.GET_EMPLEADO_GOLD, EmpleadoMaxTurnoDTO.class);
+
+		List<EmpleadoMaxTurnoDTO> turnosXCliente = query.getResultList();
+
+		for (EmpleadoMaxTurnoDTO dto : turnosXCliente) {
+			System.out.println(dto.getCantTurnos() + ": " + dto.getEmpleado().getTercero().getIdentificacion());
+		}
+
+		// Assert.assertTrue(turnosXCliente.size() == 3);
 
 	}
 }

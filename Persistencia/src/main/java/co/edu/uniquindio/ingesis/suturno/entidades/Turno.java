@@ -41,7 +41,10 @@ import co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno;
 		@NamedQuery(name = Turno.GET_COUNT_CLIENTES_X_SERVICIO, query = "SELECT COUNT( DISTINCT t.cliente.id) FROM Turno t WHERE t.servicio= :servicio"),
 		@NamedQuery(name = Turno.GET_COUNT_CLIENTES_X_TURNO, query = "SELECT COUNT( DISTINCT t.cliente.id) FROM Turno t WHERE CAST(t.fecha DATE )= :fecha"),
 		@NamedQuery(name = Turno.GET_CLIENTES_SERVICIO_AGRUPADOS, query = "SELECT new co.edu.uniquindio.ingesis.suturno.dto.ConteoClientesXServicioDTO(COUNT( t.cliente.id) , t.servicio ) FROM Turno t GROUP BY t.servicio"),
-		@NamedQuery(name = Turno.GET_CANT_TURNO_CLIENTE_SIN_ATENDER, query = "SELECT new co.edu.uniquindio.ingesis.suturno.dto.CantTurnosXClienteDTO(COUNT(1) , t.cliente ) FROM Turno t WHERE t.estado = co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno.EN_ESPERA GROUP BY t.cliente"),})
+		@NamedQuery(name = Turno.GET_CANT_TURNO_CLIENTE_SIN_ATENDER, query = "SELECT new co.edu.uniquindio.ingesis.suturno.dto.CantTurnosXClienteDTO(COUNT(1) , t.cliente ) FROM Turno t WHERE t.estado = co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno.EN_ESPERA GROUP BY t.cliente"),
+		//@NamedQuery(name = Turno.GET_EMPLEADO_GOLD, query = "SELECT new co.edu.uniquindio.ingesis.suturno.dto.EmpleadoMaxTurnoDTO( COUNT(1), t.empleado) FROM Turno t WHERE t.estado = co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno.FINALIZADO GROUP BY t.empleado"),
+		@NamedQuery(name = Turno.GET_EMPLEADO_GOLD, query = "SELECT t.empleado  FROM Turno t WHERE t.estado = co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno.FINALIZADO "),
+		})
 @Table(name = "suturno_turno")
 public class Turno implements Serializable {
 
@@ -100,6 +103,12 @@ public class Turno implements Serializable {
 	 * tienen turnos que aún no han sido atendidos {@link Turno} <br />
 	 */
 	public static final String GET_CANT_TURNO_CLIENTE_SIN_ATENDER = "Turno_CountTurnoSinAtender";
+
+	/**
+	 * Constante que identifica la consulta que permite determinar cual es el
+	 * empleado que más clientes ha atendido {@link Turno} <br />
+	 */
+	public static final String GET_EMPLEADO_GOLD = "Turno_MaxEmpleado";
 
 	/**
 	 * Variable que representa el atributo id de la entidad
