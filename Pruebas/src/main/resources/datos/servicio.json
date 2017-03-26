@@ -27,6 +27,27 @@
 	"CODIGO":"cancel",
 	"DESCRIPCION":"Cancelacion del servicio",
 	"NOMBRE":"Cancelacion del servicio"
+	},
+	{
+	"ID": 5,
+	"ACTIVO":1,
+	"CODIGO":"modif",
+	"DESCRIPCION":"Modificacion de algun servicio",
+	"NOMBRE":"Modificar servicio"
+	},
+	{
+	"ID": 6,
+	"ACTIVO":1,
+	"CODIGO":"camPlan",
+	"DESCRIPCION":"Cambiar plan del servicio actual",
+	"NOMBRE":"Cambiar plan del servicio"
+	},
+	{
+	"ID": 7,
+	"ACTIVO":0,
+	"CODIGO":"borrar",
+	"DESCRIPCION":"Borrar algun servicio",
+	"NOMBRE":"Borrar servicio"
 	}
 	]
 }

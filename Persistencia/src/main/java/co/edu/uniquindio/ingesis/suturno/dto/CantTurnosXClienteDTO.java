@@ -2,16 +2,37 @@ package co.edu.uniquindio.ingesis.suturno.dto;
 
 import co.edu.uniquindio.ingesis.suturno.entidades.Persona;
 
+/**
+ * DTO CantTurnosXCliente
+ * 
+ * @author Gustavo Salgado y Laura Julieth Rua
+ * 
+ * @author Ingeniería de Sistemas y Computacion
+ * 
+ * @author Universidad del Quindio
+ * 
+ * @version 1.0
+ * 
+ * @since 22/03/2017
+ */
 public class CantTurnosXClienteDTO {
 	
+	/**
+	 * Variable que representa el atributo cantTurnos de Turno
+	 */
 	private Long cantTurnos;
+	/**
+	 * Variable que representa el atributo persona de Persona
+	 */
 	private Persona persona;
 
+	/**
+	 * Metodo constructor vacio del DTO CantTurnosXCliente
+	 */
 	public CantTurnosXClienteDTO() {
-		// TODO Auto-generated constructor stub
 	}
 
-	/**
+	/** Metodo constructor del DTO CantTurnosXCliente
 	 * @param cantTurnos
 	 * @param persona
 	 */
