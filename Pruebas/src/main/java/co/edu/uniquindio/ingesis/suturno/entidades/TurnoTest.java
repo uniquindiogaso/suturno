@@ -146,7 +146,7 @@ public class TurnoTest {
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "datos/ciudad.json", "datos/empleado.json", "datos/persona.json", "datos/tipocliente.json",
-			"datos/turno.json" })
+		 "datos/servicio.json",	"datos/turno.json" })
 	public void saberCantidadTurnosCliente() {
 
 		Persona cliente = entityManager.find(Persona.class, 3);
@@ -156,7 +156,7 @@ public class TurnoTest {
 
 		int cantTurnos = query.getResultList().size();
 
-		Assert.assertEquals("Se espera obtener la cantidad de turnos que tiene el cliente", cantTurnos, 2);
+		Assert.assertEquals("Se espera obtener la cantidad de turnos que tiene el cliente", 7,cantTurnos);
 	}
 
 	/**
@@ -165,7 +165,7 @@ public class TurnoTest {
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "datos/ciudad.json", "datos/empleado.json", "datos/persona.json", "datos/tipocliente.json",
-			"datos/turno.json" })
+		"datos/servicio.json",	"datos/turno.json" })
 	public void saberCantidadTurnosEmpleado() {
 
 		Empleado empleado = entityManager.find(Empleado.class, 2);
@@ -175,7 +175,7 @@ public class TurnoTest {
 
 		int cantTurnos = query.getResultList().size();
 
-		Assert.assertEquals("Se espera obtener la cantidad de turnos que tiene el empleado.", cantTurnos, 2);
+		Assert.assertEquals("Se espera obtener la cantidad de turnos que tiene el empleado.",8, cantTurnos);
 	}
 
 	/**
@@ -227,7 +227,8 @@ public class TurnoTest {
 
 		System.out.println("DTO" + cantturnosFecha);
 
-		Assert.assertTrue(cantturnosFecha == 1);
+		// Assert.assertTrue(cantturnosFecha == 1);
+		Assert.assertEquals(1, cantturnosFecha);
 
 	}
 
@@ -343,8 +344,8 @@ public class TurnoTest {
 
 		Servicio servicio1 = entityManager.find(Servicio.class, 1);
 
-		TypedQuery<EmpleadoMaxTurnoDTO> query = entityManager
-				.createNamedQuery(Turno.GET_EMPLEADO_GOLD, EmpleadoMaxTurnoDTO.class);
+		TypedQuery<EmpleadoMaxTurnoDTO> query = entityManager.createNamedQuery(Turno.GET_EMPLEADO_GOLD,
+				EmpleadoMaxTurnoDTO.class);
 
 		List<EmpleadoMaxTurnoDTO> turnosXCliente = query.getResultList();
 
