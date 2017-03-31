@@ -42,9 +42,9 @@ import co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno;
 		@NamedQuery(name = Turno.GET_COUNT_CLIENTES_X_TURNO, query = "SELECT COUNT( DISTINCT t.cliente.id) FROM Turno t WHERE CAST(t.fecha DATE )= :fecha"),
 		@NamedQuery(name = Turno.GET_CLIENTES_SERVICIO_AGRUPADOS, query = "SELECT new co.edu.uniquindio.ingesis.suturno.dto.ConteoClientesXServicioDTO(COUNT( t.cliente.id) , t.servicio ) FROM Turno t GROUP BY t.servicio"),
 		@NamedQuery(name = Turno.GET_CANT_TURNO_CLIENTE_SIN_ATENDER, query = "SELECT new co.edu.uniquindio.ingesis.suturno.dto.CantTurnosXClienteDTO(COUNT(1) , t.cliente ) FROM Turno t WHERE t.estado = co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno.EN_ESPERA GROUP BY t.cliente"),
-		//@NamedQuery(name = Turno.GET_EMPLEADO_GOLD, query = "SELECT new co.edu.uniquindio.ingesis.suturno.dto.EmpleadoMaxTurnoDTO( COUNT(1), t.empleado) FROM Turno t WHERE t.estado = co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno.FINALIZADO GROUP BY t.empleado"),
-		@NamedQuery(name = Turno.GET_EMPLEADO_GOLD, query = "SELECT t.empleado  FROM Turno t WHERE t.estado = co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno.FINALIZADO "),
-		})
+		@NamedQuery(name = Turno.NUM_CLIENT_ATENDIDOS_POR_EMPLEADO, query = "SELECT COUNT( DISTINCT t.cliente.id) FROM Turno t WHERE t.estado = co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno.FINALIZADO AND t.empleado= :empleado"),
+		@NamedQuery(name = Turno.NUM_CLIENT_ATENDIDOS_POR_EMPLEADOS, query = "SELECT t.empleado , COUNT( DISTINCT t.cliente.id) FROM Turno t WHERE t.estado = co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno.FINALIZADO GROUP BY t.empleado"),
+		@NamedQuery(name = Turno.GET_EMPLEADO_GOLD, query = "SELECT t.empleado  FROM Turno t WHERE t.estado = co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno.FINALIZADO "), })
 @Table(name = "suturno_turno")
 public class Turno implements Serializable {
 
@@ -109,6 +109,19 @@ public class Turno implements Serializable {
 	 * empleado que más clientes ha atendido {@link Turno} <br />
 	 */
 	public static final String GET_EMPLEADO_GOLD = "Turno_MaxEmpleado";
+
+	/**
+	 * Constante que identifica la consulta que permite determinar cantidad de
+	 * Clientes que han sido atendidos por un Empleado en particular
+	 * {@link Turno} <br />
+	 */
+	public static final String NUM_CLIENT_ATENDIDOS_POR_EMPLEADO = "Turno_findByEmpleadoWhereEstadoAtendido";
+
+	/**
+	 * Constante que identifica la consulta que permite determinar Empleado y
+	 * Cantidad de Clientes que ha atendido {@link Turno} <br />
+	 */
+	public static final String NUM_CLIENT_ATENDIDOS_POR_EMPLEADOS = "Turno_findEstadoAtendidoGroupByEmpleado";
 
 	/**
 	 * Variable que representa el atributo id de la entidad
