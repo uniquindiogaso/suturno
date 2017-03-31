@@ -44,7 +44,8 @@ import co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno;
 		@NamedQuery(name = Turno.GET_CANT_TURNO_CLIENTE_SIN_ATENDER, query = "SELECT new co.edu.uniquindio.ingesis.suturno.dto.CantTurnosXClienteDTO(COUNT(1) , t.cliente ) FROM Turno t WHERE t.estado = co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno.EN_ESPERA GROUP BY t.cliente"),
 		@NamedQuery(name = Turno.NUM_CLIENT_ATENDIDOS_POR_EMPLEADO, query = "SELECT COUNT( DISTINCT t.cliente.id) FROM Turno t WHERE t.estado = co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno.FINALIZADO AND t.empleado= :empleado"),
 		@NamedQuery(name = Turno.NUM_CLIENT_ATENDIDOS_POR_EMPLEADOS, query = "SELECT t.empleado , COUNT( DISTINCT t.cliente.id) FROM Turno t WHERE t.estado = co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno.FINALIZADO GROUP BY t.empleado"),
-		@NamedQuery(name = Turno.GET_EMPLEADO_GOLD, query = "SELECT t.empleado  FROM Turno t WHERE t.estado = co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno.FINALIZADO "), })
+		@NamedQuery(name = Turno.GET_EMPLEADO_GOLD, query = "SELECT t.empleado  FROM Turno t WHERE t.estado = co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno.FINALIZADO "),
+		@NamedQuery(name = Turno.TURNOS_SIN_ATENDER_POR_USUARIO, query = "SELECT t  FROM Turno t WHERE t.estado = co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno.EN_ESPERA AND t.servicio IN (SELECT s FROM Empleado e LEFT JOIN(e.servicios) s WHERE e= :empleado )"),})
 @Table(name = "suturno_turno")
 public class Turno implements Serializable {
 
@@ -122,6 +123,13 @@ public class Turno implements Serializable {
 	 * Cantidad de Clientes que ha atendido {@link Turno} <br />
 	 */
 	public static final String NUM_CLIENT_ATENDIDOS_POR_EMPLEADOS = "Turno_findEstadoAtendidoGroupByEmpleado";
+
+	/**
+	 * Constante que identifica la consulta que permite obtener un listado con
+	 * los clientes y turnos que aun no han sido atendidos y que pueden ser
+	 * atendidos por un determinado empleado {@link Turno} <br />
+	 */
+	public static final String TURNOS_SIN_ATENDER_POR_USUARIO = "Turno_findEstadoByUSuario";
 
 	/**
 	 * Variable que representa el atributo id de la entidad

@@ -21,6 +21,7 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -338,10 +339,12 @@ public class TurnoTest {
 	 * Metodo de prueba que permite probar cual es el empleado que más clientes
 	 * ha atendido
 	 */
+	@Ignore("Test no completo aun")
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "datos/servicio.json", "datos/ciudad.json", "datos/empleado.json", "datos/persona.json",
 			"datos/tipocliente.json", "datos/turno.json" })
+
 	public void empleadoMasProactivo() {
 
 		Servicio servicio1 = entityManager.find(Servicio.class, 1);
@@ -356,6 +359,30 @@ public class TurnoTest {
 		}
 
 		// Assert.assertTrue(turnosXCliente.size() == 3);
+
+	}
+
+	/**
+	 * Metodo de prueba que permite probar consulta de turnos que aun no han
+	 * sido atendidos y que puedan ser atendidos por un determinado empleado.
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "datos/servicio.json", "datos/ciudad.json", "datos/empleado.json", "datos/persona.json",
+			"datos/tipocliente.json", "datos/turno.json", "datos/empleadoxservicio.json" })
+	public void turnosSinAtender() {
+
+		Empleado empleado = entityManager.find(Empleado.class, 2);
+
+		TypedQuery<Turno> query = entityManager.createNamedQuery(Turno.TURNOS_SIN_ATENDER_POR_USUARIO, Turno.class);
+		query.setParameter("empleado", empleado);
+
+		List<Turno> turnosSinAtender = query.getResultList();
+
+		// System.out.println("Cantidad de Turnos Sin Anteder por empleado " +
+		// turnosSinAtender.size());
+
+		Assert.assertTrue(turnosSinAtender.size() == 6);
 
 	}
 }
