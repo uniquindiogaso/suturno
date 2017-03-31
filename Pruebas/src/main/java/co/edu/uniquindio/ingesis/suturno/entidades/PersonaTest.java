@@ -153,7 +153,7 @@ public class PersonaTest {
 	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "datos/ciudad.json", "datos/empleado.json", "datos/persona.json" })
+	@UsingDataSet({ "datos/tipocliente.json", "datos/ciudad.json", "datos/empleado.json", "datos/persona.json" })
 	public void saberTipoClienteDeCliente() {
 
 		TipoCliente tMayor = entityManager.find(TipoCliente.class, 2);
@@ -162,10 +162,11 @@ public class PersonaTest {
 		TypedQuery<TipoCliente> query = entityManager.createNamedQuery(Persona.GET_TIPOCLIENTE_CLIENTE,
 				TipoCliente.class);
 		query.setParameter("personaId", cliente.getId());
-		
+
 		List<TipoCliente> tipoClientesCliente = query.getResultList();
 
-		Assert.assertTrue("El tipo de Cliente no esta presente en el Listodo de Clientes del Usuario", tipoClientesCliente.contains(tMayor));
+		Assert.assertTrue("El tipo de Cliente no esta presente en el listado de Clientes del Usuario",
+				tipoClientesCliente.contains(tMayor));
 	}
 
 }

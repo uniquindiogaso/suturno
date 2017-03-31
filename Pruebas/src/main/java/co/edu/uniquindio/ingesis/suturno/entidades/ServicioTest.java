@@ -153,7 +153,7 @@ public class ServicioTest {
 
 		int servicios = query.getResultList().size();
 
-		Assert.assertEquals("Se espera obtener listado de servicios disponibles", servicios, 3);
+		Assert.assertEquals("Se espera obtener listado de servicios disponibles", 5, servicios);
 	}
 
 	/**
@@ -161,6 +161,7 @@ public class ServicioTest {
 	 * servicio usando IN
 	 */
 	@Test
+	@Ignore
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({  "datos/servicio.json","datos/empleado.json", "datos/empleadoxservicio.json" })
 	public void saberEmpleadosAtenderServicioIN() {

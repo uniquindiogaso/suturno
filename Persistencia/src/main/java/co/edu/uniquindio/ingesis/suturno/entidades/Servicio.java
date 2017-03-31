@@ -75,7 +75,7 @@ public class Servicio implements Serializable {
 	 * Variable que representa el atributo codigo del servicio
 	 */
 	@NotNull(message = "El Codigo del Servicio debe de ser obligatorio")
-	@Size(max = 10, message = "El Codigo debe de tener un maximo de 5 Caracteres")
+	@Size(max = 10, message = "El Codigo debe de tener un maximo de 10 caracteres")
 	@Column(nullable = false, length = 10)
 	private String codigo;
 

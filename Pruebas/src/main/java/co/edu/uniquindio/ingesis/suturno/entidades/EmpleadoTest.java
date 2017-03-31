@@ -159,7 +159,7 @@ public class EmpleadoTest {
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "datos/puestoTrabajo.json", "datos/empleado.json", "datos/persona.json" })
-	public void comprobrarAutenticacionQuery() {
+	public void comprobarAutenticacionQuery() {
 
 		Empleado empleado = entityManager.find(Empleado.class, 1);
 
