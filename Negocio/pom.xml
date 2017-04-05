@@ -1,0 +1,25 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>co.edu.uniquindio.a2</groupId>
+    <artifactId>Principal</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>Negocio</artifactId>
+  <packaging>ejb</packaging>
+  <name>Negocio</name>
+  <description>Proyecto para la creacion de la capa de negocio</description>
+  <dependencies>
+  	<dependency>
+  		<groupId>co.edu.uniquindio.a2</groupId>
+  		<artifactId>Persistencia</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>7.0</version>
+			<scope>provided</scope>
+		</dependency>
+  </dependencies>
+</project>

@@ -2,5 +2,8 @@
 <application xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/application_7.xsd" version="7">
   <description>Proyecto EAR</description>
   <display-name>EAR</display-name>
+  <module id="EJB_co.edu.uniquindio.a2.Negocio">
+    <ejb>Negocio-0.0.1-SNAPSHOT.jar</ejb>
+  </module>
   <library-directory>lib</library-directory>
 </application>
