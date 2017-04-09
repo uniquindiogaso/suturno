@@ -64,5 +64,6 @@
 		<module>Persistencia</module>
 		<module>Pruebas</module>
     <module>Negocio</module>
-  </modules>
+    <module>ClienteEscritorio</module>
+	</modules>
 </project>

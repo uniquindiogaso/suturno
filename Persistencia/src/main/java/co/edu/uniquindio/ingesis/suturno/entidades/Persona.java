@@ -174,6 +174,31 @@ public class Persona implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
+
+	/**
+	 * @param identificacion
+	 * @param tDoc
+	 * @param nombre1
+	 * @param nombre2
+	 * @param apellido1
+	 * @param apellido2
+	 * @param email
+	 */
+	public Persona(String identificacion, TipoDocumento tDoc, String nombre1, String nombre2, String apellido1,
+			String apellido2, String email) {
+		super();
+		this.identificacion = identificacion;
+		this.tDoc = tDoc;
+		this.nombre1 = nombre1;
+		this.nombre2 = nombre2;
+		this.apellido1 = apellido1;
+		this.apellido2 = apellido2;
+		this.email = email;
+	}
+
+
+
+
 	/**
 	 * Metodo que permite obtener el valor del atributo id
 	 * 

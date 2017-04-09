@@ -45,6 +45,7 @@ public class EmpleadoEJB implements EmpleadoEJBRemote {
 		 */
 		try {
 			entityManager.persist(empleado);
+			entityManager.flush();
 		} catch (Exception e) {
 			// Registrar log
 			throw new RuntimeException("Problemas al registrar el usuario.");

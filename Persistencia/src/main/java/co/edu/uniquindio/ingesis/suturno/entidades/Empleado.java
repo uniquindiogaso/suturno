@@ -33,7 +33,8 @@ import javax.validation.constraints.NotNull;
 @NamedQueries({ @NamedQuery(name = Empleado.GET_ALL, query = "SELECT e FROM Empleado e"),
 		@NamedQuery(name = Empleado.AUTENTICAR, query = "SELECT e FROM Empleado e WHERE	e.usuario=:usuario AND e.clave=:clave"),
 		@NamedQuery(name = Empleado.GET_EMPLEADO_PUESTO, query = "SELECT e.puesto FROM Empleado e WHERE e.id=:empleadoId"),
-		@NamedQuery(name = Empleado.GET_EMPLEADO_SERVICIOS, query = "SELECT s FROM Empleado e INNER JOIN e.servicios s WHERE e.tercero.identificacion= :empledoIdentificacion")})
+		@NamedQuery(name = Empleado.GET_EMPLEADO_SERVICIOS, query = "SELECT s FROM Empleado e INNER JOIN e.servicios s WHERE e.tercero.identificacion= :empledoIdentificacion"),
+		@NamedQuery(name = Empleado.GET_CANT_ADMINS, query = "SELECT COUNT(1) FROM Empleado e WHERE e.admin = True AND e.tercero.activo = True")})
 
 @Table(name = "suturno_empleado")
 public class Empleado implements Serializable {
@@ -63,6 +64,13 @@ public class Empleado implements Serializable {
 	 * pertenece el empleado {@link Empleado} <br />
 	 */
 	public static final String GET_EMPLEADO_SERVICIOS = "Empleado_findByServicios";
+	
+	
+	/**
+	 * Constante que identifica la consulta que obtiene la cantidad de Administradores Registados en el Sistema
+	 *  {@link Empleado} <br />
+	 */
+	public static final String GET_CANT_ADMINS = "Empleado_findByAdmin";
 	
 	/**
 	 * /** Variable que representa el atributo id de la entidad

@@ -110,5 +110,11 @@
 			<version>1.0.3.Final</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>co.edu.uniquindio.a2</groupId>
+			<artifactId>Negocio</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>ejb</type>
+		</dependency>
 	</dependencies>
 </project>

@@ -219,4 +219,26 @@ public class EmpleadoTest {
 
 		Assert.assertEquals("El puesto asignado no corresponde con lo esperado...", puestoEmpleado, puesto);
 	}
+	
+	
+	
+	/**
+	 * Metodo de prueba que verifica cantidad de Usuarios Administradores en el Sistema
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "datos/puestoTrabajo.json", "datos/empleado.json", "datos/persona.json" })
+	public void comprobarCantidadAdministradores() {
+
+
+		Query query = entityManager.createNamedQuery(Empleado.GET_CANT_ADMINS,Empleado.class);		
+
+		Long numAdmins = (Long) query.getSingleResult();
+		
+		System.out.println("Numero de Administradores " + numAdmins);
+		
+		Assert.assertTrue("Solo debe haber un Administrador Registrado en Pruebas", 1 == numAdmins);
+
+		
+	}
 }
