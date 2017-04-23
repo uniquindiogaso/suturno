@@ -6,7 +6,7 @@ package co.edu.uniquindio.ingesis.suturno.delegados;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import co.edu.uniquindio.ingesis.suturno.entidades.Empleado;
+import co.edu.uniquindio.ingesis.suturno.entidades.Persona;
 import co.edu.uniquindio.ingesis.suturno.negocio.EmpleadoEJBRemote;
 
 /**
@@ -24,6 +24,7 @@ public class EmpleadoDelegate {
 	 */
 	private  EmpleadoDelegate() {
 		try {
+			System.out.println("[JDNI] "+ EmpleadoEJBRemote.JNDI );
 			administrador = (EmpleadoEJBRemote) new InitialContext().lookup( EmpleadoEJBRemote.JNDI );
 		} catch (NamingException e) {
 			e.printStackTrace();
@@ -41,7 +42,7 @@ public class EmpleadoDelegate {
 	}
 	
 	
-	public void registrarEmpleado(Empleado empleado) throws Exception{
+	public void registrarEmpleado(Persona empleado) throws Exception{
 		 administrador.registrarEmpleado(empleado);
 	}
 

@@ -33,6 +33,7 @@ import javax.validation.constraints.Size;
 @Table(name = "suturno_servicio")
 @NamedQueries({ @NamedQuery(name = Servicio.GET_ALL, query = "SELECT s FROM Servicio s"),
 		@NamedQuery(name = Servicio.GET_SERVICIO_ACTIVOS, query = "SELECT s FROM Servicio s WHERE s.activo=true"),
+		@NamedQuery(name = Servicio.GET_SERVICIOS_X_NOMBRE, query = "SELECT s FROM Servicio s WHERE s.nombre= :nombreServicio"),
 		@NamedQuery(name = Servicio.GET_EMPLEADOS_SERVICIO, query = "SELECT e FROM Servicio s, IN(s.empleados) e WHERE s.id= :servicioId"),
 		@NamedQuery(name = Servicio.GET_EMPLEADOS_X_SERVICIOS, query = "SELECT s.nombre , e FROM Servicio s LEFT JOIN(s.empleados) e"), })
 public class Servicio implements Serializable {
@@ -65,11 +66,17 @@ public class Servicio implements Serializable {
 	
 	
 	/**
+	 * Constante que identifica la consulta que obtener todos los servicios por nombre{@link Servicio} <br />
+	 */
+	public static final String GET_SERVICIOS_X_NOMBRE = "Servicio_findByNombre";
+	
+	
+	/**
 	 * Variable que representa el atributo id de la entidad
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 
 	/**
 	 * Variable que representa el atributo codigo del servicio
@@ -143,7 +150,7 @@ public class Servicio implements Serializable {
 	 * 
 	 * @return id el identificador de la entidad Servicio
 	 */
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -153,7 +160,7 @@ public class Servicio implements Serializable {
 	 * @param id
 	 *            el identificador de la entidad Servicio
 	 */
-	public void setId(int id) {
+	public void Long(Long id) {
 		this.id = id;
 	}
 
@@ -280,12 +287,12 @@ public class Servicio implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
-	/*
-	 * Metodo sobreescrito de equals
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -296,7 +303,10 @@ public class Servicio implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Servicio other = (Servicio) obj;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

@@ -5,6 +5,7 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -43,28 +44,33 @@ public class ComprobarAdmins {
 		//Comprobar Cantidad de Administradores en Base de datos
 		if ( 0 == (Long) query.getSingleResult()){
 			
-			System.out.println("No hay usuario administrador activo, se procede a crearlo ...");
+			System.err.println("No hay usuario administrador activo, se procede a crearlo ...");
 			
 			//TODO: Data la dinamica del negico; se debe de verificar si el usuario administrador ESTA INACTIVO y pasarlo a activo.		
-					
-			Persona partner1 = new Persona("0",TipoDocumento.CEDULA_CUIDADANIA,"Usuario","","","Administrador", "admin@suturno.com"); 
-			partner1.setGenero(Genero.MASCULINO);
-			partner1.setActivo(true);
 			
-						
 			Empleado e1 = new Empleado();
-			e1.setTercero(partner1);
 			e1.setAdmin(true);
 			e1.setUsuario("admin");
 			e1.setClave("nimda.admin");
+						
+			Persona persona = new Persona();
+			persona.setActivo(true);
+			persona.setApellido1("Administrador");
+			persona.setApellido2("");
+			persona.setDir("Granada");
+			persona.setEmail("admin@suturno.com");
+			persona.setGenero(Genero.MASCULINO);
+			persona.setIdentificacion("00000000");
+			persona.setNombre1("Usuario");
+			persona.settDoc(TipoDocumento.CEDULA_CUIDADANIA);
+			persona.setTel1("3206842320");
+			persona.setTel2("7452310");
+						
+			persona.setEmpleado(e1);			
 			
-//			try {
-//				empleadoEJB.registrarEmpleado(e1);		
-//			
-//			} catch (Exception e) {			
-//				throw new RuntimeException("Error Registrando Empleado " + e.getMessage());
-//			}
-			
+			empleadoEJB.registrarAdministrador(persona);
+			System.out.println("Usuario Administrador Registrado Correctamente...");
+				
 		}else{
 			System.out.println("Existe Usuarios Administradores; se omite creacion de administrador ...");
 		}

@@ -64,7 +64,7 @@ public class PersonaTest {
 	@UsingDataSet({ "datos/ciudad.json", "datos/empleado.json", "datos/persona.json" })
 	public void findTest() {
 		Persona persona = entityManager.find(Persona.class, 1);
-		Assert.assertEquals(1, persona.getId());
+		Assert.assertEquals(new Long("1"), persona.getId());
 	}
 
 	/**
@@ -91,7 +91,7 @@ public class PersonaTest {
 		tipoClient.add(clienteMayor);
 
 		Persona persona = new Persona();
-		persona.setId(3);
+		persona.setId(new Long("3"));
 		persona.setActivo(true);
 		persona.setApellido1("Marin");
 		persona.setApellido2("Perez");

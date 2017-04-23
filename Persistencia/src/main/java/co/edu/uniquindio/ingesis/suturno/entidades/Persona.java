@@ -3,6 +3,7 @@ package co.edu.uniquindio.ingesis.suturno.entidades;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -38,6 +39,7 @@ import co.edu.uniquindio.ingesis.suturno.validators.Email;
  */
 @Entity
 @NamedQueries({ @NamedQuery(name = Persona.GET_ALL, query = "SELECT p FROM Persona p"),
+	@NamedQuery(name = Persona.GET_X_IDENTIFICACION, query = "SELECT p FROM Persona p WHERE p.identificacion= :identificacion "),
 		@NamedQuery(name = Persona.GET_TIPOCLIENTE_CLIENTE, query = "SELECT t FROM Persona p LEFT JOIN (p.tiposCliente) t WHERE p.id= :personaId ") })
 @Table(name = "suturno_persona")
 public class Persona implements Serializable {
@@ -54,13 +56,19 @@ public class Persona implements Serializable {
 	 * pertenece el cliente {@link Persona} <br />
 	 */
 	public static final String GET_TIPOCLIENTE_CLIENTE = "TipoCliente_findByCliente";
+	
+	
+	/**
+	 * Constante que identifica la consulta que la Persona de acuerdo a su numero de Identificacion {@link Persona} <br />
+	 */
+	public static final String GET_X_IDENTIFICACION = "PersonaByIdentificacion";
 
 	/**
 	 * Variable que representa el atributo id de la entidad
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 
 	/**
 	 * Variable que representa el atributo identificacion de la Persona
@@ -138,7 +146,7 @@ public class Persona implements Serializable {
 	/**
 	 * Variable que representa el atributo ciudad al que pertenece la Persona
 	 */
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	private Ciudad ciudad;
 
 	/**
@@ -163,7 +171,7 @@ public class Persona implements Serializable {
 	/**
 	 * Variable que representa el atributo empleado de la Persona
 	 */
-	@OneToOne()
+	@OneToOne(cascade = CascadeType.PERSIST	)
 	private Empleado empleado;
 
 	/**
@@ -204,7 +212,7 @@ public class Persona implements Serializable {
 	 * 
 	 * @return id el identificador de la entidad Persona
 	 */
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -214,7 +222,7 @@ public class Persona implements Serializable {
 	 * @param id
 	 *            el identificador de la entidad Persona
 	 */
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

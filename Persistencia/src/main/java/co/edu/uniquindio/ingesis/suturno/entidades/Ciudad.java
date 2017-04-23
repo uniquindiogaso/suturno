@@ -30,7 +30,8 @@ import javax.validation.constraints.Size;
  * @since 1/03/2017
  */
 @Entity
-@NamedQueries({ @NamedQuery(name = Ciudad.GET_ALL, query = "SELECT entidad FROM Ciudad entidad") })
+@NamedQueries({ @NamedQuery(name = Ciudad.GET_ALL, query = "SELECT entidad FROM Ciudad entidad"),
+				@NamedQuery(name = Ciudad.GET_ALL_BY_DEPTO, query = "SELECT c FROM Ciudad c WHERE c.depto.id= :dptoId")})
 @Table(name = "suturno_ciudad")
 public class Ciudad implements Serializable {
 
@@ -40,7 +41,14 @@ public class Ciudad implements Serializable {
 	 * Constante que identifica la consulta que obtener todos los registros de
 	 * {@link Ciudad} <br />
 	 */
-	public static final String GET_ALL = "Ciudad_findAll";	
+	public static final String GET_ALL = "Ciudad_findAll";
+	
+	
+	/**
+	 * Constante que identifica la consulta que obtener todos los registros de
+	 * {@link Ciudad} de acuerdo a un departamento <br />
+	 */
+	public static final String GET_ALL_BY_DEPTO= "Ciudad_findByDepto";	
 
 	/**
 	 * Variable que representa el atributo id de la entidad

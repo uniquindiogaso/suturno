@@ -3,6 +3,7 @@ package co.edu.uniquindio.ingesis.suturno.entidades;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,9 +32,11 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @NamedQueries({ @NamedQuery(name = Empleado.GET_ALL, query = "SELECT e FROM Empleado e"),
+		@NamedQuery(name = Empleado.GET_ALL_ACTIVOS, query = "SELECT e FROM Empleado e WHERE e.tercero.activo = true"),
 		@NamedQuery(name = Empleado.AUTENTICAR, query = "SELECT e FROM Empleado e WHERE	e.usuario=:usuario AND e.clave=:clave"),
 		@NamedQuery(name = Empleado.GET_EMPLEADO_PUESTO, query = "SELECT e.puesto FROM Empleado e WHERE e.id=:empleadoId"),
 		@NamedQuery(name = Empleado.GET_EMPLEADO_SERVICIOS, query = "SELECT s FROM Empleado e INNER JOIN e.servicios s WHERE e.tercero.identificacion= :empledoIdentificacion"),
+		@NamedQuery(name = Empleado.GET_X_NOMBREUSUARIO, query = "SELECT e FROM Empleado e WHERE e.usuario= :nombreUsuario"),
 		@NamedQuery(name = Empleado.GET_CANT_ADMINS, query = "SELECT COUNT(1) FROM Empleado e WHERE e.admin = True AND e.tercero.activo = True")})
 
 @Table(name = "suturno_empleado")
@@ -52,6 +55,13 @@ public class Empleado implements Serializable {
 	 * empleado {@link Empleado} <br />
 	 */
 	public static final String GET_ALL = "Empleado_findAll";
+	
+	
+	/**
+	 * Constante que identifica la consulta que obtener todos los registros del
+	 * empleados activos {@link Empleado} <br />
+	 */
+	public static final String GET_ALL_ACTIVOS = "Empleado_findAllActivos";
 
 	/**
 	 * Constante que identifica la consulta que obtiene el puesto al que
@@ -72,6 +82,13 @@ public class Empleado implements Serializable {
 	 */
 	public static final String GET_CANT_ADMINS = "Empleado_findByAdmin";
 	
+	
+	/**
+	 * Constante que identifica la consulta par buscar los Usuarios con un Nombre de Usuario
+	 *  {@link Empleado} <br />
+	 */
+	public static final String 	GET_X_NOMBREUSUARIO = "Empleado_findByNombreUsuario";
+	
 	/**
 	 * /** Variable que representa el atributo id de la entidad
 	 */
@@ -82,8 +99,8 @@ public class Empleado implements Serializable {
 	/**
 	 * Variable que representa el atributo persona de la entidad Empleado
 	 */
-	@NotNull(message = "El tercero debe de ser obligatorio")
-	@OneToOne(mappedBy = "empleado")
+	//@NotNull(message = "El tercero debe de ser obligatorio")
+	@OneToOne(mappedBy = "empleado" , cascade = CascadeType.PERSIST)
 	private Persona tercero;
 
 	/**
