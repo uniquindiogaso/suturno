@@ -30,7 +30,8 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @NamedQueries({ @NamedQuery(name = PuestoTrabajo.GET_ALL, query = "SELECT entidad FROM PuestoTrabajo entidad"),
-	@NamedQuery(name = PuestoTrabajo.GET_X_NOMBRE, query = "SELECT p FROM PuestoTrabajo p WHERE p.nombre= :puesto")})
+	@NamedQuery(name = PuestoTrabajo.GET_X_NOMBRE, query = "SELECT p FROM PuestoTrabajo p WHERE p.nombre= :puesto"),
+	@NamedQuery(name = PuestoTrabajo.GET_LIBRES, query = "SELECT p FROM PuestoTrabajo p WHERE p.empleado IS NULL")})
 @Table(name = "suturno_puestotrabajo")
 public class PuestoTrabajo implements Serializable {
 
@@ -48,6 +49,13 @@ public class PuestoTrabajo implements Serializable {
 	 * {@link PuestoTrabajo} de acuerdo al nombre suministrado<br />
 	 */
 	public static final String GET_X_NOMBRE = "PuestoTrabajo_findByNombre";
+	
+	
+	/**
+	 * Constante que identifica la consulta que obtener todos los registros de
+	 * {@link PuestoTrabajo} libres<br />
+	 */
+	public static final String GET_LIBRES = "PuestoTrabajo_Libres";
 	
 	
 	/**

@@ -76,6 +76,16 @@ public class PuestoTrabajoEJB implements PuestoTrabajoEJBRemote {
 		return entityManager.createNamedQuery(PuestoTrabajo.GET_ALL, PuestoTrabajo.class).getResultList();
 	}
 	
+	/**
+	 * Metodo que permite obtener todos los Puestos de Trabajo Disponibles ( sin ser asignados a algun empleado ya)
+	 * 
+	 * @return {@link List} de {@link PuestoTrabajo} disponibles
+	 */
+	public List<PuestoTrabajo> listarPuestosTrabajoDisponibles(){
+		return entityManager.createNamedQuery(PuestoTrabajo.GET_LIBRES, PuestoTrabajo.class).getResultList();
+	}
+	
+	
 	
 	/**
 	 * Metodo que permite remover un Puesto de Trabajo
