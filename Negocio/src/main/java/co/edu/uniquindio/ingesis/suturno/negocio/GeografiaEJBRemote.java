@@ -9,6 +9,8 @@ import co.edu.uniquindio.ingesis.suturno.entidades.Depto;
 
 @Remote
 public interface GeografiaEJBRemote {
+	
+	public static final String JNDI = "java:global/EAR/Negocio-0.0.1-SNAPSHOT/GeografiaEJB!co.edu.uniquindio.ingesis.suturno.negocio.GeografiaEJBRemote";
 
 	/**
 	 * Listar Todas los Departamentos Disponibles

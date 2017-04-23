@@ -76,7 +76,7 @@ public class PuestoTrabajoTest {
 		Empleado marianita = entityManager.find(Empleado.class, 1);
 
 		PuestoTrabajo puesto = new PuestoTrabajo();
-		puesto.setId(4);
+		puesto.setId((long) 4);
 		puesto.setCodigo("A104");
 		puesto.setNombre("Puesto4");
 		puesto.setEmpleado(marianita);

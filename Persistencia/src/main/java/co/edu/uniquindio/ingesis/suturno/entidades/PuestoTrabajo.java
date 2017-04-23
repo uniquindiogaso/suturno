@@ -29,7 +29,8 @@ import javax.validation.constraints.Size;
  * @since 1/03/2017
  */
 @Entity
-@NamedQueries({ @NamedQuery(name = PuestoTrabajo.GET_ALL, query = "SELECT entidad FROM PuestoTrabajo entidad") })
+@NamedQueries({ @NamedQuery(name = PuestoTrabajo.GET_ALL, query = "SELECT entidad FROM PuestoTrabajo entidad"),
+	@NamedQuery(name = PuestoTrabajo.GET_X_NOMBRE, query = "SELECT p FROM PuestoTrabajo p WHERE p.nombre= :puesto")})
 @Table(name = "suturno_puestotrabajo")
 public class PuestoTrabajo implements Serializable {
 
@@ -41,12 +42,20 @@ public class PuestoTrabajo implements Serializable {
 	 */
 	public static final String GET_ALL = "PuestoTrabajo_findAll";
 
+	
+	/**
+	 * Constante que identifica la consulta que obtener todos los registros de
+	 * {@link PuestoTrabajo} de acuerdo al nombre suministrado<br />
+	 */
+	public static final String GET_X_NOMBRE = "PuestoTrabajo_findByNombre";
+	
+	
 	/**
 	 * Variable que representa el atributo id de la entidad
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 
 	/**
 	 * Variable que representa el atributo codigo del puesto de trabajo
@@ -83,7 +92,7 @@ public class PuestoTrabajo implements Serializable {
 	 * 
 	 * @return id el identificador de la entidad PuestoTrabajo
 	 */
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -93,7 +102,7 @@ public class PuestoTrabajo implements Serializable {
 	 * @param id
 	 *            el identificador de la entidad PuestoTrabajo
 	 */
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
