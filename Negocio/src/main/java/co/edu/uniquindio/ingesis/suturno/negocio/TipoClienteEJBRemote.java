@@ -10,7 +10,7 @@ import co.edu.uniquindio.ingesis.suturno.entidades.TipoCliente;
 public interface TipoClienteEJBRemote {
 	
 	
-	public static final String JNDI = "java:global/EAR/Negocio-0.0.1-SNAPSHOT/PuestoTrabajoEJB!co.edu.uniquindio.ingesis.suturno.negocio.PuestoTrabajoEJBRemote";
+	public static final String JNDI = "java:global/EAR/Negocio-0.0.1-SNAPSHOT/TipoClienteEJB!co.edu.uniquindio.ingesis.suturno.negocio.TipoClienteEJBRemote";
 	
 	/**
 	 * Metodo que permite registrar un servicio

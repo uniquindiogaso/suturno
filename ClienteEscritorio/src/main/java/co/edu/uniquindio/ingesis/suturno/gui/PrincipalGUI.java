@@ -1,16 +1,15 @@
 package co.edu.uniquindio.ingesis.suturno.gui;
 
-import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 
 /**
  * Interfaz principal de la aplicacion suturno
@@ -64,7 +63,7 @@ public class PrincipalGUI extends JFrame {
 		JButton btnEmpleado = new JButton("Empleado");
 		btnEmpleado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				login.setVisible(true);
+				(new LoginGUI()).setVisible(true);
 				setVisible(false);
 			}
 		});
