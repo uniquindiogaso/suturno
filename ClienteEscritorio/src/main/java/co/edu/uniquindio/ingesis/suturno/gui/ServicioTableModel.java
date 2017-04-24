@@ -30,7 +30,7 @@ public class ServicioTableModel extends DefaultTableModel {
 	 * Variable que representa las columnas de las que se compone la tabla
 	 * servicios
 	 */
-	private String[] columnas = { "ID", "NOMBRE" };
+	private String[] columnas = { "ID", "CÓDIGO", "NOMBRE", "DESCRIPCIÓN" };
 
 	/**
 	 * Metodo constructor del tableModel de servicio
@@ -67,7 +67,13 @@ public class ServicioTableModel extends DefaultTableModel {
 		if (col == 0) {
 			return servicio.getId();
 		}
-		return servicio.getNombre();
+		if (col == 1) {
+			return servicio.getCodigo();
+		}
+		if (col == 2) {
+			return servicio.getNombre();
+		}
+		return servicio.getDescripcion();
 	}
 
 	/*
@@ -80,8 +86,13 @@ public class ServicioTableModel extends DefaultTableModel {
 	public void setValueAt(Object aValue, int row, int column) {
 		Servicio servicio = servicios.get(row);
 		if (column == 1) {
+			servicio.setCodigo((String) aValue);
+		}
+		if (column == 2) {
 			servicio.setNombre((String) aValue);
 		}
+		servicio.setDescripcion((String) aValue);
+
 		fireTableCellUpdated(row, column);
 	}
 

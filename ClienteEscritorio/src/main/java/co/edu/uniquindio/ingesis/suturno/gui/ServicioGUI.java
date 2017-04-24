@@ -5,9 +5,13 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 
 import co.edu.uniquindio.ingesis.suturno.SuTurnoApplicationRun;
+import co.edu.uniquindio.ingesis.suturno.delegados.EmpleadoDelegate;
 import co.edu.uniquindio.ingesis.suturno.delegados.ServicioDelegate;
+import co.edu.uniquindio.ingesis.suturno.entidades.Empleado;
 import co.edu.uniquindio.ingesis.suturno.entidades.Servicio;
 
 import javax.swing.GroupLayout;
@@ -62,6 +66,7 @@ public class ServicioGUI extends JFrame {
 	private JButton btnAtras;
 	private JTable table;
 	private JTable table_1;
+	private JScrollPane scrollServicios;
 
 	/**
 	 * Launch the application. public static void main(String[] args) {
@@ -116,20 +121,9 @@ public class ServicioGUI extends JFrame {
 
 		btnNuevo = new JButton("Nuevo");
 		btnNuevo.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
-					Servicio servicio = new Servicio();
-					servicio.setCodigo(tFCodigo.getText());
-					servicio.setNombre(tFNombre.getText());
-					servicio.setDescripcion(tADescripcion.getText());
-					servicio.setActivo(true);
-					SuTurnoApplicationRun.getInstancia().getServicioDelegate().getInstancia()
-							.registrarServicio(servicio);
-					JOptionPane.showMessageDialog(ServicioGUI.this, "Se registro el servicio exitosamente.");
-					servicioTableModel.setServicios(ServicioDelegate.getInstancia().listarServicios());
-				} catch (Throwable t) {
-					JOptionPane.showMessageDialog(ServicioGUI.this, t.getCause().getMessage());
-				}
+				agregarNuevoServicio();
 			}
 		});
 
@@ -140,7 +134,7 @@ public class ServicioGUI extends JFrame {
 			}
 		});
 
-		JScrollPane scrollPane = new JScrollPane();
+		scrollServicios = new JScrollPane();
 
 		JLabel lblDescripcion = new JLabel("Descripción:");
 
@@ -152,10 +146,12 @@ public class ServicioGUI extends JFrame {
 		tFCodigo.setColumns(10);
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
-				.createSequentialGroup().addGap(38).addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 376, GroupLayout.PREFERRED_SIZE).addGroup(
-								gl_panel.createSequentialGroup().addGroup(gl_panel
-										.createParallelGroup(Alignment.TRAILING)
+				.createSequentialGroup().addGap(38)
+				.addGroup(gl_panel.createParallelGroup(Alignment.LEADING).addComponent(scrollServicios,
+						GroupLayout.PREFERRED_SIZE, 376, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel
+								.createSequentialGroup()
+								.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 										.addGroup(gl_panel.createSequentialGroup()
 												.addComponent(lblCodigo, GroupLayout.PREFERRED_SIZE, 41,
 														GroupLayout.PREFERRED_SIZE)
@@ -170,12 +166,12 @@ public class ServicioGUI extends JFrame {
 																Short.MAX_VALUE)
 														.addComponent(tFNombre, GroupLayout.DEFAULT_SIZE, 192,
 																Short.MAX_VALUE))))
-										.addGap(18)
-										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-												.addComponent(btnEliminar, GroupLayout.DEFAULT_SIZE,
-														GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-												.addComponent(btnNuevo, GroupLayout.PREFERRED_SIZE, 101,
-														GroupLayout.PREFERRED_SIZE))))
+								.addGap(18)
+								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+										.addComponent(btnEliminar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+												Short.MAX_VALUE)
+										.addComponent(btnNuevo, GroupLayout.PREFERRED_SIZE, 101,
+												GroupLayout.PREFERRED_SIZE))))
 				.addContainerGap()));
 		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
 				.createSequentialGroup()
@@ -196,10 +192,11 @@ public class ServicioGUI extends JFrame {
 						.addGroup(gl_panel.createSequentialGroup().addComponent(btnNuevo).addGap(18)
 								.addComponent(btnEliminar)))
 				.addPreferredGap(ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-				.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 245, GroupLayout.PREFERRED_SIZE).addGap(19)));
+				.addComponent(scrollServicios, GroupLayout.PREFERRED_SIZE, 245, GroupLayout.PREFERRED_SIZE)
+				.addGap(19)));
 
 		tableServicios = new JTable();
-		scrollPane.setViewportView(tableServicios);
+		scrollServicios.setViewportView(tableServicios);
 		panel.setLayout(gl_panel);
 
 		JPanel panel_1 = new JPanel();
@@ -272,6 +269,30 @@ public class ServicioGUI extends JFrame {
 		scrollPane_1.setViewportView(table);
 		panel_1.setLayout(gl_panel_1);
 		contentPane.setLayout(gl_contentPane);
+
+		cargarTabla();
+	}
+
+	/**
+	 * Accion cuando se da clic en el boton nuevo servicio
+	 */
+	private void agregarNuevoServicio() {
+		try {
+			if (!tFCodigo.getText().isEmpty() && !tFNombre.getText().isEmpty() && !tADescripcion.getText().isEmpty()) {
+				Servicio servicio = new Servicio();
+				servicio.setCodigo(tFCodigo.getText());
+				servicio.setNombre(tFNombre.getText());
+				servicio.setDescripcion(tADescripcion.getText());
+				servicio.setActivo(true);
+				ServicioDelegate.getInstancia().registrarServicio(servicio);
+				JOptionPane.showMessageDialog(ServicioGUI.this, "Se registro el servicio exitosamente.");
+				servicioTableModel.setServicios(ServicioDelegate.getInstancia().listarServicios());
+			} else {
+				JOptionPane.showMessageDialog(ServicioGUI.this, "Debe ingresar todos los datos.");
+			}
+		} catch (Throwable t) {
+			JOptionPane.showMessageDialog(ServicioGUI.this, t.getCause().getMessage());
+		}
 	}
 
 	/**
@@ -289,5 +310,32 @@ public class ServicioGUI extends JFrame {
 		} catch (Throwable t) {
 			JOptionPane.showMessageDialog(ServicioGUI.this, t.getCause().getMessage());
 		}
+	}
+
+	/**
+	 * Se carga la tabla con los datos del servicio
+	 */
+	private void cargarTabla() {
+
+		servicioTableModel = new ServicioTableModel(ServicioDelegate.getInstancia().listarServicios());
+		tableServicios.setModel(servicioTableModel);
+
+		try {
+			servicioTableModel.addTableModelListener(new TableModelListener() {
+				@Override
+				public void tableChanged(TableModelEvent e) {
+					if (e.getType() == TableModelEvent.UPDATE) {
+						int indice = e.getLastRow();
+						if (indice < servicioTableModel.getServicios().size()) {
+							Servicio servicio = servicioTableModel.getServicios().get(indice);
+							ServicioDelegate.getInstancia().actualizarServicio(servicio);
+						}
+					}
+				}
+			});
+		} catch (Throwable t) {
+			JOptionPane.showMessageDialog(ServicioGUI.this, t.getCause().getMessage());
+		}
+
 	}
 }

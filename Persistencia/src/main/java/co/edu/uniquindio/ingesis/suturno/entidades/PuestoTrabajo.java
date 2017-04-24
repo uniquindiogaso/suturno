@@ -171,4 +171,14 @@ public class PuestoTrabajo implements Serializable {
 		this.empleado = empleado;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return nombre;
+	}
+
+	
+	
 }

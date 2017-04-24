@@ -24,6 +24,8 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
+import com.sun.xml.ws.api.pipe.ThrowableContainerPropertySet;
+
 import co.edu.uniquindio.ingesis.suturno.SuTurnoApplicationRun;
 import co.edu.uniquindio.ingesis.suturno.delegados.EmpleadoDelegate;
 import co.edu.uniquindio.ingesis.suturno.delegados.GeografiaDelegate;
@@ -76,21 +78,18 @@ public class EmpleadoGUI extends JFrame {
 	private JTextField tFApellido2;
 	private JTextField tFTelefono2;
 	private final ButtonGroup grupoAdministrador = new ButtonGroup();
-	private JTextField tFIdentificacionGestionar;
 	private JComboBox cBoxTipoDoc;
 	private JComboBox cBoxGenero;
-	private JComboBox cBoxCiudad;
-	private JComboBox cBoxPuesto;
+	private JComboBox<Ciudad> cBoxCiudad;
+	private JComboBox<PuestoTrabajo> cBoxPuesto;
 	private JButton btnAgregar;
 	private JRadioButton rdbtnNo;
 	private JRadioButton rdbtnSi;
-	private JComboBox cBoxDepto;
+	private JComboBox<Depto> cBoxDepto;
 	private JTable tableGestionar;
-	private JScrollPane scrollPane;
-	private JButton btnAceptar;
-	private JButton btnModificar;
 	private JButton btnEliminar;
 	private EmpleadoTableModel empleadoTableModel;
+	private JScrollPane scrollTablaEmpleados;
 
 	/**
 	 * Launch the application.
@@ -205,7 +204,7 @@ public class EmpleadoGUI extends JFrame {
 		cBoxDepto = new JComboBox();
 		cBoxDepto.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
-				// cargarComboCiudad();
+				cargarComboCiudad();
 			}
 		});
 
@@ -362,88 +361,50 @@ public class EmpleadoGUI extends JFrame {
 		JPanel panel_1 = new JPanel();
 		tabbedPane.addTab("Gestionar Empleado", null, panel_1, null);
 
-		JLabel lblIdentificacionGestionar = new JLabel("Identificación:");
-
-		tFIdentificacionGestionar = new JTextField();
-		tFIdentificacionGestionar.setColumns(10);
-
-		btnModificar = new JButton("Modificar");
-		btnModificar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
-			}
-		});
-
 		btnEliminar = new JButton("Eliminar");
 		btnEliminar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
-				/*
-				 * try { int selec=tableGestionar.getSelectedRow();
-				 * if(selec!=1){ Persona
-				 * empleado=empleadoTableModel.getEmpleados().get(selec);
-				 * SuTurnoApplicationRun.getInstancia().getEmpleadoDelegate().
-				 * eliminarEmpleado(empleado);
-				 * JOptionPane.showMessageDialog(EmpleadoGUI.this,
-				 * "Se elimino el empleado.");
-				 * empleadoTableModel.setEmpleados(EmpleadoDelegate.getInstancia
-				 * ().listarTodosEmpleados()); } } catch (Throwable t) {
-				 * JOptionPane.showMessageDialog(ServicioGUI.this,
-				 * t.getCause().getMessage()); }
-				 */
+
+				try {
+					int selec = tableGestionar.getSelectedRow();
+					System.out.println("Fila selec: " + selec);
+					if (selec != 1) {
+						Empleado empleado = empleadoTableModel.getEmpleados().get(selec);
+						EmpleadoDelegate.getInstancia().desactivarEmpleado(empleado);
+						System.out.println("Desactivado: " + empleado.getId());
+
+						JOptionPane.showMessageDialog(EmpleadoGUI.this, "Se elimino el empleado.");
+						empleadoTableModel.setEmpleados(EmpleadoDelegate.getInstancia().listarTodosEmpleados());
+					}
+				} catch (Throwable t) {
+					JOptionPane.showMessageDialog(EmpleadoGUI.this, t.getCause().getMessage());
+				}
 
 			}
 		});
 
-		btnAceptar = new JButton("Aceptar");
-		btnAceptar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				cargarTabla();
-			}
-		});
-
-		scrollPane = new JScrollPane();
+		scrollTablaEmpleados = new JScrollPane();
 
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-		gl_panel_1
-				.setHorizontalGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panel_1
-								.createSequentialGroup()
-								.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-										.addGroup(gl_panel_1.createSequentialGroup().addGap(101)
-												.addComponent(lblIdentificacionGestionar).addGap(18)
-												.addComponent(tFIdentificacionGestionar, GroupLayout.PREFERRED_SIZE,
-														158, GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(ComponentPlacement.RELATED, 33, Short.MAX_VALUE))
-										.addGroup(gl_panel_1.createSequentialGroup().addContainerGap()
-												.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 521,
-														GroupLayout.PREFERRED_SIZE)
-												.addGap(40)))
-								.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING, false)
-										.addGroup(gl_panel_1.createSequentialGroup().addComponent(btnAceptar)
-												.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-										.addGroup(gl_panel_1.createSequentialGroup()
-												.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-														.addComponent(btnModificar).addComponent(btnEliminar))
-												.addGap(45)))));
+		gl_panel_1.setHorizontalGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panel_1.createSequentialGroup().addContainerGap()
+						.addComponent(scrollTablaEmpleados, GroupLayout.PREFERRED_SIZE, 521, GroupLayout.PREFERRED_SIZE)
+						.addGap(40).addComponent(btnEliminar).addGap(51)));
 		gl_panel_1.setVerticalGroup(gl_panel_1.createParallelGroup(Alignment.LEADING).addGroup(gl_panel_1
 				.createSequentialGroup()
-				.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING).addGroup(gl_panel_1.createSequentialGroup()
-						.addGap(41)
-						.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblIdentificacionGestionar)
-								.addComponent(tFIdentificacionGestionar, GroupLayout.PREFERRED_SIZE,
-										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnAceptar))
-						.addGap(52)
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 316, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel_1.createSequentialGroup().addGap(182).addComponent(btnModificar).addGap(18)
-								.addComponent(btnEliminar)))
+				.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createSequentialGroup().addGap(223).addComponent(btnEliminar)).addGroup(
+								gl_panel_1.createSequentialGroup().addGap(42).addComponent(scrollTablaEmpleados,
+										GroupLayout.PREFERRED_SIZE, 390, GroupLayout.PREFERRED_SIZE)))
 				.addContainerGap(71, Short.MAX_VALUE)));
 
 		tableGestionar = new JTable();
-		scrollPane.setViewportView(tableGestionar);
+		scrollTablaEmpleados.setViewportView(tableGestionar);
 		panel_1.setLayout(gl_panel_1);
 		contentPane.setLayout(gl_contentPane);
+
+		cargarTabla();
 
 		cargarComboDepto();
 		cargarComboCiudad();
@@ -456,10 +417,9 @@ public class EmpleadoGUI extends JFrame {
 	private void clicBotonAgregar() {
 		if (!tFIdentificacionNuevo.getText().isEmpty() && cBoxTipoDoc.getSelectedItem() != null
 				&& cBoxGenero.getItemCount() != 0 && !tFNombre1.getText().isEmpty() && !tFApellido1.getText().isEmpty()
-				&& !tFEmail.getText().isEmpty() && !tFTelefono1.getText().isEmpty() && !tFTelefono2.getText().isEmpty()
-				&& !tFDireccion.getText().isEmpty() && cBoxDepto.getItemCount() != 0 && cBoxCiudad.getItemCount() != 0
-				&& !tFUsuario.getText().isEmpty() && !tFContrasenia.getText().isEmpty()
-				&& cBoxPuesto.getItemCount() != 0) {
+				&& !tFEmail.getText().isEmpty() && !tFTelefono1.getText().isEmpty() && !tFDireccion.getText().isEmpty()
+				&& cBoxDepto.getItemCount() != 0 && cBoxCiudad.getItemCount() != 0 && !tFUsuario.getText().isEmpty()
+				&& !tFContrasenia.getText().isEmpty() && cBoxPuesto.getItemCount() != 0) {
 			Persona empleado = new Persona();
 			empleado.setIdentificacion(tFIdentificacionNuevo.getText());
 			empleado.settDoc((TipoDocumento) cBoxTipoDoc.getSelectedItem());
@@ -484,7 +444,6 @@ public class EmpleadoGUI extends JFrame {
 			try {
 				SuTurnoApplicationRun.getInstancia().getEmpleadoDelegate().registrarEmpleado(empleado);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			JOptionPane.showMessageDialog(EmpleadoGUI.this, "Se registro el nuevo empleado.");
@@ -496,27 +455,27 @@ public class EmpleadoGUI extends JFrame {
 	 * Se carga la tabla con los datos del empleado
 	 */
 	private void cargarTabla() {
-		/*
-		 * empleadoTableModel= new
-		 * EmpleadoTableModel(EmpleadoDelegate.getInstancia().
-		 * listarTodosEmpleados());
-		 * 
-		 * 
-		 * servicioTableModel = new
-		 * ServicioTableModel(AdministradorDelegate.getInstancia().
-		 * listarServicios()); servicioTableModel.addTableModelListener(new
-		 * TableModelListener() {
-		 * 
-		 * @Override public void tableChanged(TableModelEvent e) { if(
-		 * e.getType() == TableModelEvent.UPDATE ){ int indice = e.getLastRow();
-		 * if( indice < servicioTableModel.getServicios().size() ){ Servicio
-		 * servicio = servicioTableModel.getServicios().get(indice);
-		 * Main.getInstancia().actualizarServicio(servicio); }
-		 * 
-		 * }
-		 * 
-		 * } }); tableGestionar.setModel(empleadoTableModel);
-		 */
+
+		empleadoTableModel = new EmpleadoTableModel(EmpleadoDelegate.getInstancia().listarEmpleadosActivos());
+		tableGestionar.setModel(empleadoTableModel);
+
+		System.out.println("Lista empleados: " + empleadoTableModel.getEmpleados().size());
+		try {
+			empleadoTableModel.addTableModelListener(new TableModelListener() {
+				@Override
+				public void tableChanged(TableModelEvent e) {
+					if (e.getType() == TableModelEvent.UPDATE) {
+						int indice = e.getLastRow();
+						if (indice < empleadoTableModel.getEmpleados().size()) {
+							Empleado empleado = empleadoTableModel.getEmpleados().get(indice);
+							EmpleadoDelegate.getInstancia().actualizarEmpleado(empleado.getTercero());
+						}
+					}
+				}
+			});
+		} catch (Throwable t) {
+			JOptionPane.showMessageDialog(EmpleadoGUI.this, t.getCause().getMessage());
+		}
 	}
 
 	/**
@@ -541,7 +500,7 @@ public class EmpleadoGUI extends JFrame {
 	private void cargarComboCiudad() {
 		cBoxCiudad.removeAllItems();
 		if (cBoxDepto.getSelectedItem() != null) {
-			List<Ciudad> ciudades = SuTurnoApplicationRun.getInstancia().getGeografiaDelegate()
+			List<Ciudad> ciudades = GeografiaDelegate.getInstancia()
 					.listarCiudades((Depto) cBoxDepto.getSelectedItem());
 			for (Ciudad c : ciudades) {
 				cBoxCiudad.addItem(c);
@@ -554,13 +513,16 @@ public class EmpleadoGUI extends JFrame {
 	 * Se carga el combo box con los departamentos disponibles
 	 */
 	private void cargarComboDepto() {
-		// cBoxDepto.removeAllItems();
-		// System.out.println("Delegate " +
-		// GeografiaDelegate.getInstancia().listarDepartamentos());
-		List<Depto> deptos = SuTurnoApplicationRun.getInstancia().getGeografiaDelegate().listarDepartamentos();
-		/*
-		 * for (Depto d : deptos) { cBoxDepto.addItem(d); }
-		 */
+
+		cBoxDepto.removeAllItems();
+
+		System.out.println(" " + GeografiaDelegate.getInstancia().listarDepartamentos());
+
+		List<Depto> d = GeografiaDelegate.getInstancia().listarDepartamentos();
+
+		for (Depto depto : d) {
+			cBoxDepto.addItem(depto);
+		}
 
 	}
 

@@ -49,8 +49,9 @@ public class SuTurnoApplicationRun {
 	 * Metodo constructor del SuTurnoApplicationRun
 	 */
 	public SuTurnoApplicationRun() {
-		// empleadoGUI = new EmpleadoGUI();
-		principalGUI = new PrincipalGUI();
+		 empleadoGUI = new EmpleadoGUI();
+		 servicioGUI= new ServicioGUI();
+		//principalGUI = new PrincipalGUI();
 	}
 
 	/**
@@ -68,8 +69,10 @@ public class SuTurnoApplicationRun {
 	 * Metodo que inicializa los componentes
 	 */
 	public void init() {
-		// empleadoGUI.setVisible(false);
-		principalGUI.setVisible(true);
+		 empleadoGUI.setVisible(true);
+		 servicioGUI.setVisible(true);
+		 
+		//principalGUI.setVisible(true);
 
 	}
 
