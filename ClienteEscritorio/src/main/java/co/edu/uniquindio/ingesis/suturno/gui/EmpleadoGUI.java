@@ -1,6 +1,5 @@
 package co.edu.uniquindio.ingesis.suturno.gui;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -21,9 +20,12 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 import co.edu.uniquindio.ingesis.suturno.SuTurnoApplicationRun;
+import co.edu.uniquindio.ingesis.suturno.delegados.EmpleadoDelegate;
 import co.edu.uniquindio.ingesis.suturno.delegados.GeografiaDelegate;
 import co.edu.uniquindio.ingesis.suturno.delegados.PuestoTrabajoDelegate;
 import co.edu.uniquindio.ingesis.suturno.entidades.Ciudad;
@@ -31,13 +33,36 @@ import co.edu.uniquindio.ingesis.suturno.entidades.Depto;
 import co.edu.uniquindio.ingesis.suturno.entidades.Empleado;
 import co.edu.uniquindio.ingesis.suturno.entidades.Persona;
 import co.edu.uniquindio.ingesis.suturno.entidades.PuestoTrabajo;
+import co.edu.uniquindio.ingesis.suturno.entidades.Servicio;
 import co.edu.uniquindio.ingesis.suturno.utils.Genero;
 import co.edu.uniquindio.ingesis.suturno.utils.TipoDocumento;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import javax.swing.JScrollPane;
 
+/**
+ * Interfaz del empleado del administrador
+ * 
+ * @author Gustavo Salgado y Laura Julieth Rua
+ * 
+ * @author Ingeniería de Sistemas y Computacion
+ * 
+ * @author Universidad del Quindio
+ * 
+ * @version 1.0
+ * 
+ * @since 12/04/2017
+ */
 public class EmpleadoGUI extends JFrame {
 
+	/**
+	 * Instancia de la ventana manejador
+	 */
+	private ManejadorGUI manejador;
+
+	/**
+	 * Variables que representan los componentes de la ventana
+	 */
 	private JPanel contentPane;
 	private JTextField tFIdentificacionNuevo;
 	private JTextField tFUsuario;
@@ -52,7 +77,6 @@ public class EmpleadoGUI extends JFrame {
 	private JTextField tFTelefono2;
 	private final ButtonGroup grupoAdministrador = new ButtonGroup();
 	private JTextField tFIdentificacionGestionar;
-	private JTable tableGestionar;
 	private JComboBox cBoxTipoDoc;
 	private JComboBox cBoxGenero;
 	private JComboBox cBoxCiudad;
@@ -61,29 +85,28 @@ public class EmpleadoGUI extends JFrame {
 	private JRadioButton rdbtnNo;
 	private JRadioButton rdbtnSi;
 	private JComboBox cBoxDepto;
+	private JTable tableGestionar;
+	private JScrollPane scrollPane;
+	private JButton btnAceptar;
+	private JButton btnModificar;
+	private JButton btnEliminar;
+	private EmpleadoTableModel empleadoTableModel;
 
 	/**
 	 * Launch the application.
+	 * 
+	 * public static void main(String[] args) { EventQueue.invokeLater(new
+	 * Runnable() { public void run() { try { EmpleadoGUI frame = new
+	 * EmpleadoGUI(); frame.setVisible(true); } catch (Exception e) {
+	 * e.printStackTrace(); } } }); }
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EmpleadoGUI frame = new EmpleadoGUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
-	 * Create the frame.
+	 * Se crea la ventana
 	 */
 	public EmpleadoGUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 661, 707);
+		setBounds(100, 100, 799, 707);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -92,21 +115,29 @@ public class EmpleadoGUI extends JFrame {
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 
-		JButton btnAtrs = new JButton("Atr\u00E1s");
+		JButton btnAtras = new JButton("Atrás");
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				manejador.setVisible(true);
+				setVisible(false);
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane
-						.createSequentialGroup().addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup().addGap(324).addComponent(lblEmpleados))
-								.addGroup(gl_contentPane.createSequentialGroup().addGap(70).addComponent(tabbedPane,
-										GroupLayout.PREFERRED_SIZE, 503, GroupLayout.PREFERRED_SIZE)))
-						.addContainerGap(62, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-						.addContainerGap(282, Short.MAX_VALUE).addComponent(btnAtrs).addGap(264)));
+		gl_contentPane
+				.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_contentPane.createSequentialGroup().addGap(324).addComponent(lblEmpleados)
+								.addContainerGap(62, Short.MAX_VALUE))
+						.addGroup(Alignment.LEADING,
+								gl_contentPane.createSequentialGroup().addGap(30)
+										.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 714,
+												GroupLayout.PREFERRED_SIZE)
+										.addContainerGap(29, Short.MAX_VALUE))
+						.addGroup(gl_contentPane.createSequentialGroup().addContainerGap(420, Short.MAX_VALUE)
+								.addComponent(btnAtras).addGap(294)));
 		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup().addGap(28).addComponent(lblEmpleados).addGap(31)
 						.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 531, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(btnAtrs)
+						.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(btnAtras)
 						.addContainerGap(20, Short.MAX_VALUE)));
 
 		JPanel panel = new JPanel();
@@ -174,7 +205,7 @@ public class EmpleadoGUI extends JFrame {
 		cBoxDepto = new JComboBox();
 		cBoxDepto.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
-				//cargarComboCiudad();
+				// cargarComboCiudad();
 			}
 		});
 
@@ -206,7 +237,7 @@ public class EmpleadoGUI extends JFrame {
 
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel.createSequentialGroup().addContainerGap(73, Short.MAX_VALUE)
+				.addGroup(gl_panel.createSequentialGroup().addContainerGap(215, Short.MAX_VALUE)
 						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING).addComponent(lblTipoDeDocumento)
 								.addComponent(lblIdentificacionNuevo).addComponent(lblGenero).addComponent(lblDireccion)
 								.addComponent(lblEmail).addComponent(lblTelefonos)
@@ -239,7 +270,7 @@ public class EmpleadoGUI extends JFrame {
 										.addComponent(cBoxTipoDoc, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE,
 												Short.MAX_VALUE)
 										.addComponent(tFIdentificacionNuevo, Alignment.LEADING,
-												GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE))
+												GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE))
 								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
 										.addComponent(cBoxPuesto, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 										.addComponent(tFDireccion, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
@@ -250,19 +281,20 @@ public class EmpleadoGUI extends JFrame {
 														GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 										.addComponent(cBoxDepto, GroupLayout.PREFERRED_SIZE, 124,
 												GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_panel.createSequentialGroup().addComponent(rdbtnSi).addGap(18)
-										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-												.addComponent(btnAgregar).addComponent(rdbtnNo))))
-						.addGap(54)));
-		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup().addGap(19)
+								.addGroup(
+										gl_panel.createSequentialGroup().addComponent(rdbtnSi).addGap(18)
+												.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+														.addComponent(btnAgregar).addComponent(rdbtnNo))))
+						.addGap(123)));
+		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING,
+				gl_panel.createSequentialGroup().addContainerGap(26, Short.MAX_VALUE)
 						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING).addComponent(lblIdentificacionNuevo)
 								.addComponent(tFIdentificacionNuevo, GroupLayout.PREFERRED_SIZE,
 										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 						.addGap(14)
-						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(lblTipoDeDocumento)
-								.addComponent(cBoxTipoDoc, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblTipoDeDocumento).addComponent(cBoxTipoDoc, GroupLayout.PREFERRED_SIZE,
+										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 						.addPreferredGap(ComponentPlacement.UNRELATED)
 						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
 								.createSequentialGroup()
@@ -324,7 +356,7 @@ public class EmpleadoGUI extends JFrame {
 						.addGap(18)
 						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(rdbtnSi)
 								.addComponent(rdbtnNo).addComponent(lblAdministrador))
-						.addGap(26).addComponent(btnAgregar).addContainerGap(14, Short.MAX_VALUE)));
+						.addGap(26).addComponent(btnAgregar).addContainerGap()));
 		panel.setLayout(gl_panel);
 
 		JPanel panel_1 = new JPanel();
@@ -335,44 +367,81 @@ public class EmpleadoGUI extends JFrame {
 		tFIdentificacionGestionar = new JTextField();
 		tFIdentificacionGestionar.setColumns(10);
 
-		tableGestionar = new JTable();
-		tableGestionar.setModel(new DefaultTableModel(new Object[][] {}, new String[] {}));
-
-		JButton btnModificar = new JButton("Modificar");
+		btnModificar = new JButton("Modificar");
 		btnModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+
 			}
 		});
 
-		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar = new JButton("Eliminar");
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				/*
+				 * try { int selec=tableGestionar.getSelectedRow();
+				 * if(selec!=1){ Persona
+				 * empleado=empleadoTableModel.getEmpleados().get(selec);
+				 * SuTurnoApplicationRun.getInstancia().getEmpleadoDelegate().
+				 * eliminarEmpleado(empleado);
+				 * JOptionPane.showMessageDialog(EmpleadoGUI.this,
+				 * "Se elimino el empleado.");
+				 * empleadoTableModel.setEmpleados(EmpleadoDelegate.getInstancia
+				 * ().listarTodosEmpleados()); } } catch (Throwable t) {
+				 * JOptionPane.showMessageDialog(ServicioGUI.this,
+				 * t.getCause().getMessage()); }
+				 */
+
 			}
 		});
+
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				cargarTabla();
+			}
+		});
+
+		scrollPane = new JScrollPane();
+
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-		gl_panel_1.setHorizontalGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup().addGap(59)
-						.addComponent(tableGestionar, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
-						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING).addComponent(btnModificar)
-								.addComponent(btnEliminar))
-						.addGap(45))
-				.addGroup(gl_panel_1.createSequentialGroup().addGap(101)
-						.addComponent(lblIdentificacionGestionar).addGap(18).addComponent(tFIdentificacionGestionar,
-								GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(153, Short.MAX_VALUE)));
-		gl_panel_1.setVerticalGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup().addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_1.createSequentialGroup().addGap(41)
-								.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-										.addComponent(lblIdentificacionGestionar)
-										.addComponent(tFIdentificacionGestionar, GroupLayout.PREFERRED_SIZE,
-												GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addGap(51).addComponent(tableGestionar, GroupLayout.PREFERRED_SIZE, 351,
-										GroupLayout.PREFERRED_SIZE))
+		gl_panel_1
+				.setHorizontalGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_panel_1
+								.createSequentialGroup()
+								.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+										.addGroup(gl_panel_1.createSequentialGroup().addGap(101)
+												.addComponent(lblIdentificacionGestionar).addGap(18)
+												.addComponent(tFIdentificacionGestionar, GroupLayout.PREFERRED_SIZE,
+														158, GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED, 33, Short.MAX_VALUE))
+										.addGroup(gl_panel_1.createSequentialGroup().addContainerGap()
+												.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 521,
+														GroupLayout.PREFERRED_SIZE)
+												.addGap(40)))
+								.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING, false)
+										.addGroup(gl_panel_1.createSequentialGroup().addComponent(btnAceptar)
+												.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+										.addGroup(gl_panel_1.createSequentialGroup()
+												.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+														.addComponent(btnModificar).addComponent(btnEliminar))
+												.addGap(45)))));
+		gl_panel_1.setVerticalGroup(gl_panel_1.createParallelGroup(Alignment.LEADING).addGroup(gl_panel_1
+				.createSequentialGroup()
+				.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING).addGroup(gl_panel_1.createSequentialGroup()
+						.addGap(41)
+						.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblIdentificacionGestionar)
+								.addComponent(tFIdentificacionGestionar, GroupLayout.PREFERRED_SIZE,
+										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnAceptar))
+						.addGap(52)
+						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 316, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_panel_1.createSequentialGroup().addGap(182).addComponent(btnModificar).addGap(18)
 								.addComponent(btnEliminar)))
-						.addContainerGap(40, Short.MAX_VALUE)));
+				.addContainerGap(71, Short.MAX_VALUE)));
+
+		tableGestionar = new JTable();
+		scrollPane.setViewportView(tableGestionar);
 		panel_1.setLayout(gl_panel_1);
 		contentPane.setLayout(gl_contentPane);
 
@@ -423,16 +492,52 @@ public class EmpleadoGUI extends JFrame {
 
 	}
 
+	/**
+	 * Se carga la tabla con los datos del empleado
+	 */
+	private void cargarTabla() {
+		/*
+		 * empleadoTableModel= new
+		 * EmpleadoTableModel(EmpleadoDelegate.getInstancia().
+		 * listarTodosEmpleados());
+		 * 
+		 * 
+		 * servicioTableModel = new
+		 * ServicioTableModel(AdministradorDelegate.getInstancia().
+		 * listarServicios()); servicioTableModel.addTableModelListener(new
+		 * TableModelListener() {
+		 * 
+		 * @Override public void tableChanged(TableModelEvent e) { if(
+		 * e.getType() == TableModelEvent.UPDATE ){ int indice = e.getLastRow();
+		 * if( indice < servicioTableModel.getServicios().size() ){ Servicio
+		 * servicio = servicioTableModel.getServicios().get(indice);
+		 * Main.getInstancia().actualizarServicio(servicio); }
+		 * 
+		 * }
+		 * 
+		 * } }); tableGestionar.setModel(empleadoTableModel);
+		 */
+	}
+
+	/**
+	 * Se carga el combo box con los tipo de documentos disponibles
+	 */
 	private void cargarComboTipoDoc() {
 		cBoxTipoDoc.removeAllItems();
 		cBoxTipoDoc.setModel(new DefaultComboBoxModel<>(TipoDocumento.values()));
 	}
 
+	/**
+	 * Se carga el combo box con lo generos disponibles
+	 */
 	private void cargarComboGenero() {
 		cBoxGenero.removeAllItems();
 		cBoxGenero.setModel(new DefaultComboBoxModel<>(Genero.values()));
 	}
 
+	/**
+	 * Se carga el combo box con las ciudades disponibles
+	 */
 	private void cargarComboCiudad() {
 		cBoxCiudad.removeAllItems();
 		if (cBoxDepto.getSelectedItem() != null) {
@@ -445,21 +550,27 @@ public class EmpleadoGUI extends JFrame {
 
 	}
 
+	/**
+	 * Se carga el combo box con los departamentos disponibles
+	 */
 	private void cargarComboDepto() {
 		// cBoxDepto.removeAllItems();
-		// System.out.println("Delegate " + GeografiaDelegate.getInstancia().listarDepartamentos());
+		// System.out.println("Delegate " +
+		// GeografiaDelegate.getInstancia().listarDepartamentos());
 		List<Depto> deptos = SuTurnoApplicationRun.getInstancia().getGeografiaDelegate().listarDepartamentos();
-		/*for (Depto d : deptos) {
-			cBoxDepto.addItem(d);
-		}*/
+		/*
+		 * for (Depto d : deptos) { cBoxDepto.addItem(d); }
+		 */
 
 	}
 
+	/**
+	 * Se carga el combo box con los puesto de trabajo disponibles
+	 */
 	private void cargarComboPuesto() {
 		cBoxPuesto.removeAllItems();
 		List<PuestoTrabajo> puestos = PuestoTrabajoDelegate.getInstancia().listarPuestosTrabajo();
 		for (PuestoTrabajo p : puestos)
 			cBoxPuesto.addItem(p);
 	}
-
 }
