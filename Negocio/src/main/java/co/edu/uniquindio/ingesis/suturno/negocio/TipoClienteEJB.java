@@ -86,7 +86,7 @@ public class TipoClienteEJB implements TipoClienteEJBRemote {
 	 * @param tipoCliente
 	 *            TipoCliente a ser eliminado
 	 */
-	public void eliminarServicio(TipoCliente tipoCliente) {
+	public void eliminarTipoCliente(TipoCliente tipoCliente) {
 		if (tipoCliente == null || tipoCliente.getId() == null) {
 			throw new RuntimeException("ERROR: Faltan datos");
 		}
@@ -106,29 +106,29 @@ public class TipoClienteEJB implements TipoClienteEJBRemote {
 	
 	
 	/**
-	 * Metodo que permite actualizar un servicio
+	 * Metodo que permite actualizar un Tipo Cliente
 	 * 
 	 * @param tipoCliente
-	 *            Servicio a ser actualizado
-	 * @return El servicio actualizar, o null en caso de que no se haya podido
+	 *            TipoCliente a ser actualizado
+	 * @return El TipoCliente actualizar, o null en caso de que no se haya podido
 	 *         registrar
 	 */
-//	public TipoCliente actualizarServicio(TipoCliente tipoCliente) {
-//		if (tipoCliente == null || tipoCliente.getNombre() == null || "".equals(tipoCliente.getNombre().trim()) || tipoCliente.getId() == null ) {
-//			throw new RuntimeException("ERROR: Faltan datos");
-//		}
-//		
-//		Servicio existe = entityManager.find(Servicio.class, tipoCliente.getId());
-//		if( existe != null ){
-//			existe = buscarServicioPorNombre(tipoCliente.getNombre());
-//			if ( existe != null && existe.getId() != tipoCliente.getId() ) {
-//				throw new RuntimeException("ERROR: Ya existe un servicio con ese nombre");
-//			}
-//			return entityManager.merge(tipoCliente);
-//		} else {
-//			throw new RuntimeException("ERROR: El servicio no existe");
-//		}
-//	}	
+	public TipoCliente actualizarTipoCliente(TipoCliente tipoCliente) {
+		if (tipoCliente == null || tipoCliente.getNombre() == null || "".equals(tipoCliente.getNombre().trim()) || tipoCliente.getId() == null ) {
+			throw new RuntimeException("ERROR: Faltan datos");
+		}
+		
+		TipoCliente existe = entityManager.find(TipoCliente.class, tipoCliente.getId());
+		if( existe != null ){
+			existe = buscarTipoClientePorNombre(tipoCliente.getNombre());
+			if ( existe != null && existe.getId() != tipoCliente.getId() ) {
+			throw new RuntimeException("ERROR: Ya existe un Tipo Cliente con ese nombre");
+		}
+			return entityManager.merge(tipoCliente);
+		} else {
+			throw new RuntimeException("ERROR: El Tipo Cliente no existe");
+		}
+	}	
 	
 	
 	
