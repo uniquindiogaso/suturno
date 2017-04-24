@@ -70,7 +70,7 @@ public class TipoClienteTest {
 
 		TipoCliente tCliente = new TipoCliente();
 
-		tCliente.setId(3);
+		tCliente.setId((long) 3);
 		tCliente.setCodigo("gold");
 		tCliente.setNombre("Cliente Premium");
 		tCliente.setPrioridad(true);

@@ -30,6 +30,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @NamedQueries({ @NamedQuery(name = TipoCliente.GET_ALL, query = "SELECT tCli FROM TipoCliente tCli"),
+		@NamedQuery(name = TipoCliente.GET_X_NOMBRE, query = "SELECT tp FROM TipoCliente tp WHERE tp.nombre= :tipoCliente"),
 		@NamedQuery(name = TipoCliente.GET_PRIORIDAD, query = "SELECT tCli FROM TipoCliente tCli WHERE tCli.prioridad = True") })
 @Table(name = "suturno_tipocliente")
 public class TipoCliente implements Serializable {
@@ -48,18 +49,25 @@ public class TipoCliente implements Serializable {
 	 * tengan establecidad una prioridad {@link TipoCliente} <br />
 	 */
 	public static final String GET_PRIORIDAD = "TipoCliente_findByPrioridad";
+	
+	
+	/**
+	 * Constante que identifica la consulta que obtener todos los registros que
+	 * tengan el nombre consultado {@link TipoCliente} <br />
+	 */
+	public static final String GET_X_NOMBRE = "TipoCliente_findByNombre";
 
 	/**
 	 * Variable que representa el atributo id de la entidad
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 
 	/**
 	 * Variable que representa el atributo codigo del tipo de cliente
 	 */
-	@NotNull(message = "El Codigo de la ubicacion debe ser obligatorio")
+	@NotNull(message = "El Codigo de Tipo Cliente debe ser Obligatorio")
 	@Size(max = 5, message = "El Codigo debe de tener un maximo de 5 Caracteres")
 	@Column(nullable = false, length = 5)
 	private String codigo;
@@ -67,7 +75,7 @@ public class TipoCliente implements Serializable {
 	/**
 	 * Variable que representa el atributo nombre del tipo de cliente
 	 */
-	@NotNull(message = "El nombre de la ciudad debe de ser obligatorio")
+	@NotNull(message = "El nombre del tipo cliente debe de ser obligatorio")
 	@Column(nullable = false, length = 50)
 	private String nombre;
 
@@ -96,7 +104,7 @@ public class TipoCliente implements Serializable {
 	 * 
 	 * @return id el identificador de la entidad TipoCliente
 	 */
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -106,7 +114,7 @@ public class TipoCliente implements Serializable {
 	 * @param id
 	 *            el identificador de la entidad TipoCliente
 	 */
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -195,12 +203,12 @@ public class TipoCliente implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
-	/*
-	 * Metodo sobreescrito de equals
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -211,7 +219,10 @@ public class TipoCliente implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		TipoCliente other = (TipoCliente) obj;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
