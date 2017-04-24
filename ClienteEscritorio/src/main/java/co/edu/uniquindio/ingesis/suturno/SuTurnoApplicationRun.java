@@ -1,58 +1,59 @@
 package co.edu.uniquindio.ingesis.suturno;
 
+import java.util.List;
+
 import co.edu.uniquindio.ingesis.suturno.delegados.EmpleadoDelegate;
-import co.edu.uniquindio.ingesis.suturno.entidades.Empleado;
-import co.edu.uniquindio.ingesis.suturno.entidades.Persona;
-import co.edu.uniquindio.ingesis.suturno.utils.Genero;
-import co.edu.uniquindio.ingesis.suturno.utils.TipoDocumento;
+import co.edu.uniquindio.ingesis.suturno.delegados.GeografiaDelegate;
+import co.edu.uniquindio.ingesis.suturno.delegados.PuestoTrabajoDelegate;
+import co.edu.uniquindio.ingesis.suturno.entidades.Depto;
+import co.edu.uniquindio.ingesis.suturno.gui.EmpleadoGUI;
 
 public class SuTurnoApplicationRun {
 
 	private static final SuTurnoApplicationRun instancia = new SuTurnoApplicationRun();
+	private EmpleadoGUI empleadoGUI;
+	private EmpleadoDelegate empleadoDelegate = EmpleadoDelegate.getInstancia();
+	private GeografiaDelegate geografiaDelegate = GeografiaDelegate.getInstancia();
+	private PuestoTrabajoDelegate puestoDelegate = PuestoTrabajoDelegate.getInstancia();
 
 	public SuTurnoApplicationRun() {
-		// TODO Auto-generated constructor stub
+		//empleadoGUI = new EmpleadoGUI();
 	}
 
 	public static void main(String[] args) {
 		instancia.init();
+		System.out.println("Lista: "+instancia.getGeografiaDelegate().listarDepartamentos().size());
+		
 	}
 
 	public void init() {
-
-		Persona persona = new Persona();
-		persona.setActivo(true);
-		persona.setApellido1("Marin");
-		persona.setApellido2("Perez");
-		persona.setDir("Granada");
-		persona.setEmail("saramarin@gmail.com");
-		persona.setGenero(Genero.FEMENINO);
-		persona.setIdentificacion("9574136672");
-		persona.setNombre1("Sara");
-		persona.settDoc(TipoDocumento.TARJETA_IDENTIDAD);
-		persona.setTel1("3206842320");
-		persona.setTel2("7452310");
-		//persona.setCiudad(armenia);			
-		//persona.setTiposCliente(tipoClient);	
-		
-		Empleado e1 = new Empleado();
-		e1.setAdmin(true);
-		e1.setUsuario("gaso");
-		e1.setClave(");(/&%$#!");
-		
-		persona.setEmpleado(e1);
-		
-		try {
-			EmpleadoDelegate.getInstancia().registrarEmpleado(persona);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		//empleadoGUI.setVisible(false);
 	}
 
 	public static SuTurnoApplicationRun getInstancia() {
 		return instancia;
+	}
+
+	/**
+	 * @return the empleadoDelegate
+	 */
+	public EmpleadoDelegate getEmpleadoDelegate() {
+		return empleadoDelegate;
+	}
+
+	public GeografiaDelegate getGeografiaDelegate() {
+		return geografiaDelegate;
+	}
+
+	/**
+	 * @return the puestoDelegate
+	 */
+	public PuestoTrabajoDelegate getPuestoDelegate() {
+		return puestoDelegate;
+	}
+	
+	public void listarDepartamentos(){
+		geografiaDelegate.listarDepartamentos();
 	}
 
 }

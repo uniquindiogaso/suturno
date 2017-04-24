@@ -15,4 +15,5 @@ package co.edu.uniquindio.ingesis.suturno.utils;
  */
 public enum TipoDocumento {
 	CEDULA_CUIDADANIA, TARJETA_IDENTIDAD, REGISTRO_CIVIL, CEDULA_EXTRANJERIA,
+
 }

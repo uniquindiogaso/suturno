@@ -43,7 +43,7 @@ public class Manejador extends JFrame {
 		
 		JButton btnConsultas = new JButton("Consultas");
 		
-		JButton btnEmpleados = new JButton("Empleados");
+		JButton btnEmpleados = new JButton("EmpleadoGUI");
 		
 		JButton btnServicios = new JButton("Servicios");
 		

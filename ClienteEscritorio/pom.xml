@@ -8,7 +8,7 @@
 	</parent>
 	<artifactId>ClienteEscritorio</artifactId>
 	<name>App Escritorio</name>
-	<description>Cliente de Escritorio para Aplicación  SUTURNO</description>
+	<description>Escritorio para Aplicación  SUTURNO</description>
 	<dependencies>
 		<dependency>
 			<groupId>org.glassfish.main.extras</groupId>
