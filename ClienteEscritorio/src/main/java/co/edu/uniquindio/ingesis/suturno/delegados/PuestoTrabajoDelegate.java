@@ -11,14 +11,33 @@ import co.edu.uniquindio.ingesis.suturno.negocio.PuestoTrabajoEJB;
 import co.edu.uniquindio.ingesis.suturno.negocio.PuestoTrabajoEJBRemote;
 
 /**
- * @author gusta
- *
+ * * Delegado del puesto de trabajo
+ * 
+ * @author Gustavo Salgado y Laura Julieth Rua
+ * 
+ * @author Ingeniería de Sistemas y Computacion
+ * 
+ * @author Universidad del Quindio
+ * 
+ * @version 1.0
+ * 
+ * @since 12/04/2017
  */
 public class PuestoTrabajoDelegate {
 
+	/**
+	 * Variable que representa el PuestoTrabajoEJBRemote
+	 */
 	private PuestoTrabajoEJBRemote puestoEJB;
+
+	/**
+	 * Variable que representa la instancia del PuestoTrabajoDelegate
+	 */
 	private static final PuestoTrabajoDelegate instancia = new PuestoTrabajoDelegate();
 
+	/**
+	 * Metodo constructor del PuestoTrabajoDelegate
+	 */
 	private PuestoTrabajoDelegate() {
 		try {
 			puestoEJB = (PuestoTrabajoEJBRemote) new InitialContext().lookup(PuestoTrabajoEJB.JNDI);
@@ -85,12 +104,12 @@ public class PuestoTrabajoDelegate {
 	}
 
 	/**
-	 * @return the instancia
+	 * Metodo get de la instancia del PuestoTrabajoDelegate
+	 * 
+	 * @return instancia la instancia del PuestoTrabajoDelegate
 	 */
 	public static PuestoTrabajoDelegate getInstancia() {
 		return instancia;
 	}
-	
-	
 
 }

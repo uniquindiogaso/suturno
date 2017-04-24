@@ -1,6 +1,3 @@
-/**
- * 
- */
 package co.edu.uniquindio.ingesis.suturno.delegados;
 
 import java.util.List;
@@ -13,30 +10,45 @@ import co.edu.uniquindio.ingesis.suturno.entidades.Persona;
 import co.edu.uniquindio.ingesis.suturno.negocio.EmpleadoEJBRemote;
 
 /**
- * @author gusta
+ * Delegado del Empleado
+ * 
+ * @author Gustavo Salgado y Laura Julieth Rua
+ * 
+ * @author Ingeniería de Sistemas y Computacion
+ * 
+ * @author Universidad del Quindio
+ * 
+ * @version 1.0
+ * 
+ * @since 12/04/2017
  *
  */
 public class EmpleadoDelegate {
-	
+
+	/**
+	 * Variable que representa el EmpleadoEJBRemote
+	 */
 	private EmpleadoEJBRemote empleadoEJB;
-	
+
+	/**
+	 * Variable que representa la instancia del delegado
+	 */
 	private static final EmpleadoDelegate instancia = new EmpleadoDelegate();
 
 	/**
-	 * 
+	 * Constructor del EmpleadoDelegate
 	 */
-	private  EmpleadoDelegate() {
+	private EmpleadoDelegate() {
 		try {
-			System.out.println("[JDNI] "+ EmpleadoEJBRemote.JNDI );
-			empleadoEJB = (EmpleadoEJBRemote) new InitialContext().lookup( EmpleadoEJBRemote.JNDI );
+			System.out.println("[JDNI] " + EmpleadoEJBRemote.JNDI);
+			empleadoEJB = (EmpleadoEJBRemote) new InitialContext().lookup(EmpleadoEJBRemote.JNDI);
 		} catch (NamingException e) {
 			e.printStackTrace();
 			System.exit(-1);
 		}
 
 	}
-	
-	
+
 	/**
 	 * Permite registrar un empleado en la b.d
 	 * 
@@ -46,18 +58,17 @@ public class EmpleadoDelegate {
 	 *             se genera cuando el empleado ya se encuentra registrado y el
 	 *             login ya esta siendo usado por otro usuario
 	 */
-	public Persona registrarEmpleado(Persona empleado) throws Exception{
+	public Persona registrarEmpleado(Persona empleado) throws Exception {
 		return empleadoEJB.registrarEmpleado(empleado);
 	}
-	
-	
-	
+
 	/**
 	 * Registrar SuperAdministrador si no existe
+	 * 
 	 * @param empleado
-	 * @return
+	 * @return el administrador
 	 */
-	public Persona registrarAdministrador(Persona empleado){
+	public Persona registrarAdministrador(Persona empleado) {
 		return empleadoEJB.registrarAdministrador(empleado);
 	}
 
@@ -69,7 +80,7 @@ public class EmpleadoDelegate {
 	 * @return El Empleado que se corresponde con el nombre dado, en caso de no
 	 *         encontar el Empleado se retorna null
 	 */
-	public Empleado buscarEmpleadoPorNombreUsuario(String nombreUsuario){
+	public Empleado buscarEmpleadoPorNombreUsuario(String nombreUsuario) {
 		return empleadoEJB.buscarEmpleadoPorNombreUsuario(nombreUsuario);
 	}
 
@@ -81,26 +92,27 @@ public class EmpleadoDelegate {
 	 * @return El Empleado que se corresponde con el nombre dado, en caso de no
 	 *         encontar el Empleado se retorna null
 	 */
-	public Empleado buscarEmpleadoPorIdentificacion(String identificacion){
+	public Empleado buscarEmpleadoPorIdentificacion(String identificacion) {
 		return empleadoEJB.buscarEmpleadoPorIdentificacion(identificacion);
 	}
 
 	/**
-	 * Metodo que permite obtener todos los EmpleadoGUI activos registrados en el
-	 * sistema
+	 * Metodo que permite obtener todos los EmpleadoGUI activos registrados en
+	 * el sistema
 	 * 
-	 * @return
+	 * @return lista de empleados activos
 	 */
-	public List<Empleado> listarEmpleadosActivos(){
+	public List<Empleado> listarEmpleadosActivos() {
 		return empleadoEJB.listarEmpleadosActivos();
 	}
 
 	/**
-	 * Metodo que permite obtener todos los EmpleadoGUI registrados en el sistema
+	 * Metodo que permite obtener todos los EmpleadoGUI registrados en el
+	 * sistema
 	 * 
-	 * @return
+	 * @return lista de todos los empleados
 	 */
-	public List<Empleado> listarTodosEmpleados(){
+	public List<Empleado> listarTodosEmpleados() {
 		return empleadoEJB.listarTodosEmpleados();
 	}
 
@@ -112,7 +124,7 @@ public class EmpleadoDelegate {
 	 *            Empleado a Desactivar
 	 * @return True si se logro desactivar , False si no fue posible desactivar
 	 */
-	public boolean desactivarEmpleado(Empleado empleado){
+	public boolean desactivarEmpleado(Empleado empleado) {
 		return empleadoEJB.desactivarEmpleado(empleado);
 	}
 
@@ -125,7 +137,7 @@ public class EmpleadoDelegate {
 	 * @return True si se logro eliminar , False si no se logro eliminar el
 	 *         Empleado debido a q se estas empleando en algun proceso
 	 */
-	public void eliminarEmpleado(Empleado empleado){
+	public void eliminarEmpleado(Empleado empleado) {
 		empleadoEJB.eliminarEmpleado(empleado);
 	}
 
@@ -134,24 +146,24 @@ public class EmpleadoDelegate {
 	 * 
 	 * @param empleado
 	 *            Empleado a Actualizar
-	 * @return
+	 * @return el empleados actualizado
 	 */
-	public Persona actualizarEmpleado(Persona empleado){
+	public Persona actualizarEmpleado(Persona empleado) {
 		return empleadoEJB.actualizarEmpleado(empleado);
 	}
-	
-	
+
 	/**
-	 * @return the instancia
+	 * Metodo get de la instancia del EmpleadoDelegate
+	 * 
+	 * @return instancia la instancia del EmpleadoDelegate
 	 */
 	public static EmpleadoDelegate getInstancia() {
 		return instancia;
 	}
-	
-	
-	/*public void registrarEmpleado(Persona empleado) throws Exception{
-		 empleadoEJB.registrarEmpleado(empleado);
-	}*/
 
+	/*
+	 * public void registrarEmpleado(Persona empleado) throws Exception{
+	 * empleadoEJB.registrarEmpleado(empleado); }
+	 */
 
 }
