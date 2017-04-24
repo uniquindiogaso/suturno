@@ -207,6 +207,8 @@ public class EmpleadoEJB implements EmpleadoEJBRemote {
 		}
 
 	}
+	
+	
 
 	/**
 	 * Realiza una buscada de Empleados por nombre de usuario
