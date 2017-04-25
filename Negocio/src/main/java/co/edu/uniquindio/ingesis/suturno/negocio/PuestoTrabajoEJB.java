@@ -128,7 +128,7 @@ public class PuestoTrabajoEJB implements PuestoTrabajoEJBRemote {
 		PuestoTrabajo existe = entityManager.find(PuestoTrabajo.class, puestoTrabajo.getId());
 		if( existe != null ){
 			existe = buscarServicioPorNombre(puestoTrabajo.getNombre());
-			if ( existe != null && existe.getId() != puestoTrabajo.getId() ) {
+			if ( existe != null && existe.getId().intValue() != puestoTrabajo.getId().intValue() ) {
 				throw new RuntimeException("ERROR: Ya existe un Puesto de Trabajo con ese nombre");
 			}
 			return entityManager.merge(puestoTrabajo);

@@ -121,7 +121,7 @@ public class TipoClienteEJB implements TipoClienteEJBRemote {
 		TipoCliente existe = entityManager.find(TipoCliente.class, tipoCliente.getId());
 		if( existe != null ){
 			existe = buscarTipoClientePorNombre(tipoCliente.getNombre());
-			if ( existe != null && existe.getId() != tipoCliente.getId() ) {
+			if ( existe != null && existe.getId().intValue() != tipoCliente.getId().intValue() ) {
 			throw new RuntimeException("ERROR: Ya existe un Tipo Cliente con ese nombre");
 		}
 			return entityManager.merge(tipoCliente);

@@ -10,6 +10,7 @@ import javax.persistence.TypedQuery;
 
 import co.edu.uniquindio.ingesis.suturno.entidades.Empleado;
 import co.edu.uniquindio.ingesis.suturno.entidades.Persona;
+import co.edu.uniquindio.ingesis.suturno.entidades.Servicio;
 
 /**
  * Session Bean implementation class EmpleadoEJB
@@ -18,7 +19,7 @@ import co.edu.uniquindio.ingesis.suturno.entidades.Persona;
 @LocalBean
 public class EmpleadoEJB implements EmpleadoEJBRemote {
 
-	@PersistenceContext	
+	@PersistenceContext
 	private EntityManager entityManager;
 
 	/**
@@ -42,13 +43,13 @@ public class EmpleadoEJB implements EmpleadoEJBRemote {
 		if (null == empleado || empleado.getEmpleado() == null) {
 			throw new RuntimeException("Datos incompletos");
 		}
-		
+
 		Empleado existente = buscarEmpleadoPorIdentificacion(empleado.getIdentificacion());
-		
-		if( null != existente){
+
+		if (null != existente) {
 			throw new Exception("El empleado ya se encuentra registrado.");
 		}
-				
+
 		if (existeNombreUsuario(empleado.getEmpleado().getUsuario())) {
 			throw new RuntimeException("El login ya esta siendo usado por otro Empleado.");
 		}
@@ -67,19 +68,17 @@ public class EmpleadoEJB implements EmpleadoEJBRemote {
 
 		return empleado;
 	}
-	
-	
+
 	/**
 	 * Registrar SuperAdministrador si no existe
+	 * 
 	 * @param empleado
 	 * @return
 	 */
-	public Persona registrarAdministrador(Persona empleado){
+	public Persona registrarAdministrador(Persona empleado) {
 		entityManager.persist(empleado);
 		return empleado;
 	}
-	
-	
 
 	/**
 	 * Metodo que permite buscar un Empleado basado en su nombre
@@ -207,8 +206,6 @@ public class EmpleadoEJB implements EmpleadoEJBRemote {
 		}
 
 	}
-	
-	
 
 	/**
 	 * Realiza una buscada de Empleados por nombre de usuario
@@ -222,6 +219,61 @@ public class EmpleadoEJB implements EmpleadoEJBRemote {
 		query.setParameter("nombreUsuario", nombreUsuario);
 
 		return query.getResultList().size() == 0 ? false : true;
+	}
+
+	/**
+	 * Comprobar el acceso a Usuario de acuerdo a su usuario y clave
+	 * 
+	 * @param usuario
+	 *            nombre de usuario autenticar
+	 * @param clave
+	 *            clave de acceso
+	 * @return Empleado si la comprobacion se realiza correcta ; False si no se
+	 *         encuentra el Empleado
+	 */
+	public Empleado verificarAcceso(String usuario, String clave) {
+		TypedQuery<Empleado> query = entityManager.createNamedQuery(Empleado.AUTENTICAR, Empleado.class);
+		query.setParameter("usuario", usuario);
+		query.setParameter("clave", clave);
+		return query.getResultList().size() == 1 ? query.getResultList().get(0) : null;
+	}
+
+	/**
+	 * Actualizar la Clave de Acceso de Empleado
+	 * @param empleadoId Id de Empleado al que se le actualizara la clave
+	 * @param claveNueva Nueva Contraseña
+	 * @return True si la actualizacion de clave es correcta 
+	 */
+	public boolean actualizarClaveEmpleado(Long empleadoId, String claveNueva) {
+		Empleado existe = entityManager.find(Empleado.class, empleadoId);
+
+		if (null != existe) {
+			existe.setClave(claveNueva);
+			entityManager.merge(existe);
+			return true;
+		} else {
+			throw new RuntimeException("ERROR: El Empleado no existe - No se puede Actualizar la Clave ");
+		}
+	}
+	
+	
+	/**
+	 * Asingar Servicios a Empleado
+	 * @param empleadoId Identificacion del Empleado al que se le van a actualizar/asignar los servicios
+	 * @param servicios Lista de Servicios
+	 * @return True si se asignaron correctamente los servicios
+	 */
+	public boolean asignarServiciosEmpleado(Long empleadoId, List<Servicio> servicios){
+		Empleado existe = entityManager.find(Empleado.class, empleadoId);
+		
+		if (null != existe) {			
+			existe.setServicios(servicios);
+			entityManager.merge(existe);
+			return true;			
+		}else {
+			throw new RuntimeException("ERROR: El Empleado no existe - No se Asignar los servicios ");
+		}
+		
 	}
 
 }

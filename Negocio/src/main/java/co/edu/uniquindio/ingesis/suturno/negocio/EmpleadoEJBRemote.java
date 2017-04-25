@@ -6,6 +6,7 @@ import javax.ejb.Remote;
 
 import co.edu.uniquindio.ingesis.suturno.entidades.Empleado;
 import co.edu.uniquindio.ingesis.suturno.entidades.Persona;
+import co.edu.uniquindio.ingesis.suturno.entidades.Servicio;
 
 @Remote
 public interface EmpleadoEJBRemote {
@@ -97,4 +98,31 @@ public interface EmpleadoEJBRemote {
 	 */
 	public Persona actualizarEmpleado(Persona empleado);
 
+	
+	
+	/**
+	 * Comprobar el acceso a Usuario de acuerdo a su usuario y clave
+	 * @param usuario nombre de usuario autenticar
+	 * @param clave clave de acceso
+	 * @return Empleado si la comprobacion se realiza correcta ; False si no se encuentra el Empleado
+	 */
+	public Empleado verificarAcceso(String usuario , String clave);
+	
+	
+	/**
+	 * Actualizar la Clave de Acceso de Empleado
+	 * @param empleadoId Id de Empleado al que se le actualizara la clave
+	 * @param claveNueva Nueva Contraseña
+	 * @return True si la actualizacion de clave es correcta 
+	 */
+	public boolean actualizarClaveEmpleado(Long empleadoId, String claveNueva);
+	
+	
+	/**
+	 * Asingar Servicios a Empleado
+	 * @param empleadoId Identificacion del Empleado al que se le van a actualizar/asignar los servicios
+	 * @param servicios Lista de Servicios
+	 * @return True si se asignaron correctamente los servicios
+	 */
+	public boolean asignarServiciosEmpleado(Long empleadoId, List<Servicio> servicios);
 }

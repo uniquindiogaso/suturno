@@ -89,6 +89,13 @@ public class Empleado implements Serializable {
 	 */
 	public static final String 	GET_X_NOMBREUSUARIO = "Empleado_findByNombreUsuario";
 	
+	
+	/**
+	 * Constante que identifica la consulta para actualizar contraseña
+	 *  {@link Empleado} <br />
+	 */
+	public static final String 	CAMBIO_PASSWORD = "Empleado_ChangePassword";
+	
 	/**
 	 * /** Variable que representa el atributo id de la entidad
 	 */
