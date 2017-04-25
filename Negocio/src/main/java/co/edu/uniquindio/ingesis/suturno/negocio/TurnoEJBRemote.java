@@ -11,6 +11,7 @@ import co.edu.uniquindio.ingesis.suturno.dto.EmpleandoXClientesDTO;
 @Remote
 public interface TurnoEJBRemote {
 
+	public static final String JNDI = "java:global/EAR/Negocio-0.0.1-SNAPSHOT/TurnoEJB!co.edu.uniquindio.ingesis.suturno.negocio.TurnoEJBRemote";
 	
     /**
      * Cantidad de Turnos Atendidos por un Empleado especifico en determinada Fecha
