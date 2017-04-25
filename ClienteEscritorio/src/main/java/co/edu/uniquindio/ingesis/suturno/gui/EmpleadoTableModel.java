@@ -169,7 +169,7 @@ public class EmpleadoTableModel extends DefaultTableModel {
 	 */
 	@Override
 	public boolean isCellEditable(int row, int column) {
-		return column != 0 && column != 13;
+		return column != 0 && column != 13 && column != 2 && column != 10 && column != 12;
 	}
 
 	/**

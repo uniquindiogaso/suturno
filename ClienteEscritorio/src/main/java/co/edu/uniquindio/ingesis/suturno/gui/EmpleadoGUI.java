@@ -41,6 +41,7 @@ import co.edu.uniquindio.ingesis.suturno.utils.TipoDocumento;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 /**
  * Interfaz del empleado del administrador
@@ -56,12 +57,6 @@ import javax.swing.JScrollPane;
  * @since 12/04/2017
  */
 public class EmpleadoGUI extends JFrame {
-
-	/**
-	 * Instancia de la ventana manejador
-	 */
-	private ManejadorGUI manejador;
-
 	/**
 	 * Variables que representan los componentes de la ventana
 	 */
@@ -92,20 +87,13 @@ public class EmpleadoGUI extends JFrame {
 	private JScrollPane scrollTablaEmpleados;
 
 	/**
-	 * Launch the application.
-	 * 
-	 * public static void main(String[] args) { EventQueue.invokeLater(new
-	 * Runnable() { public void run() { try { EmpleadoGUI frame = new
-	 * EmpleadoGUI(); frame.setVisible(true); } catch (Exception e) {
-	 * e.printStackTrace(); } } }); }
-	 */
-
-	/**
 	 * Se crea la ventana
 	 */
 	public EmpleadoGUI() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 799, 707);
+		setLocationRelativeTo(null);
+		setBounds(100, 100, 799, 760);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -117,27 +105,37 @@ public class EmpleadoGUI extends JFrame {
 		JButton btnAtras = new JButton("Atrás");
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				manejador.setVisible(true);
-				setVisible(false);
+				SuTurnoApplicationRun.getInstancia().getEmpleadoGUI().setVisible(false);
+				SuTurnoApplicationRun.getInstancia().getManejadorGUI().setVisible(true);
 			}
 		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane
-				.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_contentPane.createSequentialGroup().addGap(324).addComponent(lblEmpleados)
-								.addContainerGap(62, Short.MAX_VALUE))
-						.addGroup(Alignment.LEADING,
-								gl_contentPane.createSequentialGroup().addGap(30)
-										.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 714,
-												GroupLayout.PREFERRED_SIZE)
-										.addContainerGap(29, Short.MAX_VALUE))
-						.addGroup(gl_contentPane.createSequentialGroup().addContainerGap(420, Short.MAX_VALUE)
-								.addComponent(btnAtras).addGap(294)));
-		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup().addGap(28).addComponent(lblEmpleados).addGap(31)
-						.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 531, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(btnAtras)
-						.addContainerGap(20, Short.MAX_VALUE)));
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(324)
+					.addComponent(lblEmpleados)
+					.addContainerGap(385, Short.MAX_VALUE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap(414, Short.MAX_VALUE)
+					.addComponent(btnAtras)
+					.addGap(300))
+				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+					.addGap(30)
+					.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 714, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(29, Short.MAX_VALUE))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(28)
+					.addComponent(lblEmpleados)
+					.addGap(31)
+					.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 576, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+					.addComponent(btnAtras)
+					.addContainerGap())
+		);
 
 		JPanel panel = new JPanel();
 		tabbedPane.addTab("Nuevo Empleado", null, panel, null);
@@ -235,127 +233,133 @@ public class EmpleadoGUI extends JFrame {
 		JLabel lblDepto = new JLabel("Departamento:");
 
 		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel.createSequentialGroup().addContainerGap(215, Short.MAX_VALUE)
-						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING).addComponent(lblTipoDeDocumento)
-								.addComponent(lblIdentificacionNuevo).addComponent(lblGenero).addComponent(lblDireccion)
-								.addComponent(lblEmail).addComponent(lblTelefonos)
-								.addComponent(lblUsuario).addComponent(lblContrasenia).addComponent(lblPuestoDeTrabajo)
-								.addComponent(lblAdministrador)
-								.addComponent(lblNombres).addComponent(lblApellidos).addComponent(lblCiudad)
-								.addComponent(lblDepto))
-						.addGap(18)
-						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(cBoxGenero, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_panel.createSequentialGroup()
-										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-												.addComponent(tFApellido1, GroupLayout.PREFERRED_SIZE, 124,
-														GroupLayout.PREFERRED_SIZE)
-												.addComponent(tFNombre1, GroupLayout.PREFERRED_SIZE, 124,
-														GroupLayout.PREFERRED_SIZE))
-										.addGap(10)
-										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-												.addComponent(tFNombre2, GroupLayout.PREFERRED_SIZE, 124,
-														GroupLayout.PREFERRED_SIZE)
-												.addComponent(tFApellido2, GroupLayout.PREFERRED_SIZE, 124,
-														GroupLayout.PREFERRED_SIZE)))
-								.addComponent(tFEmail, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_panel.createSequentialGroup()
-										.addComponent(tFTelefono1, GroupLayout.PREFERRED_SIZE, 124,
-												GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(tFTelefono2,
-												GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
-										.addComponent(cBoxTipoDoc, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)
-										.addComponent(tFIdentificacionNuevo, Alignment.LEADING,
-												GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(cBoxPuesto, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(tFDireccion, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-										.addComponent(tFContrasenia, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-										.addComponent(tFUsuario, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-										.addGroup(gl_panel.createSequentialGroup()
-												.addPreferredGap(ComponentPlacement.RELATED).addComponent(cBoxCiudad, 0,
-														GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-										.addComponent(cBoxDepto, GroupLayout.PREFERRED_SIZE, 124,
-												GroupLayout.PREFERRED_SIZE))
-								.addGroup(
-										gl_panel.createSequentialGroup().addComponent(rdbtnSi).addGap(18)
-												.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-														.addComponent(btnAgregar).addComponent(rdbtnNo))))
-						.addGap(123)));
-		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING,
-				gl_panel.createSequentialGroup().addContainerGap(26, Short.MAX_VALUE)
-						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING).addComponent(lblIdentificacionNuevo)
-								.addComponent(tFIdentificacionNuevo, GroupLayout.PREFERRED_SIZE,
-										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addGap(14)
-						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblTipoDeDocumento).addComponent(cBoxTipoDoc, GroupLayout.PREFERRED_SIZE,
-										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
-								.createSequentialGroup()
-								.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(lblGenero)
-										.addComponent(cBoxGenero, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-												GroupLayout.PREFERRED_SIZE))
-								.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(lblNombres).addGap(11)
-								.addComponent(lblApellidos).addGap(18).addComponent(lblEmail)
-								.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(lblTelefonos).addGap(18)
-								.addComponent(lblDireccion))
-								.addGroup(gl_panel.createSequentialGroup().addGap(28)
-										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-												.addGroup(gl_panel.createSequentialGroup()
-														.addComponent(tFNombre2, GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-														.addGap(8).addComponent(tFApellido2, GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-												.addGroup(gl_panel.createSequentialGroup()
-														.addComponent(tFNombre1, GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-														.addPreferredGap(ComponentPlacement.RELATED)
-														.addComponent(tFApellido1, GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-														.addGap(8).addComponent(tFEmail, GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-												.addComponent(tFTelefono1, GroupLayout.PREFERRED_SIZE,
-														GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-												.addComponent(tFTelefono2, GroupLayout.PREFERRED_SIZE,
-														GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-										.addGap(8).addComponent(tFDireccion, GroupLayout.PREFERRED_SIZE,
-												GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(cBoxDepto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblDepto))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(cBoxCiudad, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblCiudad))
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(tFUsuario, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblUsuario))
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(tFContrasenia, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblContrasenia))
-						.addGap(18)
-						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(cBoxPuesto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblPuestoDeTrabajo))
-						.addGap(18)
-						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(rdbtnSi)
-								.addComponent(rdbtnNo).addComponent(lblAdministrador))
-						.addGap(26).addComponent(btnAgregar).addContainerGap()));
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap(215, Short.MAX_VALUE)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblTipoDeDocumento)
+						.addComponent(lblIdentificacionNuevo)
+						.addComponent(lblGenero)
+						.addComponent(lblUsuario)
+						.addComponent(lblContrasenia)
+						.addComponent(lblPuestoDeTrabajo)
+						.addComponent(lblAdministrador)
+						.addComponent(lblNombres)
+						.addComponent(lblApellidos)
+						.addComponent(lblCiudad)
+						.addComponent(lblDepto)
+						.addComponent(lblEmail)
+						.addComponent(lblTelefonos)
+						.addComponent(lblDireccion))
+					.addGap(18)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnAgregar)
+						.addComponent(cBoxGenero, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(tFApellido1, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE)
+								.addComponent(tFNombre1, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE))
+							.addGap(18)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(tFApellido2, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE)
+								.addComponent(tFNombre2, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE)))
+						.addComponent(tFEmail, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(tFTelefono1, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(tFTelefono2, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
+							.addComponent(cBoxTipoDoc, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(tFIdentificacionNuevo, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+							.addComponent(cBoxPuesto, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(tFDireccion, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+							.addComponent(tFContrasenia, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+							.addComponent(tFUsuario, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+							.addGroup(gl_panel.createSequentialGroup()
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(cBoxCiudad, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addComponent(cBoxDepto, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(rdbtnSi)
+							.addGap(18)
+							.addComponent(rdbtnNo)))
+					.addGap(118))
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+					.addGap(24)
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+						.addComponent(lblIdentificacionNuevo)
+						.addComponent(tFIdentificacionNuevo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(14)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblTipoDeDocumento)
+						.addComponent(cBoxTipoDoc, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblGenero)
+								.addComponent(cBoxGenero, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(lblNombres)
+							.addGap(11)
+							.addComponent(lblApellidos)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(lblEmail)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(lblTelefonos)
+							.addGap(18)
+							.addComponent(lblDireccion))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(28)
+							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(tFNombre1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(tFNombre2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(tFApellido1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(tFApellido2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addGap(8)
+							.addComponent(tFEmail, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(tFTelefono1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(tFTelefono2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addGap(8)
+							.addComponent(tFDireccion, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+					.addGap(9)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(cBoxDepto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblDepto))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(cBoxCiudad, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblCiudad))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(tFUsuario, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblUsuario))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(tFContrasenia, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblContrasenia))
+					.addGap(18)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(cBoxPuesto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblPuestoDeTrabajo))
+					.addGap(18)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(rdbtnSi)
+						.addComponent(rdbtnNo)
+						.addComponent(lblAdministrador))
+					.addGap(38)
+					.addComponent(btnAgregar)
+					.addContainerGap(46, Short.MAX_VALUE))
+		);
 		panel.setLayout(gl_panel);
 
 		JPanel panel_1 = new JPanel();
@@ -369,7 +373,7 @@ public class EmpleadoGUI extends JFrame {
 				try {
 					int selec = tableGestionar.getSelectedRow();
 					System.out.println("Fila selec: " + selec);
-					if (selec != 1) {
+					if (selec != -1) {
 						Empleado empleado = empleadoTableModel.getEmpleados().get(selec);
 						EmpleadoDelegate.getInstancia().desactivarEmpleado(empleado);
 						System.out.println("Desactivado: " + empleado.getId());
@@ -385,6 +389,8 @@ public class EmpleadoGUI extends JFrame {
 		});
 
 		scrollTablaEmpleados = new JScrollPane();
+		scrollTablaEmpleados.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollTablaEmpleados.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
@@ -442,7 +448,7 @@ public class EmpleadoGUI extends JFrame {
 			empleado.setEmpleado(datosEmpleado);
 
 			try {
-				SuTurnoApplicationRun.getInstancia().getEmpleadoDelegate().registrarEmpleado(empleado);
+				EmpleadoDelegate.getInstancia().registrarEmpleado(empleado);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

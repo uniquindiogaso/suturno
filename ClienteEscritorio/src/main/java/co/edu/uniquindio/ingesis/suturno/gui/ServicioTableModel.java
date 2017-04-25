@@ -30,7 +30,7 @@ public class ServicioTableModel extends DefaultTableModel {
 	 * Variable que representa las columnas de las que se compone la tabla
 	 * servicios
 	 */
-	private String[] columnas = { "ID", "CÓDIGO", "NOMBRE", "DESCRIPCIÓN" };
+	private String[] columnas = {"ID", "CÓDIGO", "NOMBRE", "DESCRIPCIÓN" };
 
 	/**
 	 * Metodo constructor del tableModel de servicio

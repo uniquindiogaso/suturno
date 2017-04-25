@@ -115,7 +115,7 @@ public interface EmpleadoEJBRemote {
 	 * @param claveNueva Nueva Contraseña
 	 * @return True si la actualizacion de clave es correcta 
 	 */
-	public boolean actualizarClaveEmpleado(Long empleadoId, String claveNueva);
+	public boolean actualizarClaveEmpleado(int empleadoId, String claveNueva);
 	
 	
 	/**
@@ -124,5 +124,5 @@ public interface EmpleadoEJBRemote {
 	 * @param servicios Lista de Servicios
 	 * @return True si se asignaron correctamente los servicios
 	 */
-	public boolean asignarServiciosEmpleado(Long empleadoId, List<Servicio> servicios);
+	public boolean asignarServiciosEmpleado(int empleadoId, List<Servicio> servicios);
 }

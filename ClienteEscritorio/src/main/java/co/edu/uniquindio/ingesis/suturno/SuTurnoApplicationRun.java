@@ -5,9 +5,14 @@ import co.edu.uniquindio.ingesis.suturno.delegados.GeografiaDelegate;
 import co.edu.uniquindio.ingesis.suturno.delegados.PuestoTrabajoDelegate;
 import co.edu.uniquindio.ingesis.suturno.delegados.ServicioDelegate;
 import co.edu.uniquindio.ingesis.suturno.delegados.TipoClienteDelegate;
+import co.edu.uniquindio.ingesis.suturno.gui.ConsultasGUI;
 import co.edu.uniquindio.ingesis.suturno.gui.EmpleadoGUI;
+import co.edu.uniquindio.ingesis.suturno.gui.LoginGUI;
+import co.edu.uniquindio.ingesis.suturno.gui.ManejadorGUI;
 import co.edu.uniquindio.ingesis.suturno.gui.PrincipalGUI;
+import co.edu.uniquindio.ingesis.suturno.gui.RecuperarContraseniaGUI;
 import co.edu.uniquindio.ingesis.suturno.gui.ServicioGUI;
+import co.edu.uniquindio.ingesis.suturno.gui.TipoClientePrioridadGUI;
 
 /**
  * Ejecuta la capa de escritorio e inicializa las ventanas
@@ -35,7 +40,12 @@ public class SuTurnoApplicationRun {
 	private PrincipalGUI principalGUI;
 	private EmpleadoGUI empleadoGUI;
 	private ServicioGUI servicioGUI;
-
+	private TipoClientePrioridadGUI tipoClienteGUI;
+	private LoginGUI loginGUI;
+	private RecuperarContraseniaGUI recuperarGUI;
+	private ConsultasGUI consultasGUI;
+	private ManejadorGUI manejadorGUI;
+	
 	/**
 	 * Instancias de los delegados
 	 */
@@ -49,9 +59,17 @@ public class SuTurnoApplicationRun {
 	 * Metodo constructor del SuTurnoApplicationRun
 	 */
 	public SuTurnoApplicationRun() {
-		 empleadoGUI = new EmpleadoGUI();
-		 servicioGUI= new ServicioGUI();
-		//principalGUI = new PrincipalGUI();
+		principalGUI = new PrincipalGUI();
+		empleadoGUI = new EmpleadoGUI();
+		servicioGUI = new ServicioGUI();
+		tipoClienteGUI = new TipoClientePrioridadGUI();
+		loginGUI = new LoginGUI();
+		recuperarGUI = new RecuperarContraseniaGUI();
+		consultasGUI= new ConsultasGUI();
+		manejadorGUI= new ManejadorGUI();
+		
+		
+		
 	}
 
 	/**
@@ -69,10 +87,12 @@ public class SuTurnoApplicationRun {
 	 * Metodo que inicializa los componentes
 	 */
 	public void init() {
-		 empleadoGUI.setVisible(true);
-		 servicioGUI.setVisible(true);
-		 
-		//principalGUI.setVisible(true);
+		principalGUI.setVisible(true);
+//		empleadoGUI.setVisible(true);
+//		servicioGUI.setVisible(true);
+//		tipoClienteGUI.setVisible(true);
+//		loginGUI.setVisible(true);
+//		recuperarGUI.setVisible(true);
 
 	}
 
@@ -130,4 +150,67 @@ public class SuTurnoApplicationRun {
 		return tipoClienteDelegate;
 	}
 
+	/**
+	 * @return the principalGUI
+	 */
+	public PrincipalGUI getPrincipalGUI() {
+		return principalGUI;
+	}
+
+	/**
+	 * @return the empleadoGUI
+	 */
+	public EmpleadoGUI getEmpleadoGUI() {
+		return empleadoGUI;
+	}
+
+
+	/**
+	 * @return the servicioGUI
+	 */
+	public ServicioGUI getServicioGUI() {
+		return servicioGUI;
+	}
+
+
+	/**
+	 * @return the tipoClienteGUI
+	 */
+	public TipoClientePrioridadGUI getTipoClienteGUI() {
+		return tipoClienteGUI;
+	}
+
+
+	/**
+	 * @return the loginGUI
+	 */
+	public LoginGUI getLoginGUI() {
+		return loginGUI;
+	}
+
+
+	/**
+	 * @return the recuperarGUI
+	 */
+	public RecuperarContraseniaGUI getRecuperarGUI() {
+		return recuperarGUI;
+	}
+
+
+	/**
+	 * @return the consultasGUI
+	 */
+	public ConsultasGUI getConsultasGUI() {
+		return consultasGUI;
+	}
+
+	/**
+	 * @return the manejadorGUI
+	 */
+	public ManejadorGUI getManejadorGUI() {
+		return manejadorGUI;
+	}
+
+
+	
 }

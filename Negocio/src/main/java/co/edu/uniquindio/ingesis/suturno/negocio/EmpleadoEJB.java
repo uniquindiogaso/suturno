@@ -244,7 +244,7 @@ public class EmpleadoEJB implements EmpleadoEJBRemote {
 	 * @param claveNueva Nueva Contraseña
 	 * @return True si la actualizacion de clave es correcta 
 	 */
-	public boolean actualizarClaveEmpleado(Long empleadoId, String claveNueva) {
+	public boolean actualizarClaveEmpleado(int empleadoId, String claveNueva) {
 		Empleado existe = entityManager.find(Empleado.class, empleadoId);
 
 		if (null != existe) {
@@ -263,7 +263,7 @@ public class EmpleadoEJB implements EmpleadoEJBRemote {
 	 * @param servicios Lista de Servicios
 	 * @return True si se asignaron correctamente los servicios
 	 */
-	public boolean asignarServiciosEmpleado(Long empleadoId, List<Servicio> servicios){
+	public boolean asignarServiciosEmpleado(int empleadoId, List<Servicio> servicios){
 		Empleado existe = entityManager.find(Empleado.class, empleadoId);
 		
 		if (null != existe) {			

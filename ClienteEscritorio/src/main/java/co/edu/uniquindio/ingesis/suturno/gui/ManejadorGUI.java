@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import co.edu.uniquindio.ingesis.suturno.SuTurnoApplicationRun;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
@@ -26,37 +29,18 @@ import java.awt.event.ActionEvent;
  * @since 12/04/2017
  */
 public class ManejadorGUI extends JFrame {
-
-	/**
-	 * Instancias de las ventanas: tipoCliente, consultas, empleado, principal,
-	 * recuperar contraseña, servicio
-	 */
-	private TipoClientePrioridadGUI tipoCliente;
-	private ConsultasGUI consultas;
-	private EmpleadoGUI empleado;
-	private PrincipalGUI principal;
-	private RecuperarContraseniaGUI recuperar;
-	private ServicioGUI servicio;
-
 	/**
 	 * Variable que representa los componentes de la ventana
 	 */
 	private JPanel contentPane;
 
 	/**
-	 * Launch the application.
-	 * 
-	 * public static void main(String[] args) { EventQueue.invokeLater(new
-	 * Runnable() { public void run() { try { ManejadorGUI frame = new
-	 * ManejadorGUI(); frame.setVisible(true); } catch (Exception e) {
-	 * e.printStackTrace(); } } }); }
-	 */
-
-	/**
 	 * Se crea la ventana
 	 */
 	public ManejadorGUI() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
 		setBounds(100, 100, 450, 396);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -65,55 +49,55 @@ public class ManejadorGUI extends JFrame {
 		JButton btnConsultas = new JButton("Consultas");
 		btnConsultas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				consultas.setVisible(true);
-				setVisible(false);
+				SuTurnoApplicationRun.getInstancia().getConsultasGUI().setVisible(true);
+				SuTurnoApplicationRun.getInstancia().getManejadorGUI().setVisible(false);
 			}
 		});
 
 		JButton btnEmpleados = new JButton("Empleados");
 		btnEmpleados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				empleado.setVisible(true);
-				setVisible(false);
+				SuTurnoApplicationRun.getInstancia().getEmpleadoGUI().setVisible(true);
+				SuTurnoApplicationRun.getInstancia().getManejadorGUI().setVisible(false);
 			}
 		});
 
 		JButton btnServicios = new JButton("Servicios");
 		btnServicios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				servicio.setVisible(true);
-				setVisible(false);
+				SuTurnoApplicationRun.getInstancia().getServicioGUI().setVisible(true);
+				SuTurnoApplicationRun.getInstancia().getManejadorGUI().setVisible(false);
 			}
 		});
 
 		JButton btnClientes = new JButton("Clientes");
 		btnClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				tipoCliente.setVisible(true);
-				setVisible(false);
+				SuTurnoApplicationRun.getInstancia().getManejadorGUI().setVisible(false);
+				SuTurnoApplicationRun.getInstancia().getTipoClienteGUI().setVisible(true);
 			}
 		});
 
-		JButton btnSalir = new JButton("Salir");
-		btnSalir.addActionListener(new ActionListener() {
+		JButton btnAtras = new JButton("Atrás");
+		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				principal.setVisible(true);
-				setVisible(false);
+				SuTurnoApplicationRun.getInstancia().getPrincipalGUI().setVisible(true);
+				SuTurnoApplicationRun.getInstancia().getManejadorGUI().setVisible(false);
 			}
 		});
 
-		JButton btnRecuperarConstrasenia = new JButton("Recuperar Constrase\u00F1a");
+		JButton btnRecuperarConstrasenia = new JButton("Recuperar Constraseña");
 		btnRecuperarConstrasenia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				recuperar.setVisible(true);
-				setVisible(false);
+				SuTurnoApplicationRun.getInstancia().getRecuperarGUI().setVisible(true);
+				SuTurnoApplicationRun.getInstancia().getManejadorGUI().setVisible(false);
 			}
 		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING).addGroup(gl_contentPane
 				.createSequentialGroup().addGap(150)
 				.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(btnSalir, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+						.addComponent(btnAtras, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
 						.addComponent(btnEmpleados, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
 								GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addComponent(btnClientes, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
@@ -131,7 +115,7 @@ public class ManejadorGUI extends JFrame {
 				.addPreferredGap(ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
 				.addComponent(btnRecuperarConstrasenia, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
 				.addPreferredGap(ComponentPlacement.UNRELATED)
-				.addComponent(btnSalir, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE).addGap(16)));
+				.addComponent(btnAtras, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE).addGap(16)));
 		contentPane.setLayout(gl_contentPane);
 	}
 

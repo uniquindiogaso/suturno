@@ -3,9 +3,17 @@ package co.edu.uniquindio.ingesis.suturno.gui;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import org.jvnet.libpam.PAMException;
+
+import co.edu.uniquindio.ingesis.suturno.SuTurnoApplicationRun;
+import co.edu.uniquindio.ingesis.suturno.delegados.EmpleadoDelegate;
+import co.edu.uniquindio.ingesis.suturno.entidades.Empleado;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
@@ -27,34 +35,22 @@ import java.awt.event.ActionEvent;
  * @since 12/04/2017
  */
 public class LoginGUI extends JFrame {
-
-	/**
-	 * Instancias de la ventanas: manejador y principal
-	 */
-	private ManejadorGUI manejador;
-	private PrincipalGUI principal;
-
 	/**
 	 * Variables que representan los componentes de la ventana
 	 */
 	private JPanel contentPane;
 	private JTextField tFUsuario;
 	private JPasswordField pFContrasenia;
-
-	/**
-	 * Launch the application.
-	 * 
-	 * public static void main(String[] args) { EventQueue.invokeLater(new
-	 * Runnable() { public void run() { try { LoginGUI frame = new LoginGUI();
-	 * frame.setVisible(true); } catch (Exception e) { e.printStackTrace(); } }
-	 * }); }
-	 */
+	private JButton btnAceptar;
+	private JButton btnCancelar;
 
 	/**
 	 * Se crea la ventana
 	 */
 	public LoginGUI() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
 		setBounds(100, 100, 429, 368);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -67,19 +63,31 @@ public class LoginGUI extends JFrame {
 		tFUsuario = new JTextField();
 		tFUsuario.setColumns(10);
 
-		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				manejador.setVisible(true);
-				setVisible(false);
+				if (!tFUsuario.getText().isEmpty() && pFContrasenia.getPassword().length != 0) {
+					Empleado empleado = EmpleadoDelegate.getInstancia().verificarAcceso(tFUsuario.getText(),
+							new String(pFContrasenia.getPassword()));
+					if (empleado != null) {
+						JOptionPane.showMessageDialog(LoginGUI.this, "Acceso concedido.");
+						SuTurnoApplicationRun.getInstancia().getManejadorGUI().setVisible(true);
+						SuTurnoApplicationRun.getInstancia().getLoginGUI().setVisible(false);
+					} else {
+						JOptionPane.showMessageDialog(LoginGUI.this, "Acceso denegado.");
+					}
+				} else {
+					JOptionPane.showMessageDialog(LoginGUI.this, "Debe ingresar todos los datos.");
+				}
+
 			}
 		});
 
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				principal.setVisible(true);
-				setVisible(false);
+				SuTurnoApplicationRun.getInstancia().getPrincipalGUI().setVisible(true);
+				SuTurnoApplicationRun.getInstancia().getLoginGUI().setVisible(false);
 			}
 		});
 

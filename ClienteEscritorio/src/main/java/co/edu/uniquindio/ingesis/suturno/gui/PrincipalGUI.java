@@ -11,6 +11,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import co.edu.uniquindio.ingesis.suturno.SuTurnoApplicationRun;
+
 /**
  * Interfaz principal de la aplicacion suturno
  * 
@@ -25,29 +27,18 @@ import javax.swing.border.EmptyBorder;
  * @since 12/04/2017
  */
 public class PrincipalGUI extends JFrame {
-
-	/**
-	 * Instancia de la ventana login
-	 */
-	private LoginGUI login;
-
 	/**
 	 * Variable que representa los componentes de la ventana
 	 */
 	private JPanel contentPane;
 
 	/**
-	 * Launch the application. public static void main(String[] args) {
-	 * EventQueue.invokeLater(new Runnable() { public void run() { try {
-	 * PrincipalGUI frame = new PrincipalGUI(); frame.setVisible(true); } catch
-	 * (Exception e) { e.printStackTrace(); } } }); }
-	 */
-
-	/**
 	 * Se crea la ventana
 	 */
 	public PrincipalGUI() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
 		setBounds(100, 100, 356, 352);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -63,12 +54,17 @@ public class PrincipalGUI extends JFrame {
 		JButton btnEmpleado = new JButton("Empleado");
 		btnEmpleado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				(new LoginGUI()).setVisible(true);
-				setVisible(false);
+				SuTurnoApplicationRun.getInstancia().getLoginGUI().setVisible(true);
+				SuTurnoApplicationRun.getInstancia().getPrincipalGUI().setVisible(false);
 			}
 		});
 
 		JButton btnSalir = new JButton("Salir");
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane
 				.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING,
