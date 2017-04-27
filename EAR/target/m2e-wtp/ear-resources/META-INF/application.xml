@@ -5,5 +5,11 @@
   <module id="EJB_co.edu.uniquindio.a2.Negocio">
     <ejb>Negocio-0.0.1-SNAPSHOT.jar</ejb>
   </module>
+  <module id="WAR_co.edu.uniquindio.a2.Web">
+    <web>
+      <web-uri>Web-0.0.1-SNAPSHOT.war</web-uri>
+      <context-root>/Web</context-root>
+    </web>
+  </module>
   <library-directory>lib</library-directory>
 </application>

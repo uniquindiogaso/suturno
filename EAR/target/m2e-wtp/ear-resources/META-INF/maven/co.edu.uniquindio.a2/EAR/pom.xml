@@ -22,5 +22,11 @@
 			<version>0.0.1-SNAPSHOT</version>
 			<type>ejb</type>
 		</dependency>
+		<dependency>
+			<groupId>co.edu.uniquindio.a2</groupId>
+			<artifactId>Web</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>war</type>
+		</dependency>
 	</dependencies>
 </project>

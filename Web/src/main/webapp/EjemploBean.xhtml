@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<head>
+<meta charset="UTF-8" />
+<title>Ejemplo Bean</title>
+</head>
+<body>
+	<form jsf:id="miFormulario">
+		<input type="text" jsf:value="#{ejemploBean.atributo1}" /> 
+		<input type="text" jsf:value="#{ejemploBean.atributo2}" /> 
+		<input type="submit" jsf:action="#{ejemploBean.cambiar}" value="Aceptar" />
+	</form>
+</body>
+</html>

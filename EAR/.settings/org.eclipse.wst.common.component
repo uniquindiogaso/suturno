@@ -8,5 +8,8 @@
         <dependent-module archiveName="Negocio-0.0.1-SNAPSHOT.jar" deploy-path="/" handle="module:/resource/Negocio/Negocio">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="Web-0.0.1-SNAPSHOT.war" deploy-path="/" handle="module:/resource/Web/Web">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
     </wb-module>
 </project-modules>

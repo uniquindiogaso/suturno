@@ -65,5 +65,6 @@
 		<module>Pruebas</module>
     <module>Negocio</module>
     <module>ClienteEscritorio</module>
+    <module>Web</module>
 	</modules>
 </project>
