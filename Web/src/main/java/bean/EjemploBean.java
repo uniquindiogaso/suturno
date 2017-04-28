@@ -1,11 +1,23 @@
 package bean;
 
 import javax.faces.bean.ManagedBean;
-
+/**
+ * Bean de ejemplo
+ * @author Gustavo Salgado, Laura Rua
+ * @since 26/04/2017
+ * @version 1.0
+ *
+ */
 @ManagedBean
 public class EjemploBean {
 
+	/**
+	 * Variable que representa el atributo1
+	 */
 	private String atributo1;
+	/**
+	 * Variable que representa el atributo2
+	 */
 	private String atributo2;
 
 	public EjemploBean() {

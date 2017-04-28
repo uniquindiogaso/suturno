@@ -10,7 +10,7 @@
 <title>Servicios</title>
 </head>
 <body>
-	<h:form>
+	<h:form prependId="false">
 		<h:panelGrid columns="3" border="0">
 			<f:facet name="header">REGISTRAR SERVICIO</f:facet>
 			
@@ -29,7 +29,8 @@
 			<h:message for="descripcion" style="color:red" />
 			
 			
-			<h:commandButton value="Registrar" action="#{servicioBean.registrar}" />
+			<h:commandButton value="Registrar" action="#{servicioBean.registrar}"  rendered="#{!servicioBean.soloLectura}"/>
+			<h:button outcome="/index?faces-redirect=true" value="Cancelar"/>
 		</h:panelGrid>
 	</h:form>
 	<h:messages />

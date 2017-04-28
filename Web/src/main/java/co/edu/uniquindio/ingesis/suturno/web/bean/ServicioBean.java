@@ -16,6 +16,7 @@ public class ServicioBean {
 	private String codigo;
 	private String nombre;
 	private String descripcion;
+	private boolean soloLectura = false;
 	
 	private List<Servicio> servicios;
 
@@ -23,7 +24,7 @@ public class ServicioBean {
 	@EJB
 	private ServiciosEJB servicioEJB;
 
-	public void registrar() {
+	public String registrar() {
 		FacesMessage mensaje;
 		Servicio servicio = new Servicio();
 		servicio.setCodigo(codigo);
@@ -36,12 +37,16 @@ public class ServicioBean {
 			codigo = "";
 			nombre = "";
 			descripcion = "";
+			
+			return "listar?faces-redirect=true";
 
 		} catch (Throwable e) {
 			mensaje = new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getCause().getMessage(),
 					e.getCause().getMessage());
 		}
 		FacesContext.getCurrentInstance().addMessage(null, mensaje);
+		
+		return null;
 	}
 	
 	public String buscarXNombre(){
@@ -55,7 +60,7 @@ public class ServicioBean {
 			codigo = existe.getCodigo();
 			nombre = existe.getNombre();
 			descripcion = existe.getDescripcion();
-			
+			soloLectura = true;
 			return "index";
 		}else{
 			FacesMessage mensaje = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Servicio No encontrado",
@@ -126,6 +131,20 @@ public class ServicioBean {
 	 */
 	public void setServicios(List<Servicio> servicios) {
 		this.servicios = servicios;
+	}
+
+	/**
+	 * @return the soloLectura
+	 */
+	public boolean isSoloLectura() {
+		return soloLectura;
+	}
+
+	/**
+	 * @param soloLectura the soloLectura to set
+	 */
+	public void setSoloLectura(boolean soloLectura) {
+		this.soloLectura = soloLectura;
 	}
 
 

@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
 <head>
 <meta charset="UTF-8" />
-<title>Primer Pagina</title>
+<title>Pagina Principal</title>
 </head>
 <body>
-#{msg.saludo} - #{holaMundoBean.mensaje}
+	<h2>Menu de Opciones</h2>
+	<h:link outcome="servicios/index?faces-redirect=true" >Registrar Servicio</h:link><br/>
+	<h:link outcome="servicios/buscar?faces-redirect=true" >Buscar Servicio</h:link>
 </body>
 </html>
