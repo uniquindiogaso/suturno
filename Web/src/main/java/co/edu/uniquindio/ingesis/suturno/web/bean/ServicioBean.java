@@ -1,5 +1,7 @@
 package co.edu.uniquindio.ingesis.suturno.web.bean;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -14,6 +16,9 @@ public class ServicioBean {
 	private String codigo;
 	private String nombre;
 	private String descripcion;
+	
+	private List<Servicio> servicios;
+
 
 	@EJB
 	private ServiciosEJB servicioEJB;
@@ -38,6 +43,29 @@ public class ServicioBean {
 		}
 		FacesContext.getCurrentInstance().addMessage(null, mensaje);
 	}
+	
+	public String buscarXNombre(){
+		Servicio existe = servicioEJB.buscarServicioPorNombre(nombre);
+		
+		
+		System.out.println("NOMBRE A BUSCAR ?" + nombre);
+		System.out.println("Existe Servicio?" + existe);
+		
+		if(existe != null){
+			codigo = existe.getCodigo();
+			nombre = existe.getNombre();
+			descripcion = existe.getDescripcion();
+			
+			return "index";
+		}else{
+			FacesMessage mensaje = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Servicio No encontrado",
+					"No se encontro el servicio");
+			FacesContext.getCurrentInstance().addMessage(null, mensaje);
+		}
+		
+		return null;
+	}
+	
 
 	/**
 	 * @return the codigo
@@ -83,5 +111,27 @@ public class ServicioBean {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+
+
+	/**
+	 * @return the servicios
+	 */
+	public List<Servicio> getServicios() {
+		return servicioEJB.listarServicios();
+	}
+
+
+	/**
+	 * @param servicios the servicios to set
+	 */
+	public void setServicios(List<Servicio> servicios) {
+		this.servicios = servicios;
+	}
+
+
+	
+	
+	
+	
 
 }
