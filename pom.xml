@@ -66,5 +66,6 @@
     <module>Negocio</module>
     <module>ClienteEscritorio</module>
     <module>Web</module>
+	 <module>suturno-desktop</module>
 	</modules>
 </project>
