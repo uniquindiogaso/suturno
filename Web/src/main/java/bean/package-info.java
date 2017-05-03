@@ -1,8 +1,14 @@
 /**
- * 
- */
-/**
- * @author gusta
+ * Definicion de los bean usados para la capa web
  *
+ * @author Gustavo Salgado y Laura Julieth Rua
+ * 
+ * @author Ingeniería de Sistemas y Computacion
+ * 
+ * @author Universidad del Quindio
+ * 
+ * @version 1.0
+ * 
+ * @since 26/04/2017
  */
 package bean;

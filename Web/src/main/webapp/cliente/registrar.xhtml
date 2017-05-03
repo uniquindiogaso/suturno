@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<head>
+<meta charset="UTF-8" />
+<title>Clientes | Registrar</title>
+</head>
+<body>
+	<h:form prependId="false">
+		<h:panelGrid columns="3" border="0">
+			<f:facet name="header">REGISTRAR CLIENTE</f:facet>
+			<h:outputLabel value="Codigo:" for="codigo" />
+			<h:inputText id="codigo" value="#{personaBean.identificacion}" required="true"/>
+			<h:message for="codigo" style="color:red" />
+			
+			<h:outputLabel value="Tipo Documento:" for="tdoc" />
+			<h:selectOneMenu id="tdoc" value="#{personaBean.tDoc}" >
+			    <f:selectItems value="#{personaBean.tdocs}" />
+			</h:selectOneMenu>
+			
+		</h:panelGrid>
+	</h:form>
+</body>
+</html>
