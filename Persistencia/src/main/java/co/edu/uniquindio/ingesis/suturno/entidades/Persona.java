@@ -1,6 +1,7 @@
 package co.edu.uniquindio.ingesis.suturno.entidades;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -29,7 +30,7 @@ import co.edu.uniquindio.ingesis.suturno.validators.Email;
  * 
  * @author Gustavo Salgado y Laura Julieth Rua
  * 
- * @author Ingeniería de Sistemas y Computacion
+ * @author Ingenieria de Sistemas y Computacion
  * 
  * @author Universidad del Quindio
  * 
@@ -39,7 +40,7 @@ import co.edu.uniquindio.ingesis.suturno.validators.Email;
  */
 @Entity
 @NamedQueries({ @NamedQuery(name = Persona.GET_ALL, query = "SELECT p FROM Persona p"),
-	@NamedQuery(name = Persona.GET_X_IDENTIFICACION, query = "SELECT p FROM Persona p WHERE p.identificacion= :identificacion "),
+		@NamedQuery(name = Persona.GET_X_IDENTIFICACION, query = "SELECT p FROM Persona p WHERE p.identificacion= :identificacion "),
 		@NamedQuery(name = Persona.GET_TIPOCLIENTE_CLIENTE, query = "SELECT t FROM Persona p LEFT JOIN (p.tiposCliente) t WHERE p.id= :personaId ") })
 @Table(name = "suturno_persona")
 public class Persona implements Serializable {
@@ -56,10 +57,10 @@ public class Persona implements Serializable {
 	 * pertenece el cliente {@link Persona} <br />
 	 */
 	public static final String GET_TIPOCLIENTE_CLIENTE = "TipoCliente_findByCliente";
-	
-	
+
 	/**
-	 * Constante que identifica la consulta que la Persona de acuerdo a su numero de Identificacion {@link Persona} <br />
+	 * Constante que identifica la consulta que la Persona de acuerdo a su
+	 * numero de Identificacion {@link Persona} <br />
 	 */
 	public static final String GET_X_IDENTIFICACION = "PersonaByIdentificacion";
 
@@ -136,9 +137,14 @@ public class Persona implements Serializable {
 	 */
 	@Column(length = 15)
 	private String tel2;
+	/**
+	 * Variable que representa el atributo fecha de nacimiento de la Persona
+	 */
+	@Column
+	private Date fechaNacimiento;
 
 	/**
-	 * Variable que representa el atributo dirección de la Persona
+	 * Variable que representa el atributo direcciï¿½n de la Persona
 	 */
 	@Column(length = 100)
 	private String dir;
@@ -171,7 +177,7 @@ public class Persona implements Serializable {
 	/**
 	 * Variable que representa el atributo empleado de la Persona
 	 */
-	@OneToOne(cascade = CascadeType.PERSIST	)
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private Empleado empleado;
 
 	/**
@@ -182,7 +188,6 @@ public class Persona implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-
 	/**
 	 * @param identificacion
 	 * @param tDoc
@@ -191,9 +196,10 @@ public class Persona implements Serializable {
 	 * @param apellido1
 	 * @param apellido2
 	 * @param email
+	 * @param fecha
 	 */
 	public Persona(String identificacion, TipoDocumento tDoc, String nombre1, String nombre2, String apellido1,
-			String apellido2, String email) {
+			String apellido2, String email, Date fecha) {
 		super();
 		this.identificacion = identificacion;
 		this.tDoc = tDoc;
@@ -202,10 +208,8 @@ public class Persona implements Serializable {
 		this.apellido1 = apellido1;
 		this.apellido2 = apellido2;
 		this.email = email;
+		this.fechaNacimiento=fecha;
 	}
-
-
-
 
 	/**
 	 * Metodo que permite obtener el valor del atributo id
@@ -362,7 +366,7 @@ public class Persona implements Serializable {
 	/**
 	 * Metodo que permite obtener el valor del atributo email
 	 * 
-	 * @return email el correo electrónico de la persona
+	 * @return email el correo electrï¿½nico de la persona
 	 */
 	public String getEmail() {
 		return email;
@@ -372,7 +376,7 @@ public class Persona implements Serializable {
 	 * Metodo que permite asignar un valor al atributo email
 	 * 
 	 * @param email
-	 *            el correo electrónico de la persona
+	 *            el correo electrï¿½nico de la persona
 	 */
 	public void setEmail(String email) {
 		this.email = email;
@@ -381,7 +385,7 @@ public class Persona implements Serializable {
 	/**
 	 * Metodo que permite obtener el valor del atributo tel1
 	 * 
-	 * @return tel1 el teléfono de la persona, celular o fijo
+	 * @return tel1 el telï¿½fono de la persona, celular o fijo
 	 */
 	public String getTel1() {
 		return tel1;
@@ -391,7 +395,7 @@ public class Persona implements Serializable {
 	 * Metodo que permite asignar un valor al atributo tel1
 	 * 
 	 * @param tel1
-	 *            el teléfono de la persona, celular o fijo
+	 *            el telï¿½fono de la persona, celular o fijo
 	 */
 	public void setTel1(String tel1) {
 		this.tel1 = tel1;
@@ -400,7 +404,7 @@ public class Persona implements Serializable {
 	/**
 	 * Metodo que permite obtener el valor del atributo tel2
 	 * 
-	 * @return tel2 otro teléfono de la persona, celular o fijo
+	 * @return tel2 otro telï¿½fono de la persona, celular o fijo
 	 */
 	public String getTel2() {
 		return tel2;
@@ -410,7 +414,7 @@ public class Persona implements Serializable {
 	 * Metodo que permite asignar un valor al atributo tel2
 	 * 
 	 * @param tel2
-	 *            otro teléfono de la persona, celular o fijo
+	 *            otro telï¿½fono de la persona, celular o fijo
 	 */
 	public void setTel2(String tel2) {
 		this.tel2 = tel2;
@@ -419,7 +423,7 @@ public class Persona implements Serializable {
 	/**
 	 * Metodo que permite obtener el valor del atributo dir
 	 * 
-	 * @return dir la dirección de la persona
+	 * @return dir la direcciï¿½n de la persona
 	 */
 	public String getDir() {
 		return dir;
@@ -429,7 +433,7 @@ public class Persona implements Serializable {
 	 * Metodo que permite asignar un valor al atributo dir
 	 * 
 	 * @param dir
-	 *            la dirección de la persona
+	 *            la direcciï¿½n de la persona
 	 */
 	public void setDir(String dir) {
 		this.dir = dir;
@@ -457,8 +461,8 @@ public class Persona implements Serializable {
 	/**
 	 * Metodo que permite obtener el valor del atributo activo
 	 * 
-	 * @return activo true si la persona está activa en el sistema o false si la
-	 *         persona está inactiva en el sistema
+	 * @return activo true si la persona estï¿½ activa en el sistema o false si la
+	 *         persona estï¿½ inactiva en el sistema
 	 */
 	public boolean isActivo() {
 		return activo;
@@ -468,8 +472,8 @@ public class Persona implements Serializable {
 	 * Metodo que permite asignar un valor al atributo activo
 	 * 
 	 * @param activo
-	 *            true si la persona está activa en el sistema o false si la
-	 *            persona está inactiva en el sistema
+	 *            true si la persona estï¿½ activa en el sistema o false si la
+	 *            persona estï¿½ inactiva en el sistema
 	 */
 	public void setActivo(boolean activo) {
 		this.activo = activo;
@@ -532,5 +536,23 @@ public class Persona implements Serializable {
 	public void setEmpleado(Empleado empleado) {
 		this.empleado = empleado;
 	}
+	
+	/**
+	 * Metodo get del atributo fecha de nacimiento
+	 * @return fechaNacimiento la fecha de nacimiento de la persona
+	 */
+	public Date getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+
+	/**
+	 * Metodo set del atributo fehca de nacimiento
+	 * @param fechaNacimiento la fecha de nacimiento de la persona
+	 */
+	public void setFechaNacimiento(Date fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+	
+	
 
 }

@@ -2,6 +2,7 @@ package co.edu.uniquindio.ingesis.suturno.web.bean;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -11,9 +12,11 @@ import co.edu.uniquindio.ingesis.suturno.entidades.Servicio;
 import co.edu.uniquindio.ingesis.suturno.negocio.ServiciosEJB;
 
 /**
- * Bean del servicio de la aplicación suturno
+ * Bean del servicio de la aplicacion suturno
  * 
  * @author Gustavo Salgado y Laura Julieth Rua
+ * @author Ingenieria de Sistemas y Computacion
+ * @author Universidad del Quindio
  * @since 26/04/2017
  * @version 1.0
  *
@@ -47,6 +50,14 @@ public class ServicioBean {
 	 */
 	@EJB
 	private ServiciosEJB servicioEJB;
+
+	/**
+	 * Metodo que inicializa el listado de servicios
+	 */
+	@PostConstruct
+	public void inicializar() {
+		// servicios=servicioEJB.listarServicios();
+	}
 
 	/**
 	 * Registra el servicio utilizando el EJB

@@ -21,7 +21,7 @@ import javax.validation.constraints.Size;
  * 
  * @author Gustavo Salgado y Laura Julieth Rua
  * 
- * @author Ingeniería de Sistemas y Computacion
+ * @author Ingenierï¿½a de Sistemas y Computacion
  * 
  * @author Universidad del Quindio
  * 
