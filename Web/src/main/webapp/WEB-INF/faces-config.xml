@@ -3,10 +3,27 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/webfacesconfig_2_2.xsd"
 	version="2.2">
+
+	<factory>
+		<exception-handler-factory>
+			org.omnifaces.exceptionhandler.FullAjaxExceptionHandlerFactory
+		</exception-handler-factory>
+	</factory>
+
 	<application>
+		<locale-config>
+			<default-locale>es</default-locale>
+			<supported-locale>en</supported-locale>
+			<supported-locale>es</supported-locale>
+		</locale-config>
+		<message-bundle>messages</message-bundle>
 		<resource-bundle>
 			<base-name>resources.mensajes</base-name>
 			<var>msg</var>
+		</resource-bundle>
+		<resource-bundle>
+			<base-name>messages</base-name>
+			<var>msgs</var>
 		</resource-bundle>
 	</application>
 </faces-config> 

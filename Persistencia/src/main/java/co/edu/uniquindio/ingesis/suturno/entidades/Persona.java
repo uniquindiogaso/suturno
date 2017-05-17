@@ -19,6 +19,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import co.edu.uniquindio.ingesis.suturno.utils.Genero;
@@ -137,10 +138,11 @@ public class Persona implements Serializable {
 	 */
 	@Column(length = 15)
 	private String tel2;
+	
 	/**
 	 * Variable que representa el atributo fecha de nacimiento de la Persona
 	 */
-	@Column
+	@Transient
 	private Date fechaNacimiento;
 
 	/**
