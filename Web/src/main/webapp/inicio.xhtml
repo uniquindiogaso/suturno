@@ -45,16 +45,19 @@
 
 		<div class="form"></div>
 		<div class="form">
-			<h2>Tipo de Usuario</h2>
+			<h2>#{msgs['tipousuario.titulo']}</h2>
+			
 			<form>
-				<p:button value="Cliente" icon="ui-icon-star" />
+				<p:button value="#{msgs['tipousuario.tipocliente']}" icon="ui-icon-star" />
 				<br/>
 				<br/>
-				<p:button value="Empleado" icon="ui-icon-star" outcome="login?faces-redirect=true"/>
+				<p:button value="#{msgs['tipousuario.tipoempleado']}" icon="ui-icon-star" outcome="login?faces-redirect=true"/>
 			</form>
 		</div>
 		<div class="cta">
-			<span><i class='fa fa-code'></i> Laura Rua - Gustavo Salgado </span>
+			<form>
+			<p:button value="#{msgs['tipousuario.tipocliente']}" icon="ui-icon-star" />
+			</form>
 		</div>
 	</div>
 	<script

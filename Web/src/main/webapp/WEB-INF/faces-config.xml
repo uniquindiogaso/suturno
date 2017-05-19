@@ -14,7 +14,6 @@
 		<locale-config>
 			<default-locale>es</default-locale>
 			<supported-locale>en</supported-locale>
-			<supported-locale>es</supported-locale>
 		</locale-config>
 		<message-bundle>messages</message-bundle>
 		<resource-bundle>
