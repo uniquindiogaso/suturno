@@ -5,7 +5,7 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
-<head>
+<h:head>
 <meta charset="UTF-8" />
 <title>Inicio de Sesion | SUTURNO Web</title>
 
@@ -20,9 +20,9 @@
 <link rel="stylesheet" href="resources/css/login.css" />
 
 
-</head>
+</h:head>
 
-<body>
+<h:body>
 
 	<div id="clouds">
 		<div class="cloud x1"></div>
@@ -46,14 +46,14 @@
 		<div class="form"></div>
 		<div class="form">
 			<h2>Acceso Empleados</h2>
-			<form>
-				<input type="text" placeholder="Usuario" /> <input type="password"
-					placeholder="Clave" />
-				<button>Acceder</button>
+			<h:form>
+				<h:inputText  placeholder="Usuario" value="#{seguridadBean.usuario}" /> 
+				<h:inputSecret 	placeholder="Clave" value="#{seguridadBean.clave}"/>
+				<h:commandButton value="Aceptar" action="#{seguridadBean.comprobarAcceso}"/>
 				<br /> <br />
 				<h:button class="button-red" outcome="inicio?faces-redirect=true"
 					value="Regresar" />
-			</form>
+			</h:form>
 		</div>
 		<div class="cta">
 			<span><i class='fa fa-code'></i> Laura Rua - Gustavo Salgado <i
@@ -66,5 +66,5 @@
 
 
 
-</body>
+</h:body>
 </html>
