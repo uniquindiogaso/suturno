@@ -144,6 +144,17 @@ public class PersonaBean {
 	public Genero getGenero() {
 		return genero;
 	}
+	
+	/**
+	 * Metodo get del array de tipos de generos
+	 * 
+	 * @return array con los tipos de documentos
+	 */
+	public Genero[] getGeneros() {
+		return Genero.values();
+	}
+
+	
 
 	/**
 	 * Metodo set del atributo genero
