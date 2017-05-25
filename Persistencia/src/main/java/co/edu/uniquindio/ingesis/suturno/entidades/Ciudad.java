@@ -31,24 +31,23 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @NamedQueries({ @NamedQuery(name = Ciudad.GET_ALL, query = "SELECT entidad FROM Ciudad entidad"),
-				@NamedQuery(name = Ciudad.GET_ALL_BY_DEPTO, query = "SELECT c FROM Ciudad c WHERE c.depto.id= :dptoId")})
+		@NamedQuery(name = Ciudad.GET_ALL_BY_DEPTO, query = "SELECT c FROM Ciudad c WHERE c.depto.id= :dptoId") })
 @Table(name = "suturno_ciudad")
 public class Ciudad implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Constante que identifica la consulta que obtener todos los registros de
 	 * {@link Ciudad} <br />
 	 */
 	public static final String GET_ALL = "Ciudad_findAll";
-	
-	
+
 	/**
 	 * Constante que identifica la consulta que obtener todos los registros de
 	 * {@link Ciudad} de acuerdo a un departamento <br />
 	 */
-	public static final String GET_ALL_BY_DEPTO= "Ciudad_findByDepto";	
+	public static final String GET_ALL_BY_DEPTO = "Ciudad_findByDepto";
 
 	/**
 	 * Variable que representa el atributo id de la entidad
@@ -69,8 +68,21 @@ public class Ciudad implements Serializable {
 	 * Variable que representa el atributo nombre de la entidad ciudad
 	 */
 	@NotNull(message = "El nombre de la ciudad debe de ser obligatorio")
-	@Column(nullable = false, length = 50)
+	@Column(nullable = false, length = 200)
 	private String nombre;
+
+	/**
+	 * Variable que representa el atributo latitud de la entidad ciudad
+	 */
+	@Column(length = 50)
+	private String latitud;
+
+	/**
+	 * Variable que representa el atributo longitud de la entidad ciudad
+	 */
+
+	@Column(length = 50)
+	private String longitud;
 
 	/**
 	 * Variable que representa el atributo departamento de la entidad ciudad
@@ -166,6 +178,42 @@ public class Ciudad implements Serializable {
 	}
 
 	/**
+	 * Metodo que permite obtener el valor del atributo latitud
+	 * 
+	 * @return the latitud
+	 */
+	public String getLatitud() {
+		return latitud;
+	}
+
+	/**
+	 * Metodo que permite asignar un valor al atributo latitud
+	 * 
+	 * @param latitud
+	 *            the latitud to set
+	 */
+	public void setLatitud(String latitud) {
+		this.latitud = latitud;
+	}
+
+	/**
+	 * Metodo que permite obtener el valor del atributo longitud
+	 * @return the longitud
+	 */
+	public String getLongitud() {
+		return longitud;
+	}
+
+	/**
+	 * Metodo que permite asignar un valor al atributo longitud
+	 * @param longitud
+	 *            the longitud to set
+	 */
+	public void setLongitud(String longitud) {
+		this.longitud = longitud;
+	}
+
+	/**
 	 * Metodo que permite obtener el valor del atributo depto
 	 * 
 	 * @return depto el departamento al que pertenece la Ciudad
@@ -231,7 +279,9 @@ public class Ciudad implements Serializable {
 		return true;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -239,7 +289,4 @@ public class Ciudad implements Serializable {
 		return nombre;
 	}
 
-	
-	
-	
 }
