@@ -12,6 +12,7 @@ import javax.persistence.TypedQuery;
 
 import co.edu.uniquindio.ingesis.suturno.dto.ConteoClientesXServicioDTO;
 import co.edu.uniquindio.ingesis.suturno.dto.EmpleandoXClientesDTO;
+import co.edu.uniquindio.ingesis.suturno.entidades.Empleado;
 import co.edu.uniquindio.ingesis.suturno.entidades.Turno;
 
 /**
@@ -81,5 +82,15 @@ public class TurnoEJB implements TurnoEJBRemote {
     	return query.getResultList();
     }
     
+    
+    public List<Turno> turnosDisponibles(Empleado e){
+    	TypedQuery<Turno> query = entityManager.createNamedQuery(Turno.TURNOS_SIN_ATENDER_POR_USUARIO , Turno.class);
+    	query.setParameter("empleado", e);
+    	return query.getResultList();
+    }
+    
+    public void actualizarTurno(Turno t){
+    	entityManager.merge(t);
+    }
 
 }

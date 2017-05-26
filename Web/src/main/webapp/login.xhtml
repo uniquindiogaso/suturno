@@ -4,7 +4,8 @@
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 <meta charset="UTF-8" />
 <title>Inicio de Sesion | SUTURNO Web</title>
@@ -23,6 +24,8 @@
 </h:head>
 
 <h:body>
+
+	<p:growl id="growl" />  
 
 	<div id="clouds">
 		<div class="cloud x1"></div>
@@ -45,14 +48,14 @@
 
 		<div class="form"></div>
 		<div class="form">
-			<h2>Acceso Empleados</h2>
+			<h2>#{msgs['login.titulo']}</h2>
 			<h:form>
-				<h:inputText  placeholder="Usuario" value="#{seguridadBean.usuario}" /> 
-				<h:inputSecret 	placeholder="Clave" value="#{seguridadBean.clave}"/>
-				<h:commandButton value="Aceptar" action="#{seguridadBean.comprobarAcceso}"/>
+				<h:inputText  placeholder="#{msgs['login.usuario']}" value="#{seguridadBean.usuario}" /> 
+				<h:inputSecret 	placeholder="#{msgs['login.clave']}" value="#{seguridadBean.clave}"/>
+				<h:commandButton value="#{msgs['login.bacceder']}" action="#{seguridadBean.comprobarAcceso}"/>
 				<br /> <br />
 				<h:button class="button-red" outcome="inicio?faces-redirect=true"
-					value="Regresar" />
+					value="#{msgs['login.bregresar']}" />
 			</h:form>
 		</div>
 		<div class="cta">

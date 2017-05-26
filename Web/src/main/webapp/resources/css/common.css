@@ -47,17 +47,17 @@ input, select, .ui-widget, .ui-widget input, .ui-widget select,
 	padding: 0 30px 0 30px;
 }
 
-#servicesList {
+#menuLateral {
 	width: 200px;
 }
 
-#servicesList .ui-menuitem-link {
+#menuLateral .ui-menuitem-link {
 	margin-top: 4px;
 	margin-bottom: 4px;
 	line-height: 16px;
 }
 
-#servicesList .ui-menuitem-text {
+#menuLateral .ui-menuitem-text {
 	padding-left: 4px;
 }
 

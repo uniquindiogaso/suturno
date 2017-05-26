@@ -56,7 +56,10 @@
 		</div>
 		<div class="cta">
 			<h:form>
-			<p:commandButton title="#{msgs['tipousuario.idioma']}" icon="ui-icon-flag" action="#{idiomaBean.cambiarIdioma}" process="@all"/>
+				<h:commandLink action="#{idiomaBean.cambiarIdioma}" process="@all" ajax="false">
+					<span><i class='fa fa-globe'></i></span>
+					<h:outputText value="#{msgs['tipousuario.idioma']}"/>
+				</h:commandLink>
 			</h:form>
 		</div>
 	</div>

@@ -1,0 +1,69 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+	<h:form id="form">
+		<p:repeat
+			value="#{turnoBean.obtenerTurnosPendientes(seguridadBean.empleado)}"
+			var="turno">
+			<h:panelGrid columns="2" style="width:100%"
+				columnClasses="logo,detail">
+				<p:commandLink update=":form:atenderDialogModal" oncomplete="PF('atenderDialog').show()" action="#{turnoBean.inicarAtencionTurno()}" >
+					<f:setPropertyActionListener value="#{turno}"
+						target="#{turnoBean.turnoSeleccionado}" />
+					<p:graphicImage library="images" name="atender.png" />
+				</p:commandLink>
+
+				<p:outputPanel>
+					<h:panelGrid columns="2" cellpadding="5">
+						<h:outputText value="Codigo" />
+						<h:outputText value="#{turno.id}" style="font-weight: bold" />
+
+						<h:outputText value="Cliente" />
+						<h:outputText value="#{turno.cliente.nombre1}"
+							style="font-weight: bold" />
+
+						<h:outputText value="Servicio" />
+						<h:outputText value="#{turno.servicio.nombre}"
+							style="font-weight: bold" />
+					</h:panelGrid>
+				</p:outputPanel>
+			</h:panelGrid>
+			<hr />
+		</p:repeat>
+
+		<p:dialog header="Atender Turno" widgetVar="atenderDialog"
+			modal="true" showEffect="blind" hideEffect="explode"
+			resizable="false">
+			<p:outputPanel id="atenderDialogModal" style="text-align:center;">
+				<p:panelGrid style="width:100%" columns="2"
+					rendered="#{not empty turnoBean.turnoSeleccionado}"
+					columnClasses="label,value">
+
+					<h:outputText value="Cliente" />
+					<h:outputText value="#{turnoBean.turnoSeleccionado.cliente.nombre1}" />
+
+					<h:outputText value="Servicio" />
+					<h:outputText value="#{turnoBean.turnoSeleccionado.servicio.nombre}" />
+
+					<h:outputText value="Observacion" />
+					<p:inputTextarea value="#{turnoBean.turnoSeleccionado.nota}" rows="6" cols="100"/>
+
+					<f:facet name="footer">
+						<p:commandButton value="Finalizar" />
+						<p:commandButton value="Anular" />
+					</f:facet>
+
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:dialog>
+
+
+
+	</h:form>
+
+
+</ui:composition>

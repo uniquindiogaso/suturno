@@ -4,7 +4,7 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-<f:view contentType="text/html" locale="#{userSettings.locale}">
+<f:view contentType="text/html" locale="#{idiomaBean.localizacion}">
 	<h:head title="JSF-PrimeFaces-CDI Sample Web Application">
 		<f:facet name="first">
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -19,30 +19,29 @@
 		<h:form id="mainForm" prependId="false">
 			<div class="slogan">
 				<h:outputText value="SUTURNO WEB - UNIQUINDIO - &#169; 2017" />
-
-
-				<p:commandButton value="Idioma" icon="ui-icon-power"
-					ajax="false" style="margin-left:50px"
-					action="#{logoutController.logout}" immediate="true" />
 					
 				<p:commandButton value="#{msgs['logout']}" icon="ui-icon-power"
 					ajax="false" style="margin-left:50px"
 					action="#{logoutController.logout}" immediate="true" />
 
-
-
 			</div>
 
 			<h:panelGrid columns="2" columnClasses="menuColumn,contentColumn">
-				<p:menu id="servicesList">
+				<p:menu id="menuLateral">
 					<p:menuitem value="#{msgs['service.1']}"
 						styleClass="#{navigationContext.getMenuitemStyleClass('/views/firstService.xhtml')}"
-						icon="ui-icon-play" onclick="selectServiceLink(this)" ajax="false"
+						icon="ui-icon-play" onclick="menuSeleccionado(this)" ajax="false"
 						url="/views/firstService.xhtml" />
 					<p:menuitem value="#{msgs['service.2']}"
 						styleClass="#{navigationContext.getMenuitemStyleClass('/views/secondService.xhtml')}"
-						icon="ui-icon-play" onclick="selectServiceLink(this)" ajax="false"
+						icon="ui-icon-play" onclick="menuSeleccionado(this)" ajax="false"
 						url="/views/secondService.xhtml" />
+						
+						
+					<p:menuitem value="Turnos Pendientes"
+						styleClass="#{navigationContext.getMenuitemStyleClass('/views/turno/turnosPendientes.xhtml')}"
+						icon="ui-icon-play" onclick="menuSeleccionado(this)" ajax="false"
+						url="/views/turno/turnosPendientes.xhtml" />	
 				</p:menu>
 
 				<h:panelGroup layout="block">

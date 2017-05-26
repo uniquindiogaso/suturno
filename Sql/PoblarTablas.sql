@@ -2,6 +2,7 @@
 #DELETE FROM suturno_depto;
 #DELETE FROM suturno_ciudad;
 
+DELETE FROM suturno_turno;
 DELETE FROM suturno_empleado_suturno_servicio;
 DELETE FROM suturno_servicio;
 DELETE FROM suturno_persona;
@@ -1195,3 +1196,7 @@ INSERT INTO suturno_empleado_suturno_servicio(empleados_id,servicios_id) VALUES
 (4,3),
 (5,2),
 (5,3);
+
+
+INSERT INTO suturno_turno(id,estado,fecha,cliente_id,servicio_id) VALUE (1,0,now(),6,1);
+INSERT INTO suturno_turno(id,estado,fecha,cliente_id,servicio_id) VALUE (2,0,now(),7,1);

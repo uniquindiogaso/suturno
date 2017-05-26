@@ -28,6 +28,7 @@ public class UserSettings implements Serializable {
     @PostConstruct
     protected void initialize() {
         locale = FacesContext.getCurrentInstance().getExternalContext().getRequestLocale();
+        
     }
 
     public Locale getLocale() {

@@ -188,6 +188,7 @@ public class Turno implements Serializable {
 	/**
 	 * Variable que representa el atributo nota del turno
 	 */
+	@Column(nullable = true)
 	private String nota;
 
 	/**
