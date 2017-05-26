@@ -9,6 +9,7 @@ import co.edu.uniquindio.ingesis.suturno.entidades.Empleado;
 import co.edu.uniquindio.ingesis.suturno.entidades.Turno;
 import co.edu.uniquindio.ingesis.suturno.negocio.TurnoEJB;
 import co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno;
+import co.edu.uniquindio.ingesis.suturno.web.utils.ControladorEmail;
 
 @ManagedBean
 public class TurnoBean {
@@ -35,6 +36,9 @@ public class TurnoBean {
 			System.out.println("Iniciando Atencion ...");
 			turnoSeleccionado.setEstado(EstadoTurno.EN_ATENCION);
 			turnoEJB.actualizarTurno(turnoSeleccionado);
+			
+			ControladorEmail.enviarRecordatorioClave(new Empleado());
+			
 			//t.setEmpleado(seguridad.getEmpleado());
 		}
 		

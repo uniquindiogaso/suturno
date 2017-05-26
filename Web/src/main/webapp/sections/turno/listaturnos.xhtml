@@ -8,7 +8,7 @@
 	<h:form id="form">
 		<p:repeat
 			value="#{turnoBean.obtenerTurnosPendientes(seguridadBean.empleado)}"
-			var="turno">
+			var="turno" id="repeatP">
 			<h:panelGrid columns="2" style="width:100%"
 				columnClasses="logo,detail">
 				<p:commandLink update=":form:atenderDialogModal" oncomplete="PF('atenderDialog').show()" action="#{turnoBean.inicarAtencionTurno()}" >
@@ -38,6 +38,7 @@
 		<p:dialog header="Atender Turno" widgetVar="atenderDialog"
 			modal="true" showEffect="blind" hideEffect="explode"
 			resizable="false">
+			
 			<p:outputPanel id="atenderDialogModal" style="text-align:center;">
 				<p:panelGrid style="width:100%" columns="2"
 					rendered="#{not empty turnoBean.turnoSeleccionado}"
