@@ -1155,15 +1155,21 @@ INSERT INTO suturno_ciudad (id  , nombre , depto_id , latitud , longitud, codigo
 INSERT INTO suturno_servicio(id,activo,codigo,nombre,descripcion) VALUES(1,1,'S1','Activación Servicios', 'Cliente Nuevo');
 INSERT INTO suturno_servicio(id,activo,codigo,nombre,descripcion) VALUES(2,1,'S2','Reclamaciones', 'Reclamaciones respecto a un servicio');
 INSERT INTO suturno_servicio(id,activo,codigo,nombre,descripcion) VALUES(3,1,'S3','Pagos', 'Pagos servicio');
+INSERT INTO suturno_servicio(id,activo,codigo,nombre,descripcion) VALUES(4,1,'S4','Cambio servicios', 'Realizar algun cambio a los servicios prestados');
+INSERT INTO suturno_servicio(id,activo,codigo,nombre,descripcion) VALUES(5,1,'S5','Retiro', 'Cliente retira los servicios');
 
 #INSERT INTO suturno_puestotrabajo(id,codigo,nombre) VALUES(1,'P001','Estación 1');
-INSERT INTO suturno_puestotrabajo(id,codigo,nombre) VALUES(2,'P001','Estación 2');
-INSERT INTO suturno_puestotrabajo(id,codigo,nombre) VALUES(3,'P001','Estación 3');
-INSERT INTO suturno_puestotrabajo(id,codigo,nombre) VALUES(4,'P001','Estación 4');
+INSERT INTO suturno_puestotrabajo(id,codigo,nombre) VALUES(2,'P002','Estación 2');
+INSERT INTO suturno_puestotrabajo(id,codigo,nombre) VALUES(3,'P003','Estación 3');
+INSERT INTO suturno_puestotrabajo(id,codigo,nombre) VALUES(4,'P004','Estación 4');
+INSERT INTO suturno_puestotrabajo(id,codigo,nombre) VALUES(5,'P005','Estación 5');
+INSERT INTO suturno_puestotrabajo(id,codigo,nombre) VALUES(6,'P006','Estación 6');
 
 INSERT INTO suturno_empleado(id,admin,usuario,clave) VALUES (3,1,'gerente1','clave');
 INSERT INTO suturno_empleado(id,admin,usuario,clave,puesto_id) VALUES (4,0,'adrian','adrian',3);
-INSERT INTO suturno_empleado(id,admin,usuario,clave,puesto_id) VALUES (5,0,'beto','beto',4);
+INSERT INTO suturno_empleado(id,admin,usuario,clave,puesto_id) VALUES (5,0,'aa','aa',4);
+INSERT INTO suturno_empleado(id,admin,usuario,clave,puesto_id) VALUES (6,0,'beto','beto',5);
+INSERT INTO suturno_empleado(id,admin,usuario,clave,puesto_id) VALUES (7,0,'ceci','ceci',6);
 
 /**
 genero = 0 H | 1 M
@@ -1177,4 +1183,70 @@ INSERT INTO suturno_persona(id,activo,identificacion,tdoc,nombre1,nombre2,apelli
 INSERT INTO suturno_persona(id,activo,identificacion,tdoc,nombre1,nombre2,apellido1,apellido2,genero,email,tel1,dir,empleado_id) 
 	VALUES(4,1,'1113303584', 0 ,'Adrian','Esteban','Perez','Sanchez',0,'adrianp@suturno.uq.com','3158889533','Av 456',4);
 
-INSERT INTO suturno_persona(id,activo,identificacion,tdoc,
+INSERT INTO suturno_persona(id,activo,identificacion,tdoc,nombre1,nombre2,apellido1,apellido2,genero,email,tel1,dir,empleado_id) 
+	VALUES(5,1,'29880355', 0 ,'Adriana','Maria','Cuevas','Petro',1,'adrianac@suturno.uq.com','3008889533','Av 789',5);
+
+INSERT INTO suturno_persona(id,activo,identificacion,tdoc,nombre1,nombre2,apellido1,apellido2,genero,email,tel1,dir,empleado_id) 
+	VALUES(6,1,'35496712500', 0 ,'Beto','Daniel','Lopez','Ruiz',0,'betolo@suturno.uq.com','3126934120','Av 452',6);
+
+INSERT INTO suturno_persona(id,activo,identificacion,tdoc,nombre1,nombre2,apellido1,apellido2,genero,email,tel1,dir,empleado_id) 
+	VALUES(7,1,'42568346', 0 ,'Cecilia','Sofia','Trujillo','Ordoñez',1,'ceciliat@suturno.uq.com','3115694403','Av 002',7);
+
+
+#Clientes
+INSERT INTO suturno_persona(id,activo,identificacion,tdoc,nombre1,nombre2,apellido1,apellido2,genero,email,tel1,dir) 
+	VALUES(8,1,'16842399125', 0 ,'Carolina','Maria','Morales','Gutierrez',1,'carolinam@suturno.uq.com','3147512381','Av 6969');
+
+INSERT INTO suturno_persona(id,activo,identificacion,tdoc,nombre1,nombre2,apellido1,apellido2,genero,email,tel1,dir) 
+	VALUES(9,1,'25493463390', 0 ,'John','Fernando','Velez','Pareja',0,'ingvelez@suturno.uq.com','3128840924','Av 10101');
+	
+INSERT INTO suturno_persona(id,activo,identificacion,tdoc,nombre1,nombre2,apellido1,apellido2,genero,email,tel1,dir) 
+	VALUES(10,1,'413659046', 0 ,'Maria','Carmenza','Parra','Carvajales',1,'maricarmen@suturno.uq.com','3103622440','Av 1051');
+
+INSERT INTO suturno_persona(id,activo,identificacion,tdoc,nombre1,nombre2,apellido1,apellido2,genero,email,tel1,dir) 
+	VALUES(11,1,'106598220034', 0 ,'Luz','Estela','Pineda','Reyes',1,'lucy@suturno.uq.com','3003679116','Av 10132');
+
+INSERT INTO suturno_persona(id,activo,identificacion,tdoc,nombre1,nombre2,apellido1,apellido2,genero,email,tel1,tel2,dir) 
+	VALUES(12,1,'364592522', 0 ,'Michael','Jose','Torres','Rojas',0,'mickey@suturno.uq.com','3174569800','7465823','Av 10524');
+
+INSERT INTO suturno_persona(id,activo,identificacion,tdoc,nombre1,apellido1,apellido2,genero,email,tel1) 
+	VALUES(13,1,'26359696', 0 ,'Mateo','Ocampo','Suarez',0,'mati@suturno.uq.com','3153648558');
+
+INSERT INTO suturno_persona(id,activo,identificacion,tdoc,nombre1,nombre2,apellido1,apellido2,genero,email,tel1,dir) 
+	VALUES(14,1,'10979896953', 0 ,'Josefa','Camila','Jimenez','Rodriguez',1,'camila@suturno.uq.com','3216598400','Av 11635');
+
+INSERT INTO suturno_persona(id,activo,identificacion,tdoc,nombre1,nombre2,apellido1,apellido2,genero,email,dir) 
+	VALUES(15,1,'495891522', 0 ,'Mario','Arturo','Ortiz','Ospina',0,'arturito@suturno.uq.com','Av 1025');
+
+INSERT INTO suturno_persona(id,activo,identificacion,tdoc,nombre1,apellido1,genero,email,tel1,dir) 
+	VALUES(16,1,'10659378183', 0 ,'Estela','Henao',1,'estelita@suturno.uq.com','3156958269','Av 102');
+
+INSERT INTO suturno_persona(id,activo,identificacion,tdoc,nombre1,nombre2,apellido1,apellido2,genero,email,tel1,dir) 
+	VALUES(17,1,'56948236', 0 ,'Sebastian','Gildardo','Rodriguez','Pareja',0,'sebas@suturno.uq.com','3129858924','Av 10120');
+
+
+#Servicios por Empleado
+INSERT INTO suturno_empleado_suturno_servicio(empleados_id,servicios_id) VALUES
+(4,1),
+(4,2),
+(4,3),
+(5,2),
+(5,3);
+(5,5);
+(6,4);
+(6,2);
+(7.1);
+(7.5);
+
+
+
+INSERT INTO suturno_turno(id,estado,fecha,cliente_id,servicio_id) VALUE (1,0,now(),8,1);
+INSERT INTO suturno_turno(id,estado,fecha,cliente_id,servicio_id) VALUE (2,1,now(),9,2);
+INSERT INTO suturno_turno(id,estado,fecha,cliente_id,servicio_id) VALUE (3,0,now(),10,2);
+INSERT INTO suturno_turno(id,estado,fecha,cliente_id,servicio_id) VALUE (4,2,now(),17,3);
+INSERT INTO suturno_turno(id,estado,fecha,cliente_id,servicio_id) VALUE (5,0,now(),11,1);
+INSERT INTO suturno_turno(id,estado,fecha,cliente_id,servicio_id) VALUE (6,0,now(),11,1);
+INSERT INTO suturno_turno(id,estado,fecha,cliente_id,servicio_id) VALUE (7,0,now(),8,4);
+INSERT INTO suturno_turno(id,estado,fecha,cliente_id,servicio_id) VALUE (8,0,now(),15,5);
+INSERT INTO suturno_turno(id,estado,fecha,cliente_id,servicio_id) VALUE (9,0,now(),16,3);
+INSERT INTO suturno_turno(id,estado,fecha,cliente_id,servicio_id) VALUE (10,0,now(),11,1);

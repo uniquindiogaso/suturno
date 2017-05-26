@@ -1,0 +1,14 @@
+Documentación
+Properties para Internacionalización
+Refactorización java, html y biscar archivos innecesarios
+Crear correo electronico suturno (gmail)
+Llenar datos de sql
+-5 o 6 servicios
+-10 clientes
+-5 empleados
+-puestos de trabajo por empleado
+-servicios que puede atender el empleado
+-10 turnos
+
+Execute- SQL Script
+suturnouniquindio - tarea2017
