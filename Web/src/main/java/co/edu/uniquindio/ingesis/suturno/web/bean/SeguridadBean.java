@@ -11,7 +11,7 @@ import javax.faces.context.FacesContext;
 import co.edu.uniquindio.ingesis.suturno.entidades.Empleado;
 import co.edu.uniquindio.ingesis.suturno.negocio.EmpleadoEJB;
 
-@ManagedBean
+@ManagedBean(name = "seguridadBean")
 @SessionScoped
 public class SeguridadBean implements Serializable{
 	

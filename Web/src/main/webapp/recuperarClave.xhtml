@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Recuperacion Clave Acceso</title>
+	<style type="text/css">
+.ui-widget {
+	font-size: 90%;
+}
+</style>
+</h:head>
+
+<h:body>
+	<h:form>
+		<p:panel header="Recuperar Contraseña de Acceso">
+			<h2>Digite por favor su nombre de usuario para recuperar la
+				contraseña</h2>
+			<h:panelGrid columns="2" columnClasses="label, value">
+				<h:outputText value="Usuario Sistema" />
+				<p:inputText value="#{empleadoBean.nombreUsuario}" required="true"
+					label="Usuario Sistema" />
+
+				<f:facet name="footer">
+					<p:commandButton value="Recuperar Clave"
+						actionListener="#{empleadoBean.recuperarClave}" />
+				</f:facet>
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+</h:body>
+
+</html>

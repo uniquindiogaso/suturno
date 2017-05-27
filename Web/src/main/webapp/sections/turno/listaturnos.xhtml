@@ -8,10 +8,10 @@
 	<h:form id="form">
 		<p:repeat
 			value="#{turnoBean.obtenerTurnosPendientes(seguridadBean.empleado)}"
-			var="turno" id="repeatP">
+			var="turno" id="repeatP" >
 			<h:panelGrid columns="2" style="width:100%"
 				columnClasses="logo,detail">
-				<p:commandLink update=":form:atenderDialogModal" oncomplete="PF('atenderDialog').show()" action="#{turnoBean.inicarAtencionTurno()}" >
+				<p:commandLink update=":form:atenderDialogModal" oncomplete="PF('atenderDialog').show()" action="#{turnoBean.inicarAtencionTurno(seguridadBean.empleado)}" >
 					<f:setPropertyActionListener value="#{turno}"
 						target="#{turnoBean.turnoSeleccionado}" />
 					<p:graphicImage library="images" name="atender.png" />
@@ -54,8 +54,10 @@
 					<p:inputTextarea value="#{turnoBean.turnoSeleccionado.nota}" rows="6" cols="100"/>
 
 					<f:facet name="footer">
-						<p:commandButton value="Finalizar" />
-						<p:commandButton value="Anular" />
+
+						<h:button value="Finalizar" actionListener="#{turnoBean.finalizarAtencionTurno}" oncomplete="PF('atenderDialog').hide()" process="@this" update=":form"/>
+						<h:commandButton value="Anular" action="#{turnoBean.finalizarAtencionTurno}" />
+	
 					</f:facet>
 
 				</p:panelGrid>

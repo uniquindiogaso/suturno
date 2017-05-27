@@ -29,7 +29,7 @@ public class ControladorEmail {
 		try {
 			generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress("gustavo2840@gmail.com"));
 			generateMailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress("laurajrua@gmail.com"));
-			generateMailMessage.setSubject("[SUTURNO] - Recordatorio de ContraseÃ±a");
+			generateMailMessage.setSubject("[SUTURNO] - Recordatorio de Contraseña");
 			String emailBody = "Test email by Crunchify.com JavaMail API example. "
 					+ "<br><br> Regards, <br>Crunchify Admin";
 			generateMailMessage.setContent(emailBody, "text/html");

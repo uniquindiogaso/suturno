@@ -4,12 +4,12 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.event.ActionEvent;
 
 import co.edu.uniquindio.ingesis.suturno.entidades.Empleado;
 import co.edu.uniquindio.ingesis.suturno.entidades.Turno;
 import co.edu.uniquindio.ingesis.suturno.negocio.TurnoEJB;
 import co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno;
-import co.edu.uniquindio.ingesis.suturno.web.utils.ControladorEmail;
 
 @ManagedBean
 public class TurnoBean {
@@ -17,7 +17,7 @@ public class TurnoBean {
 	private Turno turnoSeleccionado;
 	@EJB
 	private TurnoEJB turnoEJB;
-		
+	
 	private String observacion;
 	private Empleado empleado;
 
@@ -31,17 +31,31 @@ public class TurnoBean {
 		return turnoEJB.turnosDisponibles(e);
 	}
 	
-	public void inicarAtencionTurno(){
+	public void inicarAtencionTurno(Empleado e){
 		if( turnoSeleccionado != null ){
 			System.out.println("Iniciando Atencion ...");
 			turnoSeleccionado.setEstado(EstadoTurno.EN_ATENCION);
+			turnoSeleccionado.setEmpleado(e);
 			turnoEJB.actualizarTurno(turnoSeleccionado);
-			
-			ControladorEmail.enviarRecordatorioClave(new Empleado());
-			
-			//t.setEmpleado(seguridad.getEmpleado());
 		}
 		
+	}
+	
+	public void finalizarAtencionTurno(){
+		
+		System.out.println("Turno Seleccionado para FINALIZAR ");
+		
+		if( turnoSeleccionado != null ){
+			turnoSeleccionado.setEstado(EstadoTurno.FINALIZADO);
+			turnoEJB.actualizarTurno(turnoSeleccionado);
+		}
+	}
+	
+	public void anularAtencionTurno(ActionEvent actionEvent){
+		if( turnoSeleccionado != null ){
+			turnoSeleccionado.setEstado(EstadoTurno.CANCELADO);
+			turnoEJB.actualizarTurno(turnoSeleccionado);
+		}
 	}
 
 	/**
