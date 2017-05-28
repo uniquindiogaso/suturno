@@ -23,8 +23,11 @@
 						<h:outputText value="#{turno.id}" style="font-weight: bold" />
 
 						<h:outputText value="Cliente" />
-						<h:outputText value="#{turno.cliente.nombre1}"
-							style="font-weight: bold" />
+						<p:commandLink update=":mainForm:masterDetail">
+							<h:outputText value="#{turno.cliente.nombreCompleto}" style="font-weight: bold" />
+			                <pe:selectDetailLevel contextValue="#{turno.cliente}"/>
+			            </p:commandLink>
+						
 
 						<h:outputText value="Servicio" />
 						<h:outputText value="#{turno.servicio.nombre}"
@@ -56,7 +59,7 @@
 					<f:facet name="footer">
 
 						<h:button value="Finalizar" actionListener="#{turnoBean.finalizarAtencionTurno}" oncomplete="PF('atenderDialog').hide()" process="@this" update=":form"/>
-						<h:commandButton value="Anular" action="#{turnoBean.finalizarAtencionTurno}" />
+						<h:commandButton value="Anular" actionListener="#{turnoBean.finalizarAtencionTurno}" immediate="true" ajax="false"/>
 	
 					</f:facet>
 

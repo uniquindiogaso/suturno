@@ -13,12 +13,13 @@
                 <ui:include src="/sections/turno/listaturnos.xhtml"/>
             </pe:masterDetailLevel>
 
-			<!-- 
+			
             <pe:masterDetailLevel level="2" rendered="#{currentLevelData.currentLevel == 2}"
-                                  levelLabel="#{msgs['moreDetails']}" contextVar="curRow">
-                <ui:include src="/sections/details.xhtml"/>
+                                  levelLabel="Informacion Cliente" contextVar="cliente">
+                <ui:include src="/sections/turno/cliente.xhtml"/>
             </pe:masterDetailLevel>
 
+			<!-- 
             <pe:masterDetailLevel level="3" rendered="#{currentLevelData.currentLevel == 3}"
                                   levelLabel="#{msgs['moreDetails']}">
                 <ui:include src="/sections/more.xhtml"/>

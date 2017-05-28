@@ -181,6 +181,9 @@ public class Persona implements Serializable {
 	 */
 	@OneToOne(cascade = CascadeType.PERSIST)
 	private Empleado empleado;
+	
+	@Transient
+	private String nombreCompleto;
 
 	/**
 	 * Metodo constructor de la entidad Persona
@@ -554,6 +557,17 @@ public class Persona implements Serializable {
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
+
+	/**
+	 * Campo Calculado que unifica el nombre de una persona
+	 * @return nombreCompleto Persona
+	 */
+	public String getNombreCompleto() {
+		nombreCompleto = String.format("%s %s %s %s", nombre1 , nombre2 != null ? nombre2 : "" , apellido1 , apellido2 != null ? apellido2 : "");
+		return nombreCompleto;
+	}
+	
+	
 	
 	
 

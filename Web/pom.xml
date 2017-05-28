@@ -52,7 +52,7 @@
 			<artifactId>juel-spi</artifactId>
 			<version>2.2.6</version>
 		</dependency>
-		 -->
+		
 		
 		<dependency>
 			<groupId>javax.el</groupId>
@@ -60,6 +60,8 @@
 			<version>2.2</version>
 			<scope>provided</scope>
 		</dependency>
+		
+		 -->
 
 		<dependency>
 			<groupId>org.primefaces</groupId>

@@ -1,11 +1,15 @@
 package co.edu.uniquindio.ingesis.suturno.web.bean;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+
+import org.primefaces.context.RequestContext;
 
 import co.edu.uniquindio.ingesis.suturno.entidades.Empleado;
 import co.edu.uniquindio.ingesis.suturno.negocio.EmpleadoEJB;
@@ -35,11 +39,14 @@ public class EmpleadoBean {
 			FacesMessage mensaje = new FacesMessage("Usuario no encontrado");
 			FacesContext.getCurrentInstance().addMessage(null, mensaje);
 			nombreUsuario = null;
-		}	
-		
-		
-		
+		}		
 	}
+	
+   
+    
+
+        
+     
 	
 
 	/**

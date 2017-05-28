@@ -23,6 +23,12 @@
 				<p:commandButton value="#{msgs['logout']}" icon="ui-icon-power"
 					ajax="false" style="margin-left:50px"
 					action="#{logoutController.logout}" immediate="true" />
+					
+				<p:commandButton value="Show Dialog - Basic" action="#{modalControllerBean.abrirModalEmpleado}"></p:commandButton>
+					
+				<p:splitButton value="Configuración" actionListener="#{modalControllerBean.abrirModalEmpleado}" icon="ui-icon-arrowrefresh-1-w"">			        
+			        <p:menuitem value="#{msgs['logout']}" action="#{logoutController.logout}" update=":mainForm" icon="ui-icon-power" />			      
+			    </p:splitButton>
 
 			</div>
 
