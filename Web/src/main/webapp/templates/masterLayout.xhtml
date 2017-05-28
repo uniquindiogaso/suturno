@@ -19,9 +19,8 @@
 		<h:form id="mainForm" prependId="false">
 			<div class="slogan">
 				<h:outputText value="SUTURNO WEB - UNIQUINDIO - &#169; 2017  " />
-					
-				
-				<p:splitButton value="Configuración" actionListener="#{modalControllerBean.abrirModalEmpleado}" icon="ui-icon-power">
+			
+				<p:splitButton value="Configuración" onclick="PF('infoEmpleadoWidget').show(); return false;" icon="ui-icon-power">			       
 			        <p:menuitem value="#{msgs['logout']}" action="#{logoutController.logout}" update=":mainForm" icon="ui-icon-power" />		
 			    </p:splitButton>
 
@@ -54,6 +53,7 @@
 		<h:outputStylesheet library="css" name="common.css" />
 		<h:outputScript library="js" name="common.js" target="body" />
 		<ui:insert name="resources" />
+		<ui:include src="/sections/empleado/empleadoForm.xhtml"/>
 	</h:body>
 </f:view>
 </html>

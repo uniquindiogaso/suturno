@@ -1,0 +1,63 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+	<p:dialog header="Informacion Empleado" widgetVar="infoEmpleadoWidget"
+		resizable="false" modal="true">
+		<h:form>
+			<h:panelGrid columns="4" columnClasses="label, value">
+
+				<h:outputText value="Usuario *" />
+				<p:inputText value="#{seguridadBean.empleado.usuario}"
+					required="true" label="Usuario" />
+
+				<h:outputText value="Clave *" />
+				<p:password value="#{seguridadBean.empleado.clave}" required="true"
+					label="Clave" feedback="true"
+					promptLabel="Diguite una contraseña segura" weakLabel="Debil"
+					goodLabel="Buena Contraseña" strongLabel="¡Contraseña Segura!" />
+
+
+				<h:outputText value="Primer Nombre*" />
+				<p:inputText value="#{seguridadBean.empleado.tercero.nombre1}"
+					required="true" label="Primer Nombre" />
+
+				<h:outputText value="Segundo Nombre" />
+				<p:inputText value="#{seguridadBean.empleado.tercero.nombre2}"
+					label="Segundo Nombre" />
+
+				<h:outputText value="Primer Apellido*" />
+				<p:inputText value="#{seguridadBean.empleado.tercero.apellido1}"
+					required="true" label="Primer Apellido" />
+
+				<h:outputText value="Segundo Apellido" />
+				<p:inputText value="#{seguridadBean.empleado.tercero.apellido2}"
+					label="Segundo Apellido" />
+
+				<h:outputText value="Telefono Principal*" />
+				<p:inputText value="#{seguridadBean.empleado.tercero.tel1}"
+					label="Telefono Principal" required="true" />
+
+				<h:outputText value="Otro Telefono" />
+				<p:inputText value="#{seguridadBean.empleado.tercero.tel2}"
+					label="Otro Telefono" />
+
+				<f:facet name="footer">
+					<p:commandButton value="Guardar Informacion"
+						oncomplete="PF('infoEmpleadoWidget').hide();"
+						process="@this :mainForm" update=":mainForm"
+						action="#{empleadoBean.actualizarInformacion(seguridadBean.empleado)}"
+						styleClass="firstbtn">
+					</p:commandButton>
+					<p:commandButton value="Cancelar" type="button"
+						onclick="PF('infoEmpleadoWidget').hide();" styleClass="btn" />
+				</f:facet>
+
+
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+</ui:composition>
