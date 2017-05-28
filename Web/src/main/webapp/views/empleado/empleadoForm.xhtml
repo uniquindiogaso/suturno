@@ -1,19 +1,55 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:p="http://primefaces.org/ui">
-     
-    <h:head>
-        <title>Informacion Empleado View Empleado</title>
-        <style type="text/css">
-            .ui-widget {
-                font-size: 90%;
-            }
-        </style>
-    </h:head>
-     
-    <h:body>
-        <h1>Logica Aca</h1>
-    </h:body>
-     
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Informacion Empleado View Empleado</title>
+	<style type="text/css">
+.ui-widget {
+	font-size: 90%;
+}
+</style>
+</h:head>
+
+<h:body>
+	<h:form>
+		<h:panelGrid columns="4" columnClasses="label, value">
+			<h:outputText value="Usuario *" />
+			<p:inputText value="#{empleadoBean.nombreUsuario}" required="true"
+				label="Usuario" />
+
+			<h:outputText value="Clave *" />
+			<p:inputText value="#{empleadoBean.clave}" required="true"
+				label="Clave" />
+
+
+			<h:outputText value="Primer Nombre*" />
+			<p:inputText value="#{empleadoBean.nombre1}" required="true"
+				label="Primer Nombre" />
+
+			<h:outputText value="Segundo Nombre" />
+			<p:inputText value="#{empleadoBean.nombre2}" label="Segundo Nombre" />
+
+			<h:outputText value="Primer Apellido*" />
+			<p:inputText value="#{empleadoBean.apellido1}" required="true"
+				label="Primer Apellido" />
+
+			<h:outputText value="Segundo Apellido" />
+			<p:inputText value="#{empleadoBean.apellido2}"
+				label="Segundo Apellido" />
+
+			<h:outputText value="Telefono Principal*" />
+			<p:inputText value="#{empleadoBean.tel1}" label="Telefono Principal"
+				required="true" />
+
+			<h:outputText value="Otro Telefono" />
+			<p:inputText value="#{empleadoBean.tel2}" label="Otro Telefono" />
+			
+			<h:commandButton value="Actualizar" actionListener="#{empleadoBean.actualizarInformacion}" />
+
+		</h:panelGrid>
+	</h:form>
+</h:body>
+
 </html>
