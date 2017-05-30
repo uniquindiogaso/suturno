@@ -21,7 +21,8 @@ public class ServicioConverter implements Converter{
 	public Object getAsObject(FacesContext arg0, UIComponent componente, String id) {
 		if (id != null && !"".equals(id.trim())) {
 			try {
-				Integer idServicio = Integer.parseInt(id);
+				//String nombreServicio=String.valueOf(id);
+				//Integer idServicio = Integer.parseInt(id);
 				//return serviciosEJB.buscarServicioPorNombre(idServicio);
 			} catch (Exception e) {
 				e.printStackTrace();

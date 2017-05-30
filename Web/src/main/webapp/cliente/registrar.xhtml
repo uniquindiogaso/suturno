@@ -77,19 +77,24 @@
 				<h:outputLabel value="Telefonos:" for="tel1" />
 				<h:inputText id="tel1" value="#{personaBean.tel1}" required="true" />
 				<h:inputText id="tel2" value="#{personaBean.tel2}" />
+				<h:outputLabel value="Email:" for="em" />
+				<h:inputText id="em" value="#{personaBean.email}" required="true" />
 				<h:outputLabel value="Direccion:" for="dir" />
 				<h:inputText id="dir" value="#{personaBean.dir}" required="true" />
 				<h:outputLabel value="Departamento:" for="depto" />
-				<h:inputText id="depto" value="#{personaBean.dpto}" required="true" />
+				<h:selectOneMenu id="depto" value="#{personaBean.dpto}">
+					<f:selectItems value="#{personaBean.departamentos}" />
+				</h:selectOneMenu>
 				<h:outputLabel value="Ciudad:" for="ciu" />
-				<h:inputText id="ciu" value="#{personaBean.ciudad}" required="true" />
-				<h:commandButton value="Aceptar"
-					action="#{seguridadBean.comprobarAcceso}" />
-				<h:commandButton value="Registrar" action="#{personaBean.registrarCliente}" ajax="false"/>
+				<h:selectOneMenu id="ciu" value="#{personaBean.ciudad}">
+					<f:selectItems value="#{personaBean.ciudades}" />
+				</h:selectOneMenu>
+				<h:commandButton value="Registrar" action="#{personaBean.registrarCliente}" />
 				<br />				<br />
 				
-				<h:button class="button-red" outcome="inicio?faces-redirect=true"
+				<h:button class="button-red" outcome="cliente/index?faces-redirect=true"
 					value="Regresar" />
+				<h:messages /> 	
 			</h:form>
 		</div>
 		<div class="cta">

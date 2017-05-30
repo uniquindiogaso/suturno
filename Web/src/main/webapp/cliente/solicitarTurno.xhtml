@@ -49,17 +49,17 @@
 			<h2>SOLICITAR TURNO</h2>
 			<h:form>
 				<h:outputLabel value="Cliente:" for="cli" />
-				<h:inputText value="#{personaBean.cliente.nombre}" readonly="true" />
+				<h:inputText value="#{personaBean.cliente.nombre1} #{personaBean.cliente.nombre2}" readonly="true" />
 				<h:outputLabel value="Servicio:" for="ser" />
-			<p:selectOneMenu id="servicio" value="#{clienteBean.servicio}"
+			<p:selectOneMenu id="servicio" value="#{personaBean.servicio}"
 					converter="#{servicioConverter}">
 					<f:selectItem itemLabel="Seleccione un servicio"
 						noSelectionOption="true" />
 					<f:selectItems value="#{servicioBean.servicios}" var="servicio"
 						itemLabel="#{servicio.nombre}" itemValue="#{servicio}" />
 				</p:selectOneMenu>
-				<h:commandButton value="Buscar"
-					action="#{client#{personaBean.buscarCliente}" ajax="false" />
+				<h:commandButton value="Aceptar"
+					action="#{personaBean.solicitarTurno}" ajax="false" />
 				<br />
 				<br />
 				<h:button class="button-red" outcome="inicio?faces-redirect=true"

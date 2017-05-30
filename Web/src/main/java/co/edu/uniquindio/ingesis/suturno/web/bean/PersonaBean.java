@@ -1,12 +1,15 @@
 package co.edu.uniquindio.ingesis.suturno.web.bean;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.persistence.Column;
+import javax.persistence.TypedQuery;
 
 import co.edu.uniquindio.ingesis.suturno.entidades.Ciudad;
 import co.edu.uniquindio.ingesis.suturno.entidades.Depto;
@@ -15,6 +18,7 @@ import co.edu.uniquindio.ingesis.suturno.entidades.Servicio;
 import co.edu.uniquindio.ingesis.suturno.entidades.Turno;
 import co.edu.uniquindio.ingesis.suturno.negocio.ClienteEJB;
 import co.edu.uniquindio.ingesis.suturno.negocio.EmpleadoEJB;
+import co.edu.uniquindio.ingesis.suturno.negocio.GeografiaEJB;
 import co.edu.uniquindio.ingesis.suturno.utils.Genero;
 import co.edu.uniquindio.ingesis.suturno.utils.TipoDocumento;
 import co.edu.uniquindio.ingesis.suturno.validators.Email;
@@ -102,6 +106,27 @@ public class PersonaBean {
 	@EJB
 	private ClienteEJB clienteEJB;
 
+	@EJB
+	private GeografiaEJB geografiaEJB;
+
+	private List<Depto> departamentos;
+	private List<Ciudad> ciudades;
+
+	@PostConstruct
+	public void inicializar() {
+		departamentos = geografiaEJB.listarDepartamentos();
+	}
+
+
+	/**
+	 * Metodo constructor del bean de persona
+	 */
+	public PersonaBean() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
 	/**
 	 * Permite buscar el cliente por la identificacion
 	 * 
@@ -154,7 +179,9 @@ public class PersonaBean {
 		try {
 			clienteEJB.registrarCliente(cliente);
 			mensaje = new FacesMessage("Se registro cliente");
+			System.out.println("Se registro");
 			retorno = "/cliente/solicitarTurno";
+
 		} catch (Throwable e) {
 			mensaje = new FacesMessage(e.getCause().getMessage());
 		}
@@ -184,15 +211,6 @@ public class PersonaBean {
 		FacesContext.getCurrentInstance().addMessage(null, mensaje);
 		return retorno;
 	}
-
-	/**
-	 * Metodo constructor del bean de persona
-	 */
-	public PersonaBean() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
 	/**
 	 * Metodo get del atributo identificacion
 	 * 
@@ -477,4 +495,43 @@ public class PersonaBean {
 		this.fecha = fecha;
 	}
 
+	public Persona getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Persona cliente) {
+		this.cliente = cliente;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Servicio getServicio() {
+		return servicio;
+	}
+
+	public void setServicio(Servicio servicio) {
+		this.servicio = servicio;
+	}
+
+	public List<Depto> getDepartamentos() {
+		return departamentos;
+	}
+
+	public void setDepartamentos(List<Depto> departamentos) {
+		this.departamentos = departamentos;
+	}
+
+	public List<Ciudad> getCiudades() {
+		return ciudades;
+	}
+
+	public void setCiudades(List<Ciudad> ciudades) {
+		this.ciudades = ciudades;
+	}
 }

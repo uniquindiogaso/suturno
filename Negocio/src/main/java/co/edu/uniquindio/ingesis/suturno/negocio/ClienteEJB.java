@@ -187,7 +187,6 @@ public class ClienteEJB implements ClienteEJBRemote {
 		}
 		Date fechaActual = new GregorianCalendar().getTime();
 		turno.setFecha(new Timestamp(fechaActual.getTime()));
-		;
 		entityManager.persist(turno);
 	}
 

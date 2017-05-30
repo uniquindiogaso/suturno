@@ -52,7 +52,7 @@ public class GeografiaEJB implements GeografiaEJBRemote {
 	 * Listado de Ciudades por Departamento
 	 * 
 	 * @param dpto
-	 *            departanto del cual se quiere filtrar los municipios
+	 *            departamento del cual se quiere filtrar los municipios
 	 *            disponibles
 	 * @return lista de Ciudades del Dpto seleccionado
 	 */

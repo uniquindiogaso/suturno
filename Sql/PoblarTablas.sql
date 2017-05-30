@@ -1204,7 +1204,7 @@ INSERT INTO suturno_persona(id,activo,identificacion,tdoc,nombre1,nombre2,apelli
 	VALUES(10,1,'413659046', 0 ,'Maria','Carmenza','Parra','Carvajales',1,'maricarmen@suturno.uq.com','3103622440','Av 1051');
 
 INSERT INTO suturno_persona(id,activo,identificacion,tdoc,nombre1,nombre2,apellido1,apellido2,genero,email,tel1,dir) 
-	VALUES(11,1,'106598220034', 0 ,'Luz','Estela','Pineda','Reyes',1,'lucy@suturno.uq.com','3003679116','Av 10132');
+	VALUES(11,1,'10659822003', 0 ,'Luz','Estela','Pineda','Reyes',1,'lucy@suturno.uq.com','3003679116','Av 10132');
 
 INSERT INTO suturno_persona(id,activo,identificacion,tdoc,nombre1,nombre2,apellido1,apellido2,genero,email,tel1,tel2,dir) 
 	VALUES(12,1,'364592522', 0 ,'Michael','Jose','Torres','Rojas',0,'mickey@suturno.uq.com','3174569800','7465823','Av 10524');
