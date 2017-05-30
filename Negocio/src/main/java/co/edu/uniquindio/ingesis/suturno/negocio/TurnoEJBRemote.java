@@ -4,9 +4,12 @@ import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Remote;
+import javax.persistence.TypedQuery;
 
 import co.edu.uniquindio.ingesis.suturno.dto.ConteoClientesXServicioDTO;
 import co.edu.uniquindio.ingesis.suturno.dto.EmpleandoXClientesDTO;
+import co.edu.uniquindio.ingesis.suturno.entidades.Empleado;
+import co.edu.uniquindio.ingesis.suturno.entidades.Turno;
 
 @Remote
 public interface TurnoEJBRemote {
@@ -39,11 +42,22 @@ public interface TurnoEJBRemote {
     
     
     /**
-     *  permite determinar que clientes tienen turnos que aún no han sido atendidos
-     * @return
+     * Permite determinar que clientes tienen turnos que aun no han sido atendidos
+     * @return la lista de turnos
      */
     public List<ConteoClientesXServicioDTO> clientesXServicioSolicitado();
     
     
+    /**
+     * Permite determinar que turnos no ha sido atendidos por el empleado
+     * @param e el empleado que no ha atendido los turnos
+     * @return la lista de turnos
+     */
+    public List<Turno> turnosDisponibles(Empleado e);
     
+    /**
+     * Actualiza el turno
+     * @param t el turno a actualizar
+     */
+    public void actualizarTurno(Turno t);
 }

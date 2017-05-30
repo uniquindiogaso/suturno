@@ -12,19 +12,27 @@ import co.edu.uniquindio.ingesis.suturno.entidades.Servicio;
 import co.edu.uniquindio.ingesis.suturno.entidades.TipoCliente;
 
 /**
- * Session Bean implementation class TipoClienteEJB
+ * EJB encargado de realizar la capa de negocio del tipo de cliente
+ * 
+ * @author Gustavo Salgado y Laura Julieth Rua
+ * @author Ingenieria de Sistemas y Computacion
+ * @author Universidad del Quindio
+ * @since 17/04/2017
+ * @version 1.0
  */
 @Stateless
 @LocalBean
 public class TipoClienteEJB implements TipoClienteEJBRemote {
 	
-	
+	/**
+	 * Variable que representa el entityManager del EmpleadoEJB
+	 */
 	@PersistenceContext
 	private EntityManager entityManager;	
 
-    /**
-     * Default constructor. 
-     */
+	/**
+	 * Metodo constructor por defecto
+	 */
     public TipoClienteEJB() {
         // TODO Auto-generated constructor stub
     }

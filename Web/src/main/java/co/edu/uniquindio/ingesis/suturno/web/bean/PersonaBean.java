@@ -2,12 +2,22 @@ package co.edu.uniquindio.ingesis.suturno.web.bean;
 
 import java.util.Date;
 
+import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+import javax.persistence.Column;
 
 import co.edu.uniquindio.ingesis.suturno.entidades.Ciudad;
 import co.edu.uniquindio.ingesis.suturno.entidades.Depto;
+import co.edu.uniquindio.ingesis.suturno.entidades.Persona;
+import co.edu.uniquindio.ingesis.suturno.entidades.Servicio;
+import co.edu.uniquindio.ingesis.suturno.entidades.Turno;
+import co.edu.uniquindio.ingesis.suturno.negocio.ClienteEJB;
+import co.edu.uniquindio.ingesis.suturno.negocio.EmpleadoEJB;
 import co.edu.uniquindio.ingesis.suturno.utils.Genero;
 import co.edu.uniquindio.ingesis.suturno.utils.TipoDocumento;
+import co.edu.uniquindio.ingesis.suturno.validators.Email;
 
 /**
  * Bean de la persona de la aplicacion suturno
@@ -50,6 +60,10 @@ public class PersonaBean {
 	 */
 	private String apellido2;
 	/**
+	 * Variable que representa el atributo email de la Persona
+	 */
+	private String email;
+	/**
 	 * Variable que representa el atributo del primer telefono de la persona
 	 */
 	private String tel1;
@@ -80,6 +94,96 @@ public class PersonaBean {
 	 * Variable que representa el atributo activo de la persona
 	 */
 	private boolean activo;
+
+	private Persona cliente;
+
+	private Servicio servicio;
+
+	@EJB
+	private ClienteEJB clienteEJB;
+
+	/**
+	 * Permite buscar el cliente por la identificacion
+	 * 
+	 * @return nulo sin no encuentra el cliente o la direccion del solicitar
+	 *         turno si el cliente tiene turnos en espera o la direccion del
+	 *         registrar cliente si el cliente no existe
+	 */
+	public String buscarCliente() {
+		String retorno = null;
+		FacesMessage mensaje;
+		try {
+			cliente = clienteEJB.buscarClientePorIdentificacion(identificacion);
+			if (cliente != null) {
+				mensaje = new FacesMessage("Se encontro cliente");
+				retorno = "/cliente/solicitarTurno";
+			} else {
+				mensaje = new FacesMessage("No encontro cliente");
+				retorno = "/cliente/registrar";
+			}
+		} catch (Throwable e) {
+			mensaje = new FacesMessage(e.getCause().getMessage());
+		}
+		FacesContext.getCurrentInstance().addMessage(null, mensaje);
+		return retorno;
+	}
+
+	/**
+	 * Permite registrar el cliente si este no existe
+	 * 
+	 * @return nulo si no es posible registrarlo o la direccion del solicitar
+	 *         turno
+	 */
+	public String registrarCliente() {
+		String retorno = null;
+		FacesMessage mensaje;
+		cliente = new Persona();
+		cliente.setIdentificacion(identificacion);
+		cliente.setNombre1(nombre1);
+		cliente.setNombre2(nombre2);
+		cliente.setApellido1(apellido1);
+		cliente.setApellido2(apellido2);
+		cliente.setTel1(tel1);
+		cliente.setTel2(tel2);
+		cliente.setCiudad(ciudad);
+		cliente.setDir(dir);
+		cliente.setEmail(email);
+		cliente.setGenero(genero);
+		cliente.settDoc(tDoc);
+
+		try {
+			clienteEJB.registrarCliente(cliente);
+			mensaje = new FacesMessage("Se registro cliente");
+			retorno = "/cliente/solicitarTurno";
+		} catch (Throwable e) {
+			mensaje = new FacesMessage(e.getCause().getMessage());
+		}
+		FacesContext.getCurrentInstance().addMessage(null, mensaje);
+		return retorno;
+	}
+
+	/**
+	 * Permite solicitar el turno al cliente
+	 * 
+	 * @return nulo si no es posible solicitar el turno y la direccion del index
+	 *         del cliente
+	 */
+	public String solicitarTurno() {
+		Turno turno = new Turno();
+		turno.setCliente(cliente);
+		turno.setServicio(servicio);
+		String retorno = null;
+		FacesMessage mensaje;
+		try {
+			clienteEJB.solicitarTurno(turno);
+			mensaje = new FacesMessage("Se registro turno");
+			retorno = "/cliente/index";
+		} catch (Throwable e) {
+			mensaje = new FacesMessage(e.getCause().getMessage());
+		}
+		FacesContext.getCurrentInstance().addMessage(null, mensaje);
+		return retorno;
+	}
 
 	/**
 	 * Metodo constructor del bean de persona
@@ -144,7 +248,7 @@ public class PersonaBean {
 	public Genero getGenero() {
 		return genero;
 	}
-	
+
 	/**
 	 * Metodo get del array de tipos de generos
 	 * 
@@ -153,8 +257,6 @@ public class PersonaBean {
 	public Genero[] getGeneros() {
 		return Genero.values();
 	}
-
-	
 
 	/**
 	 * Metodo set del atributo genero

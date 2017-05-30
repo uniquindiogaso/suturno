@@ -49,7 +49,7 @@
 			<h:form>
 			<h:outputLabel value="Identificacion" for="id"/>
 				<h:inputText  placeholder="Identificacion" id="id" value="#{personaBean.identificacion}" required="true" /> 
-				<h:commandButton value="Aceptar" action="#{}"/>
+				<h:commandButton value="Buscar" action="#{client#{personaBean.buscarCliente}" ajax="false"/>
 				<br /> <br />
 				<h:button class="button-red" outcome="inicio?faces-redirect=true"
 					value="Regresar" />

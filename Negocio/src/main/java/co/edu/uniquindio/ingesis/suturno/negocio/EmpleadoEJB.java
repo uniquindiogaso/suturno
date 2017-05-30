@@ -13,17 +13,26 @@ import co.edu.uniquindio.ingesis.suturno.entidades.Persona;
 import co.edu.uniquindio.ingesis.suturno.entidades.Servicio;
 
 /**
- * Session Bean implementation class EmpleadoEJB
+ * EJB encargado de realizar la capa de negocio del Empleado
+ * 
+ * @author Gustavo Salgado y Laura Julieth Rua
+ * @author Ingenieria de Sistemas y Computacion
+ * @author Universidad del Quindio
+ * @since 17/04/2017
+ * @version 1.0
  */
 @Stateless
 @LocalBean
 public class EmpleadoEJB implements EmpleadoEJBRemote {
 
+	/**
+	 * Variable que representa el entityManager del EmpleadoEJB
+	 */
 	@PersistenceContext
 	private EntityManager entityManager;
 
 	/**
-	 * Default constructor.
+	 * Metodo constructor por defecto
 	 */
 	public EmpleadoEJB() {
 		// TODO Auto-generated constructor stub
@@ -240,9 +249,12 @@ public class EmpleadoEJB implements EmpleadoEJBRemote {
 
 	/**
 	 * Actualizar la Clave de Acceso de Empleado
-	 * @param empleadoId Id de Empleado al que se le actualizara la clave
-	 * @param claveNueva Nueva Contraseña
-	 * @return True si la actualizacion de clave es correcta 
+	 * 
+	 * @param empleadoId
+	 *            Id de Empleado al que se le actualizara la clave
+	 * @param claveNueva
+	 *            Nueva Contraseï¿½a
+	 * @return True si la actualizacion de clave es correcta
 	 */
 	public boolean actualizarClaveEmpleado(int empleadoId, String claveNueva) {
 		Empleado existe = entityManager.find(Empleado.class, empleadoId);
@@ -255,25 +267,28 @@ public class EmpleadoEJB implements EmpleadoEJBRemote {
 			throw new RuntimeException("ERROR: El Empleado no existe - No se puede Actualizar la Clave ");
 		}
 	}
-	
-	
+
 	/**
 	 * Asingar Servicios a Empleado
-	 * @param empleadoId Identificacion del Empleado al que se le van a actualizar/asignar los servicios
-	 * @param servicios Lista de Servicios
+	 * 
+	 * @param empleadoId
+	 *            Identificacion del Empleado al que se le van a
+	 *            actualizar/asignar los servicios
+	 * @param servicios
+	 *            Lista de Servicios
 	 * @return True si se asignaron correctamente los servicios
 	 */
-	public boolean asignarServiciosEmpleado(int empleadoId, List<Servicio> servicios){
+	public boolean asignarServiciosEmpleado(int empleadoId, List<Servicio> servicios) {
 		Empleado existe = entityManager.find(Empleado.class, empleadoId);
-		
-		if (null != existe) {			
+
+		if (null != existe) {
 			existe.setServicios(servicios);
 			entityManager.merge(existe);
-			return true;			
-		}else {
+			return true;
+		} else {
 			throw new RuntimeException("ERROR: El Empleado no existe - No se Asignar los servicios ");
 		}
-		
+
 	}
 
 }

@@ -85,8 +85,9 @@
 				<h:inputText id="ciu" value="#{personaBean.ciu}" required="true" />
 				<h:commandButton value="Aceptar"
 					action="#{seguridadBean.comprobarAcceso}" />
-				<br />
-				<br />
+				<h:commandButton value="Registrar" action="#{personaBean.registrarCliente}" ajax="false"/>
+				<br />				<br />
+				
 				<h:button class="button-red" outcome="inicio?faces-redirect=true"
 					value="Regresar" />
 			</h:form>

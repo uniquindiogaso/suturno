@@ -16,28 +16,37 @@ import co.edu.uniquindio.ingesis.suturno.entidades.Empleado;
 import co.edu.uniquindio.ingesis.suturno.entidades.Turno;
 
 /**
- * Session Bean implementation class TurnoEJB
+ * EJB encargado de realizar la capa de negocio del turno
+ * 
+ * @author Gustavo Salgado y Laura Julieth Rua
+ * @author Ingenieria de Sistemas y Computacion
+ * @author Universidad del Quindio
+ * @since 17/04/2017
+ * @version 1.0
  */
 @Stateless
 @LocalBean
 public class TurnoEJB implements TurnoEJBRemote {
 	
+	/**
+	 * Variable que representa el entityManager del EmpleadoEJB
+	 */
 	@PersistenceContext
 	private EntityManager entityManager;
 
-    /**
-     * Default constructor. 
-     */
+	/**
+	 * Metodo constructor por defecto
+	 */
     public TurnoEJB() {
         // TODO Auto-generated constructor stub
     }
     
     /**
      * Cantidad de Turnos Atendidos por un Empleado especifico en determinada Fecha
-     * @param empleadoId
-     * @param fInicio
-     * @param fFin
-     * @return
+     * @param empleadoId id del empleado
+     * @param fInicio fecha de inicio de los turnos
+     * @param fFin fecha final de los turnos
+     * @return lista de turnos
      */
     public int cantTurnosAtendidosEmpleado(int empleadoId, Date fInicio , Date fFin){
     	
@@ -51,9 +60,9 @@ public class TurnoEJB implements TurnoEJBRemote {
     
     /**
      * Turnos Atendidos por Empleado en determinda fecha
-     * @param fInicio
-     * @param fFin
-     * @return
+     * @param fInicio fecha de inicio de los turnos
+     * @param fFin fecha final de los turnos
+     * @return lista de turnos
      */
     public List<EmpleandoXClientesDTO> turnosAtendidosEmpleado(Date fInicio , Date fFin){
     	TypedQuery<EmpleandoXClientesDTO> query = entityManager.createNamedQuery(Turno.TURNOS_ATENDIDOS_EMPLEADO_ENTRE_FECHAS_AGRUPADA, EmpleandoXClientesDTO.class);	
@@ -64,8 +73,8 @@ public class TurnoEJB implements TurnoEJBRemote {
     
     /**
      * Retorna Cantidad de Clientes que solicitan determinando Servicio
-     * @param servicioId
-     * @return
+     * @param servicioId id del servicio
+     * @return lista de turnos
      */
     public int cantClientesSolicitanServicio(Long servicioId){
     	Query query = entityManager.createNamedQuery(Turno.GET_COUNT_CLIENTES_X_SERVICIO);
@@ -74,21 +83,29 @@ public class TurnoEJB implements TurnoEJBRemote {
     }
     
     /**
-     *  permite determinar que clientes tienen turnos que aún no han sido atendidos
-     * @return
+     * Permite determinar que clientes tienen turnos que aun no han sido atendidos
+     * @return la lista de turnos
      */
     public List<ConteoClientesXServicioDTO> clientesXServicioSolicitado(){
     	TypedQuery<ConteoClientesXServicioDTO> query = entityManager.createNamedQuery(Turno.GET_CLIENTES_SERVICIO_AGRUPADOS, ConteoClientesXServicioDTO.class);
     	return query.getResultList();
     }
     
-    
+    /**
+     * Permite determinar que turnos no ha sido atendidos por el empleado
+     * @param e el empleado que no ha atendido los turnos
+     * @return la lista de turnos
+     */
     public List<Turno> turnosDisponibles(Empleado e){
     	TypedQuery<Turno> query = entityManager.createNamedQuery(Turno.TURNOS_SIN_ATENDER_POR_USUARIO , Turno.class);
     	query.setParameter("empleado", e);
     	return query.getResultList();
     }
     
+    /**
+     * Actualiza el turno
+     * @param t el turno a actualizar
+     */
     public void actualizarTurno(Turno t){
     	entityManager.merge(t);
     }

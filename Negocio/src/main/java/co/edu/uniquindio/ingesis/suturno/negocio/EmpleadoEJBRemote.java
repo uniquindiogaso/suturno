@@ -8,9 +8,21 @@ import co.edu.uniquindio.ingesis.suturno.entidades.Empleado;
 import co.edu.uniquindio.ingesis.suturno.entidades.Persona;
 import co.edu.uniquindio.ingesis.suturno.entidades.Servicio;
 
+/**
+ * EJBRemote encargado de realizar la capa de negocio del Empleado
+ * 
+ * @author Gustavo Salgado y Laura Julieth Rua
+ * @author Ingenieria de Sistemas y Computacion
+ * @author Universidad del Quindio
+ * @since 17/04/2017
+ * @version 1.0
+ */
 @Remote
 public interface EmpleadoEJBRemote {
 
+	/**
+	 * Variable que representa la direccion del JNDI
+	 */
 	public static final String JNDI = "java:global/EAR/Negocio-0.0.1-SNAPSHOT/EmpleadoEJB!co.edu.uniquindio.ingesis.suturno.negocio.EmpleadoEJBRemote";
 
 	/**
@@ -23,11 +35,10 @@ public interface EmpleadoEJBRemote {
 	 *             login ya esta siendo usado por otro usuario
 	 */
 	public Persona registrarEmpleado(Persona empleado) throws Exception;
-	
-	
-	
+
 	/**
 	 * Registrar SuperAdministrador si no existe
+	 * 
 	 * @param empleado
 	 * @return
 	 */
@@ -98,30 +109,37 @@ public interface EmpleadoEJBRemote {
 	 */
 	public Persona actualizarEmpleado(Persona empleado);
 
-	
-	
 	/**
 	 * Comprobar el acceso a Usuario de acuerdo a su usuario y clave
-	 * @param usuario nombre de usuario autenticar
-	 * @param clave clave de acceso
-	 * @return Empleado si la comprobacion se realiza correcta ; False si no se encuentra el Empleado
+	 * 
+	 * @param usuario
+	 *            nombre de usuario autenticar
+	 * @param clave
+	 *            clave de acceso
+	 * @return Empleado si la comprobacion se realiza correcta ; False si no se
+	 *         encuentra el Empleado
 	 */
-	public Empleado verificarAcceso(String usuario , String clave);
-	
-	
+	public Empleado verificarAcceso(String usuario, String clave);
+
 	/**
 	 * Actualizar la Clave de Acceso de Empleado
-	 * @param empleadoId Id de Empleado al que se le actualizara la clave
-	 * @param claveNueva Nueva Contraseña
-	 * @return True si la actualizacion de clave es correcta 
+	 * 
+	 * @param empleadoId
+	 *            Id de Empleado al que se le actualizara la clave
+	 * @param claveNueva
+	 *            Nueva Contraseï¿½a
+	 * @return True si la actualizacion de clave es correcta
 	 */
 	public boolean actualizarClaveEmpleado(int empleadoId, String claveNueva);
-	
-	
+
 	/**
 	 * Asingar Servicios a Empleado
-	 * @param empleadoId Identificacion del Empleado al que se le van a actualizar/asignar los servicios
-	 * @param servicios Lista de Servicios
+	 * 
+	 * @param empleadoId
+	 *            Identificacion del Empleado al que se le van a
+	 *            actualizar/asignar los servicios
+	 * @param servicios
+	 *            Lista de Servicios
 	 * @return True si se asignaron correctamente los servicios
 	 */
 	public boolean asignarServiciosEmpleado(int empleadoId, List<Servicio> servicios);

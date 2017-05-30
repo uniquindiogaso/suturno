@@ -6,10 +6,21 @@ import javax.ejb.Remote;
 
 import co.edu.uniquindio.ingesis.suturno.entidades.TipoCliente;
 
+/**
+ * EJBRemote encargado de realizar la capa de negocio del tipo de cliente
+ * 
+ * @author Gustavo Salgado y Laura Julieth Rua
+ * @author Ingenieria de Sistemas y Computacion
+ * @author Universidad del Quindio
+ * @since 17/04/2017
+ * @version 1.0
+ */
 @Remote
 public interface TipoClienteEJBRemote {
 	
-	
+	/**
+	 * Variable que representa la direccion del JNDI
+	 */
 	public static final String JNDI = "java:global/EAR/Negocio-0.0.1-SNAPSHOT/TipoClienteEJB!co.edu.uniquindio.ingesis.suturno.negocio.TipoClienteEJBRemote";
 	
 	/**

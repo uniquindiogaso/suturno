@@ -12,19 +12,27 @@ import co.edu.uniquindio.ingesis.suturno.entidades.PuestoTrabajo;
 import co.edu.uniquindio.ingesis.suturno.entidades.Servicio;
 
 /**
- * Session Bean implementation class PuestoTrabajoEJB
+ * EJB encargado de realizar la capa de negocio del puesto de trabajo
+ * 
+ * @author Gustavo Salgado y Laura Julieth Rua
+ * @author Ingenieria de Sistemas y Computacion
+ * @author Universidad del Quindio
+ * @since 17/04/2017
+ * @version 1.0
  */
 @Stateless
 @LocalBean
 public class PuestoTrabajoEJB implements PuestoTrabajoEJBRemote {
 	
-	
+	/**
+	 * Variable que representa el entityManager del EmpleadoEJB
+	 */
 	@PersistenceContext
-	private EntityManager entityManager;	
+	private EntityManager entityManager;
 
-    /**
-     * Default constructor. 
-     */
+	/**
+	 * Metodo constructor por defecto
+	 */
     public PuestoTrabajoEJB() {
         // TODO Auto-generated constructor stub
     }
