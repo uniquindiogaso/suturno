@@ -82,7 +82,7 @@
 				<h:outputLabel value="Departamento:" for="depto" />
 				<h:inputText id="depto" value="#{personaBean.dpto}" required="true" />
 				<h:outputLabel value="Ciudad:" for="ciu" />
-				<h:inputText id="ciu" value="#{personaBean.ciu}" required="true" />
+				<h:inputText id="ciu" value="#{personaBean.ciudad}" required="true" />
 				<h:commandButton value="Aceptar"
 					action="#{seguridadBean.comprobarAcceso}" />
 				<h:commandButton value="Registrar" action="#{personaBean.registrarCliente}" ajax="false"/>

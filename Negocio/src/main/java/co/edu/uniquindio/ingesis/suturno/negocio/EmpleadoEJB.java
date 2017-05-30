@@ -207,13 +207,23 @@ public class EmpleadoEJB implements EmpleadoEJBRemote {
 			if (e != null && e.getId() != empleado.getEmpleado().getId()) {
 				throw new RuntimeException("ERROR: Ya existe un Empleado con ese Numero de Identificacion");
 			}
-
+					
 			return entityManager.merge(empleado);
 
 		} else {
 			throw new RuntimeException("ERROR: El Empleado no existe");
 		}
 
+	}
+	
+	public Empleado actualizarEmpleado( Empleado  e){
+		
+		System.out.println("e.getTercero().getNombre1() " + e.getTercero().getNombre1());
+		
+		Empleado empleado = entityManager.find(Empleado.class, e.getId());
+
+		empleado.getTercero().setNombre1(e.getTercero().getNombre1());
+		return entityManager.merge(empleado);
 	}
 
 	/**

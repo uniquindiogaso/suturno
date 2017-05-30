@@ -43,7 +43,7 @@ public class EmpleadoBean {
 	
 	public void actualizarInformacion(Empleado e){
 		System.out.println("Actualizar Informacion ..." + e.getClave());		
-		empleadoEJB.actualizarEmpleado(e.getTercero());
+		empleadoEJB.actualizarEmpleado(e);
 	}
 
 

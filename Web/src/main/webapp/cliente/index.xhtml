@@ -45,11 +45,11 @@
 
 		<div class="form"></div>
 		<div class="form">
-			<h2>INGRESO</h2>
+			<h2>Apreciado Cliente , digite su numero de documento para asignarle un turno</h2>
 			<h:form>
 			<h:outputLabel value="Identificacion" for="id"/>
 				<h:inputText  placeholder="Identificacion" id="id" value="#{personaBean.identificacion}" required="true" /> 
-				<h:commandButton value="Buscar" action="#{client#{personaBean.buscarCliente}" ajax="false"/>
+				<h:commandButton value="Buscar" action="#{personaBean.buscarCliente}" ajax="false"/>
 				<br /> <br />
 				<h:button class="button-red" outcome="inicio?faces-redirect=true"
 					value="Regresar" />

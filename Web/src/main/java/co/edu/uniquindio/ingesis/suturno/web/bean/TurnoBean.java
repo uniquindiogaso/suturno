@@ -51,7 +51,19 @@ public class TurnoBean {
 		}
 	}
 	
+	/**
+	 * Revertir la atencion y volverla a poner en espera.
+	 * @param actionEvent
+	 */
 	public void anularAtencionTurno(ActionEvent actionEvent){
+		if( turnoSeleccionado != null ){
+			turnoSeleccionado.setEmpleado(null);
+			turnoSeleccionado.setEstado(EstadoTurno.EN_ESPERA);
+			turnoEJB.actualizarTurno(turnoSeleccionado);
+		}
+	}
+	
+	public void cancelarTurno(ActionEvent actionEvent){
 		if( turnoSeleccionado != null ){
 			turnoSeleccionado.setEstado(EstadoTurno.CANCELADO);
 			turnoEJB.actualizarTurno(turnoSeleccionado);
