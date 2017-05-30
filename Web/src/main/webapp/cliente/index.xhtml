@@ -45,15 +45,16 @@
 
 		<div class="form"></div>
 		<div class="form">
-			<h2>Apreciado Cliente , digite su numero de documento para asignarle un turno</h2>
+			<h2>#{msgs['buscar.titulo']}</h2>
 			<h:form>
 			<h:outputLabel value="Identificacion" for="id"/>
-				<h:inputText  placeholder="Identificacion" id="id" value="#{personaBean.identificacion}" required="true" /> 
-				<h:commandButton value="Buscar" action="#{personaBean.buscarCliente}" ajax="false"/>
+				<h:inputText  placeholder="#{msgs['buscar.identificacion']}" id="id" value="#{personaBean.identificacion}" required="true" /> 
+				<h:commandButton value="#{msgs['buscar.bbuscar']}" action="#{personaBean.buscarCliente}" ajax="false"/>
 				<br /> <br />
 				<h:button class="button-red" outcome="inicio?faces-redirect=true"
-					value="Regresar" />
+					value="#{msgs['buscar.bregresar']}" />
 			</h:form>
+			<h:growl />
 		</div>
 		<div class="cta">
 			<span><i class='fa fa-code'></i> Laura Rua - Gustavo Salgado <i

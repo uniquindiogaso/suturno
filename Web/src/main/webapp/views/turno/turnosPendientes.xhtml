@@ -9,13 +9,13 @@
 
         <pe:masterDetail id="masterDetail" level="#{currentLevelData.currentLevel}"
                          selectLevelListener="#{selectLevelListener.handleNavigation}">
-            <pe:masterDetailLevel level="1" levelLabel="Turnos Pendientes">
+            <pe:masterDetailLevel level="1" levelLabel= "#{msgs['turnospendientes.titulo']}">
                 <ui:include src="/sections/turno/listaturnos.xhtml"/>
             </pe:masterDetailLevel>
 
 			
             <pe:masterDetailLevel level="2" rendered="#{currentLevelData.currentLevel == 2}"
-                                  levelLabel="Informacion Cliente" contextVar="cliente">
+                                  levelLabel="#{msgs['turnospendientes.cliente']}" contextVar="cliente">
                 <ui:include src="/sections/turno/cliente.xhtml"/>
             </pe:masterDetailLevel>
 

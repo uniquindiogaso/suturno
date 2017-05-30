@@ -56,7 +56,7 @@ public class ServicioBean {
 	 */
 	@PostConstruct
 	public void inicializar() {
-		// servicios=servicioEJB.listarServicios();
+		servicios=servicioEJB.listarServicios();
 	}
 
 	/**

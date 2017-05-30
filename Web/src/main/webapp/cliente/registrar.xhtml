@@ -47,53 +47,53 @@
 		<div class="form">
 			<h2>Registrar cliente</h2>
 			<h:form>
-				<f:facet name="header">REGISTRAR CLIENTE</f:facet>
-				<h:outputLabel value="Identificacion:" for="iden" />
+				<f:facet name="header">#{msgs['registrar.titulo']}</f:facet>
+				<h:outputLabel value="#{msgs['registrar.id']}" for="iden" />
 				<h:inputText id="iden" value="#{personaBean.identificacion}"
 					required="true" />
 				<h:message for="iden" style="color:red" />
 
-				<h:outputLabel value="Tipo Documento:" for="tdoc" />
+				<h:outputLabel value="#{msgs['registrar.tDoc']}" for="tdoc" />
 				<h:selectOneMenu id="tdoc" value="#{personaBean.tDoc}">
 					<f:selectItems value="#{personaBean.tdocs}" />
 				</h:selectOneMenu>
-				<h:outputLabel value="Genero:" for="gen" />
+				<h:outputLabel value="#{msgs['registrar.genero']}" for="gen" />
 				<h:selectOneMenu id="gen" value="#{personaBean.genero}">
 					<f:selectItems value="#{personaBean.generos}" />
 				</h:selectOneMenu>
 				<h:panelGrid columns="2">
-					<h:outputLabel value="Nombres:" for="nom1" />
+					<h:outputLabel value="#{msgs['registrar.nombres']}" for="nom1" />
 					<h:inputText id="nom1" value="#{personaBean.nombre1}"
 						required="true" />
 					<h:inputText id="nom2" value="#{personaBean.nombre2}" />
 				
 				</h:panelGrid>
 				<h:panelGrid columns="2">
-				<h:outputLabel value="Apellidos" for="ape1" />
+				<h:outputLabel value="#{msgs['registrar.apellidos']}" for="ape1" />
 				<h:inputText id="ape1" value="#{personaBean.apellido1}"
 					required="true" />
 				<h:inputText id="ape2" value="#{personaBean.apellido2}" />
 				</h:panelGrid>
-				<h:outputLabel value="Telefonos:" for="tel1" />
+				<h:outputLabel value="#{msgs['registrar.telefonos']}" for="tel1" />
 				<h:inputText id="tel1" value="#{personaBean.tel1}" required="true" />
 				<h:inputText id="tel2" value="#{personaBean.tel2}" />
-				<h:outputLabel value="Email:" for="em" />
+				<h:outputLabel value="#{msgs['registrar.email']}" for="em" />
 				<h:inputText id="em" value="#{personaBean.email}" required="true" />
-				<h:outputLabel value="Direccion:" for="dir" />
+				<h:outputLabel value="#{msgs['registrar.dir']}" for="dir" />
 				<h:inputText id="dir" value="#{personaBean.dir}" required="true" />
-				<h:outputLabel value="Departamento:" for="depto" />
+				<h:outputLabel value="#{msgs['registrar.depto']}" for="depto" />
 				<h:selectOneMenu id="depto" value="#{personaBean.dpto}">
 					<f:selectItems value="#{personaBean.departamentos}" />
 				</h:selectOneMenu>
-				<h:outputLabel value="Ciudad:" for="ciu" />
+				<h:outputLabel value="#{msgs['registrar.ciudad']}" for="ciu" />
 				<h:selectOneMenu id="ciu" value="#{personaBean.ciudad}">
 					<f:selectItems value="#{personaBean.ciudades}" />
 				</h:selectOneMenu>
-				<h:commandButton value="Registrar" action="#{personaBean.registrarCliente}" />
+				<h:commandButton value="#{msgs['registrar.bregistrar']}" action="#{personaBean.registrarCliente}" />
 				<br />				<br />
 				
 				<h:button class="button-red" outcome="cliente/index?faces-redirect=true"
-					value="Regresar" />
+					value="#{msgs['registrar.bregresar']}" />
 				<h:messages /> 	
 			</h:form>
 		</div>

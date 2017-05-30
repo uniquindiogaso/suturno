@@ -15,16 +15,15 @@
 
 <h:body>
 	<h:form>
-		<p:panel header="Recuperar Contraseña de Acceso">
-			<h2>Digite por favor su nombre de usuario para recuperar la
-				contraseña</h2>
+		<p:panel header="#{msgs['recuperarclave.titulo']}">
+			<h2>#{msgs['recuperarclave.informacion']}</h2>
 			<h:panelGrid columns="2" columnClasses="label, value">
-				<h:outputText value="Usuario Sistema" />
+				<h:outputText value="#{msgs['recuperarclave.usuario']}" />
 				<p:inputText value="#{empleadoBean.nombreUsuario}" required="true"
 					label="Usuario Sistema" />
 
 				<f:facet name="footer">
-					<p:commandButton value="Recuperar Clave"
+					<p:commandButton value="#{msgs['recuperarclave.brecuperar']}"
 						actionListener="#{empleadoBean.recuperarClave}" />
 				</f:facet>
 			</h:panelGrid>

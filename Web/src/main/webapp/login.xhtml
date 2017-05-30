@@ -8,7 +8,7 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta charset="UTF-8" />
-	<title>Inicio de Sesion | SUTURNO Web</title>
+	<title>#{msgs['login.pestana']}</title>
 
 	<link rel="stylesheet"
 		href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" />
@@ -47,13 +47,12 @@
 	<div class="module form-module">
 
 		<div class="form">
-			<h2>Recuperar Contraseña</h2>
-			<p>Digite por favor su nombre de usuario para recuperar la
-				contraseña</p>
+			<h2>#{msgs['login.recuperar.titulo']}</h2>
+			<p>#{msgs['login.recuperar.info']}</p>
 				<br/>			
 			<h:form>
 				<p:inputText value="#{empleadoBean.nombreUsuario}" required="true"	/>
-				<h:commandButton value="Recordar"
+				<h:commandButton value="#{msgs['login.recuperar.brecordar']}"
 					actionListener="#{empleadoBean.recuperarClave}" />	
 			</h:form>
 		</div>
