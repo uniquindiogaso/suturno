@@ -107,7 +107,14 @@ public class TurnoEJB implements TurnoEJBRemote {
      * @param t el turno a actualizar
      */
     public void actualizarTurno(Turno t){
-    	entityManager.merge(t);
+    	System.out.println("Actualizar Estado para " + t.getId());
+    	Turno turno = entityManager.find(Turno.class, t.getId());
+    	turno.setEstado(t.getEstado());
+    	turno.setEmpleado(t.getEmpleado());
+    	if( null != t.getNota()){
+    		turno.setNota(t.getNota());
+    	}
+    	entityManager.merge(turno);
     }
 
 }

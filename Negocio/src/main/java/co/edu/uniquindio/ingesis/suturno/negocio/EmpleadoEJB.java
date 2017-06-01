@@ -222,7 +222,16 @@ public class EmpleadoEJB implements EmpleadoEJBRemote {
 		
 		Empleado empleado = entityManager.find(Empleado.class, e.getId());
 
+		empleado.setUsuario(e.getUsuario());
+		empleado.setClave(e.getClave());
+		
 		empleado.getTercero().setNombre1(e.getTercero().getNombre1());
+		empleado.getTercero().setNombre2(e.getTercero().getNombre2());
+		empleado.getTercero().setApellido1(e.getTercero().getApellido1());
+		empleado.getTercero().setApellido2(e.getTercero().getApellido2());
+		empleado.getTercero().setTel1(e.getTercero().getTel1());
+		empleado.getTercero().setTel2(e.getTercero().getTel2());
+		
 		return entityManager.merge(empleado);
 	}
 

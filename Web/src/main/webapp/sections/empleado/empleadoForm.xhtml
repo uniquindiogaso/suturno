@@ -16,7 +16,7 @@
 
 				<h:outputText value="Clave *" />
 				<p:password value="#{seguridadBean.empleado.clave}" required="true"
-					label="Clave" feedback="true"
+					label="Clave" feedback="true" redisplay="true"
 					promptLabel="Diguite una contraseña segura" weakLabel="Debil"
 					goodLabel="Buena Contraseña" strongLabel="¡Contraseña Segura!" />
 
@@ -47,13 +47,13 @@
 
 				<f:facet name="footer">
 					<p:commandButton value="Guardar Informacion"
-						oncomplete="PF('infoEmpleadoWidget').hide();"
-						process="@this :mainForm" update=":mainForm"
-						action="#{empleadoBean.actualizarInformacion(seguridadBean.empleado)}"
+						oncomplete="PF('infoEmpleadoWidget').hide(); return false;"
+						update=":mainForm"
+						action="#{seguridadBean.actualizarInformacion()}"
 						styleClass="firstbtn">
 					</p:commandButton>
 					<p:commandButton value="Cancelar" type="button"
-						onclick="PF('infoEmpleadoWidget').hide();" styleClass="btn" />
+						onclick="PF('infoEmpleadoWidget').hide();" styleClass="btn" process="@none"/>
 				</f:facet>
 
 

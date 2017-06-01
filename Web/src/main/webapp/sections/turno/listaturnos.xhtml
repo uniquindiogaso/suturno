@@ -8,10 +8,12 @@
 	<h:form id="form">
 		<p:repeat
 			value="#{turnoBean.obtenerTurnosPendientes(seguridadBean.empleado)}"
-			var="turno" id="repeatP" >
+			var="turno" id="repeatP">
 			<h:panelGrid columns="2" style="width:100%"
 				columnClasses="logo,detail">
-				<p:commandLink update=":form:atenderDialogModal" oncomplete="PF('atenderDialog').show()" action="#{turnoBean.inicarAtencionTurno(seguridadBean.empleado)}" >
+				<p:commandLink update=":form:formModal:atenderDialogModal"
+					oncomplete="PF('atenderDialog').show()"
+					action="#{turnoBean.inicarAtencionTurno(seguridadBean.empleado)}">
 					<f:setPropertyActionListener value="#{turno}"
 						target="#{turnoBean.turnoSeleccionado}" />
 					<p:graphicImage library="images" name="atender.png" />
@@ -24,10 +26,11 @@
 
 						<h:outputText value="Cliente" />
 						<p:commandLink update=":mainForm:masterDetail">
-							<h:outputText value="#{turno.cliente.nombreCompleto}" style="font-weight: bold" />
-			                <pe:selectDetailLevel contextValue="#{turno.cliente}"/>
-			            </p:commandLink>
-						
+							<h:outputText value="#{turno.cliente.nombreCompleto}"
+								style="font-weight: bold" />
+							<pe:selectDetailLevel contextValue="#{turno.cliente}" />
+						</p:commandLink>
+
 
 						<h:outputText value="Servicio" />
 						<h:outputText value="#{turno.servicio.nombre}"
@@ -39,32 +42,44 @@
 		</p:repeat>
 
 		<p:dialog header="Atender Turno" widgetVar="atenderDialog"
-			modal="true" showEffect="blind" hideEffect="explode"
+			modal="true" showEffect="blind" hideEffect="explode" closable="false"
 			resizable="false">
-			
-			<p:outputPanel id="atenderDialogModal" style="text-align:center;">
-				<p:panelGrid style="width:100%" columns="2"
-					rendered="#{not empty turnoBean.turnoSeleccionado}"
-					columnClasses="label,value">
 
-					<h:outputText value="Cliente" />
-					<h:outputText value="#{turnoBean.turnoSeleccionado.cliente.nombre1}" />
+			<h:form id="formModal">
+				<h:panelGroup id="atenderDialogModal" style="text-align:center;">
+					<p:panelGrid style="width:100%" columns="2"
+						rendered="#{not empty turnoBean.turnoSeleccionado}"
+						columnClasses="label,value">
 
-					<h:outputText value="Servicio" />
-					<h:outputText value="#{turnoBean.turnoSeleccionado.servicio.nombre}" />
+						<h:outputText value="Cliente" />
+						<h:outputText
+							value="#{turnoBean.turnoSeleccionado.cliente.nombreCompleto}" />
 
-					<h:outputText value="Observacion" />
-					<p:inputTextarea value="#{turnoBean.turnoSeleccionado.nota}" rows="6" cols="100"/>
+						<h:outputText value="Servicio" />
+						<h:outputText
+							value="#{turnoBean.turnoSeleccionado.servicio.nombre}" />
 
-					<f:facet name="footer">
+						<h:outputText value="Observacion" />
+						<p:inputTextarea value="#{turnoBean.turnoSeleccionado.nota}"
+							rows="6" cols="100" />
 
-						<h:button value="Finalizar" actionListener="#{turnoBean.finalizarAtencionTurno}" oncomplete="PF('atenderDialog').hide()" process="@this" update=":form"/>
-						<h:commandButton value="Anular" actionListener="#{turnoBean.finalizarAtencionTurno}" immediate="true" ajax="false"/>
-	
-					</f:facet>
+					</p:panelGrid>
 
-				</p:panelGrid>
-			</p:outputPanel>
+
+					<p:commandButton value="Finalizar"
+						actionListener="#{turnoBean.finalizarAtencionTurno}"
+						oncomplete="PF('atenderDialog').hide()" ajax="false">
+					</p:commandButton>
+
+					<p:commandButton value="Cancelar"
+						actionListener="#{turnoBean.cancelarTurno}"
+						oncomplete="PF('atenderDialog').hide()" ajax="false" />
+
+					<p:commandButton value="Anular"
+						actionListener="#{turnoBean.anularAtencionTurno}" immediate="true"
+						ajax="false" oncomplete="PF('atenderDialog').hide()" />
+				</h:panelGroup>
+			</h:form>
 		</p:dialog>
 
 

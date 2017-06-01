@@ -8,7 +8,7 @@ DELETE FROM suturno_servicio;
 DELETE FROM suturno_persona;
 DELETE FROM suturno_empleado;
 DELETE FROM suturno_puestotrabajo;
-DELETE FROM suturno_empleado_suturno_servicio;
+
 
 /*
 INSERT INTO suturno_depto (id,nombre,codigo) VALUES 
@@ -1204,7 +1204,7 @@ INSERT INTO suturno_persona(id,activo,identificacion,tdoc,nombre1,nombre2,apelli
 	VALUES(10,1,'413659046', 0 ,'Maria','Carmenza','Parra','Carvajales',1,'maricarmen@suturno.uq.com','3103622440','Av 1051');
 
 INSERT INTO suturno_persona(id,activo,identificacion,tdoc,nombre1,nombre2,apellido1,apellido2,genero,email,tel1,dir) 
-	VALUES(11,1,'10659822003', 0 ,'Luz','Estela','Pineda','Reyes',1,'lucy@suturno.uq.com','3003679116','Av 10132');
+	VALUES(11,1,'10659822', 0 ,'Luz','Estela','Pineda','Reyes',1,'lucy@suturno.uq.com','3003679116','Av 10132');
 
 INSERT INTO suturno_persona(id,activo,identificacion,tdoc,nombre1,nombre2,apellido1,apellido2,genero,email,tel1,tel2,dir) 
 	VALUES(12,1,'364592522', 0 ,'Michael','Jose','Torres','Rojas',0,'mickey@suturno.uq.com','3174569800','7465823','Av 10524');
@@ -1213,7 +1213,7 @@ INSERT INTO suturno_persona(id,activo,identificacion,tdoc,nombre1,apellido1,apel
 	VALUES(13,1,'26359696', 0 ,'Mateo','Ocampo','Suarez',0,'mati@suturno.uq.com','3153648558');
 
 INSERT INTO suturno_persona(id,activo,identificacion,tdoc,nombre1,nombre2,apellido1,apellido2,genero,email,tel1,dir) 
-	VALUES(14,1,'10979896953', 0 ,'Josefa','Camila','Jimenez','Rodriguez',1,'camila@suturno.uq.com','3216598400','Av 11635');
+	VALUES(14,1,'10979896', 0 ,'Josefa','Camila','Jimenez','Rodriguez',1,'camila@suturno.uq.com','3216598400','Av 11635');
 
 INSERT INTO suturno_persona(id,activo,identificacion,tdoc,nombre1,nombre2,apellido1,apellido2,genero,email,dir) 
 	VALUES(15,1,'495891522', 0 ,'Mario','Arturo','Ortiz','Ospina',0,'arturito@suturno.uq.com','Av 1025');
@@ -1231,12 +1231,12 @@ INSERT INTO suturno_empleado_suturno_servicio(empleados_id,servicios_id) VALUES
 (4,2),
 (4,3),
 (5,2),
-(5,3);
-(5,5);
-(6,4);
-(6,2);
-(7.1);
-(7.5);
+(5,3),
+(5,5),
+(6,4),
+(6,2),
+(7,1),
+(7,5);
 
 
 
