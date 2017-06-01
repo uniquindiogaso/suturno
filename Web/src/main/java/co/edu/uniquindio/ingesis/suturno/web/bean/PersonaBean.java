@@ -1,5 +1,6 @@
 package co.edu.uniquindio.ingesis.suturno.web.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -32,7 +33,7 @@ import co.edu.uniquindio.ingesis.suturno.utils.TipoDocumento;
  */
 @ManagedBean
 @SessionScoped
-public class PersonaBean {
+public class PersonaBean implements Serializable{
 	/**
 	 * Variable que representa el atributo identificacion de la persona
 	 */
@@ -100,6 +101,8 @@ public class PersonaBean {
 	private Persona cliente;
 
 	private Servicio servicio;
+	
+	private Turno ultimoTurno;
 
 	@EJB
 	private ClienteEJB clienteEJB;
@@ -142,6 +145,10 @@ public class PersonaBean {
 			cliente = clienteEJB.buscarClientePorIdentificacion(identificacion);
 			if (cliente != null) {
 				mensaje = new FacesMessage("Se encontro cliente");
+				
+				//buscar turnos existentes
+				ultimoTurno = turnoEJB.turnosPendientesCliente(cliente);
+				
 				retorno = "/cliente/solicitarTurno";
 			} else {
 				mensaje = new FacesMessage("No encontro cliente");
@@ -550,4 +557,20 @@ public class PersonaBean {
 	public void setCiudades(List<Ciudad> ciudades) {
 		this.ciudades = ciudades;
 	}
+
+	/**
+	 * @return the ultimoTurno
+	 */
+	public Turno getUltimoTurno() {
+		return ultimoTurno;
+	}
+
+	/**
+	 * @param ultimoTurno the ultimoTurno to set
+	 */
+	public void setUltimoTurno(Turno ultimoTurno) {
+		this.ultimoTurno = ultimoTurno;
+	}
+	
+	
 }

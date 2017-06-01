@@ -5,22 +5,29 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:pe="http://primefaces.org/ui/extensions">
     <f:facet name="label">
-<<<<<<< HEAD
         <h:outputFormat value="#{msgs['infocliente.titulo']}">
-=======
-        <h:outputFormat value="Informacion Cliente.">
->>>>>>> 6d41625b293283610c2ef09fd713bf745194635b
             <f:param value="#{cliente.nombreCompleto}"/>
         </h:outputFormat>
     </f:facet>
 
     <h:panelGrid columns="2" columnClasses="formColumn1,formColumn2"
                  cellpadding="0" cellspacing="0">        
-        <h:outputText value="Column 4"/>
-        <p:inputText value="#{cliente.nombreCompleto}"/>
+        <h:outputText value="Nombre Completo"/>
+        <p:inputText value="#{cliente.nombreCompleto}" readonly="true"/>
         
-        <h:outputText value="Column 5"/>
-        <p:inputText value="#{cliente.identificacion}"/>
+        <h:outputText value="Identificacion"/>
+        <p:inputText value="#{cliente.identificacion}" readonly="true"/>
+        
+        <h:outputText value="Email"/>
+        <p:inputText value="#{cliente.email}" readonly="true"/>
+        
+        <h:outputText value="Telefono Principal"/>
+        <p:inputText value="#{cliente.tel1}" readonly="true"/>
+        
+        <h:outputText value="Otro Telefono "/>
+        <p:inputText value="#{cliente.tel2}" readonly="true"/>
+        
+        
     </h:panelGrid>
     
         <p:commandButton value="Regresar" icon="ui-icon-arrowreturnthick-1-n"

@@ -48,27 +48,40 @@
 		<div class="form">
 			<h2>#{msgs['solicitar.titulo']}</h2>
 			<h:form>
-			<f:facet name="header">#{msgs['solicitar.info']}</f:facet>
-				<h:outputLabel value="Cliente:"/>
-				<h:inputText value="#{personaBean.cliente.nombre1} #{personaBean.cliente.nombre2}" readonly="true" />
+				<f:facet name="header">#{msgs['solicitar.info']}</f:facet>
+				<h:outputLabel value="Cliente:" />
+				<h:inputText
+					value="#{personaBean.cliente.nombre1} #{personaBean.cliente.nombre2}"
+					readonly="true" />
 				<h:outputLabel value="Servicio:" for="ser" />
+				<h:inputText id="nombreServicio"
+					value="#{personaBean.ultimoTurno.servicio.nombre}" readonly="true"
+					rendered="#{personaBean.ultimoTurno != null}" />
+					
+				<h:outputLabel value="Fecha Servicio" for="fechaServicio" rendered="#{personaBean.ultimoTurno != null}"/>
+				<h:inputText id="fechaServicio"
+					value="#{personaBean.ultimoTurno.fecha}" readonly="true"
+					rendered="#{personaBean.ultimoTurno != null}" />
+
 				<h:outputText value="#{personaBean.servicio.nombre}" escape="false" />
-			<p:selectOneMenu id="ser" value="#{personaBean.servicio}"
-					converter="#{servicioConverter}">
+				<p:selectOneMenu id="ser" value="#{personaBean.servicio}"
+					converter="#{servicioConverter}"
+					rendered="#{personaBean.ultimoTurno == null}">
 					<f:selectItem itemLabel="#{msgs['solicitar.combo']}"
 						noSelectionOption="true" />
 					<f:selectItems value="#{servicioBean.servicios}" var="servicio"
 						itemLabel="#{servicio.nombre}" itemValue="#{servicio}" />
 				</p:selectOneMenu>
 				<h:commandButton value="Aceptar"
-					action="#{personaBean.solicitarTurno}"/>
+					action="#{personaBean.solicitarTurno}"
+					rendered="#{personaBean.ultimoTurno == null}" />
 				<br />
 				<br />
-				<h:button class="button-red" outcome="inicio?faces-redirect=true"
+				<h:button class="button-red" outcome="/inicio?faces-redirect=true"
 					value="Regresar" />
 			</h:form>
 			<h:messages />
-			<p:growl/>
+			<p:growl />
 		</div>
 		<div class="cta">
 			<span><i class='fa fa-code'></i> Laura Rua - Gustavo Salgado <i

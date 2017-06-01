@@ -18,7 +18,7 @@
 	<link rel='stylesheet prefetch'
 		href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' />
 
-	<link rel="stylesheet" href="../resources/css/login.css" />
+	<link rel="stylesheet" href="../resources/css/cliente.css" />
 
 
 </h:head>
@@ -93,7 +93,7 @@
 				<h:commandButton value="#{msgs['registrar.bregistrar']}" action="#{personaBean.registrarCliente}" />
 				<br />				<br />
 				
-				<h:button class="button-red" outcome="cliente/index?faces-redirect=true"
+				<h:button class="button-red" outcome="/inicio?faces-redirect=true"
 					value="#{msgs['registrar.bregresar']}" />
 				<h:messages /> 	
 			</h:form>

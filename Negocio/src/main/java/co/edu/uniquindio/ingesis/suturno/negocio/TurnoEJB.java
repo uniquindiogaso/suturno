@@ -13,6 +13,7 @@ import javax.persistence.TypedQuery;
 import co.edu.uniquindio.ingesis.suturno.dto.ConteoClientesXServicioDTO;
 import co.edu.uniquindio.ingesis.suturno.dto.EmpleandoXClientesDTO;
 import co.edu.uniquindio.ingesis.suturno.entidades.Empleado;
+import co.edu.uniquindio.ingesis.suturno.entidades.Persona;
 import co.edu.uniquindio.ingesis.suturno.entidades.Turno;
 
 /**
@@ -115,6 +116,18 @@ public class TurnoEJB implements TurnoEJBRemote {
     		turno.setNota(t.getNota());
     	}
     	entityManager.merge(turno);
+    }
+    
+    /**
+     * Returna el ultimo turno asignado al Cliente
+     * @param cliente
+     * @return
+     */
+    public Turno turnosPendientesCliente(Persona cliente){
+    	TypedQuery<Turno> query = entityManager.createNamedQuery(Turno.TURNO_X_EN_ESPERA_CLIENTE , Turno.class);
+    	query.setParameter("clienteId", cliente.getId());
+    	List<Turno> turnos = query.getResultList();
+    	return turnos.isEmpty() ? null : turnos.get(0);
     }
 
 }

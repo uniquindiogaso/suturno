@@ -49,7 +49,7 @@ import co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno;
 
 		@NamedQuery(name = Turno.TURNOS_ATENDIDOS_EMPLEADO_ENTRE_FECHAS, query = "SELECT COUNT( DISTINCT t.cliente.id) FROM Turno t WHERE t.empleado.id= :empleado AND CAST(t.fecha DATE ) BETWEEN :fechaInicio AND :fechaFin AND t.estado = co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno.FINALIZADO"),
 		@NamedQuery(name = Turno.TURNOS_ATENDIDOS_EMPLEADO_ENTRE_FECHAS_AGRUPADA, query = "SELECT new co.edu.uniquindio.ingesis.suturno.dto.EmpleandoXClientesDTO( t.empleado , COUNT( DISTINCT t.cliente.id) ) FROM Turno t WHERE t.estado = co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno.FINALIZADO AND CAST(t.fecha DATE ) BETWEEN :fechaInicio AND :fechaFin GROUP BY t.empleado"),
-		@NamedQuery(name = Turno.GET_COUNT_CLIENTES_X_SERVICIO, query = "SELECT COUNT( DISTINCT t.cliente.id) FROM Turno t WHERE t.servicio.id= :servicio"),
+		@NamedQuery(name = Turno.GET_COUNT_CLIENTES_X_SERVICIO, query = "SELECT COUNT( DISTINCT t.cliente.id) FROM Turno t WHERE t.servicio.id= :servicio"),		
 		@NamedQuery(name = Turno.GET_CLIENTES_SERVICIO_AGRUPADOS, query = "SELECT new co.edu.uniquindio.ingesis.suturno.dto.ConteoClientesXServicioDTO(COUNT( DISTINCT t.cliente.id) , t.servicio ) FROM Turno t GROUP BY t.servicio"), })
 @Table(name = "suturno_turno")
 public class Turno implements Serializable {
@@ -158,6 +158,7 @@ public class Turno implements Serializable {
 	 * {@link Turno} <br />
 	 */
 	public static final String TURNO_X_EN_ESPERA_CLIENTE = "Turno_findByEnEsperaByCliente";
+	
 
 	/**
 	 * Variable que representa el atributo id de la entidad
