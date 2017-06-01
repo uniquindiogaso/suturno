@@ -14,6 +14,7 @@ import javax.persistence.TypedQuery;
 
 import co.edu.uniquindio.ingesis.suturno.entidades.Persona;
 import co.edu.uniquindio.ingesis.suturno.entidades.Turno;
+import co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno;
 
 /**
  * EJB encargado de realizar la capa de negocio del Cliente
@@ -176,8 +177,14 @@ public class ClienteEJB implements ClienteEJBRemote {
 	 *            el turno a solicitar
 	 */
 	public void solicitarTurno(Turno turno) {
-		if (turno == null || turno.getCliente() == null || turno.getServicio() == null) {
-			throw new RuntimeException("Datos faltantes");
+		if (turno == null) {
+			throw new RuntimeException("Datos faltantes: Turno nulo");
+		}
+		if (turno.getCliente() == null) {
+			throw new RuntimeException("Datos faltantes: Cliente nulo");
+		}
+		if (turno.getServicio() == null) {
+			throw new RuntimeException("Datos faltantes: Servicio nulo");
 		}
 		if (buscarClientePorIdentificacion(turno.getCliente().getIdentificacion()) == null) {
 			throw new RuntimeException("Cliente NO existe");
@@ -187,6 +194,8 @@ public class ClienteEJB implements ClienteEJBRemote {
 		}
 		Date fechaActual = new GregorianCalendar().getTime();
 		turno.setFecha(new Timestamp(fechaActual.getTime()));
+		turno.setEstado(EstadoTurno.EN_ESPERA);
+		System.out.println("Turno fecha:" +turno.getFecha());
 		entityManager.persist(turno);
 	}
 

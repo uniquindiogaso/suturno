@@ -1231,12 +1231,12 @@ INSERT INTO suturno_empleado_suturno_servicio(empleados_id,servicios_id) VALUES
 (4,2),
 (4,3),
 (5,2),
-(5,3);
-(5,5);
-(6,4);
-(6,2);
-(7.1);
-(7.5);
+(5,3),
+(5,5),
+(6,4),
+(6,2),
+(7,1),
+(7,5);
 
 
 

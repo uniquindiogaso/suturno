@@ -124,7 +124,7 @@ public class Persona implements Serializable {
 	 * Variable que representa el atributo email de la Persona
 	 */
 	@Column(length = 50)
-	@Email(message = "Correo Electronico Invalido")
+	//@Email(message = "Correo Electronico Invalido")
 	private String email;
 
 	/**

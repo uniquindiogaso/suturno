@@ -21,9 +21,10 @@ public class ServicioConverter implements Converter{
 	public Object getAsObject(FacesContext arg0, UIComponent componente, String id) {
 		if (id != null && !"".equals(id.trim())) {
 			try {
-				//String nombreServicio=String.valueOf(id);
-				//Integer idServicio = Integer.parseInt(id);
-				//return serviciosEJB.buscarServicioPorNombre(idServicio);
+				
+				Servicio servicio = serviciosEJB.buscarServicioPorNombre(id);
+				System.out.println("SERVICIO:"+servicio + " nombre "+id) ;
+				return servicio;
 			} catch (Exception e) {
 				e.printStackTrace();
 				throw new ConverterException(
@@ -36,7 +37,7 @@ public class ServicioConverter implements Converter{
 	@Override
 	public String getAsString(FacesContext arg0, UIComponent componente, Object servicio) {
 		if (servicio != null) {
-			return ((Servicio) servicio).getId().toString();
+			return ((Servicio) servicio).getNombre();
 		}
 		return null;
 	}

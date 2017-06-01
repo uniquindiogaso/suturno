@@ -7,21 +7,18 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.persistence.Column;
-import javax.persistence.TypedQuery;
-
 import co.edu.uniquindio.ingesis.suturno.entidades.Ciudad;
 import co.edu.uniquindio.ingesis.suturno.entidades.Depto;
 import co.edu.uniquindio.ingesis.suturno.entidades.Persona;
 import co.edu.uniquindio.ingesis.suturno.entidades.Servicio;
 import co.edu.uniquindio.ingesis.suturno.entidades.Turno;
 import co.edu.uniquindio.ingesis.suturno.negocio.ClienteEJB;
-import co.edu.uniquindio.ingesis.suturno.negocio.EmpleadoEJB;
 import co.edu.uniquindio.ingesis.suturno.negocio.GeografiaEJB;
+import co.edu.uniquindio.ingesis.suturno.negocio.TurnoEJB;
 import co.edu.uniquindio.ingesis.suturno.utils.Genero;
 import co.edu.uniquindio.ingesis.suturno.utils.TipoDocumento;
-import co.edu.uniquindio.ingesis.suturno.validators.Email;
 
 /**
  * Bean de la persona de la aplicacion suturno
@@ -34,6 +31,7 @@ import co.edu.uniquindio.ingesis.suturno.validators.Email;
  *
  */
 @ManagedBean
+@SessionScoped
 public class PersonaBean {
 	/**
 	 * Variable que representa el atributo identificacion de la persona
@@ -109,14 +107,18 @@ public class PersonaBean {
 	@EJB
 	private GeografiaEJB geografiaEJB;
 
+	@EJB
+	private TurnoEJB turnoEJB;
+
 	private List<Depto> departamentos;
 	private List<Ciudad> ciudades;
+	private List<Turno> turnos;
 
 	@PostConstruct
 	public void inicializar() {
 		departamentos = geografiaEJB.listarDepartamentos();
+		//turnos = turnoEJB.turnosDeCliente(cliente);
 	}
-
 
 	/**
 	 * Metodo constructor del bean de persona
@@ -125,7 +127,6 @@ public class PersonaBean {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
 
 	/**
 	 * Permite buscar el cliente por la identificacion
@@ -183,6 +184,7 @@ public class PersonaBean {
 			retorno = "/cliente/solicitarTurno";
 
 		} catch (Throwable e) {
+			e.printStackTrace();
 			mensaje = new FacesMessage(e.getCause().getMessage());
 		}
 		FacesContext.getCurrentInstance().addMessage(null, mensaje);
@@ -211,6 +213,20 @@ public class PersonaBean {
 		FacesContext.getCurrentInstance().addMessage(null, mensaje);
 		return retorno;
 	}
+/**
+	public String verTurnoCliente() {
+		List<Turno> turno = turnos;
+		FacesMessage mensaje;
+		String retorno = null;
+		if (turnos == null) {
+			mensaje = new FacesMessage("No posee ningún turno.");
+		} else {
+			retorno = "/cliente/verTurno";
+		}
+		return retorno;
+
+	}*/
+
 	/**
 	 * Metodo get del atributo identificacion
 	 * 

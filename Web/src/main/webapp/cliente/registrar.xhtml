@@ -4,10 +4,11 @@
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta charset="UTF-8" />
-	<title>Registrar cliente | SUTURNO Web</title>
+	<title>#{msgs['registrar.pestana']} | SUTURNO Web</title>
 
 	<link rel="stylesheet"
 		href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" />
@@ -45,22 +46,22 @@
 
 		<div class="form"></div>
 		<div class="form">
-			<h2>Registrar cliente</h2>
+			<h2>#{msgs['buscar.titulo']}</h2>
 			<h:form>
-				<f:facet name="header">#{msgs['registrar.titulo']}</f:facet>
+				<f:facet name="header">#{msgs['registrar.info']}</f:facet>
 				<h:outputLabel value="#{msgs['registrar.id']}" for="iden" />
 				<h:inputText id="iden" value="#{personaBean.identificacion}"
 					required="true" />
 				<h:message for="iden" style="color:red" />
 
 				<h:outputLabel value="#{msgs['registrar.tDoc']}" for="tdoc" />
-				<h:selectOneMenu id="tdoc" value="#{personaBean.tDoc}">
+				<p:selectOneMenu id="tdoc" value="#{personaBean.tDoc}">
 					<f:selectItems value="#{personaBean.tdocs}" />
-				</h:selectOneMenu>
+				</p:selectOneMenu>
 				<h:outputLabel value="#{msgs['registrar.genero']}" for="gen" />
-				<h:selectOneMenu id="gen" value="#{personaBean.genero}">
+				<p:selectOneMenu id="gen" value="#{personaBean.genero}">
 					<f:selectItems value="#{personaBean.generos}" />
-				</h:selectOneMenu>
+				</p:selectOneMenu>
 				<h:panelGrid columns="2">
 					<h:outputLabel value="#{msgs['registrar.nombres']}" for="nom1" />
 					<h:inputText id="nom1" value="#{personaBean.nombre1}"
@@ -82,13 +83,13 @@
 				<h:outputLabel value="#{msgs['registrar.dir']}" for="dir" />
 				<h:inputText id="dir" value="#{personaBean.dir}" required="true" />
 				<h:outputLabel value="#{msgs['registrar.depto']}" for="depto" />
-				<h:selectOneMenu id="depto" value="#{personaBean.dpto}">
+				 <p:selectOneMenu id="depto" value="#{personaBean.dpto}">
 					<f:selectItems value="#{personaBean.departamentos}" />
-				</h:selectOneMenu>
-				<h:outputLabel value="#{msgs['registrar.ciudad']}" for="ciu" />
+				</p:selectOneMenu>
+				<!--<h:outputLabel value="#{msgs['registrar.ciudad']}" for="ciu" />
 				<h:selectOneMenu id="ciu" value="#{personaBean.ciudad}">
 					<f:selectItems value="#{personaBean.ciudades}" />
-				</h:selectOneMenu>
+				</h:selectOneMenu> -->
 				<h:commandButton value="#{msgs['registrar.bregistrar']}" action="#{personaBean.registrarCliente}" />
 				<br />				<br />
 				
@@ -96,17 +97,12 @@
 					value="#{msgs['registrar.bregresar']}" />
 				<h:messages /> 	
 			</h:form>
+			<p:growl/>
 		</div>
 		<div class="cta">
 			<span><i class='fa fa-code'></i> Laura Rua - Gustavo Salgado <i
 				class="fa fa-copyright fa-flip-horizontal"></i></span>
 		</div>
 	</div>
-	<script
-		src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-
-
-
-
 </h:body>
 </html>

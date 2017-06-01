@@ -52,7 +52,7 @@
 			<h:outputLabel value="Identificacion" for="id"/>
 				<h:inputText  placeholder="#{msgs['buscar.identificacion']}" id="id" value="#{personaBean.identificacion}" required="true" /> 
 				<h:commandButton value="#{msgs['buscar.bbuscar']}" action="#{personaBean.buscarCliente}"/>
-				<!--<h:commandButton value="Mirar Turnos" action="{}"/>-->
+				<h:commandButton value="Mirar Turnos" action="{}"/>
 				<br /> <br />
 				<h:button class="button-red" outcome="../inicio?faces-redirect=true"
 					value="#{msgs['buscar.bregresar']}" />
