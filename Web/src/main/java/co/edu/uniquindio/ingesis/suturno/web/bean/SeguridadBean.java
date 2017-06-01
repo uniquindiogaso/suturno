@@ -52,6 +52,16 @@ public class SeguridadBean implements Serializable{
 	}
 	
 	
+	public void actualizarInformacion(){
+		System.out.println("Seguridad Actualizar Informacion ..." + empleado.getClave());	
+		System.out.println(empleado.getTercero().getNombre1());
+		System.out.println(empleado.getTercero().getNombre2());
+		empleadoEJB.actualizarEmpleado(empleado);
+		FacesMessage mensaje = new FacesMessage("Informacion Actualizada Correctamente");
+		FacesContext.getCurrentInstance().addMessage(null, mensaje);
+	}
+	
+	
 	public String getUsuario() {
 		return usuario;
 	}

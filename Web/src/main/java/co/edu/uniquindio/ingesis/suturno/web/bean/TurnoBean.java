@@ -1,9 +1,11 @@
 package co.edu.uniquindio.ingesis.suturno.web.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
 import co.edu.uniquindio.ingesis.suturno.entidades.Empleado;
@@ -12,13 +14,18 @@ import co.edu.uniquindio.ingesis.suturno.negocio.TurnoEJB;
 import co.edu.uniquindio.ingesis.suturno.utils.EstadoTurno;
 
 @ManagedBean
-public class TurnoBean {
+@ViewScoped
+public class TurnoBean implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Turno turnoSeleccionado;
 	@EJB
 	private TurnoEJB turnoEJB;
 	
-	private String observacion;
+
 	private Empleado empleado;
 
 	public TurnoBean() {		
@@ -37,17 +44,20 @@ public class TurnoBean {
 			turnoSeleccionado.setEstado(EstadoTurno.EN_ATENCION);
 			turnoSeleccionado.setEmpleado(e);
 			turnoEJB.actualizarTurno(turnoSeleccionado);
+			System.out.println("Iniciando Atencion ..." + turnoSeleccionado);
 		}
 		
 	}
 	
 	public void finalizarAtencionTurno(){
-		
-		System.out.println("Turno Seleccionado para FINALIZAR ");
-		
+	
 		if( turnoSeleccionado != null ){
 			turnoSeleccionado.setEstado(EstadoTurno.FINALIZADO);
 			turnoEJB.actualizarTurno(turnoSeleccionado);
+			turnoSeleccionado = null;
+			
+		}else{
+			System.out.println("Turno Seleccionado para F esta vacio ");
 		}
 	}
 	
@@ -55,11 +65,13 @@ public class TurnoBean {
 	 * Revertir la atencion y volverla a poner en espera.
 	 * @param actionEvent
 	 */
-	public void anularAtencionTurno(ActionEvent actionEvent){
+	public void anularAtencionTurno(){
 		if( turnoSeleccionado != null ){
 			turnoSeleccionado.setEmpleado(null);
 			turnoSeleccionado.setEstado(EstadoTurno.EN_ESPERA);
+			turnoSeleccionado.setNota(null);
 			turnoEJB.actualizarTurno(turnoSeleccionado);
+			turnoSeleccionado = null;
 		}
 	}
 	
@@ -84,19 +96,6 @@ public class TurnoBean {
 		this.turnoSeleccionado = turnoSeleccionado;
 	}
 
-	/**
-	 * @return the observacion
-	 */
-	public String getObservacion() {
-		return observacion;
-	}
-
-	/**
-	 * @param observacion the observacion to set
-	 */
-	public void setObservacion(String observacion) {
-		this.observacion = observacion;
-	}
 
 	/**
 	 * @return the empleado
