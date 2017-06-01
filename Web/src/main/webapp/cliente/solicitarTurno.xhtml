@@ -49,6 +49,10 @@
 			<h2>#{msgs['solicitar.titulo']}</h2>
 			<h:form>
 				<f:facet name="header">#{msgs['solicitar.info']}</f:facet>
+				
+				<h:outputLabel value="Numero de Turno" rendered="#{personaBean.ultimoTurno != null}" />
+				<h:inputText value="#{personaBean.ultimoTurno.id}"	readonly="true" rendered="#{personaBean.ultimoTurno != null}" />
+				
 				<h:outputLabel value="Cliente:" />
 				<h:inputText
 					value="#{personaBean.cliente.nombre1} #{personaBean.cliente.nombre2}"
