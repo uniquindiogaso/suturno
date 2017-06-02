@@ -21,6 +21,7 @@ import javax.inject.Named;
  */
 @Named
 @SessionScoped
+@Deprecated
 public class UserSettings implements Serializable {
 
     private Locale locale;

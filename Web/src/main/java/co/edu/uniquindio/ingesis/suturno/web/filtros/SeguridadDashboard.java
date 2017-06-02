@@ -15,6 +15,16 @@ import javax.servlet.http.HttpSession;
 
 import co.edu.uniquindio.ingesis.suturno.web.bean.SeguridadBean;
 
+/**
+ * Filtro de Seguridad Dashboard Aplicacion suturno
+ * 
+ * @author Gustavo Salgado y Laura Julieth Rua
+ * @author Ingenieria de Sistemas y Computacion
+ * @author Universidad del Quindio
+ * @since 06/05/2017
+ * @version 1.0
+ *
+ */
 @WebFilter("/views/*")
 public class SeguridadDashboard implements Filter{
 

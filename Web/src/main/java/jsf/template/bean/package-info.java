@@ -1,5 +1,6 @@
 /**
  * 
+ * Configuraciones propias del Templete usado
  * 
  * @author Gustavo Salgado y Laura Julieth Rua
  * @author Ingenieria de Sistemas y Computacion
@@ -8,4 +9,4 @@
  * @version 1.0
  *
  */
-package co.edu.uniquindio.ingesis.suturno.web.filtros;
+package jsf.template.bean;

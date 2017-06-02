@@ -11,6 +11,16 @@ import javax.faces.convert.ConverterException;
 import co.edu.uniquindio.ingesis.suturno.entidades.Servicio;
 import co.edu.uniquindio.ingesis.suturno.negocio.ServiciosEJB;
 
+/**
+ * Converter para Servicios
+ * 
+ * @author Gustavo Salgado y Laura Julieth Rua
+ * @author Ingenieria de Sistemas y Computacion
+ * @author Universidad del Quindio
+ * @since 06/05/2017
+ * @version 1.0
+ *
+ */
 @ManagedBean
 public class ServicioConverter implements Converter{
 

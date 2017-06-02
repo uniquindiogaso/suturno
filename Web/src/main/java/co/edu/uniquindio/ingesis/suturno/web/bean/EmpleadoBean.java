@@ -14,9 +14,16 @@ import co.edu.uniquindio.ingesis.suturno.entidades.Empleado;
 import co.edu.uniquindio.ingesis.suturno.negocio.EmpleadoEJB;
 import co.edu.uniquindio.ingesis.suturno.web.utils.ControladorEmail;
 
+/**
+ * Bean Manager de Empleado - Usando para la comunicacion entre la Vista y el Backend
+ * 
+ * @author gusta - laura
+ *
+ */
 @ManagedBean
 public class EmpleadoBean {
 	
+	//Puente para la conexion con la Base de datos
 	@EJB
 	private EmpleadoEJB empleadoEJB;
 	
@@ -26,7 +33,11 @@ public class EmpleadoBean {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
+	/**
+	 * Dispara recurso que verifica si el empleado existe para enviar un 
+	 * mail con los datos de acceso.
+	 * @param actionEvent
+	 */
 	public void recuperarClave(ActionEvent actionEvent){
 		Empleado e = empleadoEJB.buscarEmpleadoPorNombreUsuario(nombreUsuario);
 		if ( null != e){

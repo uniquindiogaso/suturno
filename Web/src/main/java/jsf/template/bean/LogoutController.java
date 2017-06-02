@@ -11,7 +11,7 @@ import javax.inject.Named;
 
 
 /**
- * Invalidates current session and redirects to the login page.
+ * Invalida sesión actual y redirige a la página de inicio de sesión.
  *
  * @author  ova / last modified by $Author: ova $
  * @version $Revision: 97278 $

@@ -10,7 +10,7 @@ import javax.inject.Named;
 
 
 /**
- * NavigationContext
+ * Permite saber que menu esta seleccionado
  *
  * @author Oleg Varaksin / last modified by $Author: $
  * @version $Revision: 1.0 $

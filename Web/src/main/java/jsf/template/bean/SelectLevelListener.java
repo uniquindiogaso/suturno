@@ -8,7 +8,7 @@ import javax.inject.Named;
 
 
 /**
- * SelectLevelListener
+ * Listener de Navegacion Componente de Migas de Pan
  *
  * @author  ova / last modified by $Author: ova $
  * @version $Revision: 96279 $

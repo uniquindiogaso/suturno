@@ -33,7 +33,7 @@ import co.edu.uniquindio.ingesis.suturno.utils.TipoDocumento;
  */
 @ManagedBean
 @SessionScoped
-public class PersonaBean implements Serializable{
+public class PersonaBean implements Serializable {
 	/**
 	 * Variable que representa el atributo identificacion de la persona
 	 */
@@ -101,26 +101,47 @@ public class PersonaBean implements Serializable{
 	private Persona cliente;
 
 	private Servicio servicio;
-	
+
+	/**
+	 * Permite identificar si el usuario ya tiene un servicio y mostrarle
+	 * informacion al respecto
+	 */
 	private Turno ultimoTurno;
 
+	/**
+	 * Puente para acceder a funcionalidades persistencia de Cliente
+	 */
 	@EJB
 	private ClienteEJB clienteEJB;
-
+	/**
+	 * Puente para acceder a funcionalidades persistencia de geografia
+	 */
 	@EJB
 	private GeografiaEJB geografiaEJB;
 
+	/**
+	 * Puente para acceder a funcionalidades persistencia de Turno
+	 */
 	@EJB
 	private TurnoEJB turnoEJB;
 
+	/**
+	 * Lista de Departamentos disponibles
+	 */
 	private List<Depto> departamentos;
+	/**
+	 * Lista de Ciudades en funcion del departametno seleccionado
+	 */
 	private List<Ciudad> ciudades;
+	/**
+	 * Listado de Turnos
+	 */
 	private List<Turno> turnos;
 
 	@PostConstruct
 	public void inicializar() {
 		departamentos = geografiaEJB.listarDepartamentos();
-		//turnos = turnoEJB.turnosDeCliente(cliente);
+		// turnos = turnoEJB.turnosDeCliente(cliente);
 	}
 
 	/**
@@ -145,10 +166,10 @@ public class PersonaBean implements Serializable{
 			cliente = clienteEJB.buscarClientePorIdentificacion(identificacion);
 			if (cliente != null) {
 				mensaje = new FacesMessage("Se encontro cliente");
-				
-				//buscar turnos existentes
+
+				// buscar turnos existentes
 				ultimoTurno = turnoEJB.turnosPendientesCliente(cliente);
-				
+
 				retorno = "/cliente/solicitarTurno";
 			} else {
 				mensaje = new FacesMessage("No encontro cliente");
@@ -220,19 +241,15 @@ public class PersonaBean implements Serializable{
 		FacesContext.getCurrentInstance().addMessage(null, mensaje);
 		return retorno;
 	}
-/**
-	public String verTurnoCliente() {
-		List<Turno> turno = turnos;
-		FacesMessage mensaje;
-		String retorno = null;
-		if (turnos == null) {
-			mensaje = new FacesMessage("No posee ningún turno.");
-		} else {
-			retorno = "/cliente/verTurno";
-		}
-		return retorno;
 
-	}*/
+	/**
+	 * public String verTurnoCliente() { List<Turno> turno = turnos;
+	 * FacesMessage mensaje; String retorno = null; if (turnos == null) {
+	 * mensaje = new FacesMessage("No posee ningún turno."); } else { retorno =
+	 * "/cliente/verTurno"; } return retorno;
+	 * 
+	 * }
+	 */
 
 	/**
 	 * Metodo get del atributo identificacion
@@ -518,44 +535,89 @@ public class PersonaBean implements Serializable{
 		this.fecha = fecha;
 	}
 
-	public Persona getCliente() {
-		return cliente;
-	}
 
-	public void setCliente(Persona cliente) {
-		this.cliente = cliente;
-	}
-
+	/**
+	 * @return the email
+	 */
 	public String getEmail() {
 		return email;
 	}
 
+	/**
+	 * @param email the email to set
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	/**
+	 * @return the cliente
+	 */
+	public Persona getCliente() {
+		return cliente;
+	}
+
+	/**
+	 * @param cliente the cliente to set
+	 */
+	public void setCliente(Persona cliente) {
+		this.cliente = cliente;
+	}
+
+	/**
+	 * @return the servicio
+	 */
 	public Servicio getServicio() {
 		return servicio;
 	}
 
+	/**
+	 * @param servicio the servicio to set
+	 */
 	public void setServicio(Servicio servicio) {
 		this.servicio = servicio;
 	}
 
+	/**
+	 * @return the departamentos
+	 */
 	public List<Depto> getDepartamentos() {
 		return departamentos;
 	}
 
+	/**
+	 * @param departamentos the departamentos to set
+	 */
 	public void setDepartamentos(List<Depto> departamentos) {
 		this.departamentos = departamentos;
 	}
 
+	/**
+	 * @return the ciudades
+	 */
 	public List<Ciudad> getCiudades() {
 		return ciudades;
 	}
 
+	/**
+	 * @param ciudades the ciudades to set
+	 */
 	public void setCiudades(List<Ciudad> ciudades) {
 		this.ciudades = ciudades;
+	}
+
+	/**
+	 * @return the turnos
+	 */
+	public List<Turno> getTurnos() {
+		return turnos;
+	}
+
+	/**
+	 * @param turnos the turnos to set
+	 */
+	public void setTurnos(List<Turno> turnos) {
+		this.turnos = turnos;
 	}
 
 	/**
@@ -566,11 +628,11 @@ public class PersonaBean implements Serializable{
 	}
 
 	/**
-	 * @param ultimoTurno the ultimoTurno to set
+	 * @param ultimoTurno
+	 *            the ultimoTurno to set
 	 */
 	public void setUltimoTurno(Turno ultimoTurno) {
 		this.ultimoTurno = ultimoTurno;
 	}
-	
-	
+
 }

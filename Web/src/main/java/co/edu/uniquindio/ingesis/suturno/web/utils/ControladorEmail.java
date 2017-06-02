@@ -13,27 +13,42 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import co.edu.uniquindio.ingesis.suturno.entidades.Empleado;
-import jsf.template.bean.UserSettings;
 
+/**
+ * Clase tipo Utilidad para envio de Correos Electronicos
+ * 
+ * @author Gustavo Salgado y Laura Julieth Rua
+ * @author Ingenieria de Sistemas y Computacion
+ * @author Universidad del Quindio
+ * @since 06/05/2017
+ * @version 1.0
+ *
+ */
 public class ControladorEmail {
 
+	/**
+	 * Atributos requeridos para el control de envio de mensajes a traves de
+	 * smtp
+	 */
 	private static Properties mailServerProperties;
 	private static Session getMailSession;
 	private static MimeMessage generateMailMessage;
-	
-	@ManagedProperty(value="#{userSettings.locate}")
+
+	//Atributo de localizacion para indicarle al properties que idioma en el backend debe cargar
+	@ManagedProperty(value = "#{idiomaBean.localizacion}")
 	private static Locale localizacion;
 
 	/**
 	 * Enviar una notificacion via correo electronico
 	 * 
-	 * @param e Usuario al que se le enviara la notificacion
+	 * @param e
+	 *            Usuario al que se le enviara la notificacion
 	 */
-	public static void enviarRecordatorioClave(Empleado e) {	
+	public static void enviarRecordatorioClave(Empleado e) {
 		ResourceBundle rb = ResourceBundle.getBundle("messages");
-		
+
 		System.out.println("Saludo " + rb.getString("emailclave.titulo"));
-		
+
 		mailServerProperties = System.getProperties();
 		mailServerProperties.put("mail.smtp.port", "587");
 		mailServerProperties.put("mail.smtp.auth", "true");
@@ -45,7 +60,8 @@ public class ControladorEmail {
 			generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(e.getTercero().getEmail()));
 			generateMailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress("gustavo2840@gmail.com"));
 			generateMailMessage.setSubject(rb.getString("emailclave.titulo"));
-			String emailBody = rb.getString("emailclave.saludo") + e.getTercero().getNombreCompleto() + rb.getString("emailclave.msj1") + e.getClave() + rb.getString("emailclave.msj2") 
+			String emailBody = rb.getString("emailclave.saludo") + e.getTercero().getNombreCompleto()
+					+ rb.getString("emailclave.msj1") + e.getClave() + rb.getString("emailclave.msj2")
 					+ rb.getString("emailclave.adios");
 			generateMailMessage.setContent(emailBody, "text/html");
 
@@ -71,12 +87,11 @@ public class ControladorEmail {
 	}
 
 	/**
-	 * @param localizacion the localizacion to set
+	 * @param localizacion
+	 *            the localizacion to set
 	 */
 	public static void setLocalizacion(Locale localizacion) {
 		ControladorEmail.localizacion = localizacion;
 	}
-	
-	
 
 }

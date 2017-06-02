@@ -8,4 +8,4 @@
  * @version 1.0
  *
  */
-package co.edu.uniquindio.ingesis.suturno.web.filtros;
+package co.edu.uniquindio.ingesis.suturno.web.utils;
