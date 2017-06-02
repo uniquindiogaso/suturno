@@ -21,13 +21,13 @@
 
 				<p:outputPanel>
 					<h:panelGrid columns="2" cellpadding="5">
-						<h:outputText value="Codigo" />
+						<h:outputText value="#{msgs['listaturnos.codigo']}" />
 						<h:outputText value="#{turno.id}" style="font-weight: bold" />
 						
-						<h:outputText value="Fecha" />
+						<h:outputText value="#{msgs['listaturno.fecha']}" />
 						<h:outputText value="#{turno.fecha}" style="font-weight: bold" />
 
-						<h:outputText value="Cliente" />
+						<h:outputText value="#{msgs[listaturnos.cliente'']}" />
 						<p:commandLink update=":mainForm:masterDetail">
 							<h:outputText value="#{turno.cliente.nombreCompleto}"
 								style="font-weight: bold" />
@@ -35,7 +35,7 @@
 						</p:commandLink>
 
 
-						<h:outputText value="Servicio" />
+						<h:outputText value="#{msgs['listaturnos.servicio']}" />
 						<h:outputText value="#{turno.servicio.nombre}"
 							style="font-weight: bold" />
 					</h:panelGrid>
@@ -44,7 +44,7 @@
 			<hr />
 		</p:repeat>
 
-		<p:dialog header="Atender Turno" widgetVar="atenderDialog"
+		<p:dialog header="#{msgs['listaturnos.titulo']}" widgetVar="atenderDialog"
 			modal="true" showEffect="blind" hideEffect="explode" closable="false"
 			resizable="false">
 
@@ -54,31 +54,31 @@
 						rendered="#{not empty turnoBean.turnoSeleccionado}"
 						columnClasses="label,value">
 
-						<h:outputText value="Cliente" />
+						<h:outputText value="#{msgs['listaturnos.atender.cliente']}" />
 						<h:outputText
 							value="#{turnoBean.turnoSeleccionado.cliente.nombreCompleto}" />
 
-						<h:outputText value="Servicio" />
+						<h:outputText value="#{msgs['listaturnos.atender.servicio']}" />
 						<h:outputText
 							value="#{turnoBean.turnoSeleccionado.servicio.nombre}" />
 
-						<h:outputText value="Observacion" />
+						<h:outputText value="#{msgs['listaturnos.atender.observacion']}" />
 						<p:inputTextarea value="#{turnoBean.turnoSeleccionado.nota}"
 							rows="6" cols="100" />
 
 					</p:panelGrid>
 
 
-					<p:commandButton value="Finalizar"
+					<p:commandButton value="#{msgs['listaturnos.atender.bfinalizar']}"
 						actionListener="#{turnoBean.finalizarAtencionTurno}"
 						oncomplete="PF('atenderDialog').hide()" ajax="false">
 					</p:commandButton>
 
-					<p:commandButton value="Cancelar"
+					<p:commandButton value="#{msgs['listaturnos.atender.bcancelar']}"
 						actionListener="#{turnoBean.cancelarTurno}"
 						oncomplete="PF('atenderDialog').hide()" ajax="false" />
 
-					<p:commandButton value="Anular"
+					<p:commandButton value="#{msgs['listaturnos.atender.banular']}"
 						actionListener="#{turnoBean.anularAtencionTurno}" immediate="true"
 						ajax="false" oncomplete="PF('atenderDialog').hide()" />
 				</h:panelGroup>

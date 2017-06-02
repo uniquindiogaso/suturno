@@ -4,7 +4,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>Informacion Empleado View Empleado</title>
+	<title>#{msgs['empleado.form.titulo']}</title>
 	<style type="text/css">
 .ui-widget {
 	font-size: 90%;
@@ -17,38 +17,38 @@
 		<h:form oncomplete="PF('infoEmpleadoWidget').show()">
 		<p:dialog id="infoEmpleado" widgetVar="infoEmpleadoWidget">
 			<h:panelGrid columns="4" columnClasses="label, value">
-				<h:outputText value="Usuario *" />
+				<h:outputText value="#{msgs['empleado.form.usuario']}" />
 				<p:inputText value="#{empleadoBean.nombreUsuario}" required="true"
 					label="Usuario" />
 
-				<h:outputText value="Clave *" />
+				<h:outputText value="#{msgs['empleado.form.clave']}" />
 				<p:inputText value="#{empleadoBean.clave}" required="true"
 					label="Clave" />
 
 
-				<h:outputText value="Primer Nombre*" />
+				<h:outputText value="#{msgs['empleado.form.primernombre']}" />
 				<p:inputText value="#{empleadoBean.nombre1}" required="true"
 					label="Primer Nombre" />
 
-				<h:outputText value="Segundo Nombre" />
+				<h:outputText value="#{msgs['empleado.form.segundo']}" />
 				<p:inputText value="#{empleadoBean.nombre2}" label="Segundo Nombre" />
 
-				<h:outputText value="Primer Apellido*" />
+				<h:outputText value="#{msgs['empleado.form.primerapellido']}" />
 				<p:inputText value="#{empleadoBean.apellido1}" required="true"
 					label="Primer Apellido" />
 
-				<h:outputText value="Segundo Apellido" />
+				<h:outputText value="#{msgs['empleado.form.segundoape']}" />
 				<p:inputText value="#{empleadoBean.apellido2}"
 					label="Segundo Apellido" />
 
-				<h:outputText value="Telefono Principal*" />
+				<h:outputText value="#{msgs['empleado.form.tel1']}" />
 				<p:inputText value="#{empleadoBean.tel1}" label="Telefono Principal"
 					required="true" />
 
-				<h:outputText value="Otro Telefono" />
+				<h:outputText value="#{msgs['empleado.form.tel2']}" />
 				<p:inputText value="#{empleadoBean.tel2}" label="Otro Telefono" />
 
-				<h:commandButton value="Actualizar"
+				<h:commandButton value="#{msgs['empleado.form.actualizar']}"
 					actionListener="#{empleadoBean.actualizarInformacion}" />
 			</h:panelGrid>
 				</p:dialog>

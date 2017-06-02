@@ -8,7 +8,7 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta charset="UTF-8" />
-	<title>#{msgs['registrar.pestana']} | SUTURNO Web</title>
+	<title>#{msgs['registrar.pestana']}</title>
 
 	<link rel="stylesheet"
 		href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" />
@@ -82,11 +82,11 @@
 				<h:inputText id="em" value="#{personaBean.email}" required="true" />
 				<h:outputLabel value="#{msgs['registrar.dir']}" for="dir" />
 				<h:inputText id="dir" value="#{personaBean.dir}" required="true" />
-				<h:outputLabel value="#{msgs['registrar.depto']}" for="depto" />
-				 <p:selectOneMenu id="depto" value="#{personaBean.dpto}">
+				<!--<h:outputLabel value="#{msgs['registrar.depto']}" for="depto" />
+				<p:selectOneMenu id="depto" value="#{personaBean.dpto}">
 					<f:selectItems value="#{personaBean.departamentos}" />
 				</p:selectOneMenu>
-				<!--<h:outputLabel value="#{msgs['registrar.ciudad']}" for="ciu" />
+				<h:outputLabel value="#{msgs['registrar.ciudad']}" for="ciu" />
 				<h:selectOneMenu id="ciu" value="#{personaBean.ciudad}">
 					<f:selectItems value="#{personaBean.ciudades}" />
 				</h:selectOneMenu> -->

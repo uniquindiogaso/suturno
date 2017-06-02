@@ -20,7 +20,7 @@
 			<div class="slogan">
 				<h:outputText value="SUTURNO WEB - UNIQUINDIO - &#169; 2017  " />
 			
-				<p:splitButton value="Configuración" onclick="PF('infoEmpleadoWidget').show(); return false;" icon="ui-icon-power">			       
+				<p:splitButton value="#{msgs['configuracion']}" onclick="PF('infoEmpleadoWidget').show(); return false;" icon="ui-icon-power">			       
 			        <p:menuitem value="#{msgs['logout']}" action="#{logoutController.logout}" update=":mainForm" icon="ui-icon-power" />		
 			    </p:splitButton>
 
@@ -28,7 +28,7 @@
 
 			<h:panelGrid columns="2" columnClasses="menuColumn,contentColumn">
 				<p:menu id="menuLateral">
-					<p:menuitem value="Turnos Pendientes"
+					<p:menuitem value="#{msgs['turnos']}"
 						styleClass="#{navigationContext.getMenuitemStyleClass('/views/turno/turnosPendientes.xhtml')}"
 						icon="ui-icon-play" onclick="menuSeleccionado(this)" ajax="false"
 						url="/views/turno/turnosPendientes.xhtml" />	

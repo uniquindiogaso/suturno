@@ -49,7 +49,7 @@
 			<h2>#{msgs['buscar.titulo']}</h2>
 			<h:form>
 			<f:facet name="header">#{msgs['buscar.info']}</f:facet>
-			<h:outputLabel value="Identificacion" for="id"/>
+			<h:outputLabel value="#{msgs['buscar.identificacion']}" for="id"/>
 				<h:inputText  placeholder="#{msgs['buscar.identificacion']}" id="id" value="#{personaBean.identificacion}" required="true" /> 
 				<h:commandButton value="#{msgs['buscar.bbuscar']}" action="#{personaBean.buscarCliente}"/>
 				<h:commandButton value="Mirar Turnos" action="{}"/>
